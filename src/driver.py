@@ -14,8 +14,7 @@ def driver(src_dir):
     print("Driver - start")
 
 
-    results = loop.exercise_04_calculate_sum()
-    results = loop.exercise_05_multiplication_table()
+    results = loop.exercise_05_multiplication_table(324, 10)
     results = loop.exercise_06_calculate_cube()
     results = loop.exercise_07_display_list_items()
     results = loop.exercise_08_count_occurrences()
@@ -28,6 +27,7 @@ def driver(src_dir):
 
     # exercise_22_check_empty_file
     if 1 == 0:
+        results = loop.exercise_04_calculate_sum()
         results = loop.exercise_02_display_negative_numbers()
         results = loop.exercise_03_loop_completion_test()
         results = loop.exercise_01_print_numbers_using_while(10)

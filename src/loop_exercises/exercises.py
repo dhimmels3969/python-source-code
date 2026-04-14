@@ -112,7 +112,7 @@ def exercise_04_calculate_sum():
     pass
 
 
-def exercise_05_multiplication_table():
+def exercise_05_multiplication_table(number: int, multiplier):
     """
     Exercise 5. Print multiplication table of a given number
     Practice Problem: Create a program that takes an integer
@@ -130,6 +130,11 @@ def exercise_05_multiplication_table():
         20
     """
     print("\nExercise 5. Multiplication Table")
+
+    for i in range(1, 11):
+        message = f"{number} times {i} equals {i * number}"
+        print(message)
+
     pass
 
 
