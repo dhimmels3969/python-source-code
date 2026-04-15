@@ -1,4 +1,5 @@
-from html.parser import incomplete
+# from html.parser import incomplete
+from src.common_library import helper_functions as hf
 
 
 #
@@ -134,7 +135,7 @@ def exercise_05_multiplication_table(number: int, multiplier):
     for i in range(1, 11):
         message = f"{number} times {i} equals {i * number}"
         print(message)
-
+    print("")
     pass
 
 
@@ -157,6 +158,11 @@ def exercise_06_calculate_cube():
     :rtype:
     """
     print("Exercise 6. Calculate the cube of every number from 1 to n")
+    given_number = hf.get_positive_int_from_user("Enter number greater than 0: ")
+    for i in range(1, given_number + 1):
+        message = f"Current number is : {i} and the cube is {i ** 3}"
+        print(message)
+    print("")
     pass
 
 

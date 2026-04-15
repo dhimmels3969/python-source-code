@@ -14,7 +14,7 @@ def driver(src_dir):
     print("Driver - start")
 
 
-    results = loop.exercise_05_multiplication_table(324, 10)
+    results = loop.exercise_05_multiplication_table(2, 10)
     results = loop.exercise_06_calculate_cube()
     results = loop.exercise_07_display_list_items()
     results = loop.exercise_08_count_occurrences()
