@@ -1,7 +1,7 @@
 
 import input_output_exercises.exercises as io_ex
-import loop_exercises.exercises as loop
-import loop_exercises.exercises_04 as l4
+import loop_exercises.driver as loop_exercise_driver
+
 
 
 # https://pynative.com/python-input-and-output-exercise/#h-exercise-2-format-output-string
@@ -13,16 +13,10 @@ import loop_exercises.exercises_04 as l4
 def driver(src_dir):
     print("Driver - start")
 
+    loop_driver = loop_exercise_driver.Driver()
+    loop_driver.run()
 
-    results = loop.exercise_05_multiplication_table(2, 10)
-    results = loop.exercise_06_calculate_cube()
-    results = loop.exercise_07_display_list_items()
-    results = loop.exercise_08_count_occurrences()
-    results = loop.exercise_09_odd_index_positions()
-    results = loop.exercise_10_print_list_in_reverse_order()
 
-    results = l4.exercise_39_flatten_list()
-    results = l4.exercise_40_nested_list_search()
 
 
     # exercise_22_check_empty_file

@@ -1,12 +1,17 @@
 # from html.parser import incomplete
 from src.common_library import helper_functions as hf
-
+import loop_exercises.exercises_04 as l4
 
 #
 # Exercises found at web page https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
 # Exercises 1 through 10
 #
 
+
+
+
+
+#######################################################################################################
 def exercise_01_print_numbers_using_while(limit):
     """
     Exercise 1. Print first 10 natural numbers using while loop
@@ -187,7 +192,15 @@ def exercise_07_display_list_items():
     :return:
     :rtype:
     """
+    results = []
     print("Exercise 7. Display numbers from a list using a loop")
+    numbers = [12, 75, 150, 180, 145, 525, 50]
+    for item in numbers:
+        if item % 5 == 0 and item <= 150:
+            message = f"{item}"
+            print(message)
+        if item > 500:
+            break
     pass
 
 
@@ -208,6 +221,13 @@ def exercise_08_count_occurrences():
     :rtype:
     """
     print("Exercise 8. Count occurrences of a specific element in a list")
+    list1 = [10, 20, 10, 30, 10, 40, 50]
+    target = 10
+    target_found = 0
+    for item in list1:
+        if item == target:
+            target_found += 1
+    print(f"{target} appears {target_found} times")
     pass
 
 
@@ -226,8 +246,14 @@ def exercise_09_odd_index_positions():
     :return:
     :rtype:
     """
-    print("Exercise 9. Print elements from a list present at index positions")
-    pass
+    print("Exercise 9. Print elements from a list present at odd index positions")
+    results = []
+    my_list = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    for i in range(my_list.__len__()):
+        if i % 2 == 1:
+            results.append(my_list[i])
+    print(results)
+    return None
 
 
 def exercise_10_print_list_in_reverse_order():
@@ -246,4 +272,7 @@ def exercise_10_print_list_in_reverse_order():
     :rtype:
     """
     print("Exercise 10. Print list in reverse order using a loop")
+    list1 = [10, 20, 30, 40, 50]
+    for i in range (list1.__len__(),0,-1):
+        print(list1[i-1])
     pass
