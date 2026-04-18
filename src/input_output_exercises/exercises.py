@@ -413,8 +413,10 @@ def ex_09_display_right_aligned_output():
 def ex_13_format_currency(dollar_amount):
     """
     Exercise 13. Currency formatting with commas
-        Practice Problem: Display a large number as currency, including a dollar sign, commas for thousands, and two decimal places.
-        Exercise Purpose: Financial applications require strict formatting. This exercise combines three concepts: prefixing, grouping (using commas), and precision to create a professional-grade money display.
+        Practice Problem: Display a large number as currency, including a dollar sign, commas for
+            thousands, and two decimal places.
+        Exercise Purpose: Financial applications require strict formatting. This exercise combines three concepts: prefixing,
+            grouping (using commas), and precision to create a professional-grade money display.
         Given Input:
             Amount: 1250500.7
         Expected Output:

@@ -273,6 +273,10 @@ def exercise_10_print_list_in_reverse_order():
     """
     print("Exercise 10. Print list in reverse order using a loop")
     list1 = [10, 20, 30, 40, 50]
-    for i in range (list1.__len__(),0,-1):
-        print(list1[i-1])
+    # for i in range (list1.__len__(),0,-1):
+    #     print(list1[i-1])
+
+    # Use the reversed() function for clean iteration
+    for item in reversed(list1):
+        print(item)
     pass

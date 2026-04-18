@@ -4,6 +4,92 @@
 #
 
 
+def exercise_31_segregate_items_in_list():
+    """
+    Exercise 31. Even/Odd Segregation: Move evens to front, odds to back
+    Practice Problem: Given a list of integers, move all even numbers
+        to the beginning of the list and all odd numbers to the end.
+    Exercise Purpose: This introduces List Reorganization, a simplified version
+        of the partitioning logic used in QuickSort algorithms. You learn to
+        categorize data and reassemble it into a specific structural order.
+    Given Input:
+        [1, 2, 3, 4, 5, 6]
+    Expected Output:
+        Segregated List:
+            [2, 4, 6, 1, 3, 5]
+    """
+    pass
+###########################################################
+
+
+def exercise_32():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+def exercise_33():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+
+def exercise_34():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+
+def exercise_35():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+
+def exercise_36():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+
+def exercise_37():
+    """
+
+
+    """
+    pass
+###########################################################
+
+
+
+def exercise_38():
+    """
+
+    """
+    pass
+###########################################################
+
+
+
 def exercise_39_flatten_list():
     """
     Exercise 39. flatten a nested list using loops
@@ -21,6 +107,8 @@ def exercise_39_flatten_list():
     """
     print("Exercise 39. flatten list")
     pass
+###########################################################
+
 
 
 def exercise_40_nested_list_search():
@@ -39,3 +127,4 @@ def exercise_40_nested_list_search():
     """
     print("Exercise 40. Nested list search")
     pass
+###########################################################

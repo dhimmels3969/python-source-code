@@ -2,6 +2,7 @@
 from src.common_library import helper_functions as hf
 import loop_exercises.exercises as l1
 import loop_exercises.exercises_02 as l2
+import loop_exercises.exercises_03 as l3
 import loop_exercises.exercises_04 as l4
 
 class Driver():
@@ -18,7 +19,9 @@ class Driver():
         pass
 
     def run(self):
-        print("Loop Exercises - start")
+        print("#####################################################")
+        print("Loop Exercises - 1 through 10")
+        print("#####################################################")
 
         results = l1.exercise_01_print_numbers_using_while(10)
         results = l1.exercise_02_display_negative_numbers()
@@ -31,9 +34,17 @@ class Driver():
         results = l1.exercise_09_odd_index_positions()
         results = l1.exercise_10_print_list_in_reverse_order()
 
+        print("")
+        print("#####################################################")
+        print("Loop Exercises - 11 through 20")
+        print("#####################################################")
         results = l2.exercise_11_reverse_string()
         results = l2.exercise_12_count_vowels_consonants()
-        results = l2.exercise_13_count_total_digits()
+        print("")
+        results = l2.exercise_13_count_total_digits(75869)
+        results = l2.exercise_13_count_total_digits(100000)
+        results = l2.exercise_13_count_total_digits(1000000)
+        print("")
         results = l2.exercise_14_reverse_integer_number()
         results = l2.exercise_15_find_largest_smallest()
         results = l2.exercise_16_check_for_palindrome()
@@ -41,6 +52,26 @@ class Driver():
         results = l2.exercise_18_collatz_conjecture()
         results = l2.exercise_19_armstrong_number_check()
         results = l2.exercise_20_print_number_pattern()
+
+        print("")
+        print("#####################################################")
+        print("Loop Exercises - 21 through 30")
+        print("#####################################################")
+        results = l3.exercise_21_reverse_number_pattern()
+        results = l3.exercise_22_alternate_numbers_pattern()
+        results = l3.exercise_23_alphabet_pyramid_pattern()
+        results = l3.exercise_24_hollow_square_pattern()
+        results = l3.exercise_25_pyramid_star_pattern()
+        results = l3.exercise_26_full_multiplication_table()
+        results = l3.exercise_27_list_cumulative_sums()
+        results = l3.exercise_28_filter_dictionary()
+        results = l3.exercise_29_identify_common_elements()
+        results = l3.exercise_30_remove_duplicates()
+
+        print("")
+        print("#####################################################")
+        print("Loop Exercises - 31 through 40")
+        print("#####################################################")
 
         results = l4.exercise_39_flatten_list()
         results = l4.exercise_40_nested_list_search()

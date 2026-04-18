@@ -1,4 +1,5 @@
 # from html.parser import incomplete
+import operator as op
 from src.common_library import helper_functions as hf
 
 #
@@ -30,6 +31,12 @@ def exercise_11_reverse_string():
             nohtyP
     """
     print("Exercise 11. Reverse a string using a for loop.")
+    string_to_test = "Python"
+    backwards_string_to_test = ""
+    for i in range (string_to_test.__len__(),0,-1):
+        letter = string_to_test[i-1]
+        backwards_string_to_test += letter
+    print(backwards_string_to_test)
     pass
 
 
@@ -49,10 +56,21 @@ def exercise_12_count_vowels_consonants():
 
     """
     print("Exercise 12. Count vowels and consonants in a sentence")
+    string_to_test = "Loops are Fun!"
+    vowels = 0
+    consonants = 0
+    vowel_set = ("a".lower(), "e".lower(), "i".lower(), 'o'.lower(), "u".lower())
+    for i in range (string_to_test.__len__()):
+        if string_to_test[i].isalpha():
+            if op.contains(vowel_set, string_to_test[i].lower()):
+                vowels += 1
+            else:
+                consonants += 1
+    print(f"Vowels: {vowels} and Consonants: {consonants}")
     pass
 
 
-def exercise_13_count_total_digits():
+def exercise_13_count_total_digits(number_to_parse):
     """
     Exercise 13. Count total number of digits in a number
     Practice Problem: Write a program to count the total number of digits
@@ -66,8 +84,24 @@ def exercise_13_count_total_digits():
         75869
     Expected Output:
         Total digits are: 5
+
+    Reference:
+        https://www.w3schools.com/python/ref_string_format.asp
     """
     print("Exercise 13. Count total number of digits in a number")
+    modulo = 10
+    # multiplier = 10
+    counter = 0
+    digits_list = []
+    divisor = 10**counter
+    while number_to_parse >= divisor:
+        remainder_digit = (number_to_parse // divisor) % modulo
+        digits_list.append(remainder_digit)
+        counter += 1
+        divisor = 10 ** counter
+    number_of_digits = len(digits_list)
+    print(f"Number to parse: {number_to_parse:,}")
+    print(f"Total digits are: {number_of_digits}")
     pass
 
 
