@@ -70,6 +70,42 @@ def exercise_12_count_vowels_consonants():
     pass
 
 
+def break_out_digits_add_to_list(number_to_parse):
+    """
+    This function will take an integer and store the digits that comprise the integer
+    into a list.
+
+    :param number_to_parse: The number to analyze
+    :type number_to_parse: integer
+    :return: A list of digits in the number_to_parse
+    :rtype: list of integers
+    """
+    modulo = 10
+    counter = 0
+    digits_list = []
+    divisor = 10**counter
+    while number_to_parse >= divisor:
+        remainder_digit = (number_to_parse // divisor) % modulo
+        digits_list.append(remainder_digit)
+        counter += 1
+        divisor = 10 ** counter
+    return digits_list
+
+
+def calculate_reverse_of_a_number(number_to_reverse):
+    """
+    This function will read in a number and reverse the digits
+    """
+    counter = 0
+    final_result = 0
+    digits_list = break_out_digits_add_to_list(number_to_reverse)
+    for nbr in digits_list.__reversed__():
+        final_result += (nbr * (10**counter))
+        counter += 1
+    return final_result
+
+
+
 def exercise_13_count_total_digits(number_to_parse):
     """
     Exercise 13. Count total number of digits in a number
@@ -89,23 +125,24 @@ def exercise_13_count_total_digits(number_to_parse):
         https://www.w3schools.com/python/ref_string_format.asp
     """
     print("Exercise 13. Count total number of digits in a number")
-    modulo = 10
-    # multiplier = 10
-    counter = 0
-    digits_list = []
-    divisor = 10**counter
-    while number_to_parse >= divisor:
-        remainder_digit = (number_to_parse // divisor) % modulo
-        digits_list.append(remainder_digit)
-        counter += 1
-        divisor = 10 ** counter
+    # modulo = 10
+    # # multiplier = 10
+    # counter = 0
+    # digits_list = []
+    # divisor = 10**counter
+    # while number_to_parse >= divisor:
+    #     remainder_digit = (number_to_parse // divisor) % modulo
+    #     digits_list.append(remainder_digit)
+    #     counter += 1
+    #     divisor = 10 ** counter
+    digits_list = break_out_digits_add_to_list(number_to_parse)
     number_of_digits = len(digits_list)
     print(f"Number to parse: {number_to_parse:,}")
     print(f"Total digits are: {number_of_digits}")
     pass
 
 
-def exercise_14_reverse_integer_number():
+def exercise_14_reverse_integer_number(number_to_parse = 76542):
     """
     Exercise 14. Reverse an integer number
     Practice Problem: Write a program to reverse a given integer number
@@ -121,10 +158,21 @@ def exercise_14_reverse_integer_number():
     :rtype:
     """
     print("Exercise 14. Reverse an integer number")
-    pass
+    # digits_list = break_out_digits_add_to_list(number_to_parse)
+    # Build the number that is the reverse of the number_to_parse
+    final_result = calculate_reverse_of_a_number(number_to_parse)
+    # counter = 0
+    # final_result = 0
+    # for nbr in digits_list.__reversed__():
+    #     final_result += (nbr * (10**counter))
+    #     counter += 1
+    # Print the results...
+    print(f"The reverse of {number_to_parse:,} is {final_result:,}")
+    print()
+    return final_result
 
 
-def exercise_15_find_largest_smallest():
+def exercise_15_find_largest_smallest(num = 75869):
     """
     Exercise 15. Find largest and smallest digit in a number
     Practice Problem: Write a program to find the largest and smallest digit
@@ -140,10 +188,19 @@ def exercise_15_find_largest_smallest():
         Smallest digit: 5
     """
     print("Exercise 15. Find largest and smallest digit in a number")
+    digits_list = break_out_digits_add_to_list(num)
+    smallest_number = 9
+    largest_number = 0
+    for nbr in digits_list:
+        if nbr < smallest_number:
+            smallest_number = nbr
+        if nbr > largest_number:
+            largest_number = nbr
+    print(f"For number {num} \nLargest digit: {largest_number} \nSmallest digit: {smallest_number}\n")
     pass
 
 
-def exercise_16_check_for_palindrome():
+def exercise_16_check_for_palindrome(number_to_check = 12345654321):
     """
     Exercise 16. Check if a number is a palindrome
     Practice Problem: Write a program to check if a given number is a palindrome.
@@ -158,6 +215,13 @@ def exercise_16_check_for_palindrome():
         Yes
     """
     print("Exercise 16. Check if a number is a palindrome")
+    number_to_check_reversed = calculate_reverse_of_a_number(number_to_check)
+
+    status = "is NOT a palindrome."
+    if number_to_check == number_to_check_reversed:
+        status = "IS a palindrome."
+
+    print(f"Number {number_to_check} {status}\n")
     pass
 
 
@@ -176,6 +240,16 @@ def exercise_17_find_factorial():
         120
     """
     print("Exercise 17. Find factorial of a given number")
+    results_list = []
+    for i in range(1, 11):
+        result = 1
+        for j in range(1, i + 1):
+            result *= j
+        message = f"The factorial of {i} is {result:,}"
+        results_list.append(message)
+    for item in results_list:
+        print(item)
+    print()
     pass
 
 
@@ -213,10 +287,21 @@ def exercise_19_armstrong_number_check():
         Yes
     """
     print("Exercise 19. Armstrong Number Check")
+    number_list = []
+    armstrong_list = []
+    for armstrong_candidate in range(1, 999999):
+        number_list = break_out_digits_add_to_list(armstrong_candidate)
+        power = len(number_list)
+        checksum = 0
+        for item in number_list:
+            checksum += item**power
+        if armstrong_candidate == checksum:
+            armstrong_list.append(armstrong_candidate)
+    print(f"List of Armstrong numbers from 0 to 999999: {armstrong_list}\n")
     pass
 
 
-def exercise_20_print_number_pattern():
+def exercise_20_print_number_pattern(number_of_rows = 5):
     """
     Exercise 20. Print right-angled triangle Number Pattern using a Loop
     Practice Problem: Write a program to print a right-angled triangle
@@ -234,6 +319,10 @@ def exercise_20_print_number_pattern():
         1 2 3 4 5
     """
     print("Exercise 20. Print right-angled triangle Number Pattern using a Loop.")
+    for i in range(1, number_of_rows + 1):
+        for j in range(i):
+            print(j + 1, end=" ")
+        print("")
     pass
 
 

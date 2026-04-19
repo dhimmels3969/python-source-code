@@ -80,7 +80,7 @@ def exercise_23_alphabet_pyramid_pattern(number_of_rows= 5):
 ###########################################################
 
 
-def exercise_24_hollow_square_pattern():
+def exercise_24_hollow_square_pattern(number_of_rows = 5):
     """
     Exercise 24. Hollow square pattern
     Practice Problem: Print a 5*5 square of stars where the middle is empty, leaving only the border.
@@ -97,7 +97,13 @@ def exercise_24_hollow_square_pattern():
         * * * * *
     """
     print("Exercise 24: Print a 5*5 square of stars")
-    pass
+    for i in range(number_of_rows):
+        for j in range(number_of_rows):
+            myChar = " "
+            if j == 0 or j == number_of_rows - 1 or i == 0 or i == number_of_rows - 1:
+                myChar = "*"
+            print(myChar, end = " ")
+        print()
     pass
 ###########################################################
 
@@ -121,6 +127,15 @@ def exercise_25_pyramid_star_pattern():
         *
     """
     print("Exercise 25: Print pyramid pattern")
+    number_of_rows = 5
+    for i in range(1, number_of_rows + 1):
+        for j in range(i):
+            print("*", end=" ")
+        print()
+    for i in range(number_of_rows -1, 0, -1):
+        for j in range(i):
+            print("*", end=" ")
+        print()
     pass
 ###########################################################
 
@@ -180,7 +195,14 @@ def exercise_27_list_cumulative_sums():
     Expected Output:
         Cumulative Sum: [1, 3, 6, 10]
     """
-    print("Exercise 27: List Cumulative Sum")
+    print("Exercise 27: List Cumulative Sums")
+    input_list = [1, 2, 3, 4]
+    cumulative_sums = []
+    running_total = 0
+    for item in input_list:
+        running_total += item
+        cumulative_sums.append(running_total)
+    print(cumulative_sums)
     pass
 ###########################################################
 
@@ -200,6 +222,13 @@ def exercise_28_filter_dictionary():
         Passing Students: {'Alice': 85, 'Charlie': 95}
     """
     print("Exercise 28: Dictionary Filter")
+    scores = {"Alice": 85, "Bob": 70, "Charlie": 95, "David": 60}
+    threshold = 75
+    final_results = {}
+    for key in scores.keys():
+        if scores.get(key) > threshold:
+           final_results[key] = scores.get(key)
+    print(f"Passing students: {final_results}")
     pass
 ###########################################################
 
@@ -219,6 +248,13 @@ def exercise_29_identify_common_elements():
         Common elements: [4, 5]
     """
     print("Exercise 29: Find common elements")
+    list_a = [1, 2, 3, 4, 5]
+    list_b = [4, 5, 6, 7, 8]
+    final_results = []
+    for item in list_a:
+        if item in list_b:
+            final_results.append(item)
+    print(f"Common elements: {final_results}")
     pass
 ###########################################################
 
@@ -238,6 +274,12 @@ def exercise_30_remove_duplicates():
             [1, 2, 3, 4, 5]
     """
     print("Exercise 30. Remove Duplicates")
+    original_list = [1, 2, 2, 3, 4, 4, 5]
+    unique_list = []
+    for item in original_list:
+        if item not in unique_list:
+            unique_list.append(item)
+    print(f"Unique List: {unique_list}")
     pass
 ###########################################################
 
