@@ -253,7 +253,7 @@ def exercise_17_find_factorial():
     pass
 
 
-def exercise_18_collatz_conjecture():
+def exercise_18_collatz_conjecture(number_to_parse = 6):
     """
     Exercise 18. Collatz Conjecture: Generate a sequence until it reaches 1
     Practice Problem: The Collatz conjecture states that if you start with
@@ -269,6 +269,18 @@ def exercise_18_collatz_conjecture():
         6, 3, 10, 5, 16, 8, 4, 2, 1
     """
     print("Exercise 18. Collatz Conjecture: Generate a sequence until it reaches 1")
+    results_list = []
+    current_result = number_to_parse
+    results_list.append(current_result)
+    while current_result != 1:
+        if current_result % 2 == 0:
+            current_result /= 2
+        else:
+            current_result = (current_result * 3) + 1
+        results_list.append(int(current_result))
+
+    print(results_list)
+    print()
     pass
 
 

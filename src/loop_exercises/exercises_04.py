@@ -1,3 +1,5 @@
+import types
+
 #
 # Exercises found at web page https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
 # Exercises 31 through 40
@@ -18,6 +20,19 @@ def exercise_31_segregate_items_in_list():
         Segregated List:
             [2, 4, 6, 1, 3, 5]
     """
+    print("\nExercise 31. Sort odd and even numbers in a list.")
+    even_list = []
+    odd_list = []
+    input_list = [1,2,3,4,5,6]
+    output_list = []
+    for item in input_list:
+        if item % 2 == 0:
+            even_list.append(item)
+        else:
+            odd_list.append(item)
+    output_list.extend(even_list)
+    output_list.extend(odd_list)
+    print(output_list)
     pass
 ###########################################################
 
@@ -37,7 +52,17 @@ def exercise_32_list_rotation():
     Expected Output:
         Rotated List: [3, 4, 5, 1, 2]
     """
-    print("Exercise 32. List Rotation")
+    print("\nExercise 32. List Rotation")
+    original_list = [1, 2, 3, 4, 5]
+    number_of_rotations = 2
+    print(f"Before: {original_list}")
+
+    # for _ in range(k): We use an underscore _ as the variable name because
+    # we don’t actually need the index; we just need the loop to run exactly k times.
+    for _ in range(number_of_rotations):
+        item_to_shift = original_list.pop(0)
+        original_list.append(item_to_shift)
+    print(f"After: {original_list}")
     pass
 ###########################################################
 
@@ -54,13 +79,24 @@ def exercise_33_word_frequency_counter():
     Expected Output:
         {'apple': 3, 'banana': 2, 'orange': 1}
     """
-    print("Exercise 33. Word frequency counter")
+    print("\nExercise 33. Word frequency counter")
+    input_text = "apple banana apple orange banana apple"
+    input_list = input_text.split()
+    output_dict = {}
+    for item in input_list:
+        try:
+            key = output_dict[item]
+            # increment the counter for the item
+            output_dict[item] = output_dict.get(item, 0) + 1
+        except KeyError:
+            output_dict[item] = 1
+    print(output_dict)
     pass
 ###########################################################
 
 
 
-def exercise_34_fibonacci_series():
+def exercise_34_fibonacci_series(limit = 10):
     """
     Exercise 34. Display fibonacci series up to 10 terms
     Practice Problem: Write a program to display the Fibonacci sequence up to 10 terms.
@@ -73,13 +109,31 @@ def exercise_34_fibonacci_series():
     Expected Output:
         0 1 1 2 3 5 8 13 21 34
     """
-    print("Exercise 34. Fibonacci series up to 10 terms")
+    print("\nExercise 34. Fibonacci series up to 10 terms")
+    first = 0
+    second = 1
+    list = []
+    # add the first 2 numbers to the list
+    list.append(first)
+    list.append(second)
+    counter = 0
+    # adjust limit to account for the first 2 items in the list...
+    limit -= 2
+    while counter < limit:
+        current = first + second
+        list.append(current)
+        # update first and second
+        first = second
+        second = current
+        # increment the counter
+        counter += 1
+    print(list)
     pass
 ###########################################################
 
 
 
-def exercise_35_perfect_number_check():
+def exercise_35_perfect_number_check(number_to_test = 28):
     """
     Exercise 35. Perfect number check
     Practice Problem: Write a program to check if a number is a “Perfect Number.”
@@ -93,14 +147,61 @@ def exercise_35_perfect_number_check():
         num = 28
     Expected Output:
         28 is a Perfect Number (1 + 2 + 4 + 7 + 14 = 28)
+    :returns
+        string showing results of analysis of the number to test
     """
-    print("Exercise 35. Perfect Number Check")
-    pass
+    results_list = []
+    cumulative_total = 0
+    number_message = "("
+    # print("\nExercise 35. Perfect Number Check")
+    for i in range(1, number_to_test // 2 + 1):
+        if number_to_test % i == 0:
+            results_list.append(i)
+    for item in results_list:
+        cumulative_total += item
+        number_message = number_message + str(item)  + " + "
+    number_message = number_message + ")"
+
+    # format the message
+    message = f"{number_to_test} is NOT a Perfect Number."
+    if cumulative_total == number_to_test:
+        message = f"{number_to_test} is a Perfect Number {number_message}."
+        message = message.replace(" + )", " = ###)")
+        message = message.replace("###", str(number_to_test))
+
+    return message
 ###########################################################
 
 
+def exercise_35_check_perfect_numbers_collection(lower_bound = 0, upper_bound = 100):
+    """
+    Exercise 35. Perfect number check
+    Practice Problem: Write a program to check if a number is a “Perfect Number.”
+        A perfect number is a positive integer that is equal to the sum of its
+        proper divisors (excluding the number itself). For example,
+        6 is perfect because 1 + 2 + 3 = 6.
+    Exercise Purpose: Emphasizes efficiency in search. While you
+        could check every number up to n, you only need to check up
+        to n/2 to find all divisors, showing how to optimize loop ranges.
+    Given Input:
+        num = 28
+    Expected Output:
+        28 is a Perfect Number (1 + 2 + 4 + 7 + 14 = 28)
+    :returns
+        string showing results of analysis of the number to test
+    """
+    results_list = []
+    print("\nExercise 35. Perfect Number Check - Multiple Entries")
+    for number_to_check in range(lower_bound, upper_bound + 1):
+        results_list.append(exercise_35_perfect_number_check(number_to_check))
+    for item in results_list:
+        if str(item.lower()).__contains__("is a Perfect Number".lower()):
+            print(item)
+    return None
+###########################################################
 
-def exercise_36_binary_decimal_conversion():
+
+def exercise_36_binary_decimal_conversion(binary_str = "1101"):
     """
     Exercise 36. Binary to decimal conversion using loop
     Practice Problem: Manually convert a binary string (e.g., "1101")
@@ -113,10 +214,40 @@ def exercise_36_binary_decimal_conversion():
     Expected Output:
         Decimal value: 13
     """
-    print("Exercise 36. Binary to decimal conversion using loops")
+    print("\nExercise 36. Binary to decimal conversion using loops")
+    final_result = 0
+    power = 1
+    for i in range(len(binary_str)-1, -1, -1):
+        digit = int(binary_str[i])
+        amount = digit * power
+        final_result += amount
+        power *= 2
+    print(f"Binary Value: {binary_str}   Decimal value: {final_result}")
     pass
 ###########################################################
 
+
+
+def is_prime(n):
+    """
+    Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
+    :param n:
+    :type n:
+    :return:
+    :rtype:
+    """
+    if n < 2:
+        return False
+
+    sieve = [True] * (n + 1)
+    sieve[0] = sieve[1] = False
+
+    for i in range(2, int(n**0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, n + 1, i):
+                sieve[j] = False
+
+    return sieve[n]
 
 
 def exercise_37_display_prime_numbers():
@@ -140,7 +271,16 @@ def exercise_37_display_prime_numbers():
         43
         47
     """
-    print("Exercise 37. Display all prime numbers within a range")
+    print("\nExercise 37. Display all prime numbers within a range")
+    start = 25
+    end = 50
+    prime_list = []
+    for n in range(start, end + 1):
+        if is_prime(n):
+            prime_list.append(n)
+    print(f"Prime numbers between {start} and {end} are: ")
+    for item in prime_list:
+        print(item)
     pass
 ###########################################################
 
@@ -161,7 +301,15 @@ def exercise_38_find_sum_of_series():
     Expected Output:
         24690
     """
-    print("Exercise 38. Find the sum of the series up to n terms")
+    print("\nExercise 38. Find the sum of the series up to n terms")
+    item = 0
+    number_of_terms = 5
+    digit = 2
+    terms_list = []
+    for i in range(number_of_terms):
+        item += digit * (10**i)
+        terms_list.append(item)
+    print(f"Sum of series up to {number_of_terms} terms: {sum(terms_list)}")
     pass
 ###########################################################
 
@@ -182,7 +330,14 @@ def exercise_39_flatten_list():
     Expected Output:
         [10, 20, 30, 40, 50, 60]
     """
-    print("Exercise 39. flatten list")
+    print("\nExercise 39. flatten list")
+    nested_list = [[10, 20], [30, 40], [50, 60]]
+    final_results = []
+    for item in nested_list:
+        for item_2 in item:
+            final_results.append(item_2)
+    print(f"Original Input: {nested_list}")
+    print(f"Final Result: {final_results}")
     pass
 ###########################################################
 
@@ -202,6 +357,14 @@ def exercise_40_nested_list_search():
     Expected Output:
         Target 30 found at Row: 1, Column: 0
     """
-    print("Exercise 40. Nested list search")
+    print("\nExercise 40. Nested list search")
+    matrix = [[10, 20], [30, 40], [50, 60], [112, 56], [240, 30]]
+    target = 30
+    for i in range (len(matrix)):
+        item = matrix[i]
+        for j in range (len(item)):
+            if item[j] == target:
+                print(f"Target {target} found at Row: {i}, Column: {j}")
+
     pass
 ###########################################################

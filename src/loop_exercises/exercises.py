@@ -21,6 +21,7 @@ def exercise_01_print_numbers_using_while(limit):
         teaches how to set up a loop condition to execute a block of code
         repeatedly, and manually manage a counter variable to prevent infinite loops.
     """
+    print("\nExercise 1. Print first 10 natural numbers using while loop")
     incomplete = True
     i = 1
     while incomplete:

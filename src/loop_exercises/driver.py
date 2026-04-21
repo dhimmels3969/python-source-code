@@ -52,6 +52,9 @@ class Driver():
         results = l2.exercise_16_check_for_palindrome(8675309)
         results = l2.exercise_17_find_factorial()
         results = l2.exercise_18_collatz_conjecture()
+        results = l2.exercise_18_collatz_conjecture(100)
+
+
         results = l2.exercise_19_armstrong_number_check()
         results = l2.exercise_20_print_number_pattern()
 
@@ -81,7 +84,12 @@ class Driver():
         results = l4.exercise_33_word_frequency_counter()
         results = l4.exercise_34_fibonacci_series()
         results = l4.exercise_35_perfect_number_check()
+        print(results)
+        # results = l4.exercise_35_check_perfect_numbers_collection(1, 25000)
+        results = l4.exercise_35_check_perfect_numbers_collection(28, 28)
+
         results = l4.exercise_36_binary_decimal_conversion()
+        results = l4.exercise_36_binary_decimal_conversion("11000000")
         results = l4.exercise_37_display_prime_numbers()
         results = l4.exercise_38_find_sum_of_series()
         results = l4.exercise_39_flatten_list()
