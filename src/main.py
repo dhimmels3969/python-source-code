@@ -16,7 +16,7 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
     src_dir = Path(os.path.dirname(__file__))
-    driver = driver.driver(src_dir)
+    driver = driver.driver(src_dir.parent)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
