@@ -4,6 +4,10 @@ from pathlib import Path
 import random
 import string
 
+#
+# https://pynative.com/python-input-and-output-exercise/
+# Exercises 21 - 237
+#
 
 def convert_string_to_blocks(source_data: string, block_size: int) -> list:
     """
@@ -50,6 +54,8 @@ def convert_string_to_blocks(source_data: string, block_size: int) -> list:
     return results_list
 
 
+
+#########################################################################################
 def generate_random_text(size):
     """
     Generate a random block of text with the given size.
@@ -67,6 +73,8 @@ def generate_random_text(size):
     return ''.join(random.choice(charset) for _ in range(size)).upper()
 
 
+
+#########################################################################################
 def create_text_block():
     try:
         # Get user input
@@ -111,6 +119,8 @@ def create_text_block():
     return results
 
 
+
+#########################################################################################
 def exercise_21_read_specific_lines_from_file(root_dir, items_to_keep):
     """
     Exercise 21. Read line number 4 from a file
@@ -147,6 +157,9 @@ def exercise_21_read_specific_lines_from_file(root_dir, items_to_keep):
     print(lines_to_write)
     pass
 
+
+
+#########################################################################################
 def exercise_22_check_empty_file(root_dir):
     """
     Exercise 22. Check if file is empty
@@ -179,11 +192,52 @@ def exercise_22_check_empty_file(root_dir):
         status = ""
     message = f"{myFile.name} is {status} empty."
     print(message)
-
-
     pass
 
 
+
+#########################################################################################
+def exercise_22_check_empty_zilch_file(root_dir):
+    """
+    See if we can reference a sub-folder while building a file name
+    Exercise 22. Check if file is empty
+    Practice Problem: Write a script that checks a file’s metadata. If the file size is 0 bytes
+        , print “File is empty”; otherwise, print the size in bytes.
+    Exercise Purpose: Sometimes a file exists but contains no data (common in failed
+        downloads or interrupted logs). This exercise introduces the os module
+        and “system metadata”—information about a file rather than the content inside it.
+    Given Input:
+        An empty file named empty_log.txt.
+    Expected Output:
+        Checking empty_log.txt...
+        Status: File is empty.
+    """
+    print("Exercise 22.1:   Check if file is empty.")
+
+    file_path = hf.build_file_name(root_dir, r"data\input_output_exercises", "empty_zilch_log.txt")
+    myFile = Path(file_path)
+    size = myFile.stat().st_size
+    status = "not"
+    if size == 0:
+        status = ""
+    message = f"{myFile.name} is {status} empty."
+    print(message)
+
+    file_path = hf.build_file_name(root_dir, r"data\input_output_exercises", "random_quotes.txt")
+    myFile = Path(file_path)
+    size = myFile.stat().st_size
+    status = "not"
+    if size == 0:
+        status = ""
+    message = f"{myFile.name} is {status} empty. Size is {size} bytes."
+    print(message)
+    print()
+    pass
+
+
+
+
+#########################################################################################
 def exercise_23_delete_file(root_dir):
     """
     Exercise 23. Delete a specific file

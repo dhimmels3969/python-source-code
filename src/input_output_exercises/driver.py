@@ -1,6 +1,7 @@
 
 # from src.common_library import helper_functions as hf
 import input_output_exercises.exercises as io_ex
+import input_output_exercises.exercises_02 as io_ex_02
 import input_output_exercises.exercises_03 as io_ex_03
 
 class Driver():
@@ -22,7 +23,7 @@ class Driver():
         print("#####################################################")
         print("Input Output Exercises - 1 through 10")
         print("#####################################################")
-
+        results = io_ex_03.exercise_22_check_empty_zilch_file(self.root)
 
         myResults = io_ex.exercise_01_process_two_numbers_driver(250000)
         #
@@ -46,16 +47,16 @@ class Driver():
         print("#####################################################")
 
         results = io_ex.exercise_10_center_aligned_text()
-        results = io_ex.exercise_11_pad_with_zeroes()
+        results = io_ex_02.exercise_11_pad_with_zeroes()
         results = io_ex.exercise_12_format_string()
         results = io_ex.ex_13_format_currency(1250500.7)
         results = io_ex.ex_15_tabular_output()
         results = io_ex.ex_16_interactive_menu()
         #  issue with exercise 17... return to it later (2026-04-02)
         # results = io_ex.ex_17_login_test()
-        results = io_ex.ex_18_read_file_store_content_in_list(self.root)
-        results = io_ex.ex_19_write_list_to_text_file(self.root)
-        results = io_ex.ex_20_find_number_of_lines(self.root)
+        results = io_ex_02.ex_18_read_file_store_content_in_list(self.root)
+        results = io_ex_02.ex_19_write_list_to_text_file(self.root)
+        results = io_ex_02.ex_20_find_number_of_lines(self.root)
 
 
 
@@ -68,6 +69,7 @@ class Driver():
         results = io_ex_03.create_text_block()
         results = io_ex_03.exercise_22_check_empty_file(self.root)
         results = io_ex_03.exercise_23_delete_file(self.root)
+        results = io_ex_03.exercise_22_check_empty_zilch_file(self.root)
 
         print()
         print("#####################################################")
