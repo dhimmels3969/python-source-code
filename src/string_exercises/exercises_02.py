@@ -175,6 +175,23 @@ def exercise_19_alternating_characters():
         AzbycX
     """
     print("Exercise 19. Create a mixed string using alternating characters")
+    s1 = "Abc"
+    s2 = "Xyz"
+    s1_len = len(s1)
+    s2_len = len(s2)
+    counter = max(s1_len, s2_len)
+    result = ""
+    for i in range(counter):
+        s2_offset = s2_len - i - 1
+        try:
+            result += s1[i]
+        except IndexError:
+            pass
+        try:
+            result += s2[s2_offset]
+        except IndexError:
+            pass
+    print(result)
     pass
 
 
@@ -194,6 +211,7 @@ def exercise_20_calculate_sums_and_averages():
         Sum is: 38 Average is 6.33
     """
     print("Exercise 20. Calculate Sum and Average")
+    print()
     pass
 
 
