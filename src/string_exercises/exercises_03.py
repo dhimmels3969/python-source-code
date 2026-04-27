@@ -3,12 +3,12 @@
 # Exercises 21 through 30
 #
 
-
-
+import string
+from unittest import result
 
 
 #######################################################################################################
-def exercise_21():
+def exercise_21_count_occurrences():
     """
     Exercise 21. Count occurrences of all characters within a string
     Practice Problem: Count the frequency of every character in a string
@@ -22,12 +22,21 @@ def exercise_21():
     Expected Output:
         {'a': 1, 'p': 2, 'l': 1, 'e': 1}
     """
+    print("Exercise 21. Count occurrences of all characters within a string")
+    str1 = "apple"
+    character_count_dict = {}
+    for char in str1:
+       if char not in character_count_dict:
+           character_count_dict[char] = 1
+       else:
+           character_count_dict[char] += 1
+    print(character_count_dict)
     pass
 
 
 
 #######################################################################################################
-def exercise_22():
+def exercise_22_remove_empty_strings():
     """
     Exercise 22. Remove empty strings from a list of strings
     Practice Problem: Given a list of strings, remove any empty
@@ -40,12 +49,19 @@ def exercise_22():
     Expected Output:
         ['Emma', 'Jon', 'Kelly', 'Eric']
     """
+    print("Exercise 22. Remove empty strings from a list of strings")
+    str_list = ["Emma", "Jon", "", "Kelly", None, "Eric", ""]
+    results_list = []
+    for item in str_list:
+        if item:
+            results_list.append(item)
+    print(results_list)
     pass
 
 
 
 #######################################################################################################
-def exercise_23():
+def exercise_23_remove_special_symbols():
     """
     Exercise 23. Remove special symbols/punctuation from a string
     Practice Problem: Write a program to remove all special symbols
@@ -58,12 +74,22 @@ def exercise_23():
     Expected Output:
         "Jon is developer musician"
     """
+    print("Exercise 23. Remove special symbols from a string")
+    str1 = "/*Jon is @developer & musician!!"
+    result = ""
+    for char in str1:
+        if char in string.punctuation:
+            result += ""
+        else:
+            result += char
+    result = result.replace("  ", " ")
+    print(result)
     pass
 
 
 
 #######################################################################################################
-def exercise_24():
+def exercise_24_keep_only_integers():
     """
     Exercise 24. Remove all characters from a string except integers
     Practice Problem: Write a program to extract only the numeric digits
@@ -78,12 +104,23 @@ def exercise_24():
     Expected Output:
         2510
     """
+    print("Exercise 24. Remove all characters from a string except integers")
+    str1 = "I am 25 years and 10 months old"
+    result = ""
+
+    # from pynative website
+    # res = "".join([item for item in str1 if item.isdigit()])
+
+    for char in str1:
+        if char.isdigit():
+            result += char
+    print(result)
     pass
 
 
 
 #######################################################################################################
-def exercise_25():
+def exercise_25_find_words_with_letters_and_numbers():
     """
     Exercise 25. Find words with both letters and numbers
     Practice Problem: Write a program to find and print words from a string
@@ -98,12 +135,36 @@ def exercise_25():
         Emma25
         scientist50
     """
+    print("Exercise 25. Find words with both letters and numbers")
+    letter_and_number_list = []
+    str1 = "Emma25 is Data scientist50 and AI Expert"
+    input_list = str1.split()
+
+    # from website
+    # Check each word
+    for word in input_list:
+        if any(char.isalpha() for char in word) and any(char.isdigit() for char in word):
+            letter_and_number_list.append(word)
+
+    # for word in input_list:
+    #     letters_found = False
+    #     numbers_found = False
+    #     for char in word:
+    #         if char.isalpha():
+    #             letters_found = True
+    #         if char.isdigit():
+    #             numbers_found = True
+    #     if letters_found and numbers_found:
+    #         letter_and_number_list.append(word)
+    for word in letter_and_number_list:
+        print(word)
+    print()
     pass
 
 
 
 #######################################################################################################
-def exercise_26():
+def exercise_26_replace_symbols():
     """
     Exercise 26. Replace each special symbol with # in the following string
     Practice Problem: Write a program to replace every special symbol (punctuation)
@@ -117,12 +178,21 @@ def exercise_26():
     Expected Output:
         ##Jon is #developer # musician##
     """
+    print("Exercise 26. Replace special symbols with # in the following string")
+    str1 = "/*Jon is @developer & musician!!"
+    result = ""
+    for char in str1:
+        if char in string.punctuation:
+            result += "#"
+        else:
+            result += char
+    print(result)
     pass
 
 
 
 #######################################################################################################
-def exercise_27():
+def exercise_27_palindrome_check():
     """
     Exercise 27. Palindrome Check
     Practice Problem: Write a program to check if a string is a palindrome
@@ -136,12 +206,25 @@ def exercise_27():
     Expected Output:
         Is Palindrome: True
     """
+    def is_palindrome(s1):
+        s1_backwards = s1[::-1]
+        return s1_backwards.lower() == s1.lower()
+
+    print("Exercise 27. Palindrome Check")
+    str1 = "radar"
+    message = f"Is Palindrome: {is_palindrome(str1)}"
+    print(message)
+
+    str2 = "bravo"
+    message = f"Is Palindrome: {is_palindrome(str2)}"
+    print(message)
+
     pass
 
 
 
 #######################################################################################################
-def exercise_28():
+def exercise_28_anagram_detector():
     """
     Exercise 28. Anagram Detector
     Practice Problem: Write a program to check if two strings are anagrams
@@ -154,12 +237,27 @@ def exercise_28():
     Expected Output:
         Are Anagrams: True
     """
+    print("Exercise 28. Anagram Detector")
+    def anagram_analyzer(phrase1, phrase2):
+        s1_list = sorted(list(phrase1))
+        s2_list = sorted(list(phrase2))
+        message = f"Phrases \"{phrase1}\" and \"{phrase2}\" are anagrams: {s1_list == s2_list}"
+        return message
+
+    s1 = "listen" 
+    s2 = "silent"
+    print(anagram_analyzer(s1, s2))
+
+    s3 = "vanilla"
+    s4 = "strawberry"
+    print(anagram_analyzer(s3, s4))
+
     pass
 
 
 
 #######################################################################################################
-def exercise_29():
+def exercise_29_unique_character_check():
     """
     Exercise 29. Unique Character Check
     Practice Problem: Write a function to determine if a string has all
@@ -176,12 +274,28 @@ def exercise_29():
         "python" unique: True
         "alphabet" unique: False
     """
+    print("Exercise 29. Unique Character Check")
+    str1 = "python"
+    str2 = "alphabet"
+
+    item_set = set()
+    for char in str1:
+        item_set.add(char)
+    message = f"!{str1}! unique: {len(item_set) == len(str1)}"
+    print(message.replace("!", '"'))
+
+    item_set.clear()
+    for char in str2:
+        item_set.add(char)
+    message = f"!{str2}! unique: {len(item_set) == len(str2)}"
+    print(message.replace("!", '"'))
+
     pass
 
 
 
 #######################################################################################################
-def exercise_30():
+def exercise_30_title_case_logic():
     """
     Exercise 30. Title Case Logic
     Practice Problem: Write a program to capitalize the first letter of
@@ -194,6 +308,24 @@ def exercise_30():
     Expected Output:
         Hello World From Python
     """
+    print("Exercise 30. Title Case Logic")
+    str1 = "hello world from python"
+    transformed_str1 = ""
+    words_list = str1.split()
+    for word in words_list:
+        # from website
+        capitalized = word[0].upper() + word[1:]
+        transformed_str1 += capitalized
+        # for i in range(len(word)):
+        #     if i == 0:
+        #         transformed_str1 += word[i].upper()
+        #     else:
+        #         transformed_str1 += word[i]
+        transformed_str1 += " "
+     # truncate last blank
+    transformed_str1 = transformed_str1[0:len(transformed_str1)-1]
+    print(transformed_str1)
+    print()
     pass
 
 

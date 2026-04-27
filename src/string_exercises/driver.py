@@ -1,6 +1,7 @@
 from src.common_library import helper_functions as hf
 import string_exercises.exercises as s1
 import string_exercises.exercises_02 as s2
+import string_exercises.exercises_03 as s3
 
 class Driver():
 
@@ -47,6 +48,17 @@ class Driver():
         print("#####################################################")
         print("String Exercises - 21 through 30")
         print("#####################################################")
+
+        results = s3.exercise_21_count_occurrences()
+        results = s3.exercise_22_remove_empty_strings()
+        results = s3.exercise_23_remove_special_symbols()
+        results = s3.exercise_24_keep_only_integers()
+        results = s3.exercise_25_find_words_with_letters_and_numbers()
+        results = s3.exercise_26_replace_symbols()
+        results = s3.exercise_27_palindrome_check()
+        results = s3.exercise_28_anagram_detector()
+        results = s3.exercise_29_unique_character_check()
+        results = s3.exercise_30_title_case_logic()
 
         print("#####################################################")
         print("String Exercises - 31 through 40")

@@ -2,9 +2,7 @@
 # Exercises found at web page https://pynative.com/python-string-exercise/
 # Exercises 11 through 20
 #
-
-
-
+from email import message
 
 
 #######################################################################################################
@@ -21,6 +19,11 @@ def exercise_11_prefix_suffix_check():
         Is valid URL: True
     """
     print("Exercise 11. Prefix/Suffix Check")
+    str1 = "https://google.com"
+    validUrl = False
+    if str1.startswith("https") & str1.endswith(".com"):
+        validUrl = True
+    print(f"Is valid URL: {validUrl}")
     pass
 
 
@@ -34,12 +37,20 @@ def exercise_12_swap_case():
     Exercise Purpose: This demonstrates Case Transformation. Though simple, it is
         often used in search algorithms to normalize data or in text editors
         to provide “Toggle Case” functionality.
-    Given Input: str1 =
-        "PyThOn"
+    Given Input:
+        str1 = "PyThOn"
     Expected Output:
         pYtHoN
     """
     print("Exercise 12. Swap Case")
+    str1 = "PyThOn"
+    result = ""
+    for i in range(len(str1)):
+        if str1[i].islower():
+            result += str1[i].upper()
+        else:
+            result += str1[i].lower()
+    print(result)
     pass
 
 
@@ -58,6 +69,9 @@ def exercise_13_remove_whitespace():
         Python
     """
     print("Exercise 13. Remove Whitespace")
+    str1 = " P y t h o n "
+    result = str1.replace(" ", "")
+    print(result)
     pass
 
 
@@ -73,8 +87,16 @@ def exercise_14_character_removal():
     Given Input:
         str1 = "Python", i = 2
     Expected Output:
+        Pyhon (The character 't' at index 2 was removed)
     """
     print("Exercise 14. N-th Character Removal")
+    str1 = "Python"
+    i = 2
+    head = str1[:i]
+    tail = str1[i+1:]
+    result = "".join([str1[:i], str1[i+1:]])
+    message = f"{result} (The character 't' at index 2 was removed)"
+    print(message)
     pass
 
 
@@ -95,6 +117,10 @@ def exercise_15_string_partition_test():
         ('username', '@', 'company.com')
     """
     print("Exercise 15. String Partitioning")
+    str1 = "username@company.com"
+    sep = "@"
+    partition_tuple = str1.partition(sep)
+    print(partition_tuple)
     pass
 
 
@@ -115,6 +141,15 @@ def exercise_16_extract_file_extension():
         pdf
     """
     print("Exercise 16. Extract File Extension")
+    file_name = "report_final_v2.pdf"
+    offset = file_name.find(".")
+    file_name_len = len(file_name)
+    file_extension = file_name[offset + 1:file_name_len]
+
+    # from website
+    extension = file_name.split(".")[-1]
+
+    print(f"{file_extension}")
     pass
 
 
@@ -132,8 +167,19 @@ def exercise_17_sort_lower_case_and_upper_case():
         str1 = "PyNaTive"
     Expected Output:
         yaivePNT
+    Could this be done with a regular expression???
     """
     print("Exercise 17. Sort Lowercase First")
+    str1 = "PyNaTive"
+    head = ""
+    tail = ""
+    for char in str1:
+        if char >= "a" and char <= "z":
+            head += char
+        else:
+            tail += char
+    result = "".join([head, tail])
+    print(result)
     pass
 
 
@@ -153,6 +199,21 @@ def exercise_18_count_letters_digits_symbols():
         Total counts of chars, digits, and symbols: Chars = 8 Digits = 3 Symbol = 4
     """
     print("Exercise 18. Count All Letters, Digits, and Symbols")
+    str1 = "P@#yn26at^&i5ve"
+    alpha_count = 0
+    digits_count = 0
+    symbols_count = 0
+    for char in str1:
+        if char.isalpha():
+            alpha_count += 1
+        else:
+            if char.isdigit():
+                digits_count += 1
+            else:
+                symbols_count += 1
+    message = f"Total counts of chars, digits, and symbols: Chars = {alpha_count} Digits =  {digits_count} Symbol = {symbols_count}"
+    print(message)
+
     pass
 
 
@@ -174,23 +235,33 @@ def exercise_19_alternating_characters():
     Expected Output:
         AzbycX
     """
+
+    def build_string_from_two_inputs(s1, s2):
+        s1_len = len(s1)
+        s2_len = len(s2)
+        # Use length of the bigger string
+        length = max(s1_len, s2_len)
+        result = ""
+        # Reverse s2 to make it easier to pick characters from the end
+        s2 = s2[::-1]
+        # build the single string from the two inputs
+        for i in range(length):
+            if i < s1_len:
+                result += s1[i]
+            if i < s2_len:
+                result += s2[i]
+        return result
+
     print("Exercise 19. Create a mixed string using alternating characters")
     s1 = "Abc"
     s2 = "Xyz"
-    s1_len = len(s1)
-    s2_len = len(s2)
-    counter = max(s1_len, s2_len)
-    result = ""
-    for i in range(counter):
-        s2_offset = s2_len - i - 1
-        try:
-            result += s1[i]
-        except IndexError:
-            pass
-        try:
-            result += s2[s2_offset]
-        except IndexError:
-            pass
+    result = build_string_from_two_inputs(s1, s2)
+    print(result)
+
+    print("Test of two strings of unequal length")
+    s3 = "Whale"
+    s4 = "Rhododendron"
+    result = build_string_from_two_inputs(s3, s4)
     print(result)
     pass
 
@@ -211,6 +282,15 @@ def exercise_20_calculate_sums_and_averages():
         Sum is: 38 Average is 6.33
     """
     print("Exercise 20. Calculate Sum and Average")
+    str1 = "PYnative29@#8496"
+    number_list = []
+    for char in str1:
+        if char.isdigit():
+            number_list.append(int(char))
+    total = sum(number_list)
+    average = total/len(number_list)
+    print(f"Sum is {total}")
+    print(f"Average is {average:.3}")
     print()
     pass
 
