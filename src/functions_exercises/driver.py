@@ -23,6 +23,8 @@ class Driver():
 
 
     def run(self):
+
+        print()
         print("#####################################################")
         print("Functions Exercises - 1 through 10")
         print("#####################################################")
@@ -38,6 +40,10 @@ class Driver():
         results = f1.exercise_09_find_max_in_list()
         results = f1.exercise_10_keyword_positional_arguments()
 
+        print()
+        print("#####################################################")
+        print("Functions Exercises - 11 through 18")
+        print("#####################################################")
         results = f2.exercise_11_function_with_keyword_args()
         results = f2.exercise_12_modify_global_variables()
         results = f2.exercise_13_recursion_factorial()

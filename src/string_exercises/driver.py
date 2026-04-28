@@ -2,6 +2,7 @@ from src.common_library import helper_functions as hf
 import string_exercises.exercises as s1
 import string_exercises.exercises_02 as s2
 import string_exercises.exercises_03 as s3
+import string_exercises.exercises_04 as s4
 
 class Driver():
 
@@ -17,6 +18,8 @@ class Driver():
         pass
 
     def run(self):
+
+        print()
         print("#####################################################")
         print("String Exercises - 1 through 10")
         print("#####################################################")
@@ -31,6 +34,7 @@ class Driver():
         results = s1.exercise_09_balanced_strings_check()
         results = s1.exercise_10_vowel_counter()
 
+        print()
         print("#####################################################")
         print("String Exercises - 11 through 20")
         print("#####################################################")
@@ -45,6 +49,7 @@ class Driver():
         results = s2.exercise_19_alternating_characters()
         results = s2.exercise_20_calculate_sums_and_averages()
 
+        print()
         print("#####################################################")
         print("String Exercises - 21 through 30")
         print("#####################################################")
@@ -60,6 +65,15 @@ class Driver():
         results = s3.exercise_29_unique_character_check()
         results = s3.exercise_30_title_case_logic()
 
+        print()
         print("#####################################################")
         print("String Exercises - 31 through 40")
         print("#####################################################")
+        results = s4.exercise_31_remove_duplicate_characters()
+        results = s4.exercise_32_word_reversal()
+        results = s4.exercise_33_character_interleaving()
+        results = s4.exercise_34_longest_word()
+        results = s4.exercise_35_acronym_generator()
+        results = s4.exercise_36_word_frequency()
+        results = s4.exercise_37_first_non_repeating_character()
+        results = s4.exercise_38_string_rotation_check()
