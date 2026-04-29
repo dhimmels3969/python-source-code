@@ -1,0 +1,36 @@
+from src.common_library import helper_functions as hf
+import data_structures_exercises.exercises as ds1
+
+
+class Driver():
+
+    """
+    Driver Class
+
+    Implements run function which executes multiple functions in the loop_exercises folder.
+
+    TODO:
+        Set up a dictionary to control which function gets executed and which functions get bypassed.
+    """
+    def __init__(self):
+        pass
+
+    def run(self):
+        print()
+        print("#####################################################")
+        print("Data Structure Exercises - 1 through 10")
+        print("#####################################################")
+        results = ds1.exercise_01_build_output_list_from_two_input_lists()
+        results = ds1.exercise_02_add_to_remove_from_list()
+        results = ds1.exercise_03_slice_list()
+        results = ds1.exercise_04_count_occurrences()
+        results = ds1.exercise_05_build_swt_from_paired_elements()
+        results = ds1.exercise_06_set_intersection_and_removal()
+        results = ds1.exercise_07_subset_superset_test()
+        results = ds1.exercise_08_filter_list_against_dictionary()
+        results = ds1.exercise_09_unique_dictionary_values()
+        results = ds1.exercise_10_remove_duplicates_from_list()
+        print()
+
+
+

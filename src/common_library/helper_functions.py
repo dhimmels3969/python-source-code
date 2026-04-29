@@ -50,3 +50,15 @@ def build_file_name(root_dir, subfolders, file_name):
         return json_path
     except Exception as error:
         raise error
+
+
+
+#########################################################################
+def build_dictionary(input_object):
+    results_dictionary = {}
+    for item in input_object:
+        if item not in results_dictionary:
+            results_dictionary[item] = 1
+        else:
+            results_dictionary[item] += 1
+    return results_dictionary
