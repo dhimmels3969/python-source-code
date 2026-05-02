@@ -153,6 +153,14 @@ def exercise_06_set_intersection_and_removal():
         First Set after removing common element  {65, 42, 78, 23}
     """
     print("Exercise 6: Set Intersection and Removal")
+    first_set = {23, 42, 65, 57, 78, 83, 29}
+    second_set = {57, 83, 29, 67, 73, 43, 48}
+    third_set = first_set & second_set
+    print(f"Intersection is  {third_set}")
+    # remove the common elements (stored in third set) from the first set.
+    for item in third_set:
+        first_set.remove(item)
+    print(f"First set after removing common element  {first_set}")
     pass
 
 
@@ -177,6 +185,25 @@ def exercise_07_subset_superset_test():
         Second Set  {67, 73, 43, 48, 83, 57, 29}
     """
     print("Exercise 7: Subset or Superset of another set")
+    first_set = {27, 43, 34}
+    second_set = {34, 93, 22, 27, 43, 53, 48}
+    # perform tests...
+    s1_subset_of_s2 = first_set.issubset(second_set)
+    s1_superset_of_s2 = first_set.issuperset(second_set)
+    s2_subset_of_s1 = second_set.issubset(first_set)
+    s2_superset_of_s1 = second_set.issuperset(first_set)
+    # print results...
+    print(f"First set is subset of second set - {s1_subset_of_s2}")
+    print(f"Second set is subset of First set - {s2_subset_of_s1}")
+    print()
+    print(f"First set is Super set of second set - {s1_superset_of_s2}")
+    print(f"Second set is Super set of First set - {s2_superset_of_s1}")
+    print()
+
+    if s1_subset_of_s2 or s2_superset_of_s1:
+        first_set.clear()
+    print(f"First set  {first_set}")
+    print(f"Second set  {second_set}")
     pass
 
 
@@ -195,6 +222,18 @@ def exercise_08_filter_list_against_dictionary():
         After removing unwanted elements from list [47, 69, 76, 97]
     """
     print("Exercise 8: Filter List Against Dictionary")
+    roll_number = [47, 64, 69, 37, 76, 83, 95, 97]
+    sample_dict = {'Jhon': 47, 'Emma': 69, 'Kelly': 76, 'Jason': 97}
+
+    #######################################################################################
+    # create new list (from pyNative website
+    # roll_number[:] = [item for item in roll_number if item in sample_dict.values()]
+    #######################################################################################
+
+    for i in range(len(roll_number) - 1, 0, -1):
+        if roll_number[i] not in sample_dict.values():
+            roll_number.remove(roll_number[i])
+    print(f"After removing unwanted elements from list {roll_number}")
     pass
 
 
@@ -211,6 +250,13 @@ def exercise_09_unique_dictionary_values():
         [47, 52, 44, 53, 54]
     """
     print("Exercise 9: Unique Dictionary Values to List")
+    speed = {'jan': 47, 'feb': 52, 'march': 47, 'April': 44, 'May': 52, 'June': 53, 'july': 54, 'Aug': 44, 'Sept': 54}
+    final_results = []
+
+    for value in speed.values():
+        if value not in final_results:
+            final_results.append(value)
+    print(f"Unique List: {final_results}")
     pass
 
 
@@ -230,6 +276,18 @@ def exercise_10_remove_duplicates_from_list():
         max: 99
     """
     print("Exercise 10: Remove Duplicates from a list")
+    sample_list = [87, 45, 41, 65, 94, 41, 99, 94]
+    unique_list = []
+    for item in sample_list:
+        if item not in unique_list:
+            unique_list.append(item)
+    unique_set = tuple(unique_list)
+    unique_set_min = min(unique_set)
+    unique_set_max = max(unique_set)
+    print(f"Unique Items: {unique_list}")
+    print(f"tuple: {unique_set}")
+    print(f"min: {unique_set_min}")
+    print(f"max: {unique_set_max}")
     pass
 
 
