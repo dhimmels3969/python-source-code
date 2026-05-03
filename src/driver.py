@@ -5,6 +5,7 @@ import input_output_exercises.driver as input_output_exercise_driver
 import functions_exercises.driver as function_exercise_driver
 import string_exercises.driver as string_exercise_driver
 import data_structures_exercises.driver as data_structures_exercise_driver
+import list_exercises.driver as list_exercises_driver
 
 
 
@@ -31,6 +32,9 @@ def driver(src_dir):
 
     data_structures_driver = data_structures_exercise_driver.Driver()
     data_structures_driver.run()
+
+    list_exercise_driver  = list_exercises_driver.Driver()
+    list_exercise_driver.run()
 
     print()
     print("Main Driver - complete")
