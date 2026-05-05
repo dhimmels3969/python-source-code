@@ -2,6 +2,8 @@
 from src.common_library import helper_functions as hf
 import list_exercises.exercises as list1
 import list_exercises.exercises_02 as list2
+import list_exercises.exercises_03 as list3
+import list_exercises.exercises_04 as list4
 
 
 class Driver():
@@ -52,13 +54,31 @@ class Driver():
         print("#####################################################")
         print("List Exercises - 21 through 30")
         print("#####################################################")
-
+        results = list3.exercise_21_filter_using_list_comprehension()
+        results = list3.exercise_22_concatenate_lists()
+        results = list3.exercise_23_iterate_lists_simultaneously()
+        results = list3.exercise_24_add_items_to_list()
+        results = list3.exercise_25_replace_item_in_list()
+        results = list3.exercise_26_find_item_in_list()
+        results = list3.exercise_27_find_most_frequent_element()
+        results = list3.exercise_28_extract_elements_from_list()
+        results = list3.exercise_29_is_list_palindrome()
+        results = list3.exercise_30_find_common_elements()
 
         print("")
         print("#####################################################")
         print("List Exercises - 31 through 40")
         print("#####################################################")
-
+        results = list4.exercise_31_filter_by_value_length()
+        results = list4.exercise_32_sorted_list_check()
+        results = list4.exercise_33_list_to_dictionary_conversion()
+        results = list4.exercise_34_list_differences()
+        results = list4.exercise_35_remove_values_in_place()
+        results = list4.exercise_36_extend_nested_list()
+        results = list4.exercise_37_concatenate_lists()
+        results = list4.exercise_38_flatten_nested_list()
+        results = list4.exercise_39_flatten_deeply_nested_lists()
+        results = list4.exercise_40_calculate_cumulative_sum()
 
         print("")
         print("#####################################################")

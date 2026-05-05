@@ -175,6 +175,9 @@ def exercise_16_transform_each_item_in_list():
         Squared List: [1, 4, 9, 16, 25]
     """
     print(f"Exercise 16. Turn Every Item of a List into its Square")
+    input_list = [1, 2, 3, 4, 5]
+    squared_list = [X**2 for X in input_list]
+    print(f"Squared List: {squared_list}")
     pass
 
 
@@ -288,6 +291,10 @@ def exercise_20_remove_duplicates_from_list():
         List: [10, 20, 10, 30, 40, 40, 20, 50]
     Expected Output:
         Unique List: [10, 20, 30, 40, 50]
+
+    # From PyNative website...
+    # Method to remove duplicates while preserving order
+    unique_list = list(dict.fromkeys(duplicates))
     """
     print(f"Exercise 20. Remove Duplicates from a List")
     input_list = [10, 20, 10, 30, 40, 40, 20, 50]
