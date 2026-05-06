@@ -62,3 +62,58 @@ def build_dictionary(input_object):
         else:
             results_dictionary[item] += 1
     return results_dictionary
+
+
+
+#########################################################################
+def is_prime(n):
+    """
+    Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
+    :param n:
+    :type n:
+    :return:
+    :rtype:
+    """
+    if n < 2:
+        return False
+
+    sieve = [True] * (n + 1)
+    sieve[0] = sieve[1] = False
+
+    for i in range(2, int(n**0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, n + 1, i):
+                sieve[j] = False
+
+    return sieve[n]
+
+
+#########################################################################
+def is_prime_number(n):
+    """
+    Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
+    :param
+        n: the number to be analyzed for primeness
+    :type
+        n  integer:
+    :return:
+        n if n is a prime number
+        None otherwise
+    :rtype:
+        integer
+    """
+    if n < 2:
+        return -1
+
+    sieve = [True] * (n + 1)
+    sieve[0] = sieve[1] = False
+
+    for i in range(2, int(n**0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, n + 1, i):
+                sieve[j] = False
+
+    final_result = -1
+    if sieve[n]:
+        final_result = n
+    return final_result

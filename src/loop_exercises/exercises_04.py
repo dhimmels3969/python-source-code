@@ -1,4 +1,6 @@
 import types
+from src.common_library import helper_functions as hf
+
 
 #
 # Exercises found at web page https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
@@ -228,26 +230,26 @@ def exercise_36_binary_decimal_conversion(binary_str = "1101"):
 
 
 
-def is_prime(n):
-    """
-    Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
-    :param n:
-    :type n:
-    :return:
-    :rtype:
-    """
-    if n < 2:
-        return False
-
-    sieve = [True] * (n + 1)
-    sieve[0] = sieve[1] = False
-
-    for i in range(2, int(n**0.5) + 1):
-        if sieve[i]:
-            for j in range(i * i, n + 1, i):
-                sieve[j] = False
-
-    return sieve[n]
+# def is_prime(n):
+#     """
+#     Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
+#     :param n:
+#     :type n:
+#     :return:
+#     :rtype:
+#     """
+#     if n < 2:
+#         return False
+#
+#     sieve = [True] * (n + 1)
+#     sieve[0] = sieve[1] = False
+#
+#     for i in range(2, int(n**0.5) + 1):
+#         if sieve[i]:
+#             for j in range(i * i, n + 1, i):
+#                 sieve[j] = False
+#
+#     return sieve[n]
 
 
 def exercise_37_display_prime_numbers():
@@ -276,7 +278,7 @@ def exercise_37_display_prime_numbers():
     end = 50
     prime_list = []
     for n in range(start, end + 1):
-        if is_prime(n):
+        if hf.is_prime(n):
             prime_list.append(n)
     print(f"Prime numbers between {start} and {end} are: ")
     for item in prime_list:

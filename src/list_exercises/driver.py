@@ -4,6 +4,7 @@ import list_exercises.exercises as list1
 import list_exercises.exercises_02 as list2
 import list_exercises.exercises_03 as list3
 import list_exercises.exercises_04 as list4
+import list_exercises.exercises_05 as list5
 
 
 class Driver():
@@ -84,8 +85,11 @@ class Driver():
         print("#####################################################")
         print("List Exercises - 41 through 45")
         print("#####################################################")
-
-
+        results = list5.exercise_41_rotate_list_to_the_right()
+        results = list5.exercise_42_split_list_into_chunks()
+        results = list5.exercise_43_move_zeros_to_end_of_list()
+        results = list5.exercise_44_generate_prime_numbers()
+        results = list5.exercise_45_find_all_subsets()
 
         print("\nLoop Exercises - end")
         pass
