@@ -1,10 +1,10 @@
 
 from src.common_library import helper_functions as hf
-import list_exercises.exercises as list1
-import list_exercises.exercises_02 as list2
-import list_exercises.exercises_03 as list3
-import list_exercises.exercises_04 as list4
-import list_exercises.exercises_05 as list5
+from src.list_exercises import exercises as list1
+from src.list_exercises import exercises_02 as list2
+from src.list_exercises import exercises_03 as list3
+from src.list_exercises import exercises_04 as list4
+from src.list_exercises import exercises_05 as list5
 
 
 class Driver():
@@ -91,5 +91,5 @@ class Driver():
         results = list5.exercise_44_generate_prime_numbers()
         results = list5.exercise_45_find_all_subsets()
 
-        print("\nLoop Exercises - end")
+        print("\nList Exercises - end")
         pass

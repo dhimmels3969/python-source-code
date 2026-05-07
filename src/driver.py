@@ -1,11 +1,11 @@
 
 # import input_output_exercises.exercises as io_ex
-import loop_exercises.driver as loop_exercise_driver
-import input_output_exercises.driver as input_output_exercise_driver
-import functions_exercises.driver as function_exercise_driver
-import string_exercises.driver as string_exercise_driver
-import data_structures_exercises.driver as data_structures_exercise_driver
-import list_exercises.driver as list_exercises_driver
+from src.loop_exercises import driver as loop_exercise_driver
+from src.input_output_exercises import driver as input_output_exercise_driver
+from src.functions_exercises import driver as function_exercise_driver
+from src.string_exercises import driver as string_exercise_driver
+from src.data_structures_exercises import driver as data_structures_exercise_driver
+from src.list_exercises import driver as list_exercises_driver
 
 
 

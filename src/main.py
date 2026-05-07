@@ -1,4 +1,4 @@
-import driver as driver
+from src import driver
 import os
 from pathlib import Path
 # This is a sample Python script.

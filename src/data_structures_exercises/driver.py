@@ -1,5 +1,5 @@
 from src.common_library import helper_functions as hf
-import data_structures_exercises.exercises as ds1
+from src.data_structures_exercises import exercises as ds1
 
 
 class Driver():

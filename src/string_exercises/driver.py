@@ -1,8 +1,8 @@
 from src.common_library import helper_functions as hf
-import string_exercises.exercises as s1
-import string_exercises.exercises_02 as s2
-import string_exercises.exercises_03 as s3
-import string_exercises.exercises_04 as s4
+from src.string_exercises import exercises as s1
+from src.string_exercises import exercises_02 as s2
+from src.string_exercises import exercises_03 as s3
+from src.string_exercises import exercises_04 as s4
 
 class Driver():
 

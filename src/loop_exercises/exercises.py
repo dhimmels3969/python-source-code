@@ -1,6 +1,6 @@
 # from html.parser import incomplete
 from src.common_library import helper_functions as hf
-import loop_exercises.exercises_04 as l4
+from src.loop_exercises import exercises_04 as l4
 
 #
 # Exercises found at web page https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/

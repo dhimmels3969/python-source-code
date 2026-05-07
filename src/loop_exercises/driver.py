@@ -1,9 +1,10 @@
 
 from src.common_library import helper_functions as hf
-import loop_exercises.exercises as l1
-import loop_exercises.exercises_02 as l2
-import loop_exercises.exercises_03 as l3
-import loop_exercises.exercises_04 as l4
+from src.loop_exercises import exercises as l1
+from src.loop_exercises import exercises_02 as l2
+from src.loop_exercises import exercises_02 as l2
+from src.loop_exercises import exercises_03 as l3
+from src.loop_exercises import exercises_04 as l4
 
 class Driver():
 

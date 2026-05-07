@@ -1,5 +1,5 @@
-import functions_exercises.exercises as f1
-import functions_exercises.exercises_02 as f2
+from src. functions_exercises import exercises as f1
+from src. functions_exercises import exercises_02 as f2
 #
 # https://pynative.com/python-functions-exercise-with-solutions/
 # Driver Program... called from main driver program

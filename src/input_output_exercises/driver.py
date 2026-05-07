@@ -1,8 +1,8 @@
 
 # from src.common_library import helper_functions as hf
-import input_output_exercises.exercises as io_ex
-import input_output_exercises.exercises_02 as io_ex_02
-import input_output_exercises.exercises_03 as io_ex_03
+from src.input_output_exercises import exercises as io_ex
+from src.input_output_exercises import exercises_02 as io_ex_02
+from src.input_output_exercises import exercises_03 as io_ex_03
 
 class Driver():
 
