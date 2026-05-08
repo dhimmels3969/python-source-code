@@ -6,6 +6,8 @@ from src.functions_exercises import driver as function_exercise_driver
 from src.string_exercises import driver as string_exercise_driver
 from src.data_structures_exercises import driver as data_structures_exercise_driver
 from src.list_exercises import driver as list_exercises_driver
+from src.dictionary_exercises import driver as dictionary_exercises_driver
+
 
 
 
@@ -16,7 +18,7 @@ from src.list_exercises import driver as list_exercises_driver
 #   https://www.pythonmorsels.com/string-formatting/
 
 def driver(src_dir):
-    print("Main Driver - start")
+    print("========>>>> Main Driver - start")
 
     # io_driver = input_output_exercise_driver.Driver(src_dir)
     # io_driver.run()
@@ -36,5 +38,8 @@ def driver(src_dir):
     list_exercise_driver  = list_exercises_driver.Driver()
     list_exercise_driver.run()
 
+    dict_exercises_driver = dictionary_exercises_driver.Driver()
+    dict_exercises_driver.run()
+
     print()
-    print("Main Driver - complete")
+    print("========>>>> Main Driver - complete")

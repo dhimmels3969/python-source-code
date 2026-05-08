@@ -1,0 +1,19 @@
+[project]
+name = "python-source-code"
+version = "0.1.0"
+description = "Practice exercises and utilities"
+readme = "README.md"
+requires-python = ">=3.10"
+
+# No dependencies yet, but you can add them later
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
