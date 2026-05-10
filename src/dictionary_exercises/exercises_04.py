@@ -1,3 +1,6 @@
+import json
+import copy
+from unittest import result
 from src.common_library import helper_functions as hf
 
 
@@ -22,7 +25,17 @@ def exercise_31_check_for_subset():
     Expected Output:
         True
     """
+    def is_subset(dict_main, dict_subset):
+        # results = ( set(dict_main.items()).intersection(set(dict_subset.items())) == set(dict_subset.items()))
+        # return results
+        return ( set(dict_main.items()).intersection(set(dict_subset.items())) == set(dict_subset.items()))
+
     print("Exercise 31: Check for Subset")
+    main = {"a": 1, "b": 2, "c": 3, "d": 4}
+    subset = {"a": 1, "c": 3}
+    subset2 = {"a": 1, "b": 2, "y": 25}
+    print(is_subset(main, subset2))
+    print(is_subset(main, subset))
     pass
 
 
@@ -43,6 +56,9 @@ def exercise_32_sort_by_value_length():
         {"d": "fig", "b": "kiwi", "a": "banana", "c": "strawberry"}
     """
     print("Exercise 32: Sort Dictionary by Value Length")
+    words = {"a": "banana", "b": "kiwi", "c": "strawberry", "d": "fig"}
+    revised_words = dict(sorted(words.items(), key=lambda item: len(item[1])))
+    print(revised_words)
     pass
 
 
@@ -61,8 +77,15 @@ def exercise_33_key_with_longest_list():
         data = {"fruits": ["apple", "banana", "cherry"], "vegs": ["carrot"], "grains": ["rice", "wheat"]}
     Expected Output:
         fruits
+    from PyNative website
+        longest_key = max(data.items(), key=lambda item: len(item[1]))[0]
     """
     print("Exercise 33: Find Key")
+    data = {"fruits": ["apple", "banana", "cherry"], "vegs": ["carrot"], "grains": ["rice", "wheat"]}
+    # revised_data = dict(sorted(data.items(), key=lambda item: len(item[1]), reverse = True))
+    largest_sublist = max(data.items(), key=lambda item: len(item[1]))
+    # display the key of the largest sublist...
+    print(largest_sublist[0])
     pass
 
 
@@ -89,6 +112,9 @@ def exercise_34_convert_dictionary_to_json():
         }
     """
     print("Exercise 34: Convert Dictionary to JSON")
+    person = {"name": "Alice", "age": 30, "address": {"city": "Mumbai", "pin": "400001"}}
+    results = json.dumps(person, sort_keys=False, indent=4)
+    print(results)
     pass
 
 
@@ -110,6 +136,11 @@ def exercise_35_invert_dictionary():
         {1: "a", 2: "b", 3: "c"}
     """
     print("Exercise 35: Invert Dictionary")
+    original = {"a": 1, "b": 2, "c": 3}
+    # revised = {k[1]: k[0] for k in original.items()}
+    # from Pynative website
+    inverted = {v: k for k, v in original.items()}
+    print(inverted)
     pass
 
 
@@ -130,8 +161,17 @@ def exercise_36_invert_with_duplicate_values():
         original = {"a": 1, "b": 2, "c": 1, "d": 3, "e": 2}
     Expected Output:
         {1: ["a", "c"], 2: ["b", "e"], 3: ["d"]}
+    From PyNative website:
+        inverted = {}
+        for k, v in original.items():
+            inverted.setdefault(v, []).append(k)
     """
     print("Exercise 36: Invert with Duplicate Values")
+    original = {"a": 1, "b": 2, "c": 1, "d": 3, "e": 2}
+    results = {}
+    for pairs in original.items():
+        results[pairs[1]] = results.setdefault(pairs[1], []) + [pairs[0]]
+    print(results)
     pass
 
 
@@ -152,7 +192,29 @@ def exercise_37_flatten_nested_dictionary():
     Expected Output:
         {"a": 1, "b.c": 2, "b.d.e": 3, "b.d.f": 4}
     """
+    results = {}
+    current_key = ""
+    def flatten(input_, results_, key_):
+        for item in input_.items():
+            if type(item[1]) == dict:
+                key_ = ".".join([key_,item[0]])
+                flatten(item[1], results_, key_)
+            else:
+                key_ = ".".join([key_, item[0]])
+                if key_.startswith("."):
+                    key_ = key_[1:]
+                results_[key_] = item[1]
+                key_ = ""
+        return results_
+
     print("Exercise 37: Flatten Nested Dictionary")
+    nested = {"a": 1, "b": {"c": 2, "d": {"e": 3, "f": 4}}}
+    final_results = flatten(nested, results, current_key)
+    # for item in nested.items():
+    #     if type(item[1]) == dict:
+    #         print("Dictionary")
+    #     else:
+    #         print(type(item[1]))
     pass
 
 
@@ -173,6 +235,12 @@ def exercise_38_group_by_first_character():
         {"a": ["apple", "avocado", "apricot"], "b": ["banana", "blueberry"], "c": ["cherry"]}
     """
     print("Exercise 38: Group by First Letter")
+    words = ["apple", "avocado", "banana", "blueberry", "cherry", "apricot"]
+    results = {}
+    for item in words:
+        key = item[0].lower()
+        results.setdefault(key, []).append(item)
+    print(results)
     pass
 
 
@@ -195,6 +263,13 @@ def exercise_39_merge_and_sum_overlapping():
         {"a": 10, "b": 25, "c": 45, "d": 25}
     """
     print("Exercise 39: Merge and Sum Overlapping")
+    dict1 = {"a": 10, "b": 20, "c": 30}
+    dict2 = {"b": 5, "c": 15, "d": 25}
+    results = {}
+    results = dict1.copy()
+    for k, v in dict2.items():
+        results[k] = results.get(k, 0) + v
+    print(results)
     pass
 
 
@@ -218,7 +293,32 @@ def exercise_40_deep_shallow_copy():
         Deep copy scores: [90, 85, 92, 99]
         Original scores after deep mutation: [90, 85, 92, 100]
     """
-    print("Exercise 40: Deep vs. Shallow Copy")
+    def display_results(message_, orig_msg_, copy_msg_, orig_, copy_):
+        print(message_)
+        print(f"{orig_msg_} {orig_}")
+        print(f"{copy_msg_} {copy_}")
+        print()
+
+    print("\nExercise 40: Deep vs. Shallow Copy")
+    original = {"name": "Alice", "scores": [90, 85, 92]}
+    shallowcopy = original.copy()
+    # update the shallow copy... change should be mirrored in the original
+    shallowcopy["scores"].append(100)
+    display_results("SHALLOW COPY - Following update to original",
+                    "Original scores:", "Original scores (shallowcopy):", original, shallowcopy)
+
+
+    # test using deepcopy
+    original = {"name": "Alice", "scores": [90, 85, 92]}
+    deepcopy = copy.deepcopy(original)
+    display_results("DEEP COPY - Prior to updates",
+                    "Original scores:", "Original scores (deepcopy):", original, deepcopy)
+
+    # add score to original... it will NOT be copied to the deepcopy
+    deepcopy["scores"].append(99)
+    original["scores"].append(100)
+    display_results("DEEP COPY - Following update to original",
+                    "Original scores:", "Original scores (deepcopy):", original, deepcopy)
     pass
 
 

@@ -22,6 +22,13 @@ def exercise_01_basic_dictionary_operations():
         and Name: Alice
     """
     print("Exercise 1: Basic Dictionary Operations")
+    student = {"name": "Alice", "age": 20, "grade": "B"}
+    # add key for city
+    student["city"] = "New York"
+    # update age
+    student["age"] = 21
+    print(student)
+    print(f"Name: {student["name"]}")
     pass
 
 
@@ -45,6 +52,12 @@ def exercise_02_dictionary_operations():
         'color' exists: False
     """
     print("Exercise 2: Dictionary Operations")
+    car = {"brand": "Toyota", "model": "Camry", "year": 2022, "color": "blue"}
+    car.pop("color")
+    print(car)
+    print(car.items())
+    print(f"brand exists: {"brand" in car.keys()}")
+    print(f"color exists: {"color" in car.keys()}")
     pass
 
 
@@ -64,6 +77,10 @@ def exercise_03_create_dictionary_from_lists():
         {'name': 'Bob', 'age': 25, 'city': 'London'}
     """
     print("Exercise 3: Dictionary from Two Lists")
+    keys = ["name", "age", "city"]
+    values = ["Bob", 25, "London"]
+    new_dictionary = dict(zip(keys, values))
+    print(new_dictionary)
     pass
 
 
@@ -83,6 +100,9 @@ def exercise_04_clear_dictionary():
         {}
     """
     print("Exercise 4: Clear Dictionary")
+    inventory = {"apples": 10, "bananas": 5, "oranges": 8}
+    inventory.clear()
+    print(f"Dictionary after clearing is {inventory}")
     pass
 
 
@@ -103,6 +123,10 @@ def exercise_05_merge_dictionaries():
         {'a': 1, 'b': 3, 'c': 4}
     """
     print("Exercise 5: Merge Dictionaries")
+    dict1 = {"a": 1, "b": 2}
+    dict2 = {"b": 3, "c": 4}
+    merged_dictionary = dict1 | dict2
+    print(f"Results of merge: {merged_dictionary}")
     pass
 
 
@@ -123,6 +147,9 @@ def exercise_06_access_nested_dictionary():
         City: Paris
     """
     print("Exercise 6: Access Nested Dictionary")
+    person = {"name": "Carol", "address": {"city": "Paris", "zip": "75001"}}
+    city = person["address"]["city"]
+    print(f"City: {city}")
     pass
 
 
@@ -142,6 +169,9 @@ def exercise_07_access_key_in_nested_dictionary():
         History grade: 75
     """
     print("Exercise 7: Access Nested Dictionary")
+    student = {"name": "Dave", "grades": {"math": 88, "science": 92, "history": 75}}
+    history_grade = student["grades"]["history"]
+    print(f"History grade: {history_grade}")
     pass
 
 
@@ -161,6 +191,10 @@ def exercise_08_initialize_dictionary_with_default_values():
         {'math': 0, 'science': 0, 'english': 0, 'history': 0}
     """
     print("Exercise 8: Initialize Dictionary with Default Values")
+    keys = ["math", "science", "english", "history"]
+    default = 0
+    new_dictionary = dict.fromkeys(keys, default)
+    print(new_dictionary)
     pass
 
 
@@ -182,6 +216,12 @@ def exercise_09_rename_key_in_dictionary():
         {'first_name': 'John', 'age': 30, 'dept': 'Engineering'}
     """
     print("Exercise 9: Rename Key In Dictionary")
+    employee = {"fname": "John", "age": 30, "dept": "Engineering"}
+
+    # remove key
+    employee["first_name"] = employee.pop("fname")
+
+    print(f"Dictionary item after rename: {employee}")
     pass
 
 
@@ -202,6 +242,11 @@ def exercise_10_delete_list_of_keys():
         {'id': 101, 'name': 'Laptop', 'price': 999}
     """
     print("Exercise 10: Delete List of Keys")
+    product = {"id": 101, "name": "Laptop", "price": 999, "stock": 50, "warehouse": "A3"}
+    items_to_delete = ["stock", "warehouse"]
+    for item in items_to_delete:
+        product.pop(item, None)
+    print(f"Dictionary item after delete: {product}")
     pass
 
 
