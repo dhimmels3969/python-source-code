@@ -191,30 +191,72 @@ def exercise_37_flatten_nested_dictionary():
         nested = {"a": 1, "b": {"c": 2, "d": {"e": 3, "f": 4}}}
     Expected Output:
         {"a": 1, "b.c": 2, "b.d.e": 3, "b.d.f": 4}
-    """
-    results = {}
-    current_key = ""
-    def flatten(input_, results_, key_):
-        for item in input_.items():
-            if type(item[1]) == dict:
-                key_ = ".".join([key_,item[0]])
-                flatten(item[1], results_, key_)
+    From PyNative website:
+        def flatten(d, prefix=""):
+        result = {}
+        for k, v in d.items():
+            new_key = f"{prefix}.{k}" if prefix else k
+            if isinstance(v, dict):
+                result.update(flatten(v, new_key))
             else:
-                key_ = ".".join([key_, item[0]])
-                if key_.startswith("."):
-                    key_ = key_[1:]
-                results_[key_] = item[1]
-                key_ = ""
+                result[new_key] = v
+        return result
+    """
+    def initialize(a, b):
+        """
+        Initialize  objects that will be used in the recursive flatten function.
+        :param a:   dictionary used to store the flattened results
+        :type a:    dictionary
+        :param b:   list used to build the keys for the flattened dictionary
+        :type b:    list
+        :return:    the initialized dictionary and the initialized list
+        :rtype:     dictionary, list
+        """
+        a = {}
+        b = []
+        return a, b
+
+    def flatten(payload_, results_, parent_):
+        for k,v in payload_.items():
+            parent_.append(k)
+            if isinstance(v, dict):
+                flatten(v, results_, parent_)
+                parent_.remove(k)
+            else:
+                key_ = ".".join(parent_)
+                results_[key_] = v
+                # pop the last item from parent_
+                parent_.remove(k)
         return results_
 
+    def nested_dictionary_report_driver(payload_, results_, parent_, message_):
+        initialize(results_, parent_)
+        final_results = flatten(payload_, results_, parent_)
+        line2 = "=" * 80
+        print(f"{line2}")
+        print(f"{message_}")
+        print(f"{final_results}")
+        print(f"{line2}")
+        print()
+        pass
+
     print("Exercise 37: Flatten Nested Dictionary")
+    # objects needed for the recursion routines (a dictionary and a list)
+    results = {}
+    parent = []
+
+    # initialize(results, parent)
     nested = {"a": 1, "b": {"c": 2, "d": {"e": 3, "f": 4}}}
-    final_results = flatten(nested, results, current_key)
-    # for item in nested.items():
-    #     if type(item[1]) == dict:
-    #         print("Dictionary")
-    #     else:
-    #         print(type(item[1]))
+    nested2 = {"a": 1, "b": {"c": 2, "d": {"e": 3, "f": 4}},
+               "z": {"y": {"x": {"id": "George", "w": {
+                   "v": {"u": {"t": {"s": {"r": {"q": {"a": "North", "b": "South", "c": "East", "d": "West"
+                       , "p": {"o": {"v1": 10125, "v2": 45590, "v3": 60516, "v4": "frigate"}}}}}}}}}}}}}
+    nested2a = {"a": 1, "b": {"c": 2, "d": {"e": 3, "f": 4}},
+               "z": {"y": {"x": {"id": "George"}}}}
+
+    # parse dictionaries and generate reports...
+    nested_dictionary_report_driver(nested, results, parent, "Parse simple nested dictionary")
+    nested_dictionary_report_driver(nested2, results, parent, "Parse complex nested dictionary")
     pass
 
 
