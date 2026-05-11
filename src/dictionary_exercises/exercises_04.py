@@ -221,12 +221,15 @@ def exercise_37_flatten_nested_dictionary():
             parent_.append(k)
             if isinstance(v, dict):
                 flatten(v, results_, parent_)
-                parent_.remove(k)
             else:
                 key_ = ".".join(parent_)
                 results_[key_] = v
-                # pop the last item from parent_
-                parent_.remove(k)
+
+            # remove the last item in the list
+            # need to use indexing because it's possible to have duplicate entries
+            # in the list and remove will remove all of the duplicate key values resulting
+            # in inaccurate keys
+            del parent_[len(parent_) - 1]
         return results_
 
     def nested_dictionary_report_driver(payload_, results_, parent_, message_):

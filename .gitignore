@@ -1,0 +1,56 @@
+# -------------------------
+# Python cache / build files
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+build/
+dist/
+
+# -------------------------
+# Virtual environments
+# -------------------------
+.venv/
+venv/
+env/
+
+# uv (modern Python package manager)
+.uv/
+
+# -------------------------
+# VS Code
+# -------------------------
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Allow launch.json if you want it committed:
+!.vscode/launch.json
+
+# -------------------------
+# PyCharm / JetBrains
+# -------------------------
+.idea/
+*.iml
+
+# -------------------------
+# pytest
+# -------------------------
+.pytest_cache/
+
+# -------------------------
+# Jupyter (if you ever add notebooks)
+# -------------------------
+.ipynb_checkpoints/
+
+# -------------------------
+# OS-specific junk
+# -------------------------
+Thumbs.db
+Desktop.ini
+.DS_Store
