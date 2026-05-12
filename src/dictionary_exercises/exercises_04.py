@@ -234,8 +234,19 @@ def exercise_37_flatten_nested_dictionary():
 
     def nested_dictionary_report_driver(payload_, results_, parent_, message_):
         initialize(results_, parent_)
-        final_results = flatten(payload_, results_, parent_)
         line2 = "=" * 80
+        # Uncomment the section below if you wantr to see what the dictionary
+        # looks like before we flatten it...
+        # dictionary_before = json.dumps(payload_, sort_keys=True, indent=4)
+        # print(f"{line2}")
+        # print(f"Dictionary Before")
+        # print(f"{dictionary_before}")
+        # print(f"{line2}")
+        # print()
+
+        results = flatten(payload_, results_, parent_)
+        # convert dictionary to json for reporting...
+        final_results = json.dumps(results, sort_keys=False, indent=4)
         print(f"{line2}")
         print(f"{message_}")
         print(f"{final_results}")

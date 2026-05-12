@@ -7,6 +7,7 @@ from src.string_exercises import driver as string_exercise_driver
 from src.data_structures_exercises import driver as data_structures_exercise_driver
 from src.list_exercises import driver as list_exercises_driver
 from src.dictionary_exercises import driver as dictionary_exercises_driver
+from src.set_exercises import driver as set_exercise_driver
 
 
 
@@ -40,6 +41,9 @@ def driver(src_dir):
 
     dict_exercises_driver = dictionary_exercises_driver.Driver()
     dict_exercises_driver.run()
+
+    set_exercises_driver = set_exercise_driver.Driver()
+    set_exercises_driver.run()
 
     print()
     print("========>>>> Main Driver - complete")
