@@ -24,6 +24,10 @@ def exercise_11_add_elements():
         Updated set: {'apple', 'banana', 'cherry', 'mango'}
     """
     print("Exercise 11: Add Elements")
+    fruits = {"apple", "banana"}
+    new_fruits = ["cherry", "mango", "apple"]
+    fruits.update(new_fruits)
+    print(f"Updated set: {sorted(fruits)}")
     pass
 
 
@@ -45,6 +49,12 @@ def exercise_12_update_with_multiple_iterables():
         Updated set: {1, 2, 3, 4, 5, 6, 7, 8}
     """
     print("Exercise 12: Update with Multiple Iterables")
+    base = {1, 2}
+    from_list = [3, 4]
+    from_tuple = (5, 6)
+    from_set = {7, 8}
+    base.update(from_list, from_tuple, from_set)
+    print(f"Updated set: {base}")
     pass
 
 
@@ -65,7 +75,25 @@ def exercise_13_subset_superset_check():
     Expected Output:
         Is set_a a subset of set_b? True and Is set_b a superset of set_a? True
     """
+    def subset(src, tgt):
+        return src.issubset(tgt)
+
+    def superset(src, tgt):
+        return src.issuperset(tgt)
+
     print("Exercise 13: Check Subset and Superset")
+    set_a = {1, 2, 3}
+    set_b = {1, 2, 3, 4, 5}
+    set_a_subset_of_set_b = subset(set_a, set_b)
+    set_a_superset_of_set_b = superset(set_a, set_b)
+
+    set_b_subset_of_set_a = subset(set_b, set_a)
+    set_b_superset_of_set_a = superset(set_b, set_a)
+    print(f"Set A subset of Set B: {set_a_subset_of_set_b}")
+    print(f"Set A superset of Set B: {set_a_superset_of_set_b}")
+    print()
+    print(f"Set B subset of Set A: {set_b_subset_of_set_a}")
+    print(f"Set B superset of Set A: {set_b_superset_of_set_a}")
     pass
 
 
@@ -86,6 +114,10 @@ def exercise_14_disjoint_check():
         Are the sets disjoint? True
     """
     print("Exercise 14: Intersection Check with isdisjoint()")
+    set_a = {1, 2, 3}
+    set_b = {4, 5, 6}
+    results = set_a.isdisjoint(set_b)
+    print(f"Are the sets disjoint? {results}")
     pass
 
 
@@ -107,6 +139,11 @@ def exercise_15_difference_update():
         a = {1, 2}
     """
     print("Exercise 15: Set Difference Update")
+    a = {1, 2, 3, 4, 5}
+    b = {3, 4, 5, 6, 7}
+    a.difference_update(b)
+    results = a
+    print(f"a = {results}")
     pass
 
 
@@ -128,6 +165,10 @@ def exercise_16_intersection_update():
         a = {3, 4, 5}
     """
     print("Exercise 16: Set Intersection Update")
+    a = {1, 2, 3, 4, 5}
+    b = {3, 4, 5, 6, 7}
+    a.intersection_update(b)
+    print(f"a = {a}")
     pass
 
 
@@ -149,6 +190,10 @@ def exercise_17_symmetric_difference_update():
         a = {1, 2, 6, 7}
     """
     print("Exercise 17: Set Symmetric Difference Update")
+    a = {1, 2, 3, 4, 5}
+    b = {3, 4, 5, 6, 7}
+    a.symmetric_difference_update(b)
+    print(f"a = {a}")
     pass
 
 
@@ -170,6 +215,10 @@ def exercise_18_remove_items():
         items = {10, 30, 50}
     """
     print("Exercise 18: Remove Items Simultaneously")
+    items = {10, 20, 30, 40, 50, 60}
+    to_remove = {20, 40, 60}
+    items.difference_update(to_remove)
+    print(f"items = {items}")
     pass
 
 
@@ -192,6 +241,13 @@ def exercise_19_pop_elements():
         Error: pop from an empty set
     """
     print("Exercise 19: Pop Operation")
+    s = {100, 200, 300}
+    try:
+        for _ in range(len(s) + 1):
+            print(f"Popped: {s.pop()}")
+    except KeyError as e:
+        print(f"Error: {e}")
+        print(f"Set: {s}")
     pass
 
 
@@ -213,6 +269,9 @@ def exercise_20_filter_set():
         divisible_by_3 = {3, 6, 9, 12, 15}
     """
     print("Exercise 20: Filter Set")
+    numbers = {1, 2, 3, 6, 7, 9, 12, 14, 15}
+    divisible_by_3 = {x for x in numbers if x % 3 == 0}
+    print(f"divisible_by_3 = {divisible_by_3}")
     pass
 
 

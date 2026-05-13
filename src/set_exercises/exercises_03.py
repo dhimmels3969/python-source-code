@@ -1,5 +1,5 @@
 from src.common_library import helper_functions as hf
-
+import time
 
 #
 # Exercises found at web page https://pynative.com/python-set-exercise-with-solutions/
@@ -25,6 +25,10 @@ def exercise_21_common_elements_check():
         common = {3, 4, 5}
     """
     print("Exercise 21: Find Common Elements in Lists")
+    list1 = [1, 2, 3, 4, 5, 3, 2]
+    list2 = [3, 4, 5, 6, 7, 4, 5]
+    results = set(list1).intersection(set(list2))
+    print(f"common = {results}")
     pass
 
 
@@ -47,6 +51,9 @@ def exercise_22_count_unique_words():
         Unique word count: 5
     """
     print("Exercise 22: Count Unique Words")
+    text = "the cat sat on the mat the cat"
+    words = set(text.split())
+    print(f"Unique word count: {len(words)}")
     pass
 
 
@@ -68,6 +75,9 @@ def exercise_23_convert_to_joined_string():
         A single string with all tags joined by " | " (order may vary)
     """
     print("Exercise 23: Convert Set to Joined String")
+    tags = {"python", "set", "programming", "tutorial"}
+    results = " | ".join(tags)
+    print(f"Joined string: {results}")
     pass
 
 
@@ -92,6 +102,11 @@ def exercise_24_proper_subset_superset():
         a is a proper subset of a: False
     """
     print("Exercise 24: Proper Subset and Superset")
+    a = {1, 2, 3}
+    b = {1, 2, 3, 4, 5}
+    print(f"a is a proper subset of b: {a < b}")
+    print(f"b is a proper superset of a: {b > a}")
+    print(f"a is a proper subset of a: {a < a}")
     pass
 
 
@@ -114,8 +129,19 @@ def exercise_25_frozenset_check():
         frozenset: frozenset({1, 2, 3, 4, 5})
         Intersection with {3, 4, 5, 6}: frozenset({3, 4, 5})
         Error: 'frozenset' object has no attribute 'add'
+    Additional information:
+        "fs.intersection(set_02)" and "fs & set_02" produce the same results.
     """
     print("Exercise 25: Frozen Set")
+    fs = frozenset([1, 2, 3, 4, 5])
+    set_02 = {3, 4, 5, 6}
+    print(f"frozenset: {fs}")
+    print(f"Intersection with {3, 4, 5, 6}: {fs.intersection(set_02)}")
+    # try to add an item to frozenset fs... will result in an error (AttributeError)
+    try:
+        fs.add(100)
+    except AttributeError as e:
+        print(f"Error: {e}")
     pass
 
 
@@ -162,6 +188,14 @@ def exercise_27_remove_duplicates_preserve_order():
         [3, 1, 4, 5, 9, 2, 6]
     """
     print("Exercise 27: Remove Duplicates (Preserving Order)")
+    items = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    seen = set()
+    results = []
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            results.append(item)
+    print(results)
     pass
 
 
@@ -172,15 +206,25 @@ def exercise_28_multiset_difference():
     Exercise 28: Multi-Set Difference
     Problem Statement: Write a Python program to find all elements
         that are in Set A but not present in either Set B or Set C.
-    Purpose: This exercise extends the two-set difference operation to multiple sets. It is practical in scenarios such as finding users who have not yet completed any of several onboarding steps, or items in a master list that have not been processed by any of several workers.
+    Purpose: This exercise extends the two-set difference operation to
+        multiple sets. It is practical in scenarios such as finding
+        users who have not yet completed any of several onboarding steps
+        , or items in a master list that have not been processed by
+        any of several workers.
     Given Input:
         A = {1, 2, 3, 4, 5, 6, 7, 8}
         B = {2, 4, 6}
         C = {5, 7, 9}
     Expected Output:
         Result: {1, 3, 8}
+    Additional information:
+        "A - B - C" and "A.difference(B).difference(C)" produce the same results
     """
     print("Exercise 28: Multi-Set Difference")
+    A = {1, 2, 3, 4, 5, 6, 7, 8}
+    B = {2, 4, 6}
+    C = {5, 7, 9}
+    print(f"Result: {A.difference(B).difference(C)}")
     pass
 
 
@@ -204,6 +248,20 @@ def exercise_29_tuples_test():
         Error: unhashable type: 'list'
     """
     print("Exercise 29: Set Comparison")
+    results = set()
+    a = (1,2)
+    b = (3,4)
+    c = (5,6)
+    myList = [1,2,3,4,5,6]
+    results.add(a)
+    results.add(b)
+    results.add(c)
+    # attempting to add a list to the set results in a TypeError
+    try:
+        results.add(myList)
+    except TypeError as e:
+        print(f"Error: {e}")
+
     pass
 
 
@@ -231,6 +289,21 @@ def exercise_30_shallow_copy_test():
         copied: {1, 2, 3, 4, 5, 42}
     """
     print("Exercise 30: Shallow Copy vs. Assignment")
+    original = {1, 2, 3, 4, 5}
+    ref_copy = original
+    original.add(99)
+    print(f"--- Assignment (=) ---")
+    print(f"original: {original}")
+    print(f"ref: {ref_copy}")
+
+    # restore original
+    original.remove(99)
+    shallow_copy = original.copy()
+    # original.add(43)
+    shallow_copy.add(42)
+    print(f"--- Shallow copy (.copy()) ---")
+    print(f"original: {original}")
+    print(f"copied: {shallow_copy}")
     pass
 
 
@@ -251,7 +324,25 @@ def exercise_31_test_performance():
         List lookup time:  0.008542 seconds
         Set lookup time:   0.000001 seconds
     """
+    def elapsed_time(object_, lookup_):
+        results = False
+        start = time.time()
+        results = lookup_ in object_
+        end = time.time()
+        elapsed_time = end - start
+        return elapsed_time
+
     print("Exercise 31: Membership Testing Performance")
+    myList = list(range(1_000_000))
+    mySet = set(myList)
+    search_arg = 999_999
+
+    list_lookup_time = elapsed_time(myList, search_arg)
+    set_lookup_time = elapsed_time(mySet, search_arg)
+    print(f"List lookup time: {list_lookup_time:.6f} seconds")
+    print(f"Set lookup time: {set_lookup_time:.6f} seconds")
+
+
     pass
 
 

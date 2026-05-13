@@ -29,7 +29,18 @@ def exercise_01_basic_set_operations():
         after discard (no error even if element is absent)
     """
     print("Exercise 1: Basic Set Operations")
+    fruits = {"apple", "banana", "cherry"}
+    fruits.add('mango')
+    print(fruits)
+    fruits.remove('banana')
+    print(fruits)
+    try:
+        fruits.remove('banana')
+    except KeyError as ve:
+        print("[KeyError] Tried to delete non-existent fruit item")
+    fruits.discard('banana')
     pass
+
 
 
 
@@ -49,6 +60,9 @@ def exercise_02_clear_all_elements():
         set()
     """
     print("Exercise 2: Clear All Elements")
+    colors = {"red", "green", "blue"}
+    colors.clear()
+    print(colors)
     pass
 
 
@@ -70,6 +84,11 @@ def exercise_03_find_set_length():
         Length of set: 4
     """
     print("Exercise 3: Find the Length of a Set")
+    animals = {"cat", "dog", "bird", "fish"}
+    set_length = 0
+    for animal in animals:
+        set_length += 1
+    print(f"Length of set: {set_length}")
     pass
 
 
@@ -91,7 +110,22 @@ def exercise_04_empty_set_check():
     Expected Output:
         The set is empty.
     """
+    def build_message(input_):
+        message = "The set is @empty empty."
+        if not input_:
+            message = message.replace("@empty", "").replace("  ", " ")
+        else:
+            message = message.replace("@empty", "NOT")
+        return message
+
     print("Exercise 4: Check if a set is empty")
+    data = set()
+    print(data)
+    print(build_message(data))
+
+    animals = {"cat", "dog", "bird", "fish"}
+    print(animals)
+    print(build_message(animals))
     pass
 
 
@@ -112,6 +146,11 @@ def exercise_05_union_of_sets():
         Union: {1, 2, 3, 4, 5, 6}
     """
     print("Exercise 5: Union of Sets")
+    set_a = {1, 2, 3, 4}
+    set_b = {3, 4, 5, 6}
+    set_c = set_a | set_b
+    # Alternate  set_c = set_a.union(set_b)
+    print(f"Union: {set_c}")
     pass
 
 
@@ -132,6 +171,12 @@ def exercise_06_set_intersection_check():
         Intersection: {3, 4}
     """
     print("Exercise 6: Intersection of Sets")
+    set_a = {1, 2, 3, 4}
+    set_b = {3, 4, 5, 6}
+    set_c = set_a & set_b
+    set_d = set_a.intersection(set_b)
+    set_d = set_a.difference(set_b)
+    print(f"Intersection: {set_c}")
     pass
 
 
@@ -152,6 +197,13 @@ def exercise_07_sets_difference_check():
         Difference (A - B): {1, 2}
     """
     print("Exercise 7: Difference of Sets")
+    set_a = {1, 2, 3, 4}
+    set_b = {3, 4, 5, 6}
+    set_c = set_a.difference(set_b)
+    print(f"Difference (A - B): {set_c}")
+
+    set_e = set_b - set_a
+    print(f"Difference (B - A): {set_e}")
     pass
 
 
@@ -172,6 +224,12 @@ def exercise_08_symmetric_difference():
         Symmetric Difference: {1, 2, 5, 6}
     """
     print("Exercise 8: Symmetric Difference")
+    set_a = {1, 2, 3, 4}
+    set_b = {3, 4, 5, 6}
+    set_d = set_a.symmetric_difference(set_b)
+    # equivalent  set_d = set_a ^ set_b
+    # (set_b ^ set_a) == (set_a ^ set_b) is True
+    print(f"Symmetric Difference (A - B): {set_d}")
     pass
 
 
@@ -192,6 +250,10 @@ def exercise_09_find_min_max():
         Max: 85 and Min: 3
     """
     print("Exercise 9: Find Max and Min")
+    numbers = {42, 7, 19, 85, 3, 56}
+    max_ = max(numbers)
+    min_ = min(numbers)
+    print(f"Max: {max_} and Min: {min_}")
     pass
 
 
@@ -214,6 +276,8 @@ def exercise_10_sum_elements():
         Sum: 150
     """
     print("Exercise 10: Sum of Set Elements")
+    numbers = {10, 20, 30, 40, 50}
+    print(f"Sum: {sum(numbers)}")
     pass
 
 
