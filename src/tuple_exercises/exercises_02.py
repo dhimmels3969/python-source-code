@@ -286,7 +286,7 @@ def exercise_29_flatten_nested_tuples():
         print("Flattened:", result)
     """
 
-    def flatten2(payload_, results_):
+    def flatten_v1(payload_, results_):
         for item in payload_:
             if isinstance(item, tuple):
                 flatten(item, results_)
@@ -294,7 +294,7 @@ def exercise_29_flatten_nested_tuples():
                 results_.append(item)
         return results_
 
-    def flatten(payload_, results_):
+    def flatten_v2(payload_, results_):
         for item in payload_:
             if isinstance(item, dict):
                 for v in item.values():
@@ -305,15 +305,25 @@ def exercise_29_flatten_nested_tuples():
                 results_.append(item)
         return results_
 
+    def flatten(payload_, results_):
+        if isinstance(payload_, dict):
+            for v in payload_.values():
+                flatten(v, results_)
+        elif isinstance(payload_, Iterable) and not isinstance(payload_, (str, bytes)):
+            for item in payload_:
+                flatten(item, results_)
+        else:
+            results_.append(payload_)
+
+        return results_
+
     print("Exercise 29: Nested Tuple Flattening")
-    nested = (1, (2, 3), (4, (5, (6, 7))))
-    nested = (1, (2, 3), ("a", "b", "c") , (11, 122, 233, (5, 58, (99, (201,)))), (4, (5, (6, 7)))
-                , 13, 21, 34, ((55,), (89,), (144,)
-                , (233, 377, 255, 40840, (5,6,7,(9,10,11, (31,42,53,64))))))
     nested = (1, (2, 3), (4, (5, (6, 7, (8,9,(10, 11, (12, 13, 14, 15, 16))))))
-              , [99, 98, 97, 96, 95], sorted({"a", "b", "c", "d", "e", "f"})
+              , [99, 98, 97, 96, 95, [89, 88, 87, [77, 76, 75]]]
+              , sorted({"a", "b", "c", "d", "e", "f"}, reverse=True)
+              , { "directions": {"N": "North", "S": "South", "E": "East", "W": "West"}}
+              , (233, 377, 255, 40840, (5,6,7,(9,10,11, (31,42,53,64))))
               )
-              # , {"N": "North", "S": "South", "E": "East", "W": "West"})
 
     results = flatten(nested, [])
     print(f"Tuple Before: {nested}")
