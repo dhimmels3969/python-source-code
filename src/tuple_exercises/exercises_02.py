@@ -1,4 +1,6 @@
 from src.common_library import helper_functions as hf
+from typing import NamedTuple
+import sys
 
 
 #
@@ -26,6 +28,9 @@ def exercise_13_nested_tuple_access():
         6
     """
     print("Exercise 13: Nested Tuple Access")
+    matrix = ((1, 2, 3), (4, 5, 6), (7, 8, 9))
+    results = matrix[1][2]
+    print(results)
     pass
 
 
@@ -48,6 +53,11 @@ def exercise_14_tuple_stats_check():
         Sum: 573, Max: 99, and Min: 62
     """
     print("Exercise 14: Tuple Statistics")
+    scores = (88, 95, 70, 62, 99, 74, 85)
+    sum_ = sum(scores)
+    max_ = max(scores)
+    min_ = min(scores)
+    print(f"Sum:{sum_}, Max: {max_}, and Min: {min_}")
     pass
 
 
@@ -68,6 +78,9 @@ def exercise_22_tuple_sort_check():
         Sorted: (('Diana', 61), ('Bob', 73), ('Alice', 88), ('Charlie', 95))
     """
     print("Exercise 22: Sort Tuple of Tuples")
+    students = (("Alice", 88), ("Bob", 73), ("Charlie", 95), ("Diana", 61))
+    results = tuple(sorted(students, key=lambda item: item[1]))
+    print(f"Sorted: {results}")
     pass
 
 
@@ -87,8 +100,14 @@ def exercise_23_tuple_filtering():
         numbers = (3, 14, 7, 22, 9, 41, 18, 5), keep only values greater than 10
     Expected Output:
         Filtered: (14, 22, 41, 18)
+    Additional Information:
+        tuple(filter(lambda x: x > 10, numbers)) and tuple(n for n in numbers if n > 10)
+        produce the same results.
     """
     print("Exercise 23: Tuple Filtering")
+    numbers = (3, 14, 7, 22, 9, 41, 18, 5)
+    filtered = tuple(x for x in numbers if x > 10)
+    print(f"Filtered: {filtered}")
     pass
 
 
@@ -109,8 +128,14 @@ def exercise_24_tuple_mapping():
         numbers = (1, 2, 3, 4, 5, 6)
     Expected Output:
         Squared: (1, 4, 9, 16, 25, 36)
+    Additional Information:
+        tuple(map(lambda x: x**2, numbers)) and tuple(x**2 for x in numbers)
+        produce the same results.
     """
     print("Exercise 24: Tuple Mapping")
+    numbers = (1, 2, 3, 4, 5, 6)
+    squared = tuple(x**2 for x in numbers)
+    print(f"Squared: {squared}")
     pass
 
 
@@ -133,6 +158,10 @@ def exercise_25_tuple_dictionary_mapping():
         {'name': 'Alice', 'age': 30, 'city': 'Pune'}
     """
     print("Exercise 25: Tuple Dictionary Mapping")
+    keys = ("name", "age", "city")
+    values = ("Alice", 30, "Pune")
+    results = dict(zip(keys, values))
+    print(f"{results}")
     pass
 
 
@@ -152,8 +181,15 @@ def exercise_26_tuple_intersection():
         t1 = (1, 2, 3, 4, 5, 6) and t2 = (4, 5, 6, 7, 8, 9)
     Expected Output:
         Common elements: (4, 5, 6)
+    Additional Information:
+        tuple(set(t1).intersection(t2)) and tuple(set(t1) & set(t2))
+        produce the same results.
     """
     print("Exercise 26: Tuple Intersection")
+    t1 = (1, 2, 3, 4, 5, 6)
+    t2 = (4, 5, 6, 7, 8, 9)
+    results = tuple(set(t1).intersection(t2))
+    print(f"Common elements: {results}")
     pass
 
 
@@ -177,6 +213,12 @@ def exercise_27_modification_hack_test():
         Modified: ('red', 'yellow', 'blue')
     """
     print("Exercise 27: Tuple Modification")
+    colours = ("red", "green", "blue")
+    colours_list = list(colours)
+    colours_list[1] = "yellow"
+    results = tuple(colours_list)
+    print(f"Original: {colours}")
+    print(f"Modified: {results}")
     pass
 
 
@@ -202,6 +244,13 @@ def exercise_28_tuple_mutability_check():
         Same object? True
     """
     print("Exercise 28: Tuple Mutability")
+    t = (1, 2, [3, 4, 5])
+    print(f"Before: {t}")
+    id_before = id(t)
+    t[2].append(99)
+    id_after  = id(t)
+    print(f"After: {t}")
+    print(f"Same object? {id_before == id_after}")
     pass
 
 
@@ -222,8 +271,39 @@ def exercise_29_flatten_nested_tuples():
         nested = (1, (2, 3), (4, (5, (6, 7))))
     Expected Output:
         Flattened: (1, 2, 3, 4, 5, 6, 7)
+
+    PyNative solution:
+        def flatten(t):
+            for item in t:
+                if isinstance(item, tuple):
+                    yield from flatten(item)
+                else:
+                    yield item
+        ####
+        nested = (1, (2, 3), (4, (5, (6, 7))))
+        result = tuple(flatten(nested))
+        print("Flattened:", result)
     """
+
+    def flatten(payload_, results_):
+        for item in payload_:
+            if isinstance(item, tuple):
+                flatten(item, results_)
+            else:
+                results_.append(item)
+        return results_
+
+
     print("Exercise 29: Nested Tuple Flattening")
+    nested = (1, (2, 3), (4, (5, (6, 7))))
+    nested = (1, (2, 3), (11, 122, 233, (5, 58, (99, (201,)))), (4, (5, (6, 7)))
+                , 13, 21, 34, ((55,), (89,), (144,)
+                , (233, 377, 255, 40840, (5,6,7,(9,10,11, (31,42,53,64))))))
+    results_ = []
+    parent_ = []
+    results = flatten(nested, results_)
+    print(f"Tuple Before: {nested}")
+    print(f"Flattened: {tuple(results)}")
     pass
 
 
@@ -247,8 +327,20 @@ def exercise_30_memory_efficiency_check():
         Printed byte sizes for the list and the tuple,
         followed by the difference in bytes (exact values vary by
         Python version and platform)
+    References:
+        https://stackabuse.com/bytes/determining-the-size-of-an-object-in-python/
     """
     print("Exercise 30: Memory Efficiency")
+    big_list = [x for x in range(1_000_000)]
+    big_tuple = tuple(big_list)
+    # get the size for both objects...
+    list_size_in_bytes = sys.getsizeof(big_list)
+    tuple_size_in_bytes = sys.getsizeof(big_tuple)
+    difference_in_bytes = list_size_in_bytes - tuple_size_in_bytes
+    print(f"Size of List: {list_size_in_bytes:,}")
+    print(f"Size of Tuple: {tuple_size_in_bytes:,}")
+    # print(f"Difference in Bytes: {difference_in_bytes:,}")
+    print(f"Difference: {difference_in_bytes:,} bytes ({difference_in_bytes / 1024:.2f} KB)")
     pass
 
 
@@ -275,7 +367,19 @@ def exercise_31_named_tuples_test():
         Charlie works in Engineering and earns $88,000
         Highest paid: Alice ($95,000)
     """
+    class Employee(NamedTuple):
+        name: str
+        department: str
+        salary: int
+
     print("Exercise 31: NamedTuples")
+    employee_list = [Employee("Alice", "Engineering", 95000), Employee("Bob", "Marketing", 72000),
+                     Employee("Charlie", "Engineering", 88000)]
+    employee_list_tuple = tuple(employee_list)
+    for employee in employee_list_tuple:
+        print(f"{employee.name} works in {employee.department} and earns ${employee.salary:,}")
+    highest_paid = sorted(employee_list_tuple, key=lambda x: x.salary, reverse=True)[0]
+    print(f"Highest Paid: {highest_paid.name} (${highest_paid.salary:,})")
     pass
 
 
@@ -301,6 +405,19 @@ def exercise_32_tuple_hashability():
         (1, [2]) as key: TypeError - unhashable type: 'list'
     """
     print("Exercise 32: The Hashability Paradox")
+    my_dictionary = {}
+    valid_key = (1, 2)
+    invalid_key = (1, [2])
+    try:
+        my_dictionary[valid_key] = "immutable tuple"
+        print(f"{valid_key} as key: success, value = '{my_dictionary[valid_key]}'")
+    except TypeError as e:
+        print(f"TypeError: {e}")
+
+    try:
+        my_dictionary[invalid_key] = "ABCDEFGHIJKL" * 10
+    except TypeError as e:
+        print(f"{invalid_key} as key: TypeError: {e}")
     pass
 
 
