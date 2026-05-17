@@ -9,6 +9,7 @@ from src.list_exercises import driver as list_exercises_driver
 from src.dictionary_exercises import driver as dictionary_exercises_driver
 from src.set_exercises import driver as set_exercise_driver
 from src.tuple_exercises import driver as tuple_exercise_driver
+from src.wordle import driver as wordle_driver
 
 
 
@@ -21,12 +22,14 @@ from src.tuple_exercises import driver as tuple_exercise_driver
 
 def driver(src_dir):
     print("========>>>> Main Driver - start")
-
     # io_driver = input_output_exercise_driver.Driver(src_dir)
     # io_driver.run()
     #
     # loop_driver = loop_exercise_driver.Driver()
     # loop_driver.run()
+
+    word_driver = wordle_driver.Driver(src_dir)
+    word_driver.run()
 
     func_driver = function_exercise_driver.Driver()
     func_driver.run()
