@@ -285,27 +285,15 @@ def exercise_29_flatten_nested_tuples():
         result = tuple(flatten(nested))
         print("Flattened:", result)
     """
-
-    def flatten_v1(payload_, results_):
-        for item in payload_:
-            if isinstance(item, tuple):
-                flatten(item, results_)
-            else:
-                results_.append(item)
-        return results_
-
-    def flatten_v2(payload_, results_):
-        for item in payload_:
-            if isinstance(item, dict):
-                for v in item.values():
-                    flatten(v, results_)
-            elif isinstance(item, Iterable) and not isinstance(item, (str, bytes)):
-                flatten(item, results_)
-            else:
-                results_.append(item)
-        return results_
-
     def flatten(payload_, results_):
+        """
+        :param payload_: object to flatten
+        :type payload_:  various could be Iterable, Dictionary, or other
+        :param results_: in-process list that holds the results of the flatten function
+        :type results_:  list
+        :return:         final results of parsing/flattening all items in the input object
+        :rtype:          list
+        """
         if isinstance(payload_, dict):
             for v in payload_.values():
                 flatten(v, results_)
@@ -314,19 +302,18 @@ def exercise_29_flatten_nested_tuples():
                 flatten(item, results_)
         else:
             results_.append(payload_)
-
         return results_
 
     print("Exercise 29: Nested Tuple Flattening")
-    nested = (1, (2, 3), (4, (5, (6, 7, (8,9,(10, 11, (12, 13, 14, 15, 16))))))
+    nested_data = (1, (2, 3), (4, (5, (6, 7, (8,9,(10, 11, (12, 13, 14, 15, 16))))))
               , [99, 98, 97, 96, 95, [89, 88, 87, [77, 76, 75]]]
               , sorted({"a", "b", "c", "d", "e", "f"}, reverse=True)
               , { "directions": {"N": "North", "S": "South", "E": "East", "W": "West"}}
               , (233, 377, 255, 40840, (5,6,7,(9,10,11, (31,42,53,64))))
               )
 
-    results = flatten(nested, [])
-    print(f"Tuple Before: {nested}")
+    results = flatten(nested_data, [])
+    print(f"Tuple Before: {nested_data}")
     print(f"Flattened: {tuple(results)}")
     pass
 
