@@ -169,18 +169,19 @@ class wordle():
         self.root = root
 
     def play(self):
-        print(80*"=")
-        print("Welcome to Wordle!")
-        print(80*"=")
-        print()
+        def display_message(message):
+            print(80*"=")
+            print(message)
+            print(80*"=")
+            print()
+
         exit_not_selected = True
+        display_message("Welcome to Wordle!")
         while exit_not_selected:
             choice = input("Enter 99 to quit, any other key to play another game: ")
             if choice == "99":
                 exit_not_selected = False
-                print(80 * "=")
-                print("Thanks for playing Wordle!")
-                print(80 * "=")
+                display_message("Thanks for playing Wordle!")
                 break
             else:
                 play(self.root)
