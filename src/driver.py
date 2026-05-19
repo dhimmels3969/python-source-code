@@ -2,6 +2,7 @@
 # import input_output_exercises.exercises as io_ex
 from src.loop_exercises import driver as loop_exercise_driver
 from src.input_output_exercises import driver as input_output_exercise_driver
+from src.common_library import helper_functions as hf
 from src.functions_exercises import driver as function_exercise_driver
 from src.string_exercises import driver as string_exercise_driver
 from src.data_structures_exercises import driver as data_structures_exercise_driver
@@ -9,6 +10,7 @@ from src.list_exercises import driver as list_exercises_driver
 from src.dictionary_exercises import driver as dictionary_exercises_driver
 from src.set_exercises import driver as set_exercise_driver
 from src.tuple_exercises import driver as tuple_exercise_driver
+from src.date_time_exercises import driver as date_time_exercise_driver
 from src.wordle import driver as wordle_driver
 
 
@@ -58,6 +60,10 @@ def driver(src_dir):
 
         tuple_exercises_driver = tuple_exercise_driver.Driver()
         tuple_exercises_driver.run()
+
+        date_time_exercises_driver = date_time_exercise_driver.Driver()
+        date_time_exercises_driver.run()
+
         return None
     #####################################################################
 
@@ -101,6 +107,7 @@ def driver(src_dir):
 
     #####################################################################
     def main_driver():
+        # hf.clear_screen()
         exit_not_selected = True
         while exit_not_selected:
             main_driver_display_menu()

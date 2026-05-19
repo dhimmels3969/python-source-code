@@ -11,7 +11,7 @@ class Driver():
     """
     Driver Class
 
-    Implements run function which executes multiple functions in the list_exercises folder.
+    Implements run function which executes multiple functions in the tuple_exercises folder.
 
     TODO:
         Set up a dictionary to control which function gets executed and which functions get bypassed.

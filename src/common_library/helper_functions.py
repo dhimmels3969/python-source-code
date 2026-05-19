@@ -1,10 +1,15 @@
 
 import os
+import subprocess
+import platform
 
 #
 # Routines used in multiple places
 #
 
+
+
+#########################################################################
 def get_positive_int_from_user(prompt):
     incomplete = True
     final_result = None
@@ -22,6 +27,9 @@ def get_positive_int_from_user(prompt):
             print("Previous value was invalid. Enter a number.")
     return final_result
 
+
+
+#########################################################################
 def build_file_name(root_dir, subfolders, file_name):
     """
     This function builds a file name.
@@ -117,3 +125,13 @@ def is_prime_number(n):
     if sieve[n]:
         final_result = n
     return final_result
+
+
+
+#########################################################################
+def clear_screen():
+    system = platform.system()
+    try:
+        subprocess.run('cls' if platform.system() == "Windows" else 'clear', shell=True)
+    except Exception as e:
+        print(f"An error occurred while clearing the screen: {e}")
