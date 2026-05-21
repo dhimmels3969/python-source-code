@@ -1,4 +1,7 @@
+import calendar
+
 from src.common_library import helper_functions as hf
+from datetime import datetime, timedelta
 
 
 #
@@ -23,7 +26,16 @@ def exercise_21_calculate_future_date():
     Expected Output:
         Date 4 months from today: 2025-11-15 (actual value will vary)
     """
+    def display_future_date(input_date_, months_):
+        future_date_ = hf.calculate_past_or_future_date(months=months_, input_date=input_date_)
+        print(f"Date {months_} Months From {input_date_.strftime("%Y-%m-%d")}: \
+            {future_date_.strftime("%Y-%m-%d")}")
+        pass
+
     print("Exercise 21: Calculate the Date 4 Months From Today")
+    display_future_date(datetime.now(), 4)
+    display_future_date(datetime(2025, 10, 31), 4)
+    display_future_date(datetime(2026, 1, 15), 18)
     pass
 
 
@@ -44,6 +56,9 @@ def exercise_22_find_first_day_of_month():
         First day of the month: 2025-08-01
     """
     print("Exercise 22: Find the First Day of the Month")
+    given_date = datetime(2025, 8, 17)
+    first_day_of_month = given_date.replace(day=1)
+    print(f"First day of the month: {first_day_of_month.strftime("%Y-%m-%d").strip()}")
     pass
 
 
@@ -64,7 +79,17 @@ def exercise_23_find_last_day_of_month():
     Expected Output:
         Last day of current month: 2025-07-31 (actual value will vary)
     """
+    def last_day_of_month(dt):
+        # last_day = datetime(dt.year, dt.month + 1, 1) + timedelta(days=-1)
+        info = calendar.monthrange(dt.year, dt.month)
+        return datetime(dt.year, dt.month, info[1])
+
+    def display_last_day_of_month(dt):
+        print(f"Last day of {dt.strftime("%B %Y")}: {last_day_of_month(dt).strftime("%Y-%m-%d").strip()}")
+
     print("Exercise 23: Find the Last Day of the Month")
+    display_last_day_of_month(datetime.today())
+    display_last_day_of_month(datetime(2024, 2, 22))
     pass
 
 
@@ -84,7 +109,18 @@ def exercise_24_find_next_date():
     Expected Output:
         Next Monday: 2025-07-21 (actual value will vary)
     """
+    def calculate_following_day_of_week(input_date):
+        # TODO: figure a way to calculate ANY day of the week not just Monday.
+        return input_date + timedelta(days= 7 - input_date.weekday())
+
+    def display_message(input_date):
+        print(f"Next Monday after {input_date.strftime("%B %d, %Y")}: \
+            {calculate_following_day_of_week(input_date).strftime('%A %B %d, %Y')}")
+
     print("Exercise 24: Find the Next Monday")
+    display_message(datetime.now().replace(hour = 0, minute=0, second=0, microsecond=0))
+    display_message(datetime(2026, 12, 12))
+    # print(f"Next Monday after {date_to_check}: {calculate_next_monday(date_to_check)}")
     pass
 
 
@@ -105,6 +141,11 @@ def exercise_25_round_time_to_nearest_hour():
         Rounded to nearest hour: 2025-07-15 15:00:00
     """
     print("Exercise 25: Round Time to Nearest Hour")
+    dt = datetime(2025, 7, 15, 14, 35, 0)
+    if dt.minute >= 30:
+        dt = dt + timedelta(hours = 1)
+    new_dt = dt.replace(minute = 0, second = 0, microsecond = 0)
+    print(f"Rounded to the Nearest Hour: {new_dt}")
     pass
 
 
@@ -125,6 +166,10 @@ def exercise_26_list_all_sundays():
         A list of all 52 Sunday dates in 2026, starting with 2026-01-04 and ending with 2026-12-27.
     """
     print("Exercise 26: List All Sundays in a Year")
+    basedate = datetime(2026, 1, 1)
+    sundays = [(basedate + timedelta(days = i)).strftime("%A %Y-%m-%d") for i in range(0,366) if (basedate + timedelta(days = i)).strftime("%A") == "Sunday"]
+    for sunday in sundays:
+        print(sunday)
     pass
 
 
@@ -146,6 +191,13 @@ def exercise_27_calculate_working_days_between_dates():
         Business days between 2025-07-01 and 2025-07-31: 23
     """
     print("Exercise 27: Calculate Working Days Between Two Dates")
+    start = datetime(2025, 7, 1)
+    end = datetime(2025, 7, 31)
+    # build list comprehension of all working days in the specified date range
+    days_ = [(start + timedelta(days=i)).strftime("%A %B %d, %Y") for i in range(0, 31) if
+             (start + timedelta(days=i)).strftime("%A") not in ["Saturday", "Sunday"]]
+    # length of the days_ list = number of working days
+    print(f"Business days between 2025-07-01 and 2025-07-31: {len(days_)}")
     pass
 
 
@@ -208,6 +260,15 @@ def exercise_30_working_days_check():
         Date after 10 working days from 2025-07-01: 2025-07-15
     """
     print("Exercise 30: Calculate Date After N Working Days")
+    start_date = datetime(2025, 7, 1)
+    n = 10
+    counter = 0
+    new_date = start_date
+    while counter < n:
+        new_date = new_date + timedelta(days=1)
+        if new_date.weekday() < 5:
+            counter += 1
+    print(f"Date after {n} working days from {start_date.strftime('%Y-%m-%d')}: {new_date.strftime('%Y-%m-%d')}.")
     pass
 
 

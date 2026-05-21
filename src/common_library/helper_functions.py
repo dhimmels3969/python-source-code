@@ -1,8 +1,8 @@
-
 import os
 import subprocess
 import platform
-
+import calendar
+from datetime import datetime
 #
 # Routines used in multiple places
 #
@@ -135,3 +135,53 @@ def clear_screen():
         subprocess.run('cls' if platform.system() == "Windows" else 'clear', shell=True)
     except Exception as e:
         print(f"An error occurred while clearing the screen: {e}")
+
+
+def calculate_past_or_future_date(**kwargs):
+    ########################################################
+    # ----------------------------------------------------------------------------
+    # initially valid kwargs are
+    #	months = ##
+    # ----------------------------------------------------------------------------
+    # Raise an error if months not provided in **kwargs
+    try:
+        input_date_in = kwargs["input_date"]
+    except KeyError as error:
+        print(f"Required parameter [input_date] not provided. Ending program.")
+        print(f"Error: {error}")
+        print(f"Ending program.")
+        raise error
+
+    try:
+        months_to_add_in = kwargs["months"]
+    except KeyError as error:
+        print(f"Required parameter [months] not provided. Ending program.")
+        print(f"Error: {error}")
+        print(f"Ending program.")
+        raise error
+
+    # ----------------------------------------------------------------------------
+    # Calculate the number of months to add or subtract  = number_months % 12
+    months_to_add = months_to_add_in % 12
+    # Calculate the number of years  to add or subtract  = number_months // 12
+    years_to_add = months_to_add_in // 12
+
+    # Compare the day of the month of the base date with the number of days in the
+    # month of the resolved date. If base date day of month > number of days in the
+    # resolved month increment number months by 1 and set new day of month
+    # equal to base date day of month - number days in the resolved month
+    resolved_year = input_date_in.year + years_to_add
+    resolved_month = input_date_in.month + months_to_add
+    resolved_day = input_date_in.day
+    if resolved_month > 12:
+        resolved_year += 1
+        resolved_month = resolved_month % 12
+    calendar_info = calendar.monthrange(resolved_year, resolved_month)
+    if input_date_in.day > calendar_info[1]:
+        resolved_month += 1
+        resolved_day = input_date_in.day - calendar_info[1]
+    final_result = datetime(resolved_year, resolved_month, resolved_day)
+    # ----------------------------------------------------------------------------
+    return final_result
+
+
