@@ -1,4 +1,6 @@
 import calendar
+import zoneinfo
+import tzdata
 
 from src.common_library import helper_functions as hf
 from datetime import datetime, timedelta
@@ -218,6 +220,11 @@ def exercise_28_convert_local_time_to_utc():
         Local (IST): 2025-07-15 10:30:00+05:30 and UTC: 2025-07-15 05:00:00+00:00
     """
     print("Exercise 28: Convert Local Time to UTC")
+    timestamp_to_check = datetime(2025, 7, 15, 10, 30, 0)
+    zone = zoneinfo.ZoneInfo("Asia/Kolkata")
+    timestamp_to_check = timestamp_to_check.replace(tzinfo=zone)
+    utc_timestamp = timestamp_to_check.astimezone(zoneinfo.ZoneInfo("UTC"))
+    print(f"Local (IST): {timestamp_to_check} and UTC: {utc_timestamp}")
     pass
 
 
@@ -238,7 +245,27 @@ def exercise_29_current_time_by_city():
         Current times in both cities, formatted clearly
         (actual values will vary by when the program is run).
     """
-    print("Exercise 29: Get Current Time in a Specific City")
+    print("#####################################\nExercise 29: Get Current Time in a Specific City")
+    current_time = datetime.now()
+
+    central = zoneinfo.ZoneInfo("America/Chicago")
+    central_time = current_time.replace(tzinfo=central)
+    print(f"Current local time: {central_time}")
+    current_timestamp = central_time.astimezone(zoneinfo.ZoneInfo("UTC"))
+    print(f"Current local time converted to UTC: {current_timestamp}\n")
+
+    new_york = zoneinfo.ZoneInfo("America/New_York")
+    new_york_time = datetime.now(tz=new_york)
+    print(f"Current local time (New York): {new_york_time}")
+    nyc_timestamp = new_york_time.astimezone(zoneinfo.ZoneInfo("UTC"))
+    print(f"New York time converted to UTC: {nyc_timestamp}\n")
+
+    tokyo = zoneinfo.ZoneInfo("Asia/Tokyo")
+    tokyo_time = datetime.now(tz=tokyo)
+    print(f"Current local time (Tokyo): {tokyo_time}")
+    tokyo_timestamp = tokyo_time.astimezone(zoneinfo.ZoneInfo("UTC"))
+    print(f"Tokyo time converted to UTC: {tokyo_timestamp}")
+    print()
     pass
 
 
