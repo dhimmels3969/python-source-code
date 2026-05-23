@@ -69,7 +69,8 @@ class Driver():
         results = dt_03.exercise_26_list_all_sundays()
         results = dt_03.exercise_27_calculate_working_days_between_dates()
         results = dt_03.exercise_28_convert_local_time_to_utc()
-        results = dt_03.exercise_29_current_time_by_city()
+        # results = dt_03.exercise_29_current_time_by_city()
+        results = dt_03.exercise_29_current_time_by_city_pynative_solution()
         results = dt_03.exercise_30_working_days_check()
 
         print("")
