@@ -2,7 +2,9 @@
 # Exercises found at web page https://pynative.com/python-object-oriented-programming-oop-exercise/
 # Exercises 1 through 10
 #
-
+from object_oriented_exercises.classes import \
+        Vehicle, Student, Rectangle, Product, BankAccount, \
+        Light, User, Temperature, Notebook
 
 
 ##############################################################################
@@ -46,6 +48,8 @@ def exercise_02_class_with_instance_attributes():
         Vehicle Name: Tesla Model S, Speed: 250, Mileage: 18
     """
     print("Exercise 2: Vehicle Class with Instance Attributes")
+    vehicle1 = Vehicle("Tesla Model S", 250, 18)
+    vehicle1.get_info()
     pass
 
 
@@ -70,6 +74,9 @@ def exercise_03_rectangle_class():
         Area = 40 and Perimeter = 28
     """
     print("Exercise 3: Rectangle Class with Area and Perimeter")
+    rect = Rectangle(10, 4)
+    print(f"Area = {rect.area()} and Perimeter = {rect.perimeter()}")
+
     pass
 
 
@@ -84,7 +91,7 @@ def exercise_04_student_class_average_grade():
     Purpose: This exercise shows how instance attributes can store
         complex data types such as lists, not just simple values.
         It also practices combining OOP with list operations and
-        arithmetic, a pattern common in gradebooks, dashboards,
+        arithmetic, a pattern common in grade books, dashboards,
         and reporting tools.
     Given Input:
         s1 = Student("Alice", [85, 90, 78, 92, 88])
@@ -92,6 +99,8 @@ def exercise_04_student_class_average_grade():
         Alice's Average Grade: 86.6
     """
     print("Exercise 4: Student Class with Average Grade")
+    s1 = Student("Alice", [85, 90, 78, 92, 88])
+    print(f"{s1.name}'s Average Grade: {s1.average():.1f}")
     pass
 
 
@@ -115,6 +124,8 @@ def exercise_05_product_class():
         Total stock value of Laptop: $4499.95
     """
     print("Exercise 5: Product Class with Stock Value Calculator")
+    p1 = Product("Laptop", 899.99, 5)
+    print(f"Total stock value of {p1.name}: ${p1.total_value():.2f}")
     pass
 
 
@@ -144,6 +155,11 @@ def exercise_06_bank_account_overdraft_protection():
         Insufficient funds. Current balance: 1300
     """
     print("Exercise 6: BankAccount with Deposit & Overdraw Protection")
+    account = BankAccount()
+    account.deposit(500)
+    account.withdraw(200)
+    account.withdraw(2000)
+    print()
     pass
 
 
@@ -171,6 +187,13 @@ def exercise_07_light_class_state_toggle():
         Current status: OFF
     """
     print("Exercise 7: Light Class with On/Off State Toggle")
+    myLight = Light()
+    print(f"Current status: {myLight.status()}")
+    myLight.turn_on()
+    print(f"Current status: {myLight.status()}")
+    myLight.turn_off()
+    print(f"Current status: {myLight.status()}")
+    print()
     pass
 
 
@@ -196,6 +219,11 @@ def exercise_08_user_account_password_protection():
         False
     """
     print("Exercise 8: User Class with Password Validation")
+    u1 = User("alice", "secure123")
+    results = u1.check_password("secure123")
+    print(results)
+    results = u1.check_password("bogus_credential_2026")
+    print(results)
     pass
 
 
@@ -222,6 +250,11 @@ def exercise_09_temperature_class():
         Kelvin: 373.15
     """
     print("Exercise 9: Temperature Class with Unit Converters")
+    t = Temperature(100)
+    print(f"Celsius: {t.temperature()}")
+    print(f"Fahrenheit: {t.to_fahrenheit()}")
+    print(f"Kelvin: {t.to_kelvin()}")
+    print()
     pass
 
 
@@ -248,6 +281,11 @@ def exercise_10_notebook_class_display_notes():
         3. Call the doctor
     """
     print("Exercise 10: Notebook Class with Add & Display Notes")
+    myNotebook = Notebook()
+    myNotebook.add("Buy groceries")
+    myNotebook.add("Read a book")
+    myNotebook.add("Call the doctor")
+    myNotebook.show_notes()
     pass
 
 
