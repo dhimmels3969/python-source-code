@@ -1,3 +1,14 @@
+
+import math
+
+from object_oriented_exercises.classes import \
+    Vehicle, Student, Rectangle, Product, BankAccount, \
+    Light, User, Temperature, Notebook, CoffeeMachine, \
+    Vehicle_v2, Bus, Bus_v2, Taxi, \
+    Book, Magazine, DVD, \
+    DiscountedOrder
+
+
 #
 # Exercises found at web page https://pynative.com/python-object-oriented-programming-oop-exercise/
 # Exercises 11 through 20
@@ -28,6 +39,10 @@ def exercise_11_coffee_machine_class():
         Not enough resources to make a latte.
     """
     print("Exercise 11: Coffee Machine with Multi-Resource Tracking")
+    ourCoffeeMachine = CoffeeMachine(water=300, coffee=100, milk=200)
+    ourCoffeeMachine.make_latte()
+    ourCoffeeMachine.make_latte()
+    print()
     pass
 
 
@@ -56,6 +71,14 @@ def exercise_12_shared_class_attribures():
         BMW - Color: Red, Speed: 200
     """
     print("Exercise 12: Shared Class Attribute Across Instances")
+    v1 = Vehicle("Tesla", 250, 0)
+    v2 = Vehicle("BMW", 200, 0)
+    v1.get_info_v2()
+    v2.get_info_v2()
+    print("------------AFTER--------------")
+    Vehicle.color = "Red"
+    v1.get_info_v2()
+    v2.get_info_v2()
     pass
 
 
@@ -81,6 +104,12 @@ def exercise_13_subclass_inheritance():
         Vehicle: School Bus, Max Speed: 120 km/h
     """
     print("Exercise 13: Bus Subclass Inheriting from Vehicle")
+    bus1 = Bus("School Bus", 120)
+    # Python first looks for display on the Bus instance,
+    # then on the Bus class, and finally on Vehicle, where it finds
+    # and executes the method.This lookup process is known as
+    # the Method Resolution Order (MRO).
+    bus1.display()
     pass
 
 
@@ -106,6 +135,8 @@ def exercise_14_override_parent_method():
         School Bus seating capacity is: 50
     """
     print("Exercise 14: Override Parent Method Using super()")
+    bus = Bus_v2("School Bus", 120)
+    bus.seating_capacity()
     pass
 
 
@@ -127,6 +158,8 @@ def exercise_15_extend_child_class():
         Total fare with maintenance fee: 550.0
     """
     print("Exercise 15: Add Maintenance Fee in Child Class via super()")
+    myTaxi = Taxi("Taxi", 120, 500)
+    print(f"Total fare with maintenance fee: {myTaxi.total_fare()}")
     pass
 
 
@@ -148,7 +181,38 @@ def exercise_16_polymorphism_poc():
         Dog says: Woof!
         Cat says: Meow!
     """
+    class Animal:
+        def __init__(self, name):
+            self.name = name
+
+        def speak(self):
+            pass
+
+    class Dog(Animal):
+        def __init__(self, name):
+            super().__init__(name)
+            pass
+
+        def speak(self):
+            return "Woof!"
+
+    class Cat(Animal):
+        def __init__(self, name):
+            super().__init__(name)
+            pass
+
+        def speak(self):
+            return "Meow!"
+
+    def Speak(creature):
+        # Dog says: Woof!
+        print(f"{creature.name} says: {creature.speak()}")
+
     print("Exercise 16: Polymorphism with Dog & Cat speak()")
+    myDog = Dog("Dog")
+    Speak(myDog)
+    myCat = Cat("Cat")
+    Speak(myCat)
     pass
 
 
@@ -171,7 +235,41 @@ def exercise_17_create_subclasses():
         Alice's monthly pay: 5000.0
         Bob's monthly pay: 10000
     """
+    class Employee:
+        def __init__(self, name):
+            self.name = name
+
+        def calculate_pay(self):
+            return 0
+
+    class FullTimeEmployee(Employee):
+        def __init__(self, name, annual_salary):
+            super().__init__(name)
+            self._salary = annual_salary
+
+        def calculate_pay(self):
+            return self._salary / 12.0
+
+    class PartTimeEmployee(Employee):
+        def __init__(self, name, hourly_rate, number_hours):
+            super().__init__(name)
+            self._hourly_rate = hourly_rate
+            self._number_hours = number_hours
+
+        def calculate_pay(self):
+            return self._hourly_rate * self._number_hours
+
+    def display_info(employee):
+        message = f"{employee.name}'s monthly pay: ${employee.calculate_pay():,.0f}"
+        print(message)
+        pass
+
     print("Exercise 17: FullTimeEmployee and PartTimeEmployee pay logic")
+    full_time_emp = FullTimeEmployee("Alice", 60000)
+    display_info(full_time_emp)
+
+    part_time_emp = PartTimeEmployee("Bob", 500, 20)
+    display_info(part_time_emp)
     pass
 
 
@@ -194,7 +292,47 @@ def exercise_18_implement_subclasses():
         Square area: 16
         Triangle area: 24.0
     """
+    class Shape:
+        def area(self):
+            raise NotImplementedError(
+                f"The {self.__class__.__name__} class must implement the 'area' method."
+            )
+
+    class Circle(Shape):
+        def __init__(self, radius):
+            self._radius = radius
+
+        def area(self):
+            return math.pi *  (self._radius**2)
+
+    class Square(Shape):
+        def __init__(self, side):
+            self._side = side
+        def area(self):
+            return self._side ** 2
+
+    class Triangle(Shape):
+        def __init__(self, base, height):
+            self._base = base
+            self._height = height
+
+        def area(self):
+            return self._base * self._height * 0.5
+
+
+
     print("Exercise 18: Shape Subclasses with Custom area() method")
+    # myCircle = Circle(7)
+    # mySquare = Square(4)
+    # myTriangle = Triangle(6, 8)
+    #
+    # print(f"Circle Area: {myCircle.area():.2f}")
+    # print(f"Square Area: {mySquare.area():.2f}")
+    # print(f"Triangle Area: {myTriangle.area():.2f}")
+    shapes = [Circle(7), Square(4), Triangle(6, 8)]
+    for shape in shapes:
+        print(f"{type(shape).__name__} area: {shape.area():.2f}")
+
     pass
 
 
@@ -220,6 +358,11 @@ def exercise_19_subclasses_with_custom_attributes():
         DVD: Inception, 148 mins - Rs.299
     """
     print("Exercise 19: Media Subclasses with Type-Specific Attributes")
+    media_items = [Book("Clean Code", 499, "Robert C. Martin"),
+                   Magazine("Wired", 150, "Monthly"),
+                   DVD("Inception", 299, 148)]
+    for item in media_items:
+        print(f"{item.describe()}")
     pass
 
 
@@ -242,6 +385,10 @@ def exercise_20_discounted_order_subclass():
         Discounted Total: 1080.0
     """
     print("Exercise 20: Discounted Order Subclass with 10% Off")
+    myOrder = DiscountedOrder("ORD001", 1200)
+    print(f"Order ID: {myOrder.id}")
+    print(f"Original Total: {myOrder.total:.2f}")
+    print(f"Discounted Total: {myOrder.discounted_total(0.10):.2f}")
     pass
 
 
