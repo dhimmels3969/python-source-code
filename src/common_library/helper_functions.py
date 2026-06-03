@@ -3,6 +3,8 @@ import subprocess
 import platform
 import calendar
 from datetime import datetime
+from itertools import repeat
+import random
 #
 # Routines used in multiple places
 #
@@ -185,3 +187,22 @@ def calculate_past_or_future_date(**kwargs):
     return final_result
 
 
+#########################################################################
+def shuffle(list_size):
+    """
+    Generate a randomly shuffled list
+    :param list_size:  size of the list to create
+    :type list_size:   integer
+    :return:           a list of integers in random order
+    :rtype:            list of integers
+    # TODO: allow the user to specify  the type of elements in the list.
+    # TODO: do not limit it to integers.
+    """
+    results = list(repeat(-1, list_size))
+    for i in range(0, len(results)):
+        while True:
+            spin = random.randint(0, len(results) - 1)
+            if results[spin] == -1:
+                break
+        results[spin] = i
+    return results

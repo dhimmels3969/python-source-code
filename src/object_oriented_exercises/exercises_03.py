@@ -3,6 +3,12 @@
 # Exercises 21 through 31
 #
 
+from object_oriented_exercises.classes import \
+    Vehicle, Bike_v3, Truck_v3, Bus_v3, \
+    Vector, ShoppingCart, BankAccount_v2, Multiplier, \
+    Flight, Passenger, \
+    Animal, Dog, Cat, Lion, Elephant, Parrot, Zoo, \
+    Character, PlayList, Song
 
 
 ##############################################################################
@@ -24,6 +30,9 @@ def exercise_21_class_hierarchy_test():
         Bus max speed: 100 km/h
     """
     print("Exercise 21: Vehicle Class Hierarchy with Bike, Truck & Bus")
+    requests = [Bike_v3(120), Truck_v3(90), Bus_v3(100)]
+    for request in requests:
+        print(request.describe())
     pass
 
 
@@ -46,7 +55,21 @@ def exercise_22_identify_class_type():
         c is of type: Cat
         v is of type: Vehicle
     """
+    def get_class_of_item(key, value):
+        message = f"{key} is of type: {type(value).__name__}"
+        return message
+
     print("Exercise 22: Object Type Identification")
+    myVehicle = Vehicle("Tesla", 250, 0)
+    myDog = Dog("Dog")
+    myCat = Cat("Cat")
+    var_names = ["myVehicle", "myDog", "myCat"]
+    var_data = [myVehicle, myDog, myCat]
+    # requests contains a list of tuples.
+    # Each tuple contains the object name and the object.
+    requests = zip(var_names, var_data)
+    for k, v in requests:
+        print(get_class_of_item(k, v))
     pass
 
 
@@ -72,6 +95,11 @@ def exercise_23_type_checking():
         Is Animal a subclass of Dog? False
     """
     print("Exercise 23: Type Checking with isinstance() & issubclass")
+    d = Dog("Dog")
+    print(f"Is d an instance of Dog? {isinstance(d, Dog)}")
+    print(f"Is d an instance of Animal? {isinstance(d, Animal)}")
+    print(f"Is Dog a subclass of Animal? {issubclass(Dog, Animal)}")
+    print(f"Is Animal a subclass of Dog? {issubclass(Animal, Dog)}")
     pass
 
 
@@ -93,8 +121,11 @@ def exercise_24_implement_dunder_method():
         Vector(6, 4)
     """
     print("Exercise 24: Vector Addition Using add Overloading")
+    v1 = Vector(2, 3)
+    v2 = Vector(4, 1)
+    v3 = v1 + v2
+    print(v3)
     pass
-
 
 
 ##############################################################################
@@ -116,6 +147,8 @@ def exercise_25_implement_len_dunder_method():
         Number of items in cart: 3
     """
     print("Exercise 25: Cart Length Using len Overloading")
+    myCart = ShoppingCart(["apple", "banana", "mango"])
+    print(f"Number of items in cart: {len(myCart)}")
     pass
 
 
@@ -140,6 +173,12 @@ def exercise_26_property_getter_setter_poc():
         Invalid balance. Must be non-negative.
     """
     print("Exercise 26: Private Balance with Property Getter & Setter")
+    myAccount = BankAccount_v2(1000)
+    print(myAccount)
+    myAccount.deposit(500)
+    print(myAccount)
+    myAccount.deposit(-1700)
+    print(myAccount)
     pass
 
 
@@ -163,6 +202,10 @@ def exercise_27_callable_object_poc():
         35
     """
     print("Exercise 27: Callable Object Class Using call")
+    mult1 = Multiplier(3)
+    mult2 = Multiplier(5)
+    for request in [mult1(10), mult2(7)]:
+        print(request)
     pass
 
 
@@ -187,7 +230,21 @@ def exercise_28_class_composition_check():
         Bob booked on Flight AI202.
         Sorry, Flight AI202 is fully booked.
     """
+    def reserve(flight, passenger):
+        reserve_flight_results = flight.book(passenger)
+        print(reserve_flight_results)
+
     print("Exercise 28: Flight Class with Passenger Capacity Check")
+    # Create the flight object
+    myFlight = Flight("AI202", 2)
+    passenger_20260603001 = Passenger("20260603001", "Lee M", "A!202")
+    passenger_20260603002 = Passenger("20260603002", "Bobby H", "A!202")
+    passenger_20260603003 = Passenger("20260603003", "Betty C", "A!202")
+
+    for k, v in zip([myFlight, myFlight, myFlight],
+                    [passenger_20260603001, passenger_20260603002, passenger_20260603003]):
+        reserve(k, v)
+
     pass
 
 
@@ -214,6 +271,13 @@ def exercise_29_combine_composition_polymorphism_pox():
         Parrot eats seeds.
     """
     print("Exercise 29: Zoo Class with Polymorphism")
+    l = Lion("Lion", "meat")
+    e = Elephant("Elephant", "grass")
+    p = Parrot("Parrot", "seeds")
+    myZoo = Zoo()
+    for request in [l, e, p]:
+        myZoo.add(request)
+    myZoo.feed_all()
     pass
 
 
@@ -237,6 +301,12 @@ def exercise_30_manage_state_transitions_poc():
         Aria gained 60 exp. Level up! Now Level 2. (Remaining exp: 20)
     """
     print("Exercise 30: Character Class with Auto Level Up Logic")
+    myCharacter = Character("Aria", health=100)
+    print(myCharacter.gain_exp(60))
+    print(myCharacter.gain_exp(60))
+    print(myCharacter.gain_exp(75))
+    print(myCharacter.gain_exp(42))
+    print(myCharacter.gain_exp(63))
     pass
 
 
@@ -260,7 +330,33 @@ def exercise_31_manage_collection_of_objects_test():
         Removed: Levitating
         After shuffle: (order will vary)
     """
+    def displayList(list):
+        for song in list:
+            print(song.title)
+        print()
+
     print("Exercise 31: Playlist Class with Add, Remove & Shuffle")
+    mySongsList = PlayList()
+    songTitles = ["China Cat Sunflower", "Somebody to Love", "Mississippi Queen",
+                  "Purple Haze", "Dear Mr. Fantasy", "Elanor Rigby", "Last Dance with Mary Jane",
+                  "Running Down A Dream"]
+    for title in songTitles:
+        mySongsList.addSong(Song(title))
+    print("Initial list")
+    displayList(mySongsList.songList)
+
+    mySongsList.removeSong("Elanor Rigby")
+    print("After Removing a song")
+    displayList(mySongsList.songList)
+
+    print("\nAfter shuffling the song list")
+    shuffled_list = mySongsList.shuffle()
+    displayList(shuffled_list)
+
+    print("\nAfter shuffling the song list #2")
+    shuffled_list = mySongsList.shuffle()
+    displayList(shuffled_list)
+
     pass
 
 

@@ -1,3 +1,6 @@
+import inspect
+from email import message
+from src.common_library import helper_functions as hf
 
 
 ######################################################################################
@@ -238,6 +241,78 @@ class DVD(Media):
 
 
 ######################################################################################
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        pass
+
+    def eat(self):
+        method_name = inspect.currentframe().f_code.co_name
+        raise NotImplementedError(
+            f"Class {self.__class__.__name__} - missing required {method_name} method."
+        )
+
+class Dog(Animal):
+    def __init__(self, name):
+        super().__init__(name)
+        pass
+
+    def speak(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def __init__(self, name):
+        super().__init__(name)
+        pass
+
+    def speak(self):
+        return "Meow!"
+
+class Lion(Animal):
+    def __init__(self, name, food):
+        super().__init__(name)
+        self._food = food
+
+    def eat(self):
+        return f"{self.name} eats {self._food}"
+
+
+class Elephant(Animal):
+    def __init__(self, name, food):
+        super().__init__(name)
+        self._food = food
+
+    def eat(self):
+        return f"{self.name} eats {self._food}"
+
+class Parrot(Animal):
+    def __init__(self, name, food):
+        super().__init__(name)
+        self._food = food
+
+    def eat(self):
+        return f"{self.name} eats {self._food}"
+
+class Zoo:
+    def __init__(self):
+        self._member_list = []
+
+    def add(self, member):
+        self._member_list.append(member)
+
+    def feed_all(self):
+        for member in self._member_list:
+            print(member.eat())
+
+######################################################################################
+######################################################################################
+######################################################################################
+
+
+
+######################################################################################
 class Order:
     def __init__(self, id, total):
         self.id = id
@@ -251,4 +326,243 @@ class DiscountedOrder(Order):
         return self.total - (self.total * discount_rate)
 
 
+######################################################################################
+class Vehicle_v3:
+    def __init__(self, max_speed):
+        self._max_speed = max_speed
+
+    def describe(self):
+        method_name = inspect.currentframe().f_code.co_name
+        raise NotImplementedError(
+            f"Class {self.__class__.__name__} - missing required {method_name} method."
+        )
+
+class Bike_v3(Vehicle_v3):
+    def __init__(self, max_speed):
+        super().__init__(max_speed)
+        self.name = "Bike"
+
+    def describe(self):
+        return f"{self.name} max speed: {self._max_speed} km/h"
+
+
+class Truck_v3(Vehicle_v3):
+    def __init__(self, max_speed):
+        super().__init__(max_speed)
+        self.name = "Truck"
+
+    def describe(self):
+        return f"{self.name} max speed: {self._max_speed} km/h"
+
+
+class Bus_v3(Vehicle_v3):
+    def __init__(self, max_speed):
+        super().__init__(max_speed)
+        self.name = "Bus"
+
+    def describe(self):
+        return f"{self.name} max speed: {self._max_speed} km/h"
+
+
+######################################################################################
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        results = Vector(self.x + other.x, self.y + other.y)
+        return results
+
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+
+
+######################################################################################
+class ShoppingCart:
+    def __init__(self, items):
+        self.items = items
+
+    def __len__(self):
+        return len(self.items)
+
+
+######################################################################################
+class BankAccount_v2:
+    def __init__(self, initial_balance):
+        self.__balance = initial_balance
+        # print(self)
+
+    def deposit(self, value):
+        try:
+            self.balance += value
+            # print(self)
+        except ValueError as e:
+            print(e)
+
+    def __str__(self):
+        return f"Current Balance: ${self.balance:,.2f}"
+
+    @property
+    def balance(self):
+        return self.__balance
+
+    @balance.setter
+    def balance(self, value):
+        if value > 0:
+            self.__balance = value
+        else:
+            raise ValueError("Invalid withdrawal. Balance after withdrawal must be greater than 0. Request denied.")
+
+
+######################################################################################
+class Multiplier:
+    def __init__(self, factor):
+        self.__factor = factor
+
+    def __call__(self, value):
+        return value * self.__factor
+
+    
+
+
+######################################################################################
+class Passenger:
+    def __init__(self, id, name, flight):
+        self.__id = id
+        self.__name = name
+        self.__flight = flight
+
+    @property
+    def name(self):
+        return self.__name
+
+
+class Flight:
+    def __init__(self, flight_id, capacity):
+        self.__flight_id = flight_id
+        self.__capacity = capacity
+        self.__passenger_list = []
+
+    @property
+    def flight_id(self):
+        return self.__flight_id
+
+    @property
+    def flight_capacity(self):
+        return self.__capacity
+
+    @property
+    def passenger_list(self):
+        return self.__passenger_list
+
+    @passenger_list.setter
+    def passenger_list(self, passenger_list):
+        self.__passenger_list = passenger_list
+
+    def book(self, passenger):
+        if len(self.passenger_list) < self.flight_capacity:
+            self.__passenger_list.append(passenger)
+            message = f"{passenger.name} booked on Flight {self.__flight_id}."
+
+        else:
+            message = f"Sorry, Flight {self.flight_id} is fully booked."
+            # delete the passenger object. In theory, you would
+            # add the passenger to a waiting list and then add to a flight
+            # if a seat became available
+            del passenger
+
+        return message
+######################################################################################
+
+
+######################################################################################
+class Character:
+    LEVEL_THRESHOLD = 100
+    def __init__(self, name, health):
+        self.__name = name
+        self.__health = health
+        self.__level = 1
+        self.__exp = 0
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def health(self):
+        return self.__health
+
+    @property
+    def level(self):
+        return self.__level
+
+    @property
+    def exp(self):
+        return self.__exp
+
+    def gain_exp(self, amount):
+        hold = self.__exp + amount
+        if hold >= Character.LEVEL_THRESHOLD:
+            self.__level += 1
+            revised_exp = hold - Character.LEVEL_THRESHOLD
+            self.__exp = revised_exp
+            message = f"{self.name} gained {amount} exp. Level up! " + \
+                      f"Now Level {self.level}. (Remaining exp: {self.exp}))"
+        else:
+            self.__exp += amount
+            message = f"{self.name} gained {amount} exp. (Total: {self.exp})"
+
+        return message
+
+
+######################################################################################
+class Song:
+    def __init__(self, title):
+        self.__title = title
+
+    @property
+    def title(self):
+        return self.__title
+
+class PlayList:
+    def __init__(self):
+        self.__songList = []
+
+    @property
+    def songList(self):
+        return self.__songList
+
+    @songList.setter
+    def songList(self, value):
+        self.__songList = value
+
+    def __len__(self):
+        return len(self.songList)
+
+    def addSong(self, song):
+        self.songList.append(song)
+
+    def removeSong(self, song):
+        # loop through the list of songs and match the requested title.
+        # TODO: find a more efficient way to do this in the future.
+        updated_list = [song_ for song_ in self.songList if song_.title != song]
+        self.songList = updated_list
+        # for i in range(self.__songList.__len__()):
+        #     if song == self.__songList[i].title:
+        #         del self.songList[i]
+        #         break
+
+    def shuffle(self):
+        new_song_list = []
+        list_order = hf.shuffle(len(self.songList))
+        for i in range(0, len(list_order)):
+            new_song_list.append(self.songList[list_order[i]])
+        return new_song_list
+######################################################################################
+
+
+######################################################################################
+######################################################################################
+######################################################################################
 ######################################################################################

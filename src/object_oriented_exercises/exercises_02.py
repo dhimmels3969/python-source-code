@@ -5,7 +5,7 @@ from object_oriented_exercises.classes import \
     Vehicle, Student, Rectangle, Product, BankAccount, \
     Light, User, Temperature, Notebook, CoffeeMachine, \
     Vehicle_v2, Bus, Bus_v2, Taxi, \
-    Book, Magazine, DVD, \
+    Dog, Cat, Book, Magazine, DVD, \
     DiscountedOrder
 
 
@@ -181,28 +181,7 @@ def exercise_16_polymorphism_poc():
         Dog says: Woof!
         Cat says: Meow!
     """
-    class Animal:
-        def __init__(self, name):
-            self.name = name
 
-        def speak(self):
-            pass
-
-    class Dog(Animal):
-        def __init__(self, name):
-            super().__init__(name)
-            pass
-
-        def speak(self):
-            return "Woof!"
-
-    class Cat(Animal):
-        def __init__(self, name):
-            super().__init__(name)
-            pass
-
-        def speak(self):
-            return "Meow!"
 
     def Speak(creature):
         # Dog says: Woof!
