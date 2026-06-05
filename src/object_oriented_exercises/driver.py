@@ -19,8 +19,11 @@ class Driver():
     TODO:
         Set up a dictionary to control which function gets executed and which functions get bypassed.
     """
-    def __init__(self):
+    def __init__(self, root):
+        # pass the root directory to the class for file operations
+        self.root = root
         pass
+
 
     def run(self):
         print()
@@ -67,7 +70,7 @@ class Driver():
         results = oop_03.exercise_28_class_composition_check()
         results = oop_03.exercise_29_combine_composition_polymorphism_pox()
         results = oop_03.exercise_30_manage_state_transitions_poc()
-        results = oop_03.exercise_31_manage_collection_of_objects_test()
+        results = oop_03.exercise_31_manage_collection_of_objects_test(self.root)
 
         print("")
         print("#####################################################")
