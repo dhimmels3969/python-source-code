@@ -518,12 +518,17 @@ class Character:
 
 ######################################################################################
 class Song:
-    def __init__(self, title):
+    def __init__(self, title, artist):
         self.__title = title
+        self.__artist = artist
 
     @property
     def title(self):
         return self.__title
+
+    @property
+    def artist(self):
+        return self.__artist
 
 class PlayList:
     def __init__(self):
@@ -543,15 +548,21 @@ class PlayList:
     def addSong(self, song):
         self.songList.append(song)
 
-    def removeSong(self, song):
+    def removeSong(self, song, artist=""):
         # loop through the list of songs and match the requested title.
-        # TODO: find a more efficient way to do this in the future.
-        updated_list = [song_ for song_ in self.songList if song_.title != song]
+        # 04JUN2026 Allow the user to specify an artist if there are multiple
+        # versions of the song. If artist is blank ALL versions of the song
+        # will be removed.
+        # one last thing to do. send a message if a song or song/srtist is NOT found
+        if artist > "":
+            # artist is specified. only one song should be deleted
+            updated_list = \
+                [song_ for song_ in self.songList if not (song_.title == song and song_.artist == artist)]
+        else:
+            # no artist specified one or more versions of the song will be deleted
+            updated_list = [song_ for song_ in self.songList if song_.title != song]
         self.songList = updated_list
-        # for i in range(self.__songList.__len__()):
-        #     if song == self.__songList[i].title:
-        #         del self.songList[i]
-        #         break
+
 
     def shuffle(self):
         new_song_list = []

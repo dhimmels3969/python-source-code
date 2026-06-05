@@ -10,6 +10,7 @@ from object_oriented_exercises.classes import \
     Animal, Dog, Cat, Lion, Elephant, Parrot, Zoo, \
     Character, PlayList, Song
 
+import object_oriented_exercises.read_spreadsheet as rs
 
 ##############################################################################
 def exercise_21_class_hierarchy_test():
@@ -312,7 +313,7 @@ def exercise_30_manage_state_transitions_poc():
 
 
 ##############################################################################
-def exercise_31_manage_collection_of_objects_test():
+def exercise_31_manage_collection_of_objects_test(src_dir):
     """
     Exercise 31: Playlist Class with Add, Remove & Shuffle
     Problem Statement: Write a Python program that defines a Song class
@@ -332,28 +333,34 @@ def exercise_31_manage_collection_of_objects_test():
     """
     def displayList(list):
         for song in list:
-            print(song.title)
+            print(f"{song.title} - {song.artist}")
         print()
 
     print("Exercise 31: Playlist Class with Add, Remove & Shuffle")
+    songInfo = rs.read_spreadsheet(src_dir
+                        , "data/object_oriented_exercises"
+                        , "playlists.xlsx"
+                        , "1.0")
     mySongsList = PlayList()
-    songTitles = ["China Cat Sunflower", "Somebody to Love", "Mississippi Queen",
-                  "Purple Haze", "Dear Mr. Fantasy", "Elanor Rigby", "Last Dance with Mary Jane",
-                  "Running Down A Dream"]
-    for title in songTitles:
-        mySongsList.addSong(Song(title))
+
+    for title, artist in songInfo:
+        mySongsList.addSong(Song(title, artist))
     print("Initial list")
     displayList(mySongsList.songList)
 
-    mySongsList.removeSong("Elanor Rigby")
+    mySongsList.removeSong("All Along The Watchtower", "Jimi Hendrix Experience")
     print("After Removing a song")
     displayList(mySongsList.songList)
 
-    print("\nAfter shuffling the song list")
+    # try to remove a song from the playlist where the item can not be found
+
+    ########################################################################
+
+    print("\nShuffle #1")
     shuffled_list = mySongsList.shuffle()
     displayList(shuffled_list)
 
-    print("\nAfter shuffling the song list #2")
+    print("\nShuffle #2")
     shuffled_list = mySongsList.shuffle()
     displayList(shuffled_list)
 

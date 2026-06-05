@@ -65,7 +65,7 @@ def driver(src_dir):
         date_time_exercises_driver = date_time_exercise_driver.Driver()
         date_time_exercises_driver.run()
 
-        object_oriented_driver = object_oriented_exercise_driver.Driver()
+        object_oriented_driver = object_oriented_exercise_driver.Driver(src_dir)
         object_oriented_driver.run()
 
         return None
