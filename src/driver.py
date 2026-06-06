@@ -12,6 +12,7 @@ from src.set_exercises import driver as set_exercise_driver
 from src.tuple_exercises import driver as tuple_exercise_driver
 from src.date_time_exercises import driver as date_time_exercise_driver
 from src.object_oriented_exercises import driver as object_oriented_exercise_driver
+from src.file_handling_exercises import driver as file_handling_exercise_driver
 from src.wordle import driver as wordle_driver
 
 
@@ -67,6 +68,9 @@ def driver(src_dir):
 
         object_oriented_driver = object_oriented_exercise_driver.Driver(src_dir)
         object_oriented_driver.run()
+
+        file_handling_driver = file_handling_exercise_driver.Driver(src_dir)
+        file_handling_driver.run()
 
         return None
     #####################################################################
