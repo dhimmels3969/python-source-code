@@ -1,3 +1,6 @@
+from src.common_library import helper_functions as hf
+import os
+
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
 # Exercises 1 through 10
@@ -6,7 +9,7 @@
 
 
 ##############################################################################
-def exercise_01_write_user_name_to_file():
+def exercise_01_write_user_name_to_file(root_dir):
     """
     Exercise 1: Write User Name to File
     Problem Statement: Write a Python program that accepts a user’s
@@ -21,11 +24,24 @@ def exercise_01_write_user_name_to_file():
         A file named user.txt is created containing the entered name, e.g. Alice
     """
     print("Exercise 1: Write User Name to File")
+    #### get a user name... not sure how we'll do this when testing...
+    while True:
+        user_name = input("Enter your user name: ")
+        if user_name.strip() > '':
+            break
+        else:
+            print("User name cannot be blank... please try again.")
+
+    #### build the name of the output file
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "user.txt")
+    #### open the file and write the data
+    with open(file_path, 'w') as file_out:
+        file_out.writelines(user_name)
     pass
 
 
 ##############################################################################
-def exercise_02_read_and_print_file():
+def exercise_02_read_and_print_file(root_dir):
     """
     Exercise 2: Read and Print Complete File
     Problem Statement: Write a Python program that opens a file
@@ -40,11 +56,16 @@ def exercise_02_read_and_print_file():
         Hello, World!
     """
     print("Exercise 2: Read and Print Complete File")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    for line in lines_in_the_file:
+        print(f"    {line.strip()}")
     pass
 
 
 ##############################################################################
-def exercise_03_read_file_line_by_line():
+def exercise_03_read_file_line_by_line(root_dir):
     """
     Exercise 3: Read File Line by Line Using Loop
     Problem Statement: Write a Python program that reads a file
@@ -64,11 +85,16 @@ def exercise_03_read_file_line_by_line():
         Line 3
     """
     print("Exercise 3: Read File Line by Line Using Loop")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    for line in lines_in_the_file:
+        print(f"    {line.strip()}")
     pass
 
 
 ##############################################################################
-def exercise_04_read_file_into_list():
+def exercise_04_read_file_into_list(root_dir):
     """
     Exercise 4: Read File Lines into a List
     Problem Statement: Write a Python program that reads all lines from a
@@ -85,11 +111,18 @@ def exercise_04_read_file_into_list():
         ['apple\n', 'banana\n', 'cherry']
     """
     print("Exercise 4: Read File Lines into a List")
+    results = []
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "items.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    for line in lines_in_the_file:
+        results.append(line)
+    print(f"    {results}")
     pass
 
 
 ##############################################################################
-def exercise_05_append_data_to_file():
+def exercise_05_append_data_to_file(root_dir):
     """
     Exercise 5: Append New Sentence to Existing File
     Problem Statement: Write a Python program that appends the sentence
@@ -106,11 +139,19 @@ def exercise_05_append_data_to_file():
         This is a new line.
     """
     print("Exercise 5: Append New Sentence to Existing File")
+    line_to_append = "\nThis is a new line."
+
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "notes.txt")
+    #### open the file and write the data
+    #### file writing modes: 'w' write over existing contents,
+    #### 'a' append data to existing data
+    with open(file_path, 'a') as file_out:
+        file_out.writelines(line_to_append)
     pass
 
 
 ##############################################################################
-def exercise_06_clear_file_content():
+def exercise_06_clear_file_content(root_dir):
     """
     Exercise 6: Clear All File Content
     Problem Statement: Write a Python program that clears all content
@@ -126,12 +167,39 @@ def exercise_06_clear_file_content():
     Expected Output:
         temp.txt exists but is completely empty (0 bytes).
     """
+    def reload_temp_dot_txt():
+        """
+        write the data from lorem_ipsum.txt to temp.txt.
+        """
+        input_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lorem_ipsum.txt")
+        output_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "temp.txt")
+        input_data = []
+        with open(input_path, 'r') as file_in:
+            for line in file_in:
+                input_data.append(line)
+        with open(output_path, 'w') as file_out:
+            file_out.writelines(input_data)
+        print(f"    temp.txt reloaded")
+        pass
+
     print("Exercise 6: Clear All File Content")
+    reload_temp_dot_txt()
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "temp.txt")
+    file_size_bytes = os.path.getsize(file_path)
+    print(f"    File Size Before: {file_size_bytes} Bytes")
+    #### open the file and write the data
+    #### file writing modes: 'w' write over existing contents,
+    #### 'a' append data to existing data
+    with open(file_path, 'w') as file_out:
+        pass
+    file_size_bytes = os.path.getsize(file_path)
+    print(f"    File Size After: {file_size_bytes} Bytes")
+
     pass
 
 
 ##############################################################################
-def exercise_07_write_text_to_new_file():
+def exercise_07_write_text_to_new_file(root_dir):
     """
     Exercise 7: Write Text to New File
     Problem Statement: Write a Python program that creates a new file
@@ -149,11 +217,21 @@ def exercise_07_write_text_to_new_file():
         Third line
     """
     print("Exercise 7: Write Text to New File")
+    lines = ["First line", "Second line", "Third line"]
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "output.txt")
+    with open(file_path, 'w') as file_out:
+        line_count = 1
+        for line in lines:
+            file_out.write(line)
+            # write a new line after every line except the last one in the list
+            if line_count < len(lines):
+                file_out.write("\n")
+                line_count += 1
     pass
 
 
 ##############################################################################
-def exercise_08_check_if_file_exists():
+def exercise_08_check_if_file_exists(root_dir):
     """
     Exercise 8: Check If File Exists
     Problem Statement: Write a Python program that checks whether a
@@ -171,12 +249,25 @@ def exercise_08_check_if_file_exists():
         File exists. if the file is present,
         or File does not exist. if it is not.
     """
+    def display_search_results(file_to_find):
+        if hf.file_exists(file_to_find):
+            print(f"    {file_to_find} - File Exists")
+        else:
+            print(f"    {file_to_find} - File Does Not Exist")
+        pass
+
     print("Exercise 8: Check If File Exists")
+    files_to_find = [
+        hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt"),
+        hf.build_file_name(root_dir, "data/file_handling_exercises", "data2.txt")
+        ]
+    for file in files_to_find:
+        display_search_results(file)
     pass
 
 
 ##############################################################################
-def exercise_09_handle_missing_file():
+def exercise_09_handle_missing_file(root_dir):
     """
     Exercise 9: Handle Missing File with Try-Except
     Problem Statement: Write a Python program that attempts to open a
@@ -195,11 +286,19 @@ def exercise_09_handle_missing_file():
         Error: The file was not found.
     """
     print("Exercise 9: Handle Missing File with Try-Except")
+    try:
+        input_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "missing.txt")
+        with open(input_path, 'r') as file_in:
+            pass
+    except FileNotFoundError as error:
+        print("    Error: The file was not found.")
+    except Exception as error:
+        print(error)
     pass
 
 
 ##############################################################################
-def exercise_10_count_lines_in_file():
+def exercise_10_count_lines_in_file(root_dir):
     """
     Exercise 10: Count Total Lines in File
     Problem Statement: Write a Python program that opens a file
@@ -219,6 +318,10 @@ def exercise_10_count_lines_in_file():
         Total lines: 4
     """
     print("Exercise 10: Count Total Lines in File")
+    input_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt")
+    with open(input_path, 'r') as file_in:
+        results = file_in.readlines()
+    print(f"    Total Lines: {len(results)}")
     pass
 
 

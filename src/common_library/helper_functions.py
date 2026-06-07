@@ -5,6 +5,9 @@ import calendar
 from datetime import datetime
 from itertools import repeat
 import random
+from pathlib import Path
+
+
 #
 # Routines used in multiple places
 #
@@ -12,23 +15,8 @@ import random
 
 
 #########################################################################
-def get_positive_int_from_user(prompt):
-    incomplete = True
-    final_result = None
-    while incomplete:
-        user_number = input(prompt)
-        try:
-            user_number = int(user_number)
-            if user_number > 0:
-                incomplete = False
-                final_result = user_number
-            else:
-                print("Number must be greater than 0. Please try again.")
-
-        except ValueError:
-            print("Previous value was invalid. Enter a number.")
-    return final_result
-
+####   File handling routines
+#########################################################################
 
 
 #########################################################################
@@ -60,6 +48,54 @@ def build_file_name(root_dir, subfolders, file_name):
         return json_path
     except Exception as error:
         raise error
+
+
+#########################################################################
+def file_exists(file_name):
+    """
+    This function builds a file name.
+    Args:
+        file_name (string): name of the file to analyze..
+    Returns:
+        true if the file exists, False otherwise
+    """
+
+    # Get the directory of the current source file
+    try:
+        file_path = Path(file_name)
+        return file_path.exists()
+    except Exception as error:
+        raise error
+
+
+
+#########################################################################
+####   File handling routines - Enf of Section
+#########################################################################
+
+
+
+#########################################################################
+def get_positive_int_from_user(prompt):
+    incomplete = True
+    final_result = None
+    while incomplete:
+        user_number = input(prompt)
+        try:
+            user_number = int(user_number)
+            if user_number > 0:
+                incomplete = False
+                final_result = user_number
+            else:
+                print("Number must be greater than 0. Please try again.")
+
+        except ValueError:
+            print("Previous value was invalid. Enter a number.")
+    return final_result
+
+
+
+
 
 
 
