@@ -6,7 +6,7 @@
 
 
 ##############################################################################
-def exercise_31_read_write_binary_image_file():
+def exercise_31_read_write_binary_image_file(root_dir):
     """
     Exercise 31: Read and Write Binary Image File
     Problem Statement: Write a Python program to read a binary
@@ -27,7 +27,7 @@ def exercise_31_read_write_binary_image_file():
 
 
 ##############################################################################
-def exercise_32_extract_unique_words():
+def exercise_32_extract_unique_words(root_dir):
     """
     Exercise 32: Extract and Sort Unique Words from File
     Problem Statement: Write a Python program to read a text file,
@@ -51,7 +51,7 @@ def exercise_32_extract_unique_words():
 
 
 ##############################################################################
-def exercise_33_filter_log_file():
+def exercise_33_filter_log_file(root_dir):
     """
     Exercise 33: Filter Log File Lines Containing ERROR Keyword
     Problem Statement: Write a Python program to read a log file
@@ -72,7 +72,7 @@ def exercise_33_filter_log_file():
 
 
 ##############################################################################
-def exercise_34_split_large_file():
+def exercise_34_split_large_file(root_dir):
     """
     Exercise 34: Split Large File into Smaller 10-Line Files
     Problem Statement: Write a Python program to read a large

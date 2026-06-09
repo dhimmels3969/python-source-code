@@ -1,3 +1,8 @@
+from src.common_library import helper_functions as hf
+import os
+import re
+
+
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
 # Exercises 21 through 30
@@ -6,7 +11,7 @@
 
 
 ##############################################################################
-def exercise_21_convert_uppercase_and_lowercase():
+def exercise_21_convert_uppercase_and_lowercase(root_dir):
     """
     Exercise 21: Convert Uppercase to Lowercase and Vice Versa
     Problem Statement: Write a Python program to read a text file
@@ -22,12 +27,32 @@ def exercise_21_convert_uppercase_and_lowercase():
     Expected Output:
         A new file swapped.txt containing: hELLO wORLD
     """
+    def invert_case(line_in):
+        line_out = ""
+        for char in line_in:
+            if char.isupper():
+                line_out += char.lower()
+            else:
+                if char.islower():
+                    line_out += char.upper()
+                else:
+                    line_out += char
+        return line_out
+
     print("Exercise 21: Convert Uppercase to Lowercase and Vice Versa")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "hello_world.txt")
+    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises", "hello_world_swapped.txt")
+
+    with open(file_path, 'r') as file, open(file_path_out, 'w') as file_out:
+        lines_in_the_file = file.readlines()
+        for line in lines_in_the_file:
+            results = invert_case(line)
+            file_out.write(results)
     pass
 
 
 ##############################################################################
-def exercise_22_find_replace():
+def exercise_22_find_replace(root_dir):
     """
     Exercise 22: Find and Replace a Word Throughout File
     Problem Statement: Write a Python program to read a text file,
@@ -44,11 +69,19 @@ def exercise_22_find_replace():
         The file story.txt updated to: I love Python. Python is great.
     """
     print("Exercise 22: Find and Replace a Word Throughout File")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "python.txt")
+    results = ""
+    with open(file_path, 'r') as file:
+        content = file.read()
+        results = content.replace("Java", "Python")
+
+    with open(file_path, 'w') as file_out:
+        file_out.write(results)
     pass
 
 
 ##############################################################################
-def exercise_23_get_file_size_kilobytes():
+def exercise_23_get_file_size_kilobytes(root_dir):
     """
     Exercise 23: Get File Size in Kilobytes
     Problem Statement: Write a Python program to find and
@@ -67,7 +100,7 @@ def exercise_23_get_file_size_kilobytes():
 
 
 ##############################################################################
-def exercise_24_copy_file_using_binary_mode():
+def exercise_24_copy_file_using_binary_mode(root_dir):
     """
     Exercise 24: Copy File Using Binary Mode
     Problem Statement: Write a Python program to copy the contents of
@@ -90,7 +123,7 @@ def exercise_24_copy_file_using_binary_mode():
 
 
 ##############################################################################
-def exercise_25_rename_single_file():
+def exercise_25_rename_single_file(root_dir):
     """
     Exercise 25: Rename a Single File
     Problem Statement: Write a Python program to rename a
@@ -109,7 +142,7 @@ def exercise_25_rename_single_file():
 
 
 ##############################################################################
-def exercise_26_rename_multiple_files():
+def exercise_26_rename_multiple_files(root_dir):
     """
     Exercise 26: Rename Multiple Files with Prefix
     Problem Statement: Write a Python program to rename all .txt files
@@ -129,7 +162,7 @@ def exercise_26_rename_multiple_files():
 
 
 ##############################################################################
-def exercise_27_delete_a_file():
+def exercise_27_delete_a_file(root_dir):
     """
     Exercise 27: Delete a File from Disk
     Problem Statement: Write a Python program to delete a specified
@@ -148,7 +181,7 @@ def exercise_27_delete_a_file():
 
 
 ##############################################################################
-def exercise_28_merge_multiple_files():
+def exercise_28_merge_multiple_files(root_dir):
     """
     Exercise 28: Merge Two Files into One
     Problem Statement: Write a Python program to read the contents
@@ -170,7 +203,7 @@ def exercise_28_merge_multiple_files():
 
 
 ##############################################################################
-def exercise_29_reverse_line_order():
+def exercise_29_reverse_line_order(root_dir):
     """
     Exercise 29: Reverse Line Order and Save to New File
     Problem Statement: Write a Python program to read all lines
@@ -192,7 +225,7 @@ def exercise_29_reverse_line_order():
 
 
 ##############################################################################
-def exercise_30_list_all_files():
+def exercise_30_list_all_files(root_dir):
     """
     Exercise 30: List All Files in Directory and Save
     Problem Statement: Write a Python program to list all files

@@ -1,3 +1,6 @@
+from src.common_library import helper_functions as hf
+import os
+import re
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
 # Exercises 11 through 20
@@ -6,7 +9,7 @@
 
 
 ##############################################################################
-def exercise_11_count_total_words():
+def exercise_11_count_total_words(root_dir):
     """
     Exercise 11: Count Total Words in File
     Problem Statement: Write a Python program that reads a file
@@ -25,11 +28,19 @@ def exercise_11_count_total_words():
         Total words: 9
     """
     print("Exercise 11: Count Total Words in File")
+    total_words = 0
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data_02.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+        for line in lines_in_the_file:
+            for item in line.split():
+                total_words += 1
+    print(f"  Total words: {total_words}")
     pass
 
 
 ##############################################################################
-def exercise_12_count_total_characters():
+def exercise_12_count_total_characters(root_dir):
     """
     Exercise 12: Count Total Characters in File
     Problem Statement: Write a Python program that reads a file
@@ -46,11 +57,19 @@ def exercise_12_count_total_characters():
         Total characters: 13
     """
     print("Exercise 12: Count Total Characters in File")
+    total_characters = 0
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+        for line in lines_in_the_file:
+            for item in line.strip():
+                total_characters += len(item)
+    print(f"  Total characters: {total_characters}")
     pass
 
 
 ##############################################################################
-def exercise_13_count_word_occurrences():
+def exercise_13_count_word_occurrences(root_dir):
     """
     Exercise 13: Count Specific Word Occurrences in File
     Problem Statement: Write a Python program that reads a
@@ -69,12 +88,38 @@ def exercise_13_count_word_occurrences():
     Expected Output:
         Occurrences of 'Python': 3
     """
+
+    def scrub_words(word_list):
+        # for each word in the list remove non-alphabetic characters
+        # Replace any character NOT in a-z, A-Z, or 0-9 with an empty string
+        revised_list = []
+        for word in word_list:
+            cleaned_word = re.sub(r'[^a-zA-Z0-9]', '', word)
+            revised_list.append(cleaned_word)
+        return revised_list
+
     print("Exercise 13: Count Specific Word Occurrences in File")
+    words = []
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "python.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+        for line in lines_in_the_file:
+            for item in line.split():
+                words.append(item)
+    # build the dictionary with words and counts...
+    # need to remove punctuation
+    print(f"  Id before: {id(words)} -  {words}")
+    words = scrub_words(words)
+    print(f"  Id after: {id(words)} -  {words}")
+    word_counts = {}
+    for word in words:
+        word_counts[word] = word_counts.get(word, 0) + 1
+    print(f"  {word_counts}")
     pass
 
 
 ##############################################################################
-def exercise_14_read_first_n_lines():
+def exercise_14_read_first_n_lines(root_dir):
     """
     Exercise 14: Read Only First N Lines
     Problem Statement: Write a Python program that reads and
@@ -86,7 +131,7 @@ def exercise_14_read_first_n_lines():
         reading the entire content is inefficient, such
         as previewing log files, inspecting dataset headers,
         or loading configuration sections.
-    Given Input: A file named data.txt containing:
+    Given Input: A file named lines.txt containing:
         Line 1
         Line 2
         Line 3
@@ -96,13 +141,25 @@ def exercise_14_read_first_n_lines():
         Line 1
         Line 2
         Line 3
+    Additional info from PyNative web site:
+        The most memory-efficient approach for large files:
+        use itertools.islice(f, n) to read only the first n
+        lines without loading the rest into memory.
     """
     print("Exercise 14: Read Only First N Lines")
+    results = []
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+        results = lines_in_the_file[:3]
+
+    for item in results:
+        print(f"  {item.strip()}")
     pass
 
 
 ##############################################################################
-def exercise_15_read_last_n_lines():
+def exercise_15_read_last_n_lines(root_dir):
     """
     Exercise 15: Read Only Last N Lines
     Problem Statement: Write a Python program that reads and
@@ -123,13 +180,24 @@ def exercise_15_read_last_n_lines():
         Line 3
         Line 4
         Line 5
+    Additional info from PyNative web site:
+        For very large files, consider the collections.deque approach
+        with a fixed maxlen to avoid loading the whole file into memory.
     """
     print("Exercise 15: Read Only Last N Lines")
+    results = []
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+        results = lines_in_the_file[-3:]
+
+    for item in results:
+        print(f"  {item.strip()}")
     pass
 
 
 ##############################################################################
-def exercise_16_read_line_numbers_from_file():
+def exercise_16_read_line_numbers_from_file(root_dir):
     """
     Exercise 16: Read Specific Line Numbers from File
     Problem Statement: Write a Python program that reads a file
@@ -152,11 +220,22 @@ def exercise_16_read_line_numbers_from_file():
         Line 5
     """
     print("Exercise 16: Read Specific Line Numbers from File")
+    results = []
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    lines_to_display = {1, 3, 5}
+    # results = list(enumerate(lines_in_the_file, start = 1))
+    results = [(index, item) for (index, item)
+               in list(enumerate(lines_in_the_file, start=1))
+               if index in lines_to_display]
+    for index, item in results:
+        print(f"  {item.strip()}")
     pass
 
 
 ##############################################################################
-def exercise_17_find_longest_word():
+def exercise_17_find_longest_word(root_dir):
     """
     Exercise 17: Find Longest Word in File
     Problem Statement: Write a Python program to read a text file
@@ -171,11 +250,20 @@ def exercise_17_find_longest_word():
         Longest word: programming
     """
     print("Exercise 17: Find Longest Word in File")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "words.txt")
+    words = []
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    for line in lines_in_the_file:
+        for word in line.split():
+            words.append(word)
+    longest_word = max(words, key=len)
+    print(f"  Longest word: {longest_word}")
     pass
 
 
 ##############################################################################
-def exercise_18_letter_frequency():
+def exercise_18_letter_frequency(root_dir):
     """
     Exercise 18: Count Each Letter Frequency in File
     Problem Statement: Write a Python program to read a text
@@ -197,11 +285,18 @@ def exercise_18_letter_frequency():
         d: 1
     """
     print("Exercise 18: Count Each Letter Frequency in File")
+    character_counts = {}
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "hello_world.txt")
+    with open(file_path, 'r') as file:
+        content = file.read().lower().strip()
+    for character in content:
+        character_counts[character] = character_counts.get(character, 0) + 1
+    print(f"  {character_counts}")
     pass
 
 
 ##############################################################################
-def exercise_19_search_for_words_in_file():
+def exercise_19_search_for_words_in_file(root_dir):
     """
     Exercise 19: Search Word and Print Matching Line Numbers
     Problem Statement: Write a Python program to search for a specific
@@ -218,11 +313,21 @@ def exercise_19_search_for_words_in_file():
         "Python" found on line 3
     """
     print("Exercise 19: Search Word and Print Matching Line Numbers")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "python.txt")
+    with open(file_path, 'r') as file:
+        lines_in_the_file = file.readlines()
+    search_arg = "Python"
+    # results = list(enumerate(lines_in_the_file, start = 1))
+    results = [(index, item) for (index, item)
+               in list(enumerate(lines_in_the_file, start=1))
+               if search_arg.lower() in item.strip().lower()]
+    for index, item in results:
+        print(f'  "{search_arg}" found on line {index}')
     pass
 
 
 ##############################################################################
-def exercise_20_strip_whitespace():
+def exercise_20_strip_whitespace(root_dir):
     """
     Exercise 20: Strip Extra Whitespace and Save to New File
     Problem Statement: Write a Python program to read a text
@@ -239,6 +344,15 @@ def exercise_20_strip_whitespace():
         and Python, with all surrounding whitespace removed.
     """
     print("Exercise 20: Strip Extra Whitespace and Save to New File")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "messy.txt")
+    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises", "clean.txt")
+
+    with open(file_path, 'r') as file_in, open(file_path_out, 'w') as file_out:
+            for line in file_in:
+                file_out.write(" ".join(line.strip().split()))
+                file_out.write("\n")
+
+    # TODO: Remove last \n in the file...
     pass
 
 
