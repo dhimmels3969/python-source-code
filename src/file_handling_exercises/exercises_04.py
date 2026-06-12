@@ -145,16 +145,6 @@ def exercise_34_split_large_file(root_dir):
         Created: part_2.txt (10 lines)
         Created: part_3.txt (5 lines)
     """
-    # def write_results_to_file(file_number, content):
-    #     file_name = f"part_{file_number}.txt"
-    #     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", file_name)
-    #     with open(file_path, "w") as outfile:
-    #         for line in content:
-    #             outfile.write(line)
-    #
-    #     message = f"Created: {Path(file_path).name} ({len(content)} lines)"
-    #     return message
-
     print("Exercise 34: Split Large File into Smaller 10-Line Files")
     # read in the file and load into a list
     block_size = 10
@@ -167,35 +157,14 @@ def exercise_34_split_large_file(root_dir):
 
     for i, start in enumerate(range(0, total_lines, block_size), start=1):
         block = lines[start:start + block_size]
-        file_name = f"part_{i}.txt"
-        output_filename = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", file_name)
+
+        output_filename = hf.build_file_name(root_dir
+                        , "data/file_handling_exercises/dummy"
+                        , f"part_{i}.txt")
         with open(output_filename, "w") as out:
             out.writelines(block)
         print(f"  Created: {output_filename} ({len(block)} lines)")
 
-    # index = 0
-    # results = []
-    # process_complete = False
-    # # Every time we read a range from the lines list it deletes lines in the file.
-    # # Assign the list to a different list to see if we can preserve the content in the input file.
-    # payload = lines
-    # while True:
-    #     lower_limit = index * block_size
-    #     upper_limit = (index + 1) * block_size
-    #     if upper_limit > len(lines):
-    #         upper_limit = len(lines)
-    #         process_complete = True
-    #     block = lines[lower_limit:upper_limit]
-    #     results.append(block)
-    #     if process_complete:
-    #         break
-    #     else:
-    #         index += 1
-    #
-    # final_results = list(enumerate(results, start = 1))
-    # for index, result in final_results:
-    #     message = write_results_to_file(index, result)
-    #     print(f"  {message}")
     pass
 
 
