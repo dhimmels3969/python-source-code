@@ -7,6 +7,22 @@ import os
 #
 
 
+##############################################################################
+def file_handling_setup_dummy_directory(root_dir):
+    # build the directory path (../data/file_handling_exercises/dummy)
+    subfolder = "data/file_handling_exercises/dummy"
+    current_dir = root_dir
+
+    # Construct the path to the JSON file in the /data directory
+    json_path = os.path.join(current_dir, subfolder)
+    # Normalize the path (optional but recommended)
+    json_path = os.path.normpath(json_path)
+    # verify it exists by calling helper_functions.mkdir
+    dummy_directory_exists = hf.mkdir(json_path)
+    # print(f"  dummy_directory_exists: {dummy_directory_exists}")
+    pass
+
+
 
 ##############################################################################
 def exercise_01_write_user_name_to_file(root_dir):

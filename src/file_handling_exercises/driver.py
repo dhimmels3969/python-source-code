@@ -31,6 +31,7 @@ class Driver:
         print("#####################################################")
         print("File Handling Programming Exercises - 1 through 10")
         print("#####################################################")
+        results = fh_01.file_handling_setup_dummy_directory(self.root)
         results = fh_01.exercise_01_write_user_name_to_file(self.root)
         results = fh_01.exercise_02_read_and_print_file(self.root)
         results = fh_01.exercise_03_read_file_line_by_line(self.root)

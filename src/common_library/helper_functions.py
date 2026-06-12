@@ -70,6 +70,33 @@ def file_exists(file_name):
 
 
 #########################################################################
+def mkdir(directory_name):
+    """
+    This function check for the existence of a user-specified directory.
+    If the directory does not exist, it creates it.
+    If the directory exists, it returns without taking any action.
+    Args:
+        directory_name (string): name of the directory to check for..
+    Returns:
+        True if the directory exists, or has been successfully created.
+    """
+
+    # Get the directory of the current source file
+    try:
+        results = False
+        directory_path = Path(directory_name)
+        if directory_path.exists() and directory_path.is_dir():
+            pass
+        else:
+            Path(directory_name).mkdir(parents=True, exist_ok=True)
+            # os.mkdir(directory_name)
+        results = True
+        return results
+    except Exception as error:
+        raise error
+
+
+#########################################################################
 ####   File handling routines - Enf of Section
 #########################################################################
 
