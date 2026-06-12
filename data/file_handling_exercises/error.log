@@ -1,0 +1,42 @@
+2026-06-11 21:57:01,112 INFO main Starting application version 3.4.1
+2026-06-11 21:57:01,145 DEBUG config Loaded configuration from config.yaml
+2026-06-11 21:57:01,201 INFO db Connection pool initialized with size=5
+2026-06-11 21:57:01,244 WARNING cache Cache directory not found, creating new one
+2026-06-11 21:57:01,301 DEBUG worker Thread worker-1 started
+2026-06-11 21:57:01,302 DEBUG worker Thread worker-2 started
+2026-06-11 21:57:01,303 DEBUG worker Thread worker-3 started
+2026-06-11 21:57:01,350 INFO scheduler Scheduled job 'cleanup' every 10 minutes
+2026-06-11 21:57:01,401 ERROR db Failed to connect to database: timeout expired
+2026-06-11 21:57:01,402 ERROR db Traceback (most recent call last):
+2026-06-11 21:57:01,402 ERROR db   File "db.py", line 88, in connect
+2026-06-11 21:57:01,402 ERROR db     conn = psycopg2.connect(**params)
+2026-06-11 21:57:01,402 ERROR db psycopg2.OperationalError: connection timed out
+2026-06-11 21:57:01,450 WARNING retry Retrying database connection (attempt 1 of 5)
+2026-06-11 21:57:01,501 DEBUG http Sending GET request to https://api.example.com/status
+2026-06-11 21:57:01,550 ERROR http HTTPError: 503 Service Unavailable
+2026-06-11 21:57:01,551 ERROR http Traceback (most recent call last):
+2026-06-11 21:57:01,551 ERROR http   File "http_client.py", line 42, in get
+2026-06-11 21:57:01,551 ERROR http     raise HTTPError("503 Service Unavailable")
+2026-06-11 21:57:01,551 ERROR http HTTPError: 503 Service Unavailable
+2026-06-11 21:57:01,600 INFO auth User login attempt: user=admin
+2026-06-11 21:57:01,650 WARNING auth Invalid password for user admin
+2026-06-11 21:57:01,700 DEBUG metrics CPU load: 12.4%
+2026-06-11 21:57:01,750 DEBUG metrics Memory usage: 512MB
+2026-06-11 21:57:01,801 ERROR parser ValueError: invalid literal for int() with base 10: 'abc'
+2026-06-11 21:57:01,802 ERROR parser Traceback (most recent call last):
+2026-06-11 21:57:01,802 ERROR parser   File "parser.py", line 19, in parse_int
+2026-06-11 21:57:01,802 ERROR parser     return int(value)
+2026-06-11 21:57:01,802 ERROR parser ValueError: invalid literal for int()
+2026-06-11 21:57:01,850 INFO worker worker-1 processed batch 001
+2026-06-11 21:57:01,900 INFO worker worker-2 processed batch 002
+2026-06-11 21:57:01,950 INFO worker worker-3 processed batch 003
+2026-06-11 21:57:02,001 WARNING disk Low disk space: 1.2GB remaining
+2026-06-11 21:57:02,050 DEBUG cache Cache hit for key=user_123
+2026-06-11 21:57:02,100 DEBUG cache Cache miss for key=user_124
+2026-06-11 21:57:02,150 ERROR fs FileNotFoundError: [Errno 2] No such file or directory: 'data/input.csv'
+2026-06-11 21:57:02,151 ERROR fs Traceback (most recent call last):
+2026-06-11 21:57:02,151 ERROR fs   File "loader.py", line 55, in load_file
+2026-06-11 21:57:02,151 ERROR fs     open(path)
+2026-06-11 21:57:02,151 ERROR fs FileNotFoundError: No such file
+2026-06-11 21:57:02,200 INFO job Starting job 'daily-report'
+2026-06-11 21:57:02,250 DEBUG job Generating report

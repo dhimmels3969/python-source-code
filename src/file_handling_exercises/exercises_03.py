@@ -1,4 +1,6 @@
 from src.common_library import helper_functions as hf
+from pathlib import Path
+import shutil
 import os
 import re
 
@@ -41,7 +43,7 @@ def exercise_21_convert_uppercase_and_lowercase(root_dir):
 
     print("Exercise 21: Convert Uppercase to Lowercase and Vice Versa")
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "hello_world.txt")
-    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises", "hello_world_swapped.txt")
+    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", "hello_world_swapped.txt")
 
     with open(file_path, 'r') as file, open(file_path_out, 'w') as file_out:
         lines_in_the_file = file.readlines()
@@ -95,7 +97,13 @@ def exercise_23_get_file_size_kilobytes(root_dir):
     Expected Output:
         File size: 2.0 KB
     """
+    KILOBYTES = 1024
     print("Exercise 23: Get File Size in Kilobytes")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lorem_ipsum.txt")
+    file_size_bytes = os.path.getsize(file_path)
+    file_size_kilobytes = file_size_bytes / KILOBYTES
+    print(f"  File Size Lorem Ipsum: {file_size_bytes} Bytes")
+    print(f"  File Size Lorem Ipsum: {file_size_kilobytes:.2f} Kilobytes")
     pass
 
 
@@ -119,6 +127,19 @@ def exercise_24_copy_file_using_binary_mode(root_dir):
         source.txt, confirmed by printing File copied successfully.
     """
     print("Exercise 24: Copy File Using Binary Mode")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lorem_ipsum.txt")
+    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", "lorem_ipsum_copy.txt")
+    with open(file_path, 'rb') as file:
+        content = file.read()
+
+    with open(file_path_out, 'wb') as file_out:
+        file_out.write(content)
+
+    # get file size for both files
+    file_size_bytes_original = os.path.getsize(file_path)
+    file_size_bytes_copy = os.path.getsize(file_path_out)
+    print(f"  Original        Copy")
+    print(f"  {file_size_bytes_original}           {file_size_bytes_copy}")
     pass
 
 
@@ -138,6 +159,21 @@ def exercise_25_rename_single_file(root_dir):
         File renamed successfully.
     """
     print("Exercise 25: Rename a Single File")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", "lorem_ipsum_copy.txt")
+    file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", "lorem_ipsum_copy_dest.txt")
+    # rename the filw     lorem_ipsum_copy.txt -> lorem_ipsum_copy_dest.txt
+    try:
+        os.rename(file_path, file_path_out)
+    except Exception as error:
+        print(error)
+
+    # display directory info for files containing lorem_ipsum
+    file_list = [file for file in os.listdir("../data/file_handling_exercises/dummy") if "lorem" in file]
+    print(f"  File list: {file_list}")
+
+    # rename the file back to the original name
+    # lorem_ipsum_copy_dest.txt -> lorem_ipsum_copy.txt
+    os.rename(file_path_out, file_path)
     pass
 
 
@@ -157,7 +193,33 @@ def exercise_26_rename_multiple_files(root_dir):
         Renamed: notes.txt -> 2024_notes.txt
         Renamed: data.txt -> 2024_data.txt
     """
+    def reset(root_dir, folder_):
+        contents = [file for file in os.listdir(folder_) if
+                    "lorem".lower() not in file.lower() and "swapped".lower() not in file.lower()]
+        files_to_copy = ["notes.txt", "data.txt"]
+        # delete files in the target folder
+        for file in contents:
+            target_file = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", file)
+            os.remove(target_file)
+
+        for file in files_to_copy:
+            source_file = hf.build_file_name(root_dir, "data/file_handling_exercises/", file)
+            # copy files from the src folder to the target folder
+            target_file = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", file)
+            shutil.copyfile(source_file, target_file)
+        pass
     print("Exercise 26: Rename Multiple Files with Prefix")
+    tgt_dir = "../data/file_handling_exercises/dummy"
+    reset(root_dir, tgt_dir)
+    contents = [file for file in os.listdir(tgt_dir) if "lorem" not in file and "swapped" not in file]
+    prefix = "2024"
+
+    for file in contents:
+        revised_name = "_".join([prefix, file])
+        file_path = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", file)
+        file_path_out = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", revised_name)
+        os.rename(file_path, file_path_out)
+        print(f"  Renamed: {file} -> {revised_name}")
     pass
 
 
@@ -176,7 +238,38 @@ def exercise_27_delete_a_file(root_dir):
     Expected Output:
         temp.txt has been deleted.
     """
+    def reset(root_dir):
+        # reload the file to be deleted to the dummy directory
+        # copy lorem_ipsum.txt and rename to temp.txt  in the target folder
+        files_to_copy = ["lorem_ipsum.txt"]
+        target_file_name = "temp.txt"
+
+        for file in files_to_copy:
+            source_file = hf.build_file_name(root_dir, "data/file_handling_exercises/", file)
+            # copy files from the src folder to the target folder
+            target_file = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", target_file_name)
+            shutil.copyfile(source_file, target_file)
+        pass
+
+    def delete_file(target_file):
+        if Path(target_file).is_file():
+            Path(target_file).unlink()
+            print(f"  Requested file {target_file_name_valid} has been deleted.")
+        else:
+            print(f"  Requested file {target_file_name_invalid} not found and could not be deleted.")
+        pass
+
     print("Exercise 27: Delete a File from Disk")
+    reset(root_dir)
+    target_file_name_valid = "temp.txt"
+    target_file_name_invalid = "non_existent_temp.txt"
+    ####
+    requests = [hf.build_file_name(root_dir,
+                "data/file_handling_exercises/dummy", target_file_name_invalid),
+                hf.build_file_name(root_dir,
+                "data/file_handling_exercises/dummy", target_file_name_valid)]
+    for request in requests:
+        delete_file(request)
     pass
 
 
@@ -199,6 +292,17 @@ def exercise_28_merge_multiple_files(root_dir):
         confirmed by printing Files merged into merged.txt
     """
     print("Exercise 28: Merge Two Files into One")
+    input_files = [
+        hf.build_file_name(root_dir, "data/file_handling_exercises/", "file1.txt"),
+        hf.build_file_name(root_dir, "data/file_handling_exercises/", "file2.txt")
+    ]
+    output_file = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy", "merged.txt")
+    with open(output_file, "a") as outfile:
+        for file in input_files:
+            with open(file, "r") as infile:
+                outfile.write(infile.read())
+                outfile.write("\n")
+
     pass
 
 
@@ -221,6 +325,14 @@ def exercise_29_reverse_line_order(root_dir):
         Line 1
     """
     print("Exercise 29: Reverse Line Order and Save to New File")
+    input_files = hf.build_file_name(root_dir, "data/file_handling_exercises/", "lines.txt")
+    output_file = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy",
+                                     "lines_reversed.txt")
+    with open(input_files, "r") as infile:
+        lines = infile.readlines()
+    reversed_lines = lines[::-1]
+    with open(output_file, "w") as outfile:
+        outfile.writelines(reversed_lines)
     pass
 
 
@@ -243,6 +355,15 @@ def exercise_30_list_all_files(root_dir):
         confirmed by printing File list saved to file_list.txt
     """
     print("Exercise 30: List All Files in Directory and Save")
+    myDirectory = "\\".join([str(root_dir), "data\\file_handling_exercises\\dummy\\"])
+    myOutputList = hf.build_file_name(root_dir, "data/file_handling_exercises/dummy"
+                                      , "file_list_exercise_30.txt")
+    results = os.listdir(myDirectory)
+    with open(myOutputList, "w") as outfile:
+        for item in results:
+            if Path(myDirectory + item).is_file():
+                outfile.write(item + "\n")
+    print(f"  File List saved to {myOutputList}")
     pass
 
 
