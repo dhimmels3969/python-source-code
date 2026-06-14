@@ -11,6 +11,10 @@ from object_oriented_exercises.classes import \
     Character, PlayList, Song
 
 import object_oriented_exercises.read_spreadsheet as rs
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 ##############################################################################
 def exercise_21_class_hierarchy_test():
@@ -30,10 +34,10 @@ def exercise_21_class_hierarchy_test():
         Truck max speed: 90 km/h
         Bus max speed: 100 km/h
     """
-    print("Exercise 21: Vehicle Class Hierarchy with Bike, Truck & Bus")
+    logger.info("Exercise 21: Vehicle Class Hierarchy with Bike, Truck & Bus")
     requests = [Bike_v3(120), Truck_v3(90), Bus_v3(100)]
     for request in requests:
-        print(request.describe())
+        logger.info(f"  {request.describe()}")
     pass
 
 
@@ -60,7 +64,7 @@ def exercise_22_identify_class_type():
         message = f"{key} is of type: {type(value).__name__}"
         return message
 
-    print("Exercise 22: Object Type Identification")
+    logger.info("Exercise 22: Object Type Identification")
     myVehicle = Vehicle("Tesla", 250, 0)
     myDog = Dog("Dog")
     myCat = Cat("Cat")
@@ -70,7 +74,7 @@ def exercise_22_identify_class_type():
     # Each tuple contains the object name and the object.
     requests = zip(var_names, var_data)
     for k, v in requests:
-        print(get_class_of_item(k, v))
+        logger.info(f"  {get_class_of_item(k, v)}")
     pass
 
 
@@ -95,12 +99,12 @@ def exercise_23_type_checking():
         Is Dog a subclass of Animal? True
         Is Animal a subclass of Dog? False
     """
-    print("Exercise 23: Type Checking with isinstance() & issubclass")
+    logger.info("Exercise 23: Type Checking with isinstance() & issubclass")
     d = Dog("Dog")
-    print(f"Is d an instance of Dog? {isinstance(d, Dog)}")
-    print(f"Is d an instance of Animal? {isinstance(d, Animal)}")
-    print(f"Is Dog a subclass of Animal? {issubclass(Dog, Animal)}")
-    print(f"Is Animal a subclass of Dog? {issubclass(Animal, Dog)}")
+    logger.info(f"  Is d an instance of Dog? {isinstance(d, Dog)}")
+    logger.info(f"  Is d an instance of Animal? {isinstance(d, Animal)}")
+    logger.info(f"  Is Dog a subclass of Animal? {issubclass(Dog, Animal)}")
+    logger.info(f"  Is Animal a subclass of Dog? {issubclass(Animal, Dog)}")
     pass
 
 
@@ -121,11 +125,11 @@ def exercise_24_implement_dunder_method():
     Expected Output:
         Vector(6, 4)
     """
-    print("Exercise 24: Vector Addition Using add Overloading")
+    logger.info("Exercise 24: Vector Addition Using add Overloading")
     v1 = Vector(2, 3)
     v2 = Vector(4, 1)
     v3 = v1 + v2
-    print(v3)
+    logger.info(f"  {v3}")
     pass
 
 
@@ -147,9 +151,9 @@ def exercise_25_implement_len_dunder_method():
     Expected Output:
         Number of items in cart: 3
     """
-    print("Exercise 25: Cart Length Using len Overloading")
+    logger.info("Exercise 25: Cart Length Using len Overloading")
     myCart = ShoppingCart(["apple", "banana", "mango"])
-    print(f"Number of items in cart: {len(myCart)}")
+    logger.info(f"  Number of items in cart: {len(myCart)}")
     pass
 
 
@@ -173,13 +177,13 @@ def exercise_26_property_getter_setter_poc():
         Current balance: 1500
         Invalid balance. Must be non-negative.
     """
-    print("Exercise 26: Private Balance with Property Getter & Setter")
+    logger.info("Exercise 26: Private Balance with Property Getter & Setter")
     myAccount = BankAccount_v2(1000)
-    print(myAccount)
+    logger.info(f"  {myAccount}")
     myAccount.deposit(500)
-    print(myAccount)
+    logger.info(f"  {myAccount}")
     myAccount.deposit(-1700)
-    print(myAccount)
+    logger.info(f"  {myAccount}")
     pass
 
 
@@ -202,11 +206,12 @@ def exercise_27_callable_object_poc():
         30
         35
     """
-    print("Exercise 27: Callable Object Class Using call")
+    logger.info("Exercise 27: Callable Object Class Using call")
     mult1 = Multiplier(3)
     mult2 = Multiplier(5)
     for request in [mult1(10), mult2(7)]:
-        print(request)
+        logger.info(f"  {request}")
+
     pass
 
 
@@ -233,9 +238,9 @@ def exercise_28_class_composition_check():
     """
     def reserve(flight, passenger):
         reserve_flight_results = flight.book(passenger)
-        print(reserve_flight_results)
+        logger.info(reserve_flight_results)
 
-    print("Exercise 28: Flight Class with Passenger Capacity Check")
+    logger.info("Exercise 28: Flight Class with Passenger Capacity Check")
     # Create the flight object
     myFlight = Flight("AI202", 2)
     passenger_20260603001 = Passenger("20260603001", "Lee M", "A!202")
@@ -271,7 +276,7 @@ def exercise_29_combine_composition_polymorphism_pox():
         Elephant eats grass.
         Parrot eats seeds.
     """
-    print("Exercise 29: Zoo Class with Polymorphism")
+    logger.info("Exercise 29: Zoo Class with Polymorphism")
     l = Lion("Lion", "meat")
     e = Elephant("Elephant", "grass")
     p = Parrot("Parrot", "seeds")
@@ -301,13 +306,13 @@ def exercise_30_manage_state_transitions_poc():
         Aria gained 60 exp. (Total: 60)
         Aria gained 60 exp. Level up! Now Level 2. (Remaining exp: 20)
     """
-    print("Exercise 30: Character Class with Auto Level Up Logic")
+    logger.info("Exercise 30: Character Class with Auto Level Up Logic")
     myCharacter = Character("Aria", health=100)
-    print(myCharacter.gain_exp(60))
-    print(myCharacter.gain_exp(60))
-    print(myCharacter.gain_exp(75))
-    print(myCharacter.gain_exp(42))
-    print(myCharacter.gain_exp(63))
+    logger.info(f"  {myCharacter.gain_exp(60)}")
+    logger.info(f"  {myCharacter.gain_exp(60)}")
+    logger.info(f"  {myCharacter.gain_exp(75)}")
+    logger.info(f"  {myCharacter.gain_exp(42)}")
+    logger.info(f"  {myCharacter.gain_exp(63)}")
     pass
 
 
@@ -333,10 +338,10 @@ def exercise_31_manage_collection_of_objects_test(src_dir):
     """
     def displayList(list):
         for song in list:
-            print(f"{song.title} - {song.artist}")
-        print()
+            logger.info(f"  {song.title} - {song.artist}")
+        logger.info("")
 
-    print("Exercise 31: Playlist Class with Add, Remove & Shuffle")
+    logger.info("Exercise 31: Playlist Class with Add, Remove & Shuffle")
     songInfo = rs.read_spreadsheet(src_dir
                         , "data/object_oriented_exercises"
                         , "playlists.xlsx"
@@ -345,22 +350,22 @@ def exercise_31_manage_collection_of_objects_test(src_dir):
 
     for title, artist in songInfo:
         mySongsList.addSong(Song(title, artist))
-    print("Initial list")
+    logger.info("  Initial list")
     displayList(mySongsList.songList)
 
     mySongsList.removeSong("All Along The Watchtower", "Jimi Hendrix Experience")
-    print("After Removing a song")
+    logger.info("  After Removing a song")
     displayList(mySongsList.songList)
 
     # try to remove a song from the playlist where the item can not be found
 
     ########################################################################
 
-    print("\nShuffle #1")
+    logger.info("  Shuffle #1")
     shuffled_list = mySongsList.shuffle()
     displayList(shuffled_list)
 
-    print("\nShuffle #2")
+    logger.info("  Shuffle #2")
     shuffled_list = mySongsList.shuffle()
     displayList(shuffled_list)
 

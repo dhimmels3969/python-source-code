@@ -1,7 +1,10 @@
 import inspect
 from email import message
 from src.common_library import helper_functions as hf
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 ######################################################################################
 class Vehicle:
@@ -12,14 +15,14 @@ class Vehicle:
         self.mileage = mileage
 
     def get_info(self):
-        print(f"Vehicle Name: {self.name}, Speed: {self.max_speed}, Mileage: {self.mileage}")
+        logger.info(f"  Vehicle Name: {self.name}, Speed: {self.max_speed}, Mileage: {self.mileage}")
 
     def get_info_v2(self):
-        print(f"{self.name} - Color: {Vehicle.color}, Speed: {self.max_speed}")
+        logger.info(f"  {self.name} - Color: {Vehicle.color}, Speed: {self.max_speed}")
 
     def display(self):
         # Expected Output: Vehicle: School Bus, Max Speed: 120 km/h
-        print(f"Vehicle: {self.name}, Speed: {self.max_speed} km/h")
+        logger.info(f"  Vehicle: {self.name}, Speed: {self.max_speed} km/h")
 
 ######################################################################################
 class Rectangle:
@@ -62,14 +65,14 @@ class BankAccount:
 
     def deposit(self, amount):
         self.balance += amount
-        print(f"Balance after deposit: {self.balance}")
+        logger.info(f"  Balance after deposit: {self.balance}")
 
     def withdraw(self, amount):
         if self.balance - amount > 0:
             self.balance -= amount
-            print(f"Balance after withdrawal: {self.balance}")
+            logger.info(f"  Balance after withdrawal: {self.balance}")
         else:
-            print(f"Insufficient funds. Current balance: {self.balance}")
+            logger.info(f"  Insufficient funds. Current balance: {self.balance}")
 
 
 ######################################################################################
@@ -79,11 +82,11 @@ class Light:
 
     def turn_on(self):
         self._state = "ON"
-        print(f"Light is {self.status()}")
+        logger.info(f"  Light is {self.status()}")
 
     def turn_off(self):
         self._state = "OFF"
-        print(f"Light is {self.status()}")
+        logger.info(f"  Light is {self.status()}")
 
     def status(self):
         return self._state
@@ -125,7 +128,7 @@ class Notebook:
     def show_notes(self):
         counter = 1
         for note in self._notes:
-            print(f"{counter}. {note}")
+            logger.info(f"  {counter}. {note}")
             counter += 1
 
 
@@ -145,7 +148,7 @@ class CoffeeMachine:
         self._water = kwargs.get("water")
         self._coffee = kwargs.get("coffee")
         self._milk = kwargs.get("milk")
-        print("A latte requires 200ml water, 20g coffee, and 150ml milk.")
+        logger.info("  A latte requires 200ml water, 20g coffee, and 150ml milk.")
 
     def make_latte(self):
         if enough_for_latte(self._water, self._coffee, self._milk):
@@ -153,9 +156,9 @@ class CoffeeMachine:
             self._water -= WATER_NEEDED_FOR_LATTE
             self._coffee -= COFFEE_NEEDED_FOR_LATTE
             self._milk -= MILK_NEEDED_FOR_LATTE
-            print(f"Latte made! Remaining - Water: {self._water}ml, Coffee: {self._coffee}ml, Milk: {self._milk}ml")
+            logger.info(f"  Latte made! Remaining - Water: {self._water}ml, Coffee: {self._coffee}ml, Milk: {self._milk}ml")
         else:
-            print("Not enough resources to make a latte.")
+            logger.info("  Not enough resources to make a latte.")
 
 
 ######################################################################################
@@ -171,7 +174,7 @@ class Vehicle_v2:
         self._base_fare = base_fare
 
     def seating_capacity(self, capacity):
-        print(f"{self._name} seating capacity is: {capacity}")
+        logger.info(f"  {self._name} seating capacity is: {capacity}")
 
     def base_fare(self):
         return self._base_fare
@@ -203,7 +206,7 @@ class Media:
 
     def describe(self):
         raise NotImplementedError(
-            f"The {self.__class__.__name__} class must implement the 'describe' method."
+            f"  The {self.__class__.__name__} class must implement the 'describe' method."
         )
 
 
@@ -214,7 +217,7 @@ class Book(Media):
 
     def describe(self):
         # Book: Clean Code by Robert C. Martin - Rs.499
-        results = f"{self.__class__.__name__}: {self.title} by {self._author} - Rs. {self.price}"
+        results = f"  {self.__class__.__name__}: {self.title} by {self._author} - Rs. {self.price}"
         return results
 
 
@@ -225,7 +228,7 @@ class Magazine(Media):
 
     def describe(self):
         # Magazine: Wired (Monthly) - Rs.150
-        results = f"{self.__class__.__name__}: {self.title} ({self._frequency}) - Rs. {self.price}"
+        results = f"  {self.__class__.__name__}: {self.title} ({self._frequency}) - Rs. {self.price}"
         return results
 
 
@@ -236,7 +239,7 @@ class DVD(Media):
 
     def describe(self):
         # DVD: Inception, 148 mins - Rs.299
-        results = f"{self.__class__.__name__}: {self.title}, {self._duration} mins - Rs. {self.price}"
+        results = f"  {self.__class__.__name__}: {self.title}, {self._duration} mins - Rs. {self.price}"
         return results
 
 
@@ -251,7 +254,7 @@ class Animal:
     def eat(self):
         method_name = inspect.currentframe().f_code.co_name
         raise NotImplementedError(
-            f"Class {self.__class__.__name__} - missing required {method_name} method."
+            f"  Class {self.__class__.__name__} - missing required {method_name} method."
         )
 
 class Dog(Animal):
@@ -304,7 +307,7 @@ class Zoo:
 
     def feed_all(self):
         for member in self._member_list:
-            print(member.eat())
+            logger.info(f"  {member.eat()}")
 
 ######################################################################################
 ######################################################################################
@@ -398,7 +401,7 @@ class BankAccount_v2:
             self.balance += value
             # print(self)
         except ValueError as e:
-            print(e)
+            logger.error(e)
 
     def __str__(self):
         return f"Current Balance: ${self.balance:,.2f}"

@@ -1,9 +1,13 @@
 from src.common_library import helper_functions as hf
 from pathlib import Path
 import string
-import shutil
+# import shutil
 import os
-import re
+# import re
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
@@ -37,7 +41,7 @@ def exercise_31_read_write_binary_image_file(root_dir):
             inside a while loop to avoid loading the entire file
             into memory at once.
     """
-    print("Exercise 31: Read and Write Binary Image File")
+    logger.info("Exercise 31: Read and Write Binary Image File")
     block_size = 4096
     file_path = hf.build_file_name(root_dir
                         , "data/file_handling_exercises"
@@ -53,8 +57,8 @@ def exercise_31_read_write_binary_image_file(root_dir):
             file_out.write(content)
 
     # check out the file size for the original and the copy
-    print(f"  Original ({Path(file_path).name}): {os.path.getsize(file_path)} bytes")
-    print(f"      Copy ({Path(file_path_out).name}): {os.path.getsize(file_path_out)} bytes")
+    logger.info(f"  Original ({Path(file_path).name}): {os.path.getsize(file_path)} bytes")
+    logger.info(f"      Copy ({Path(file_path_out).name}): {os.path.getsize(file_path_out)} bytes")
     pass
 
 
@@ -78,7 +82,7 @@ def exercise_32_extract_unique_words(root_dir):
         sat
         the
     """
-    print("Exercise 32: Extract and Sort Unique Words from File")
+    logger.info("Exercise 32: Extract and Sort Unique Words from File")
     word_list = []
     # unique_list = []
     input_file = hf.build_file_name(root_dir, "data/file_handling_exercises/", "paragraph.txt")
@@ -91,8 +95,8 @@ def exercise_32_extract_unique_words(root_dir):
     # convert the list to a set to remove duplicate items.
     unique_list = sorted(set(word_list))
 
-    for word in unique_list:
-        print(f"  {word}")
+    # for word in unique_list:
+    logger.info(f"  Unique words: {unique_list}")
     pass
 
 
@@ -113,7 +117,7 @@ def exercise_33_filter_log_file(root_dir):
         2024-01-01 10:02:05 ERROR Disk quota exceeded
         2024-01-01 10:07:45 ERROR Connection timeout
     """
-    print("Exercise 33: Filter Log File Lines Containing ERROR Keyword")
+    logger.info("Exercise 33: Filter Log File Lines Containing ERROR Keyword")
     keyword = "ERROR"
     input_file = hf.build_file_name(root_dir, "data/file_handling_exercises/", "error.log")
     with open(input_file, "r") as infile:
@@ -121,7 +125,7 @@ def exercise_33_filter_log_file(root_dir):
 
     list_of_errors = [item for item in lines if keyword in item]
     for line in list_of_errors:
-        print(f"  {line.strip()}")
+        logger.info(f"  {line.strip()}")
     pass
 
 
@@ -145,7 +149,7 @@ def exercise_34_split_large_file(root_dir):
         Created: part_2.txt (10 lines)
         Created: part_3.txt (5 lines)
     """
-    print("Exercise 34: Split Large File into Smaller 10-Line Files")
+    logger.info("Exercise 34: Split Large File into Smaller 10-Line Files")
     # read in the file and load into a list
     block_size = 10
 
@@ -163,7 +167,7 @@ def exercise_34_split_large_file(root_dir):
                         , f"part_{i}.txt")
         with open(output_filename, "w") as out:
             out.writelines(block)
-        print(f"  Created: {output_filename} ({len(block)} lines)")
+        logger.info(f"  Created: {output_filename} ({len(block)} lines)")
 
     pass
 

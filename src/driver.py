@@ -14,7 +14,7 @@ from src.date_time_exercises import driver as date_time_exercise_driver
 from src.object_oriented_exercises import driver as object_oriented_exercise_driver
 from src.file_handling_exercises import driver as file_handling_exercise_driver
 from src.wordle import driver as wordle_driver
-
+import logging
 
 # https://pynative.com/python-input-and-output-exercise/#h-exercise-2-format-output-string
 #
@@ -23,7 +23,8 @@ from src.wordle import driver as wordle_driver
 #   https://www.pythonmorsels.com/string-formatting/
 
 def driver(src_dir):
-
+    logger = logging.getLogger(__name__)
+    logger.info("Start main driver.")
     EXIT_OUT_OF_LOOP = "3"
     valid_choices = ["1", "2", "3"]
 
@@ -104,6 +105,14 @@ def driver(src_dir):
 
 
 
+    #####################################################################
+    def display_message_box(message):
+        print(50*"=")
+        print(message)
+        print(50*"=")
+        return None
+    #####################################################################
+
 
 
     #####################################################################
@@ -137,24 +146,15 @@ def driver(src_dir):
 
     #####################################################################
     def start_here():
-        print(50*"=")
-        print("**********     Main Driver - start      **********")
-        print(50*"=")
-        print()
-        #
+
+        display_message_box("**********     Main Driver - start      **********")
         #  The main loop for the project starts below...
-        #
         main_driver()
-        #
-        #
-        #
-        print()
-        print(50*"=")
-        print("**********     Main Driver - complete   **********")
-        print(50*"=")
+        display_message_box("**********     Main Driver - complete   **********")
+
         return None
     #####################################################################
 
 
-
     start_here()
+    logger.info("End main driver.")

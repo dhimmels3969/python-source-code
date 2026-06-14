@@ -3,6 +3,10 @@
 # Exercises 31 through 38
 #
 import string
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 
@@ -21,7 +25,7 @@ def exercise_31_remove_duplicate_characters():
     Expected Output:
         gole
     """
-    print("Exercise 31. Remove Duplicate Characters")
+    logger.info("Exercise 31. Remove Duplicate Characters")
     str1 = "google"
     results = ""
     character_count_dict = {}
@@ -30,7 +34,7 @@ def exercise_31_remove_duplicate_characters():
            character_count_dict[char] = 1
            results += char
 
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -49,13 +53,13 @@ def exercise_32_word_reversal():
     Expected Output:
         fun is Python
     """
-    print("Exercise 32. Word Reversal")
+    logger.info("Exercise 32. Word Reversal")
     str1 = "Python is fun"
     results = ""
     word_list = str1.split()
     reversed_word_list = word_list[::-1]
     results = " ".join(reversed_word_list)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -83,12 +87,12 @@ def exercise_33_character_interleaving():
     def concatenate_string_unequal_length(s1, s2):
         pass
 
-    print("Exercise 33. Character Interleaving")
+    logger.info("Exercise 33. Character Interleaving")
     s1 = "ABC"
     s2 = "xyz"
     if len(s1) == len(s2):
         results = concatenate_string_equal_length(s1, s2)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -118,14 +122,14 @@ def exercise_34_longest_word():
                 longest_word = word
         return longest_word
 
-    print("Exercise 34. Longest Word")
+    logger.info("Exercise 34. Longest Word")
     str1 = "The quick brown fox jumps over the lazy dog"
     longest_word = find_longest_word(str1)
-    print(f"Longest word: {longest_word}")
+    logger.info(f"  Longest word: {longest_word}")
 
     str1 = "Round up the usual suspects"
     longest_word = find_longest_word(str1)
-    print(f"Longest word: {longest_word}")
+    logger.info(f"  Longest word: {longest_word}")
     pass
 
 
@@ -151,13 +155,14 @@ def exercise_35_acronym_generator():
             acronym += word[0].upper()
         return acronym
 
-    print("Exercise 35. Acronym Creator")
+    logger.info("Exercise 35. Acronym Creator")
     str1 = "Random Access Memory"
-    acronym = build_acronym(str1)
-    print(acronym)
+    # acronym = build_acronym(str1)
+    logger.info(f"  {build_acronym(str1)}")
+    # logger.info(acronym)
 
     str2 = "Burlington Northern Santa Fe"
-    print(build_acronym(str2))
+    logger.info(f"  {build_acronym(str2)}")
     pass
 
 
@@ -194,11 +199,11 @@ def exercise_36_word_frequency():
         #     text = key + ": " + str(value)
         return frequency_map
 
-    print("Exercise 36. Word Frequency")
+    logger.info("Exercise 36. Word Frequency")
     str1 = "apple banana apple cherry banana apple"
     word_count_map = build_frequency_map(str1)
-    print(word_count_map)
-    print()
+    logger.info(f"  {word_count_map}")
+    logger.info("")
 
     # str2 = \
     #     "Of all tyrannies, a tyranny sincerely exercised for the good of its victims may be " \
@@ -247,13 +252,13 @@ def exercise_37_first_non_repeating_character():
             final_results = first_unique_character
         return final_results
 
-    print("Exercise 37. First Non-Repeating Character")
+    logger.info("Exercise 37. First Non-Repeating Character")
     str1 = "swiss"
     results = find_first_unique_character(str1)
-    print(results)
+    logger.info(f"  {results}")
     str1 = "Abraham"
     results = find_first_unique_character(str1)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -302,13 +307,13 @@ def exercise_38_string_rotation_check():
         return is_rotation
 
     def compare_strings_for_rotation(src, tgt):
-        results = f"Is Rotation: {is_rotation(src, tgt)}"
+        results = f"  Is Rotation: {is_rotation(src, tgt)}"
         return results
 
-    print("Exercise 38. String Rotation Check")
-    print(compare_strings_for_rotation("waterbottle", "erbottlewat"))
-    print(compare_strings_for_rotation("waterbottle", "ewaterbottl"))
-    print(compare_strings_for_rotation("waterbottle", "erbottlwaat"))
+    logger.info("Exercise 38. String Rotation Check")
+    logger.info(compare_strings_for_rotation("waterbottle", "erbottlewat"))
+    logger.info(compare_strings_for_rotation("waterbottle", "ewaterbottl"))
+    logger.info(compare_strings_for_rotation("waterbottle", "erbottlwaat"))
 
     pass
 

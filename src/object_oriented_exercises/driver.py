@@ -3,6 +3,10 @@ from src.common_library import helper_functions as hf
 from src.object_oriented_exercises import exercises as oop_01
 from src.object_oriented_exercises import exercises_02 as oop_02
 from src.object_oriented_exercises import exercises_03 as oop_03
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-object-oriented-programming-oop-exercise/
@@ -26,10 +30,10 @@ class Driver():
 
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Object-Oriented Programming Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info("\n\n\n")
+        logger.info("#####################################################")
+        logger.info("Object-Oriented Programming Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = oop_01.exercise_01_empty_class()
         results = oop_01.exercise_02_class_with_instance_attributes()
         results = oop_01.exercise_03_rectangle_class()
@@ -41,10 +45,10 @@ class Driver():
         results = oop_01.exercise_09_temperature_class()
         results = oop_01.exercise_10_notebook_class_display_notes()
 
-        print("")
-        print("#####################################################")
-        print("Object-Oriented Programming - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Object-Oriented Programming - 11 through 20")
+        logger.info("#####################################################")
         results = oop_02.exercise_11_coffee_machine_class()
         results = oop_02.exercise_12_shared_class_attribures()
         results = oop_02.exercise_13_subclass_inheritance()
@@ -56,10 +60,10 @@ class Driver():
         results = oop_02.exercise_19_subclasses_with_custom_attributes()
         results = oop_02.exercise_20_discounted_order_subclass()
 
-        print("")
-        print("#####################################################")
-        print("Object-Oriented Programming - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Object-Oriented Programming - 21 through 30")
+        logger.info("#####################################################")
         results = oop_03.exercise_21_class_hierarchy_test()
         results = oop_03.exercise_22_identify_class_type()
         results = oop_03.exercise_23_type_checking()
@@ -72,9 +76,10 @@ class Driver():
         results = oop_03.exercise_30_manage_state_transitions_poc()
         results = oop_03.exercise_31_manage_collection_of_objects_test(self.root)
 
-        print("")
-        print("#####################################################")
-        print("Object-Oriented Programming - end")
-        print("#####################################################\n")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Object-Oriented Programming - end")
+        logger.info("#####################################################\n")
+        logger.info("\n\n\n")
 
         pass

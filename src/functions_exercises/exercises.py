@@ -1,15 +1,18 @@
-
+import logging
 #
 # https://pynative.com/python-functions-exercise-with-solutions/
 # Exercises 1 through 10
 #
 
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #########################################################################################
 def demo(name, age):
-    print(f"{name} {age}")
+    # print(f"{name} {age}")
+    logger.info(f"  Values passed to function: {name} {age}")
     return None
 
 def exercise_01_create_function_with_parameters():
@@ -26,7 +29,8 @@ def exercise_01_create_function_with_parameters():
     Expected Output:
         Kelly 25
     """
-    print("Exercise 1. Create a Function with Parameters")
+    # print("Exercise 1. Create a Function with Parameters")
+    logger.info("Exercise 1. Create a Function with Parameters")
     demo("Kelly", 25)
     pass
 
@@ -34,10 +38,17 @@ def exercise_01_create_function_with_parameters():
 
 #########################################################################################
 def func1(*args):
-    print("Printing values:")
+    # print("Printing values:", end = " ")
+    message = "  Printing values: "
     for arg in args:
-        print(arg)
-    print()
+        message = message + str(arg) + " "
+        # print(arg, end = " ")
+    # print()
+    logger.info(message)
+    pass
+    # for arg in args:
+    #     print(arg, end=" ")
+    # print()
 
 def exercise_02_variable_length_arguments():
     """
@@ -61,7 +72,7 @@ def exercise_02_variable_length_arguments():
         80
         100
     """
-    print("Exercise 2. Variable Length of Arguments (*args)")
+    logger.info("Exercise 2. Variable Length of Arguments (*args)")
     func1(20, 40, 60)
     func1(80, 100)
     pass
@@ -89,17 +100,18 @@ def exercise_03_return_multiple_values():
     Expected Output:
         50, 30
     """
-    print("Exercise 3. Return Multiple Values from a Function")
+    logger.info("Exercise 3. Return Multiple Values from a Function")
     (add_result, subtraction_result) = calculation(40, 10)
-    print(f"{add_result}, {subtraction_result}")
-    print()
+    logger.info(f"  {add_result}, {subtraction_result}")
+    logger.info(" ")
     pass
 
 
 
 #########################################################################################
 def show_employee(name, salary = 9000):
-    print(f"Name: {name}, Salary: {salary}")
+    # print(f"Name: {name}, Salary: {salary}")
+    logger.info(f"  Name: {name}, Salary: {salary}")
 
 def exercise_04_functions_default_argument():
     """
@@ -119,7 +131,7 @@ def exercise_04_functions_default_argument():
         Name: Ben salary: 12000
         Name: Jessa salary: 9000
     """
-    print("Exercise 4. Function with Default Argument")
+    logger.info("Exercise 4. Function with Default Argument")
     show_employee("Ben", 12000)
     show_employee("Jessa")
     print()
@@ -150,10 +162,10 @@ def exercise_05_inner_function_example():
     Expected Output:
         20
     """
-    print("Exercise 5. Create an Inner Function")
+    logger.info("Exercise 5. Create an Inner Function")
     result = wrapper(5, 10)
-    print(f"{result}")
-    print()
+    logger.info(f"  {result}")
+    # print()
     pass
 
 
@@ -192,19 +204,19 @@ def exercise_06_recursion_addition(limit=10):
     Expected Output:
         55
     """
-    print("Exercise 6. Create a Recursive Function")
+    logger.info("Exercise 6. Create a Recursive Function")
     sum = addition_alt(limit)
-    print(f"{sum}")
+    logger.info(f" {sum}")
 
     res = addition(10)
-    print(res)
+    logger.info(f" {res}")
     pass
 
 
 
 #########################################################################################
 def display_student(name, age):
-        print(name, age)
+        logger.info(f"  {name}, {age}")
 
 def exercise_07_assign_function_different_name():
     """
@@ -217,14 +229,14 @@ def exercise_07_assign_function_different_name():
         logic into different modules.
     Given Input:
         def display_student(name, age):
-            print(name, age)
+            logger.in(name, age)
     Expected Output:
         Emma 26
     """
-    print("Exercise 7. Assign a Different Name to Function and Call it")
+    logger.info("Exercise 7. Assign a Different Name to Function and Call it")
     student_info = display_student
     student_info("Emma", 26)
-    print()
+    # logger.info()
     pass
 
 
@@ -249,10 +261,10 @@ def exercise_08_generate_list(lower, upper):
     Expected Output:
         [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
     """
-    print("Exercise 8. Generate a List of Even Numbers (Range Function)")
+    logger.info("Exercise 8. Generate a List of Even Numbers (Range Function)")
     final_result = build_a_list(lower, upper)
-    print(f"{final_result}")
-    print()
+    logger.info(f"  {final_result}")
+    # print()
     pass
 
 
@@ -281,19 +293,19 @@ def exercise_09_find_max_in_list():
     Expected Output:
         24
     """
-    print("Exercise 9. Find the Largest Item in a List")
+    logger.info("Exercise 9. Find the Largest Item in a List")
     x = [4, 6, 8, 24, 12, 2]
     final_result = find_max_value(x)
-    print(f"{final_result}")
-    print()
+    logger.info(f"  {final_result}")
+    # print()
     pass
 
 
 
 #########################################################################################
 def describe_pet(animal_type, pet_name):
-    message = f"I have a pet {animal_type}.\nMy {animal_type}'s name is {pet_name}"
-    print(message)
+    message = f"\n  I have a pet {animal_type}.\n  My {animal_type}'s name is {pet_name}"
+    logger.info(message)
 
 def exercise_10_keyword_positional_arguments():
     """
@@ -314,10 +326,10 @@ def exercise_10_keyword_positional_arguments():
         I have a dog.
         My dog's name is Willie.
     """
-    print("Exercise 10. Call Function using Positional and Keyword Arguments")
+    logger.info("Exercise 10. Call Function using Positional and Keyword Arguments")
     describe_pet("hamster", "Harry")
     describe_pet(pet_name="Willie", animal_type="dog")
-    print()
+    # print()
     pass
 
 

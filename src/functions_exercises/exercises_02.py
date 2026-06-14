@@ -1,16 +1,19 @@
-
+import logging
 #
 # https://pynative.com/python-functions-exercise-with-solutions/
 # Exercises 11 through 18
 #
 
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 global_var = 10
 
 #########################################################################################
 def print_info(**kwargs):
     for key, value in kwargs.items():
-        print(f"{key}: {value}")
+        logger.info(f"  {key}: {value}")
 
 def exercise_11_function_with_keyword_args():
     """
@@ -31,9 +34,9 @@ def exercise_11_function_with_keyword_args():
         age: 30
         city: New York
     """
-    print("Exercise 11. Create a Function with Keyword Arguments")
+    logger.info("Exercise 11. Create a Function with Keyword Arguments")
     print_info(name="Alice", age=30, city="New York")
-    print()
+    # print()
     pass
 
 
@@ -55,10 +58,10 @@ def exercise_12_modify_global_variables():
         Modified: 20
     """
     global global_var
-    print("Exercise 12. Modifying Global Variables")
-    print(f"Initial: {global_var}")
+    logger.info("Exercise 12. Modifying Global Variables")
+    logger.info(f"  Initial: {global_var}")
     global_var = 20
-    print(f"Modified: {global_var}")
+    logger.info(f"  Modified: {global_var}")
     pass
 
 
@@ -75,7 +78,7 @@ def factorial(num):
 
 def factorial_wrapper(num):
     results = factorial(num)
-    print(f"Factorial of {num} is {results:,}")
+    logger.info(f"  Factorial of {num} is {results:,}")
 
 def exercise_13_recursion_factorial():
     """
@@ -89,11 +92,11 @@ def exercise_13_recursion_factorial():
     Expected Output:
         The factorial of 5 is 120
     """
-    print("Exercise 13. Recursive Factorial (Non-Negative Integers)")
+    logger.info("Exercise 13. Recursive Factorial (Non-Negative Integers)")
     factorial_wrapper(5)
     factorial_wrapper(10)
     factorial_wrapper(21)
-    print()
+    # print()
     pass
 
 
@@ -112,12 +115,12 @@ def exercise_14_square_number_using_lambda():
     Expected Output:
         25
     """
-    print("Exercise 14. Square a Number")
+    logger.info("Exercise 14. Square a Number")
     number = 5
     lsq = lambda x: x**2
     result = lsq(number)
-    print(result)
-    print()
+    logger.info(f"  {result}")
+    # print()
     pass
 
 
@@ -137,11 +140,11 @@ def exercise_15_filter_list_using_lambda():
     Expected Output:
         [2, 4, 6, 8, 10]
     """
-    print("Exercise 15. Filter a List Using Lambda and filter()")
+    logger.info("Exercise 15. Filter a List Using Lambda and filter()")
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
-    print(even_numbers)
-    print()
+    logger.info(f"  {even_numbers}")
+    # print()
     pass
 
 
@@ -160,11 +163,11 @@ def exercise_16_transform_list_using_lambda():
     Expected Output:
         [2, 4, 6, 8, 10]
     """
-    print("Exercise 16. Transform a List Using Lambda and map()")
+    logger.info("Exercise 16. Transform a List Using Lambda and map()")
     numbers = [1, 2, 3, 4, 5]
     doubled_numbers = list(map(lambda x: x * 2, numbers))
-    print(doubled_numbers)
-    print()
+    logger.info(f"  {doubled_numbers}")
+    # print()
     pass
 
 
@@ -185,11 +188,11 @@ def exercise_17_sort_complex_data_using_lambda():
     Expected Output:
         [('Bob', 75), ('Alice', 88), ('Charlie', 92)]
     """
-    print("Exercise 17. Sort Complex Data with sorted() and Lambda")
+    logger.info("Exercise 17. Sort Complex Data with sorted() and Lambda")
     students = [("Alice", 88), ("Bob", 75), ("Charlie", 92)]
     students_sorted_by_grade = sorted(students, key=lambda x: x[1])
-    print(students_sorted_by_grade)
-    print()
+    logger.info(f"  {students_sorted_by_grade}")
+    # print()
     pass
 
 
@@ -218,7 +221,7 @@ def exercise_18_pass_a_function_to_a_higher_order_function():
     :return:
     :rtype:
     """
-    print("Exercise 18. Create a Higher-Order Function")
+    logger.info("Exercise 18. Create a Higher-Order Function")
     def add(a, b):
         return a + b
 
@@ -230,9 +233,9 @@ def exercise_18_pass_a_function_to_a_higher_order_function():
 
     addition_result = apply_operation(add, 5, 3)
     multiplication_result = apply_operation(multiply, 5, 3)
-    print(f"Addition Result: {addition_result}")
-    print(f"Multiplication Result: {multiplication_result}")
-    print()
+    logger.info(f"  Addition Result: {addition_result}")
+    logger.info(f"  Multiplication Result: {multiplication_result}")
+    # print()
     pass
 
 

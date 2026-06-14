@@ -3,6 +3,10 @@ from src.string_exercises import exercises as s1
 from src.string_exercises import exercises_02 as s2
 from src.string_exercises import exercises_03 as s3
 from src.string_exercises import exercises_04 as s4
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class Driver():
 
@@ -19,10 +23,10 @@ class Driver():
 
     def run(self):
 
-        print()
-        print("#####################################################")
-        print("String Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("String Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = s1.exercise_01_grab_first_middle_last_character()
         results = s1.exercise_02_grab_middle_three_characters()
         results = s1.exercise_03_insert_data_in_middle_of_string()
@@ -34,10 +38,10 @@ class Driver():
         results = s1.exercise_09_balanced_strings_check()
         results = s1.exercise_10_vowel_counter()
 
-        print()
-        print("#####################################################")
-        print("String Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("String Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = s2.exercise_11_prefix_suffix_check()
         results = s2.exercise_12_swap_case()
         results = s2.exercise_13_remove_whitespace()
@@ -49,10 +53,10 @@ class Driver():
         results = s2.exercise_19_alternating_characters()
         results = s2.exercise_20_calculate_sums_and_averages()
 
-        print()
-        print("#####################################################")
-        print("String Exercises - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("String Exercises - 21 through 30")
+        logger.info("#####################################################")
 
         results = s3.exercise_21_count_occurrences()
         results = s3.exercise_22_remove_empty_strings()
@@ -65,10 +69,10 @@ class Driver():
         results = s3.exercise_29_unique_character_check()
         results = s3.exercise_30_title_case_logic()
 
-        print()
-        print("#####################################################")
-        print("String Exercises - 31 through 40")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("String Exercises - 31 through 40")
+        logger.info("#####################################################")
         results = s4.exercise_31_remove_duplicate_characters()
         results = s4.exercise_32_word_reversal()
         results = s4.exercise_33_character_interleaving()
@@ -77,3 +81,7 @@ class Driver():
         results = s4.exercise_36_word_frequency()
         results = s4.exercise_37_first_non_repeating_character()
         results = s4.exercise_38_string_rotation_check()
+        logger.info("#####################################################")
+        logger.info("String Exercises - COMPLETE")
+        logger.info("#####################################################")
+        logger.info("")

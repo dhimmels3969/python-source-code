@@ -1,6 +1,9 @@
 from src.common_library import helper_functions as hf
 import os
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
 # Exercises 1 through 10
@@ -39,14 +42,14 @@ def exercise_01_write_user_name_to_file(root_dir):
     Expected Output:
         A file named user.txt is created containing the entered name, e.g. Alice
     """
-    print("Exercise 1: Write User Name to File")
+    logger.info("Exercise 1: Write User Name to File")
     #### get a user name... not sure how we'll do this when testing...
     while True:
         user_name = input("Enter your user name: ")
         if user_name.strip() > '':
             break
         else:
-            print("User name cannot be blank... please try again.")
+            logger.info("User name cannot be blank... please try again.")
 
     #### build the name of the output file
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "user.txt")
@@ -71,12 +74,12 @@ def exercise_02_read_and_print_file(root_dir):
     Expected Output:
         Hello, World!
     """
-    print("Exercise 2: Read and Print Complete File")
+    logger.info("Exercise 2: Read and Print Complete File")
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt")
     with open(file_path, 'r') as file:
         lines_in_the_file = file.readlines()
     for line in lines_in_the_file:
-        print(f"    {line.strip()}")
+        logger.info(f"    {line.strip()}")
     pass
 
 
@@ -100,12 +103,12 @@ def exercise_03_read_file_line_by_line(root_dir):
         Line 2
         Line 3
     """
-    print("Exercise 3: Read File Line by Line Using Loop")
-    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines.txt")
+    logger.info("Exercise 3: Read File Line by Line Using Loop")
+    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "lines_ex_03.txt")
     with open(file_path, 'r') as file:
         lines_in_the_file = file.readlines()
     for line in lines_in_the_file:
-        print(f"    {line.strip()}")
+        logger.info(f"    {line.strip()}")
     pass
 
 
@@ -126,14 +129,14 @@ def exercise_04_read_file_into_list(root_dir):
     Expected Output:
         ['apple\n', 'banana\n', 'cherry']
     """
-    print("Exercise 4: Read File Lines into a List")
+    logger.info("Exercise 4: Read File Lines into a List")
     results = []
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "items.txt")
     with open(file_path, 'r') as file:
         lines_in_the_file = file.readlines()
     for line in lines_in_the_file:
         results.append(line)
-    print(f"    {results}")
+    logger.info(f"    {results}")
     pass
 
 
@@ -154,7 +157,7 @@ def exercise_05_append_data_to_file(root_dir):
         Original content.
         This is a new line.
     """
-    print("Exercise 5: Append New Sentence to Existing File")
+    logger.info("Exercise 5: Append New Sentence to Existing File")
     line_to_append = "\nThis is a new line."
 
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "notes.txt")
@@ -195,21 +198,21 @@ def exercise_06_clear_file_content(root_dir):
                 input_data.append(line)
         with open(output_path, 'w') as file_out:
             file_out.writelines(input_data)
-        print(f"    temp.txt reloaded")
+        logger.info(f"    temp.txt reloaded")
         pass
 
-    print("Exercise 6: Clear All File Content")
+    logger.info("Exercise 6: Clear All File Content")
     reload_temp_dot_txt()
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "temp.txt")
     file_size_bytes = os.path.getsize(file_path)
-    print(f"    File Size Before: {file_size_bytes} Bytes")
+    logger.info(f"    File Size Before: {file_size_bytes} Bytes")
     #### open the file and write the data
     #### file writing modes: 'w' write over existing contents,
     #### 'a' append data to existing data
     with open(file_path, 'w') as file_out:
         pass
     file_size_bytes = os.path.getsize(file_path)
-    print(f"    File Size After: {file_size_bytes} Bytes")
+    logger.info(f"    File Size After: {file_size_bytes} Bytes")
 
     pass
 
@@ -232,7 +235,7 @@ def exercise_07_write_text_to_new_file(root_dir):
         Second line
         Third line
     """
-    print("Exercise 7: Write Text to New File")
+    logger.info("Exercise 7: Write Text to New File")
     lines = ["First line", "Second line", "Third line"]
     file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "output.txt")
     with open(file_path, 'w') as file_out:
@@ -267,12 +270,12 @@ def exercise_08_check_if_file_exists(root_dir):
     """
     def display_search_results(file_to_find):
         if hf.file_exists(file_to_find):
-            print(f"    {file_to_find} - File Exists")
+            logger.info(f"    {file_to_find} - File Exists")
         else:
-            print(f"    {file_to_find} - File Does Not Exist")
+            logger.info(f"    {file_to_find} - File Does Not Exist")
         pass
 
-    print("Exercise 8: Check If File Exists")
+    logger.info("Exercise 8: Check If File Exists")
     files_to_find = [
         hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt"),
         hf.build_file_name(root_dir, "data/file_handling_exercises", "data2.txt")
@@ -301,15 +304,15 @@ def exercise_09_handle_missing_file(root_dir):
     Expected Output:
         Error: The file was not found.
     """
-    print("Exercise 9: Handle Missing File with Try-Except")
+    logger.info("Exercise 9: Handle Missing File with Try-Except")
     try:
         input_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "missing.txt")
         with open(input_path, 'r') as file_in:
             pass
     except FileNotFoundError as error:
-        print("    Error: The file was not found.")
+        logger.error("    Error: The file was not found.")
     except Exception as error:
-        print(error)
+        logger.error(f"  {error}")
     pass
 
 
@@ -333,11 +336,11 @@ def exercise_10_count_lines_in_file(root_dir):
     Expected Output:
         Total lines: 4
     """
-    print("Exercise 10: Count Total Lines in File")
+    logger.info("Exercise 10: Count Total Lines in File")
     input_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "data.txt")
     with open(input_path, 'r') as file_in:
         results = file_in.readlines()
-    print(f"    Total Lines: {len(results)}")
+    logger.info(f"    Total Lines: {len(results)}")
     pass
 
 

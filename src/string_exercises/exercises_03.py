@@ -5,6 +5,10 @@
 
 import string
 from unittest import result
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #######################################################################################################
@@ -22,7 +26,7 @@ def exercise_21_count_occurrences():
     Expected Output:
         {'a': 1, 'p': 2, 'l': 1, 'e': 1}
     """
-    print("Exercise 21. Count occurrences of all characters within a string")
+    logger.info("Exercise 21. Count occurrences of all characters within a string")
     str1 = "apple"
     character_count_dict = {}
     for char in str1:
@@ -30,7 +34,7 @@ def exercise_21_count_occurrences():
            character_count_dict[char] = 1
        else:
            character_count_dict[char] += 1
-    print(character_count_dict)
+    logger.info(f"  {character_count_dict}")
     pass
 
 
@@ -49,13 +53,13 @@ def exercise_22_remove_empty_strings():
     Expected Output:
         ['Emma', 'Jon', 'Kelly', 'Eric']
     """
-    print("Exercise 22. Remove empty strings from a list of strings")
+    logger.info("Exercise 22. Remove empty strings from a list of strings")
     str_list = ["Emma", "Jon", "", "Kelly", None, "Eric", ""]
     results_list = []
     for item in str_list:
         if item:
             results_list.append(item)
-    print(results_list)
+    logger.info(f"  {results_list}")
     pass
 
 
@@ -74,7 +78,7 @@ def exercise_23_remove_special_symbols():
     Expected Output:
         "Jon is developer musician"
     """
-    print("Exercise 23. Remove special symbols from a string")
+    logger.info("Exercise 23. Remove special symbols from a string")
     str1 = "/*Jon is @developer & musician!!"
     result = ""
     for char in str1:
@@ -83,7 +87,7 @@ def exercise_23_remove_special_symbols():
         else:
             result += char
     result = result.replace("  ", " ")
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -104,7 +108,7 @@ def exercise_24_keep_only_integers():
     Expected Output:
         2510
     """
-    print("Exercise 24. Remove all characters from a string except integers")
+    logger.info("Exercise 24. Remove all characters from a string except integers")
     str1 = "I am 25 years and 10 months old"
     result = ""
 
@@ -114,7 +118,7 @@ def exercise_24_keep_only_integers():
     for char in str1:
         if char.isdigit():
             result += char
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -135,7 +139,7 @@ def exercise_25_find_words_with_letters_and_numbers():
         Emma25
         scientist50
     """
-    print("Exercise 25. Find words with both letters and numbers")
+    logger.info("Exercise 25. Find words with both letters and numbers")
     letter_and_number_list = []
     str1 = "Emma25 is Data scientist50 and AI Expert"
     input_list = str1.split()
@@ -157,8 +161,8 @@ def exercise_25_find_words_with_letters_and_numbers():
     #     if letters_found and numbers_found:
     #         letter_and_number_list.append(word)
     for word in letter_and_number_list:
-        print(word)
-    print()
+        logger.info(f"  {word}")
+    logger.info("")
     pass
 
 
@@ -178,7 +182,7 @@ def exercise_26_replace_symbols():
     Expected Output:
         ##Jon is #developer # musician##
     """
-    print("Exercise 26. Replace special symbols with # in the following string")
+    logger.info("Exercise 26. Replace special symbols with # in the following string")
     str1 = "/*Jon is @developer & musician!!"
     result = ""
     for char in str1:
@@ -186,7 +190,7 @@ def exercise_26_replace_symbols():
             result += "#"
         else:
             result += char
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -210,14 +214,14 @@ def exercise_27_palindrome_check():
         s1_backwards = s1[::-1]
         return s1_backwards.lower() == s1.lower()
 
-    print("Exercise 27. Palindrome Check")
+    logger.info("Exercise 27. Palindrome Check")
     str1 = "radar"
     message = f"Is Palindrome: {is_palindrome(str1)}"
-    print(message)
+    logger.info(f"  {message}")
 
     str2 = "bravo"
     message = f"Is Palindrome: {is_palindrome(str2)}"
-    print(message)
+    logger.info(f"  {message}")
 
     pass
 
@@ -237,7 +241,7 @@ def exercise_28_anagram_detector():
     Expected Output:
         Are Anagrams: True
     """
-    print("Exercise 28. Anagram Detector")
+    logger.info("Exercise 28. Anagram Detector")
     def anagram_analyzer(phrase1, phrase2):
         s1_list = sorted(list(phrase1))
         s2_list = sorted(list(phrase2))
@@ -246,12 +250,11 @@ def exercise_28_anagram_detector():
 
     s1 = "listen" 
     s2 = "silent"
-    print(anagram_analyzer(s1, s2))
+    logger.info(f"  {anagram_analyzer(s1, s2)}")
 
     s3 = "vanilla"
     s4 = "strawberry"
-    print(anagram_analyzer(s3, s4))
-
+    logger.info(f"  {anagram_analyzer(s3, s4)}")
     pass
 
 
@@ -274,7 +277,7 @@ def exercise_29_unique_character_check():
         "python" unique: True
         "alphabet" unique: False
     """
-    print("Exercise 29. Unique Character Check")
+    logger.info("Exercise 29. Unique Character Check")
     str1 = "python"
     str2 = "alphabet"
 
@@ -282,13 +285,13 @@ def exercise_29_unique_character_check():
     for char in str1:
         item_set.add(char)
     message = f"!{str1}! unique: {len(item_set) == len(str1)}"
-    print(message.replace("!", '"'))
+    logger.info(f"  {message.replace("!", '"')}")
 
     item_set.clear()
     for char in str2:
         item_set.add(char)
     message = f"!{str2}! unique: {len(item_set) == len(str2)}"
-    print(message.replace("!", '"'))
+    logger.info(f"  {message.replace("!", '"')}")
 
     pass
 
@@ -308,7 +311,7 @@ def exercise_30_title_case_logic():
     Expected Output:
         Hello World From Python
     """
-    print("Exercise 30. Title Case Logic")
+    logger.info("Exercise 30. Title Case Logic")
     str1 = "hello world from python"
     transformed_str1 = ""
     words_list = str1.split()
@@ -324,8 +327,8 @@ def exercise_30_title_case_logic():
         transformed_str1 += " "
      # truncate last blank
     transformed_str1 = transformed_str1[0:len(transformed_str1)-1]
-    print(transformed_str1)
-    print()
+    logger.info(f"  {transformed_str1}")
+    logger.info("")
     pass
 
 

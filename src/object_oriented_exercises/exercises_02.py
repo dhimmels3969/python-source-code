@@ -7,7 +7,10 @@ from object_oriented_exercises.classes import \
     Vehicle_v2, Bus, Bus_v2, Taxi, \
     Dog, Cat, Book, Magazine, DVD, \
     DiscountedOrder
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-object-oriented-programming-oop-exercise/
@@ -38,11 +41,11 @@ def exercise_11_coffee_machine_class():
         Latte made! Remaining - Water: 100ml, Coffee: 80g, Milk: 50ml
         Not enough resources to make a latte.
     """
-    print("Exercise 11: Coffee Machine with Multi-Resource Tracking")
+    logger.info("Exercise 11: Coffee Machine with Multi-Resource Tracking")
     ourCoffeeMachine = CoffeeMachine(water=300, coffee=100, milk=200)
     ourCoffeeMachine.make_latte()
     ourCoffeeMachine.make_latte()
-    print()
+    # print()
     pass
 
 
@@ -70,12 +73,12 @@ def exercise_12_shared_class_attribures():
         Tesla - Color: Red, Speed: 250
         BMW - Color: Red, Speed: 200
     """
-    print("Exercise 12: Shared Class Attribute Across Instances")
+    logger.info("Exercise 12: Shared Class Attribute Across Instances")
     v1 = Vehicle("Tesla", 250, 0)
     v2 = Vehicle("BMW", 200, 0)
     v1.get_info_v2()
     v2.get_info_v2()
-    print("------------AFTER--------------")
+    logger.info("------------AFTER--------------")
     Vehicle.color = "Red"
     v1.get_info_v2()
     v2.get_info_v2()
@@ -103,7 +106,7 @@ def exercise_13_subclass_inheritance():
     Expected Output:
         Vehicle: School Bus, Max Speed: 120 km/h
     """
-    print("Exercise 13: Bus Subclass Inheriting from Vehicle")
+    logger.info("Exercise 13: Bus Subclass Inheriting from Vehicle")
     bus1 = Bus("School Bus", 120)
     # Python first looks for display on the Bus instance,
     # then on the Bus class, and finally on Vehicle, where it finds
@@ -134,7 +137,7 @@ def exercise_14_override_parent_method():
     Expected Output:
         School Bus seating capacity is: 50
     """
-    print("Exercise 14: Override Parent Method Using super()")
+    logger.info("Exercise 14: Override Parent Method Using super()")
     bus = Bus_v2("School Bus", 120)
     bus.seating_capacity()
     pass
@@ -157,9 +160,9 @@ def exercise_15_extend_child_class():
     Expected Output:
         Total fare with maintenance fee: 550.0
     """
-    print("Exercise 15: Add Maintenance Fee in Child Class via super()")
+    logger.info("Exercise 15: Add Maintenance Fee in Child Class via super()")
     myTaxi = Taxi("Taxi", 120, 500)
-    print(f"Total fare with maintenance fee: {myTaxi.total_fare()}")
+    logger.info(f"  Total fare with maintenance fee: {myTaxi.total_fare()}")
     pass
 
 
@@ -185,9 +188,9 @@ def exercise_16_polymorphism_poc():
 
     def Speak(creature):
         # Dog says: Woof!
-        print(f"{creature.name} says: {creature.speak()}")
+        logger.info(f"  {creature.name} says: {creature.speak()}")
 
-    print("Exercise 16: Polymorphism with Dog & Cat speak()")
+    logger.info("Exercise 16: Polymorphism with Dog & Cat speak()")
     myDog = Dog("Dog")
     Speak(myDog)
     myCat = Cat("Cat")
@@ -239,11 +242,11 @@ def exercise_17_create_subclasses():
             return self._hourly_rate * self._number_hours
 
     def display_info(employee):
-        message = f"{employee.name}'s monthly pay: ${employee.calculate_pay():,.0f}"
-        print(message)
+        message = f"  {employee.name}'s monthly pay: ${employee.calculate_pay():,.0f}"
+        logger.info(message)
         pass
 
-    print("Exercise 17: FullTimeEmployee and PartTimeEmployee pay logic")
+    logger.info("Exercise 17: FullTimeEmployee and PartTimeEmployee pay logic")
     full_time_emp = FullTimeEmployee("Alice", 60000)
     display_info(full_time_emp)
 
@@ -273,8 +276,9 @@ def exercise_18_implement_subclasses():
     """
     class Shape:
         def area(self):
+            logger.error(f"  The {self.__class__.__name__} class must implement the 'area' method.")
             raise NotImplementedError(
-                f"The {self.__class__.__name__} class must implement the 'area' method."
+                f"  The {self.__class__.__name__} class must implement the 'area' method."
             )
 
     class Circle(Shape):
@@ -300,17 +304,14 @@ def exercise_18_implement_subclasses():
 
 
 
-    print("Exercise 18: Shape Subclasses with Custom area() method")
+    logger.info("Exercise 18: Shape Subclasses with Custom area() method")
     # myCircle = Circle(7)
     # mySquare = Square(4)
     # myTriangle = Triangle(6, 8)
-    #
-    # print(f"Circle Area: {myCircle.area():.2f}")
-    # print(f"Square Area: {mySquare.area():.2f}")
-    # print(f"Triangle Area: {myTriangle.area():.2f}")
+
     shapes = [Circle(7), Square(4), Triangle(6, 8)]
     for shape in shapes:
-        print(f"{type(shape).__name__} area: {shape.area():.2f}")
+        logger.info(f"  {type(shape).__name__} area: {shape.area():.2f}")
 
     pass
 
@@ -336,12 +337,12 @@ def exercise_19_subclasses_with_custom_attributes():
         Magazine: Wired (Monthly) - Rs.150
         DVD: Inception, 148 mins - Rs.299
     """
-    print("Exercise 19: Media Subclasses with Type-Specific Attributes")
+    logger.info("Exercise 19: Media Subclasses with Type-Specific Attributes")
     media_items = [Book("Clean Code", 499, "Robert C. Martin"),
                    Magazine("Wired", 150, "Monthly"),
                    DVD("Inception", 299, 148)]
     for item in media_items:
-        print(f"{item.describe()}")
+        logger.info(f"  {item.describe()}")
     pass
 
 
@@ -363,11 +364,11 @@ def exercise_20_discounted_order_subclass():
         Original Total: 1200
         Discounted Total: 1080.0
     """
-    print("Exercise 20: Discounted Order Subclass with 10% Off")
+    logger.info("Exercise 20: Discounted Order Subclass with 10% Off")
     myOrder = DiscountedOrder("ORD001", 1200)
-    print(f"Order ID: {myOrder.id}")
-    print(f"Original Total: {myOrder.total:.2f}")
-    print(f"Discounted Total: {myOrder.discounted_total(0.10):.2f}")
+    logger.info(f"  Order ID: {myOrder.id}")
+    logger.info(f"  Original Total: {myOrder.total:.2f}")
+    logger.info(f"  Discounted Total: {myOrder.discounted_total(0.10):.2f}")
     pass
 
 

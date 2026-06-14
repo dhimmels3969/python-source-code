@@ -1,9 +1,13 @@
-from src. functions_exercises import exercises as f1
-from src. functions_exercises import exercises_02 as f2
+import logging
+from src.functions_exercises import exercises as f1
+from src.functions_exercises import exercises_02 as f2
 #
 # https://pynative.com/python-functions-exercise-with-solutions/
 # Driver Program... called from main driver program
 #
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 global global_var
 global_var = 10
@@ -24,10 +28,10 @@ class Driver():
 
     def run(self):
 
-        print()
-        print("#####################################################")
-        print("Functions Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Functions Exercises - 1 through 10")
+        logger.info("#####################################################")
 
         results = f1.exercise_01_create_function_with_parameters()
         results = f1.exercise_02_variable_length_arguments()
@@ -40,10 +44,10 @@ class Driver():
         results = f1.exercise_09_find_max_in_list()
         results = f1.exercise_10_keyword_positional_arguments()
 
-        print()
-        print("#####################################################")
-        print("Functions Exercises - 11 through 18")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Functions Exercises - 11 through 18")
+        logger.info("#####################################################")
         results = f2.exercise_11_function_with_keyword_args()
         results = f2.exercise_12_modify_global_variables()
         results = f2.exercise_13_recursion_factorial()
@@ -52,6 +56,10 @@ class Driver():
         results = f2.exercise_16_transform_list_using_lambda()
         results = f2.exercise_17_sort_complex_data_using_lambda()
         results = f2.exercise_18_pass_a_function_to_a_higher_order_function()
+        logger.info("#####################################################")
+        logger.info("Functions Exercises - END")
+        logger.info("#####################################################")
+        logger.info("")
 
         pass
 

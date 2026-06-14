@@ -4,7 +4,10 @@ from src.file_handling_exercises import exercises as fh_01
 from src.file_handling_exercises import exercises_02 as fh_02
 from src.file_handling_exercises import exercises_03 as fh_03
 from src.file_handling_exercises import exercises_04 as fh_04
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 #
 # Exercises found at web page https://pynative.com/python-file-handling-exercises/
 # Driver program to call all methods
@@ -27,10 +30,10 @@ class Driver:
 
 
     def run(self):
-        print(self.root)
-        print("#####################################################")
-        print("File Handling Programming Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(f"  Source code root directory: {self.root}")
+        logger.info("#####################################################")
+        logger.info("File Handling Programming Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = fh_01.file_handling_setup_dummy_directory(self.root)
         results = fh_01.exercise_01_write_user_name_to_file(self.root)
         results = fh_01.exercise_02_read_and_print_file(self.root)
@@ -43,10 +46,10 @@ class Driver:
         results = fh_01.exercise_09_handle_missing_file(self.root)
         results = fh_01.exercise_10_count_lines_in_file(self.root)
 
-        print("")
-        print("#####################################################")
-        print("File Handling Programming Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("File Handling Programming Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = fh_02.exercise_11_count_total_words(self.root)
         results = fh_02.exercise_12_count_total_characters(self.root)
         results = fh_02.exercise_13_count_word_occurrences(self.root)
@@ -58,10 +61,10 @@ class Driver:
         results = fh_02.exercise_19_search_for_words_in_file(self.root)
         results = fh_02.exercise_20_strip_whitespace(self.root)
 
-        print("")
-        print("#####################################################")
-        print("File Handling Programming Exercises - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("File Handling Programming Exercises - 21 through 30")
+        logger.info("#####################################################")
         results = fh_03.exercise_21_convert_uppercase_and_lowercase(self.root)
         results = fh_03.exercise_22_find_replace(self.root)
         results = fh_03.exercise_23_get_file_size_kilobytes(self.root)
@@ -74,19 +77,19 @@ class Driver:
         results = fh_03.exercise_30_list_all_files(self.root)
 
 
-        print("")
-        print("#####################################################")
-        print("File Handling Programming Exercises - 31 through 34")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("File Handling Programming Exercises - 31 through 34")
+        logger.info("#####################################################")
         results = fh_04.exercise_31_read_write_binary_image_file(self.root)
         results = fh_04.exercise_32_extract_unique_words(self.root)
         results = fh_04.exercise_33_filter_log_file(self.root)
         results = fh_04.exercise_34_split_large_file(self.root)
 
 
-        print("")
-        print("#####################################################")
-        print("Object-Oriented Programming - end")
-        print("#####################################################\n")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Object-Oriented Programming - end")
+        logger.info("#####################################################\n")
 
         pass

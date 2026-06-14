@@ -5,7 +5,10 @@
 from object_oriented_exercises.classes import \
         Vehicle, Student, Rectangle, Product, BankAccount, \
         Light, User, Temperature, Notebook
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 ##############################################################################
 def exercise_01_empty_class():
@@ -25,7 +28,7 @@ def exercise_01_empty_class():
     Expected Output:
         <class '__main__.Vehicle'>
     """
-    print("Exercise 1: Define an empty Vehicle Class")
+    logger.info("Exercise 1: Define an empty Vehicle Class")
     pass
 
 
@@ -47,7 +50,7 @@ def exercise_02_class_with_instance_attributes():
     Expected Output:
         Vehicle Name: Tesla Model S, Speed: 250, Mileage: 18
     """
-    print("Exercise 2: Vehicle Class with Instance Attributes")
+    logger.info("Exercise 2: Vehicle Class with Instance Attributes")
     vehicle1 = Vehicle("Tesla Model S", 250, 18)
     vehicle1.get_info()
     pass
@@ -73,9 +76,9 @@ def exercise_03_rectangle_class():
     Expected Output:
         Area = 40 and Perimeter = 28
     """
-    print("Exercise 3: Rectangle Class with Area and Perimeter")
+    logger.info("Exercise 3: Rectangle Class with Area and Perimeter")
     rect = Rectangle(10, 4)
-    print(f"Area = {rect.area()} and Perimeter = {rect.perimeter()}")
+    logger.info(f"  Area = {rect.area()} and Perimeter = {rect.perimeter()}")
 
     pass
 
@@ -98,9 +101,9 @@ def exercise_04_student_class_average_grade():
     Expected Output:
         Alice's Average Grade: 86.6
     """
-    print("Exercise 4: Student Class with Average Grade")
+    logger.info("Exercise 4: Student Class with Average Grade")
     s1 = Student("Alice", [85, 90, 78, 92, 88])
-    print(f"{s1.name}'s Average Grade: {s1.average():.1f}")
+    logger.info(f"  {s1.name}'s Average Grade: {s1.average():.1f}")
     pass
 
 
@@ -123,9 +126,9 @@ def exercise_05_product_class():
     Expected Output:
         Total stock value of Laptop: $4499.95
     """
-    print("Exercise 5: Product Class with Stock Value Calculator")
+    logger.info("Exercise 5: Product Class with Stock Value Calculator")
     p1 = Product("Laptop", 899.99, 5)
-    print(f"Total stock value of {p1.name}: ${p1.total_value():.2f}")
+    logger.info(f"  Total stock value of {p1.name}: ${p1.total_value():.2f}")
     pass
 
 
@@ -154,12 +157,12 @@ def exercise_06_bank_account_overdraft_protection():
         Balance after withdrawal: 1300
         Insufficient funds. Current balance: 1300
     """
-    print("Exercise 6: BankAccount with Deposit & Overdraw Protection")
+    logger.info("Exercise 6: BankAccount with Deposit & Overdraw Protection")
     account = BankAccount()
     account.deposit(500)
     account.withdraw(200)
     account.withdraw(2000)
-    print()
+    logger.info("")
     pass
 
 
@@ -186,14 +189,13 @@ def exercise_07_light_class_state_toggle():
         Light is OFF
         Current status: OFF
     """
-    print("Exercise 7: Light Class with On/Off State Toggle")
+    logger.info("Exercise 7: Light Class with On/Off State Toggle")
     myLight = Light()
-    print(f"Current status: {myLight.status()}")
+    logger.info(f"  Current status: {myLight.status()}")
     myLight.turn_on()
-    print(f"Current status: {myLight.status()}")
+    logger.info(f"  Current status: {myLight.status()}")
     myLight.turn_off()
-    print(f"Current status: {myLight.status()}")
-    print()
+    logger.info(f"  Current status: {myLight.status()}")
     pass
 
 
@@ -218,12 +220,12 @@ def exercise_08_user_account_password_protection():
         True
         False
     """
-    print("Exercise 8: User Class with Password Validation")
+    logger.info("Exercise 8: User Class with Password Validation")
     u1 = User("alice", "secure123")
     results = u1.check_password("secure123")
-    print(results)
+    logger.info(f"  {results}")
     results = u1.check_password("bogus_credential_2026")
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -249,12 +251,12 @@ def exercise_09_temperature_class():
         Fahrenheit: 212.0
         Kelvin: 373.15
     """
-    print("Exercise 9: Temperature Class with Unit Converters")
+    logger.info("Exercise 9: Temperature Class with Unit Converters")
     t = Temperature(100)
-    print(f"Celsius: {t.temperature()}")
-    print(f"Fahrenheit: {t.to_fahrenheit()}")
-    print(f"Kelvin: {t.to_kelvin()}")
-    print()
+    logger.info(f"  Celsius: {t.temperature()}")
+    logger.info(f"  Fahrenheit: {t.to_fahrenheit()}")
+    logger.info(f"  Kelvin: {t.to_kelvin()}")
+    logger.info("")
     pass
 
 
@@ -280,7 +282,7 @@ def exercise_10_notebook_class_display_notes():
         2. Read a book
         3. Call the doctor
     """
-    print("Exercise 10: Notebook Class with Add & Display Notes")
+    logger.info("Exercise 10: Notebook Class with Add & Display Notes")
     myNotebook = Notebook()
     myNotebook.add("Buy groceries")
     myNotebook.add("Read a book")

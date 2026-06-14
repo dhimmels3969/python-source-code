@@ -3,6 +3,10 @@
 # Exercises 11 through 20
 #
 from email import message
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #######################################################################################################
@@ -18,12 +22,12 @@ def exercise_11_prefix_suffix_check():
     Expected Output:
         Is valid URL: True
     """
-    print("Exercise 11. Prefix/Suffix Check")
+    logger.info("Exercise 11. Prefix/Suffix Check")
     str1 = "https://google.com"
     validUrl = False
     if str1.startswith("https") & str1.endswith(".com"):
         validUrl = True
-    print(f"Is valid URL: {validUrl}")
+    logger.info(f"  Is valid URL: {validUrl}")
     pass
 
 
@@ -42,7 +46,7 @@ def exercise_12_swap_case():
     Expected Output:
         pYtHoN
     """
-    print("Exercise 12. Swap Case")
+    logger.info("Exercise 12. Swap Case")
     str1 = "PyThOn"
     result = ""
     for i in range(len(str1)):
@@ -50,7 +54,7 @@ def exercise_12_swap_case():
             result += str1[i].upper()
         else:
             result += str1[i].lower()
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -68,10 +72,10 @@ def exercise_13_remove_whitespace():
     Expected Output:
         Python
     """
-    print("Exercise 13. Remove Whitespace")
+    logger.info("Exercise 13. Remove Whitespace")
     str1 = " P y t h o n "
     result = str1.replace(" ", "")
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -89,14 +93,14 @@ def exercise_14_character_removal():
     Expected Output:
         Pyhon (The character 't' at index 2 was removed)
     """
-    print("Exercise 14. N-th Character Removal")
+    logger.info("Exercise 14. N-th Character Removal")
     str1 = "Python"
     i = 2
     head = str1[:i]
     tail = str1[i+1:]
     result = "".join([str1[:i], str1[i+1:]])
     message = f"{result} (The character 't' at index 2 was removed)"
-    print(message)
+    logger.info(f"  {message}")
     pass
 
 
@@ -116,11 +120,11 @@ def exercise_15_string_partition_test():
     Expected Output:
         ('username', '@', 'company.com')
     """
-    print("Exercise 15. String Partitioning")
+    logger.info("Exercise 15. String Partitioning")
     str1 = "username@company.com"
     sep = "@"
     partition_tuple = str1.partition(sep)
-    print(partition_tuple)
+    logger.info(f"  {partition_tuple}")
     pass
 
 
@@ -140,7 +144,7 @@ def exercise_16_extract_file_extension():
     Expected Output:
         pdf
     """
-    print("Exercise 16. Extract File Extension")
+    logger.info("Exercise 16. Extract File Extension")
     file_name = "report_final_v2.pdf"
     offset = file_name.find(".")
     file_name_len = len(file_name)
@@ -149,7 +153,7 @@ def exercise_16_extract_file_extension():
     # from website
     extension = file_name.split(".")[-1]
 
-    print(f"{file_extension}")
+    logger.info(f"  {file_extension}")
     pass
 
 
@@ -169,7 +173,7 @@ def exercise_17_sort_lower_case_and_upper_case():
         yaivePNT
     Could this be done with a regular expression???
     """
-    print("Exercise 17. Sort Lowercase First")
+    logger.info("Exercise 17. Sort Lowercase First")
     str1 = "PyNaTive"
     head = ""
     tail = ""
@@ -179,7 +183,7 @@ def exercise_17_sort_lower_case_and_upper_case():
         else:
             tail += char
     result = "".join([head, tail])
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -198,7 +202,7 @@ def exercise_18_count_letters_digits_symbols():
     Expected Output:
         Total counts of chars, digits, and symbols: Chars = 8 Digits = 3 Symbol = 4
     """
-    print("Exercise 18. Count All Letters, Digits, and Symbols")
+    logger.info("Exercise 18. Count All Letters, Digits, and Symbols")
     str1 = "P@#yn26at^&i5ve"
     alpha_count = 0
     digits_count = 0
@@ -212,8 +216,7 @@ def exercise_18_count_letters_digits_symbols():
             else:
                 symbols_count += 1
     message = f"Total counts of chars, digits, and symbols: Chars = {alpha_count} Digits =  {digits_count} Symbol = {symbols_count}"
-    print(message)
-
+    logger.info(f"  {message}")
     pass
 
 
@@ -252,17 +255,17 @@ def exercise_19_alternating_characters():
                 result += s2[i]
         return result
 
-    print("Exercise 19. Create a mixed string using alternating characters")
+    logger.info("Exercise 19. Create a mixed string using alternating characters")
     s1 = "Abc"
     s2 = "Xyz"
     result = build_string_from_two_inputs(s1, s2)
-    print(result)
+    logger.info(f"  {result}")
 
-    print("Test of two strings of unequal length")
+    logger.info("Test of two strings of unequal length")
     s3 = "Whale"
     s4 = "Rhododendron"
     result = build_string_from_two_inputs(s3, s4)
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -281,7 +284,7 @@ def exercise_20_calculate_sums_and_averages():
     Expected Output:
         Sum is: 38 Average is 6.33
     """
-    print("Exercise 20. Calculate Sum and Average")
+    logger.info("Exercise 20. Calculate Sum and Average")
     str1 = "PYnative29@#8496"
     number_list = []
     for char in str1:
@@ -289,9 +292,9 @@ def exercise_20_calculate_sums_and_averages():
             number_list.append(int(char))
     total = sum(number_list)
     average = total/len(number_list)
-    print(f"Sum is {total}")
-    print(f"Average is {average:.3}")
-    print()
+    logger.info(f"  Sum is {total}")
+    logger.info(f"  Average is {average:.3}")
+    logger.info("")
     pass
 
 

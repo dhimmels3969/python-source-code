@@ -4,6 +4,10 @@
 #
 
 import itertools
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 
@@ -23,13 +27,13 @@ def exercise_01_grab_first_middle_last_character():
     Expected Output:
         Jms
     """
-    print("Exercise 1. Create a string made of the first, middle, and last character")
+    logger.info("Exercise 1. Create a string made of the first, middle, and last character")
     str1 = "James"
     first = str1[0]
     middle = str1[len(str1) // 2]
     last = str1[-1]
     result = "".join([first, middle, last])
-    print(result)
+    logger.info(f"  {result}")
     return None
 
 
@@ -52,13 +56,13 @@ def exercise_02_grab_middle_three_characters():
         # Slice string from (mid - 1) to (mid + 2)
         res = str1[mi - 1:mi + 2]
     """
-    print("Exercise 2. Create a string made of the middle three characters")
+    logger.info("Exercise 2. Create a string made of the middle three characters")
     str1 = "JhonDipPeta"
     total_len = len(str1)
     chars_to_grab = 3
     offset = (total_len - chars_to_grab) // 2
     result = str1[offset:offset + chars_to_grab]
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -77,14 +81,14 @@ def exercise_03_insert_data_in_middle_of_string():
     Expected Output:
         AuKellylt
     """
-    print("Exercise 3. Append new string in the middle of a given string")
+    logger.info("Exercise 3. Append new string in the middle of a given string")
     s1 = "Ault"
     s2 = "Kelly"
     midpoint = len(s1) // 2
     head = s1[:midpoint]
     tail = s1[midpoint:]
     result = "".join([head, s2, tail])
-    print(result)
+    logger.info(f"  {result}")
     pass
 
 
@@ -104,7 +108,7 @@ def exercise_04_create_new_string():
     Expected Output:
         AJrpan
     """
-    print("Exercise 4. Create a new string from the first, middle,")
+    logger.info("Exercise 4. Create a new string from the first, middle,")
     s1 = "America"
     s1_midpoint = len(s1) // 2
     s2 = "Japan"
@@ -113,7 +117,7 @@ def exercise_04_create_new_string():
     s2_list = [s2[0], s2[s2_midpoint], s2[-1]]
     results_list = itertools.chain.from_iterable(zip(s1_list, s2_list))
     final_result = "".join(results_list)
-    print(final_result)
+    logger.info(f"  {final_result}")
     pass
 
 
@@ -131,11 +135,11 @@ def exercise_05_reverse_a_string():
     Expected Output:
         evitanYP
     """
-    print("Exercise 5. Reverse a given string")
+    logger.info("Exercise 5. Reverse a given string")
     str1 = "PYnative"
     final_result = str1[-1::-1]
-    print(final_result)
-    print()
+    logger.info(f"  {final_result}")
+    logger.info("")
     pass
 
 
@@ -154,10 +158,10 @@ def exercise_06_find_last_occurrence():
     Expected Output:
         Last occurrence of Emma starts at index 43
     """
-    print("Exercise 6. Find the last occurrence of a given substring")
+    logger.info("Exercise 6. Find the last occurrence of a given substring")
     str1 = "Emma is a data scientist who knows Python. Emma works at google."
     results = str1.rfind("Emma")
-    print(f"Last occurrence of Emma starts at index {results}")
+    logger.info(f"  Last occurrence of Emma starts at index {results}")
     pass
 
 
@@ -181,11 +185,11 @@ def exercise_07_split_string_using_delimiter():
         data
         scientist
     """
-    print("Exercise 7. Split a given string")
+    logger.info("Exercise 7. Split a given string")
     str1 = "Emma-is-a-data-scientist"
     results = str1.split("-")
     for item in results:
-        print(item)
+        logger.info(f"  {item}")
     pass
 
 
@@ -204,11 +208,11 @@ def exercise_08_find_all_occurrences():
     Expected Output:
         The USA count is: 2
     """
-    print("Exercise 8. Find all occurrences of a substring in a given string")
+    logger.info("Exercise 8. Find all occurrences of a substring in a given string")
     str1 = "Welcome to USA. usa awesome, isn't it?"
     search_arg = "usa"
     results = str1.lower().count(search_arg)
-    print(f"The USA count is: {results}")
+    logger.info(f"  The USA count is: {results}")
     pass
 
 
@@ -230,15 +234,15 @@ def exercise_09_balanced_strings_check():
         Case 1: True
         Case 2: False
     """
-    print("Exercise 9. String characters balance test")
+    logger.info("Exercise 9. String characters balance test")
     s1 = "yn"
     s2 = "PyNative"
     results = (s2.lower().count(s1)) >  0
-    print(f"Case 1: {results}")
+    logger.info(f"  Case 1: {results}")
 
     s1 = "ynf"
     results = (s2.lower().count(s1)) >  0
-    print(f"Case 2: {results}")
+    logger.info(f"  Case 2: {results}")
     pass
 
 
@@ -253,12 +257,12 @@ def exercise_10_vowel_counter():
     Expected Output:
         Vowel Count: 3
     """
-    print("Exercise 10. Vowel Counter")
+    logger.info("Exercise 10. Vowel Counter")
     str1 = "Hello World"
     vowel_counter = 0
     for char in str1:
         if char.lower() in "aeiou":
             vowel_counter += 1
-    print(f"Vowel Count: {vowel_counter}")
-    print()
+    logger.info(f"  Vowel Count: {vowel_counter}")
+    logger.info("")
     pass
