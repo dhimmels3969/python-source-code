@@ -4,6 +4,10 @@ import tzdata
 
 from src.common_library import helper_functions as hf
 from datetime import datetime, timedelta
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -30,11 +34,11 @@ def exercise_21_calculate_future_date():
     """
     def display_future_date(input_date_, months_):
         future_date_ = hf.calculate_past_or_future_date(months=months_, input_date=input_date_)
-        print(f"Date {months_} Months From {input_date_.strftime("%Y-%m-%d")}: \
+        logger.info(f"  Date {months_} Months From {input_date_.strftime("%Y-%m-%d")}: \
             {future_date_.strftime("%Y-%m-%d")}")
         pass
 
-    print("Exercise 21: Calculate the Date 4 Months From Today")
+    logger.info("Exercise 21: Calculate the Date 4 Months From Today")
     display_future_date(datetime.now(), 4)
     display_future_date(datetime(2025, 10, 31), 4)
     display_future_date(datetime(2026, 1, 15), 18)
@@ -57,10 +61,10 @@ def exercise_22_find_first_day_of_month():
     Expected Output:
         First day of the month: 2025-08-01
     """
-    print("Exercise 22: Find the First Day of the Month")
+    logger.info("Exercise 22: Find the First Day of the Month")
     given_date = datetime(2025, 8, 17)
     first_day_of_month = given_date.replace(day=1)
-    print(f"First day of the month: {first_day_of_month.strftime("%Y-%m-%d").strip()}")
+    logger.info(f"  First day of the month: {first_day_of_month.strftime("%Y-%m-%d").strip()}")
     pass
 
 
@@ -87,9 +91,9 @@ def exercise_23_find_last_day_of_month():
         return datetime(dt.year, dt.month, info[1])
 
     def display_last_day_of_month(dt):
-        print(f"Last day of {dt.strftime("%B %Y")}: {last_day_of_month(dt).strftime("%Y-%m-%d").strip()}")
+        logger.info(f"  Last day of {dt.strftime("%B %Y")}: {last_day_of_month(dt).strftime("%Y-%m-%d").strip()}")
 
-    print("Exercise 23: Find the Last Day of the Month")
+    logger.info("Exercise 23: Find the Last Day of the Month")
     display_last_day_of_month(datetime.today())
     display_last_day_of_month(datetime(2024, 2, 22))
     pass
@@ -116,13 +120,12 @@ def exercise_24_find_next_date():
         return input_date + timedelta(days= 7 - input_date.weekday())
 
     def display_message(input_date):
-        print(f"Next Monday after {input_date.strftime("%B %d, %Y")}: \
+        logger.info(f"  Next Monday after {input_date.strftime("%B %d, %Y")}: \
             {calculate_following_day_of_week(input_date).strftime('%A %B %d, %Y')}")
 
-    print("Exercise 24: Find the Next Monday")
+    logger.info("Exercise 24: Find the Next Monday")
     display_message(datetime.now().replace(hour = 0, minute=0, second=0, microsecond=0))
     display_message(datetime(2026, 12, 12))
-    # print(f"Next Monday after {date_to_check}: {calculate_next_monday(date_to_check)}")
     pass
 
 
@@ -142,12 +145,12 @@ def exercise_25_round_time_to_nearest_hour():
     Expected Output:
         Rounded to nearest hour: 2025-07-15 15:00:00
     """
-    print("Exercise 25: Round Time to Nearest Hour")
+    logger.info("Exercise 25: Round Time to Nearest Hour")
     dt = datetime(2025, 7, 15, 14, 35, 0)
     if dt.minute >= 30:
         dt = dt + timedelta(hours = 1)
     new_dt = dt.replace(minute = 0, second = 0, microsecond = 0)
-    print(f"Rounded to the Nearest Hour: {new_dt}")
+    logger.info(f"  Rounded to the Nearest Hour: {new_dt}")
     pass
 
 
@@ -167,11 +170,12 @@ def exercise_26_list_all_sundays():
     Expected Output:
         A list of all 52 Sunday dates in 2026, starting with 2026-01-04 and ending with 2026-12-27.
     """
-    print("Exercise 26: List All Sundays in a Year")
+    logger.info("Exercise 26: List All Sundays in a Year")
     basedate = datetime(2026, 1, 1)
     sundays = [(basedate + timedelta(days = i)).strftime("%A %Y-%m-%d") for i in range(0,366) if (basedate + timedelta(days = i)).strftime("%A") == "Sunday"]
-    for sunday in sundays:
-        print(sunday)
+    logger.info(f"  Sundays: {sundays}")
+    # for sunday in sundays:
+    #     logger.info(f"  {sunday}")
     pass
 
 
@@ -192,14 +196,14 @@ def exercise_27_calculate_working_days_between_dates():
     Expected Output:
         Business days between 2025-07-01 and 2025-07-31: 23
     """
-    print("Exercise 27: Calculate Working Days Between Two Dates")
+    logger.info("Exercise 27: Calculate Working Days Between Two Dates")
     start = datetime(2025, 7, 1)
     end = datetime(2025, 7, 31)
     # build list comprehension of all working days in the specified date range
     days_ = [(start + timedelta(days=i)).strftime("%A %B %d, %Y") for i in range(0, 31) if
              (start + timedelta(days=i)).strftime("%A") not in ["Saturday", "Sunday"]]
     # length of the days_ list = number of working days
-    print(f"Business days between 2025-07-01 and 2025-07-31: {len(days_)}")
+    logger.info(f"  Business days between 2025-07-01 and 2025-07-31: {len(days_)}")
     pass
 
 
@@ -219,12 +223,12 @@ def exercise_28_convert_local_time_to_utc():
     Expected Output:
         Local (IST): 2025-07-15 10:30:00+05:30 and UTC: 2025-07-15 05:00:00+00:00
     """
-    print("Exercise 28: Convert Local Time to UTC")
+    logger.info("Exercise 28: Convert Local Time to UTC")
     timestamp_to_check = datetime(2025, 7, 15, 10, 30, 0)
     zone = ZoneInfo("Asia/Kolkata")
     timestamp_to_check = timestamp_to_check.replace(tzinfo=zone)
     utc_timestamp = timestamp_to_check.astimezone(ZoneInfo("UTC"))
-    print(f"Local (IST): {timestamp_to_check} and UTC: {utc_timestamp}")
+    logger.info(f"  Local (IST): {timestamp_to_check} and UTC: {utc_timestamp}")
     pass
 
 
@@ -245,31 +249,31 @@ def exercise_29_current_time_by_city():
         Current times in both cities, formatted clearly
         (actual values will vary by when the program is run).
     """
-    print("#####################################################\nExercise 29: Get Current Time in a Specific City")
+    logger.info("#####################################################\nExercise 29: Get Current Time in a Specific City")
     current_time = datetime.now()
 
     # get timezone for current location
     local_time = datetime.now().astimezone()
-    print(f"Current local time: {local_time}")
+    logger.info(f"Current local time: {local_time}")
     current_timestamp = local_time.astimezone(ZoneInfo("UTC"))
-    print(f"Current local time converted to UTC: {current_timestamp}\n")
+    logger.info(f"Current local time converted to UTC: {current_timestamp}\n")
 
     new_york = ZoneInfo("America/New_York")
     new_york_time = datetime.now(tz=new_york)
-    print(f"Current local time (New York): {new_york_time}")
+    logger.info(f"Current local time (New York): {new_york_time}")
     nyc_timestamp = new_york_time.astimezone(ZoneInfo("UTC"))
-    print(f"New York time converted to UTC: {nyc_timestamp}\n")
+    logger.info(f"New York time converted to UTC: {nyc_timestamp}\n")
 
     tokyo = ZoneInfo("Asia/Tokyo")
     tokyo_time = datetime.now(tz=tokyo)
-    print(f"Current local time (Tokyo): {tokyo_time}")
+    logger.info(f"  Current local time (Tokyo): {tokyo_time}")
     tokyo_timestamp = tokyo_time.astimezone(ZoneInfo("UTC"))
-    print(f"Tokyo time converted to UTC: {tokyo_timestamp}")
-    print()
+    logger.info(f"  Tokyo time converted to UTC: {tokyo_timestamp}")
+    logger.info()
     pass
 
 def exercise_29_current_time_by_city_pynative_solution():
-    print("#####################################################\n"
+    logger.info("#####################################################\n"
           "Exercise 29: Get Current Time in a Specific City - PyNative Solution")
     timezones = {
         "Tokyo": "Asia/Tokyo",
@@ -280,8 +284,8 @@ def exercise_29_current_time_by_city_pynative_solution():
     for city, tz_name in timezones.items():
         current_time = datetime.now(tz=ZoneInfo(tz_name))
         formatted = current_time.strftime("%Y-%m-%d %H:%M:%S %Z")
-        print(f"Current time in {city}: {formatted}")
-    print("#####################################################\n\n")
+        logger.info(f"  Current time in {city}: {formatted}")
+    logger.info("#####################################################\n\n")
 
 ##############################################################################
 def exercise_30_working_days_check():
@@ -299,7 +303,7 @@ def exercise_30_working_days_check():
     Expected Output:
         Date after 10 working days from 2025-07-01: 2025-07-15
     """
-    print("Exercise 30: Calculate Date After N Working Days")
+    logger.info("Exercise 30: Calculate Date After N Working Days")
     start_date = datetime(2025, 7, 1)
     n = 10
     counter = 0
@@ -308,7 +312,7 @@ def exercise_30_working_days_check():
         new_date = new_date + timedelta(days=1)
         if new_date.weekday() < 5:
             counter += 1
-    print(f"Date after {n} working days from {start_date.strftime('%Y-%m-%d')}: {new_date.strftime('%Y-%m-%d')}.")
+    logger.info(f"  Date after {n} working days from {start_date.strftime('%Y-%m-%d')}: {new_date.strftime('%Y-%m-%d')}.")
     pass
 
 

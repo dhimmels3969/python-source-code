@@ -3,6 +3,11 @@ from src.common_library import helper_functions as hf
 from src.date_time_exercises import exercises as dt_01
 from src.date_time_exercises import exercises_02 as dt_02
 from src.date_time_exercises import exercises_03 as dt_03
+import constants
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-date-and-time-exercise/
@@ -23,10 +28,10 @@ class Driver():
         pass
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Date Time Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("Date Time Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = dt_01.exercise_01_print_current_date_and_time()
         results = dt_01.exercise_02_format_datetime()
         results = dt_01.exercise_03_find_day_of_week()
@@ -41,10 +46,10 @@ class Driver():
 
 
 
-        print("")
-        print("#####################################################")
-        print("Date Time Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Date Time Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = dt_02.exercise_11_subtract_week_from_date()
         results = dt_02.exercise_12_add_week_to_date()
         results = dt_02.exercise_13_calculate_days_between_dates()
@@ -57,10 +62,10 @@ class Driver():
         results = dt_02.exercise_20_print_monthly_calendar()
 
 
-        print("")
-        print("#####################################################")
-        print("Date Time Exercises - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Date Time Exercises - 21 through 30")
+        logger.info("#####################################################")
         results = dt_03.exercise_21_calculate_future_date()
         results = dt_03.exercise_22_find_first_day_of_month()
         results = dt_03.exercise_23_find_last_day_of_month()
@@ -73,9 +78,8 @@ class Driver():
         results = dt_03.exercise_29_current_time_by_city_pynative_solution()
         results = dt_03.exercise_30_working_days_check()
 
-        print("")
-        print("#####################################################")
-        print("Date Time Exercises - end")
-        print("#####################################################\n")
+        logger.info("#####################################################")
+        logger.info("Date Time Exercises - end")
+        logger.info("#####################################################")
 
         pass

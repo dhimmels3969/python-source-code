@@ -198,7 +198,9 @@ def exercise_26_rename_multiple_files(root_dir):
     """
     def reset(root_dir, folder_):
         contents = [file for file in os.listdir(folder_) if
-                    "lorem".lower() not in file.lower() and "swapped".lower() not in file.lower()]
+                    "lorem".lower() not in file.lower()
+                    and "swapped".lower() not in file.lower()
+                    and "notes_active".lower() not in file.lower()]
         files_to_copy = ["notes.txt", "data.txt"]
         # delete files in the target folder
         for file in contents:
@@ -214,7 +216,10 @@ def exercise_26_rename_multiple_files(root_dir):
     logger.info("Exercise 26: Rename Multiple Files with Prefix")
     tgt_dir = "../data/file_handling_exercises/dummy"
     reset(root_dir, tgt_dir)
-    contents = [file for file in os.listdir(tgt_dir) if "lorem" not in file and "swapped" not in file]
+    contents = [file for file in os.listdir(tgt_dir)
+                    if "lorem" not in file
+                    and "swapped" not in file
+                    and "notes_active" not in file]
     prefix = "2024"
 
     for file in contents:

@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -21,9 +25,9 @@ def exercise_11_list_slicing():
     Expected Output:
         Middle Three: [30, 40, 50]
     """
-    print(f"Exercise 11. List Slicing: Extract Middle Elements")
+    logger.info(f"Exercise 11. List Slicing: Extract Middle Elements")
     input_list = [10, 20, 30, 40, 50, 60, 70]
-    print(f"Original: {input_list}")
+    logger.info(f"  Original: {input_list}")
     # find mid-point of list. Need to do a boundary change to determine the list contains at least 3 items
     mid_point = len(input_list) // 2
 
@@ -34,7 +38,7 @@ def exercise_11_list_slicing():
 
     # extract the middle 3 values from the list
     middle_three = input_list[start_index:stop_index]
-    print(f"Middle Three: {middle_three}")
+    logger.info(f"  Middle Three: {middle_three}")
     pass
 
 
@@ -56,11 +60,11 @@ def exercise_12_swap_elements_in_list():
         Original: [23, 65, 19, 90]
         Swapped: [19, 65, 23, 90]
     """
-    print(f"Exercise 12. Swap Two Elements at Given Indices")
+    logger.info(f"Exercise 12. Swap Two Elements at Given Indices")
     input_list = [23, 65, 19, 90]
-    print(f"Original: {input_list}")
+    logger.info(f"  Original: {input_list}")
     input_list[0], input_list[2] = input_list[2], input_list[0]
-    print(f"Swapped: {input_list}")
+    logger.info(f"  Swapped: {input_list}")
     pass
 
 
@@ -78,7 +82,7 @@ def exercise_13_access_nested_lists():
     Expected Output:
         Accessed Value: 5
     """
-    print(f"Exercise 13. Access Nested Lists")
+    logger.info(f"Exercise 13. Access Nested Lists")
     found = False
     input_list = [[1, 2], [3, 4, 5], [6, 7]]
     target = 5
@@ -106,7 +110,7 @@ def exercise_13_access_nested_lists():
             else:
                 item_counter += 1
     if results:
-        print(f"Accessed Value Found (row, column): {results}  value = {target}")
+        logger.info(f"  Accessed Value Found (row, column): {results}  value = {target}")
     pass
 
 
@@ -125,13 +129,13 @@ def exercise_14_check_for_specific_item():
     Expected Output:
         Is Tablet in inventory? False
     """
-    print(f"Exercise 14. Check For Specific Item")
+    logger.info(f"Exercise 14. Check For Specific Item")
     input_list = ["Laptop", "Mouse", "Monitor", "Keyboard"]
     target = "Tablet"
     found = False
     if target in input_list:
         found = True
-    print(f"Is {target} in inventory? {found}")
+    logger.info(f"  Is {target} in inventory? {found}")
     pass
 
 
@@ -149,13 +153,13 @@ def exercise_15_find_longest_string_in_list():
     Expected Output:
         Longest word: Exercises
     """
-    print(f"Exercise 15. Find the Longest String in a List")
+    logger.info(f"Exercise 15. Find the Longest String in a List")
     input_list = ["PHP", "Exercises", "Backend", "Python"]
     longest_word = ""
     for word in input_list:
         if len(word) > len(longest_word):
             longest_word = word
-    print(f"Longest word: {longest_word}")
+    logger.info(f"  Longest word: {longest_word}")
     pass
 
 
@@ -174,10 +178,10 @@ def exercise_16_transform_each_item_in_list():
     Expected Output:
         Squared List: [1, 4, 9, 16, 25]
     """
-    print(f"Exercise 16. Turn Every Item of a List into its Square")
+    logger.info(f"Exercise 16. Turn Every Item of a List into its Square")
     input_list = [1, 2, 3, 4, 5]
     squared_list = [X**2 for X in input_list]
-    print(f"Squared List: {squared_list}")
+    logger.info(f"  Squared List: {squared_list}")
     pass
 
 
@@ -195,7 +199,7 @@ def exercise_17_count_occurrences():
     Expected Output:
         The number 10 appears 3 times.
     """
-    print(f"Exercise 17. Count Occurrences of an Item")
+    logger.info(f"Exercise 17. Count Occurrences of an Item")
     input_list = [10, 20, 30, 10, 40, 10, 50]
     target = 10
     frequency_counts = hf.build_dictionary(input_list)
@@ -203,8 +207,8 @@ def exercise_17_count_occurrences():
     # Alternate method using count() function
     number_of_occurrences = input_list.count(target)
     message = f"The number {target} appears {number_of_occurrences} times"
-    print(message)
-    print()
+    logger.info(f"  {message}")
+    logger.info("")
 
     pass
 
@@ -228,11 +232,11 @@ def exercise_18_remove_all_occurrences():
     # Filter the list using a comprehension
     cleaned_list = [x for x in list_v if x != target]
     """
-    print(f"Exercise 18. Remove All Occurrences of a Specific Item")
+    logger.info(f"Exercise 18. Remove All Occurrences of a Specific Item")
     input_list = [5, 20, 15, 20, 25, 50, 20]
     target = 20
     target_list = []
-    print(f"Original List: {input_list}")
+    logger.info(f"  Original List: {input_list}")
     # identify the index(es) where the target is found... store in a list
     for i in range(len(input_list)):
         if input_list[i] == target:
@@ -245,7 +249,7 @@ def exercise_18_remove_all_occurrences():
     for index in target_list:
         input_list.pop(index)
 
-    print(f"Cleaned List: {input_list}")
+    logger.info(f"  Cleaned List: {input_list}")
     pass
 
 
@@ -269,11 +273,11 @@ def exercise_19_remove_empty_strings():
     # filter(None, ...) removes all "Falsy" values (empty strings, 0, None)
     cleaned_names = list(filter(None, names))
     """
-    print(f"Exercise 19. Remove Empty Strings from a List of Strings")
+    logger.info(f"Exercise 19. Remove Empty Strings from a List of Strings")
     input_list = ["Mike", "", "Emma", "Kelly", "", "Brad"]
-    print(f"Original List: {input_list}")
+    logger.info(f"  Original List: {input_list}")
     clean_list = [x for x in input_list if len(x.strip()) > 0]
-    print(f"Cleaned Names: {clean_list}")
+    logger.info(f"  Cleaned Names: {clean_list}")
     pass
 
 
@@ -296,12 +300,12 @@ def exercise_20_remove_duplicates_from_list():
     # Method to remove duplicates while preserving order
     unique_list = list(dict.fromkeys(duplicates))
     """
-    print(f"Exercise 20. Remove Duplicates from a List")
+    logger.info(f"Exercise 20. Remove Duplicates from a List")
     input_list = [10, 20, 10, 30, 40, 40, 20, 50]
     unique_list = []
-    print(f"Original List: {input_list}")
+    logger.info(f"  Original List: {input_list}")
     for i in range(len(input_list)):
         if input_list[i] not in unique_list:
             unique_list.append(input_list[i])
-    print(f"Unique List: {unique_list}")
+    logger.info(f"  Unique List: {unique_list}")
     pass

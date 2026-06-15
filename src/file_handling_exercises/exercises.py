@@ -1,5 +1,6 @@
 from src.common_library import helper_functions as hf
 import os
+import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -23,6 +24,24 @@ def file_handling_setup_dummy_directory(root_dir):
     # verify it exists by calling helper_functions.mkdir
     dummy_directory_exists = hf.mkdir(json_path)
     # print(f"  dummy_directory_exists: {dummy_directory_exists}")
+
+    #########################################################################
+    # 2026-06-14 check if notes_active.txt is found in the dummy directory
+    # if not found copy it notes.txt in the file_handing_exercises folder
+    #########################################################################
+    source_file = hf.build_file_name(root_dir
+                        , "data/file_handling_exercises"
+                        , "notes.txt")
+    target_file = hf.build_file_name(root_dir
+                        , "data/file_handling_exercises/dummy"
+                        , "notes_active.txt")
+    if not hf.file_exists(target_file):
+        with open(source_file, 'rb') as file:
+            content = file.read()
+
+        with open(target_file, 'wb') as file_out:
+            file_out.write(content)
+
     pass
 
 
@@ -30,7 +49,7 @@ def file_handling_setup_dummy_directory(root_dir):
 ##############################################################################
 def exercise_01_write_user_name_to_file(root_dir):
     """
-    Exercise 1: Write User Name to File
+    Exercise 1: Write UserName to File
     Problem Statement: Write a Python program that accepts a user’s
         name as input and writes it to a file called user.txt.
     Purpose: This exercise introduces you to writing data to a file
@@ -158,9 +177,11 @@ def exercise_05_append_data_to_file(root_dir):
         This is a new line.
     """
     logger.info("Exercise 5: Append New Sentence to Existing File")
-    line_to_append = "\nThis is a new line."
+    line_to_append = f"\n[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}] This is a new line."
 
-    file_path = hf.build_file_name(root_dir, "data/file_handling_exercises", "notes.txt")
+    file_path = hf.build_file_name(root_dir
+                    , "data/file_handling_exercises/dummy"
+                    , "notes_active.txt")
     #### open the file and write the data
     #### file writing modes: 'w' write over existing contents,
     #### 'a' append data to existing data

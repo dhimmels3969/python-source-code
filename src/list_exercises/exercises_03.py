@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -21,10 +25,10 @@ def exercise_21_filter_using_list_comprehension():
     Expected Output:
         Even Numbers: [2, 4, 6, 8, 10]
     """
-    print("Exercise 21. List Comprehension for Filtering Numbers")
+    logger.info("Exercise 21. List Comprehension for Filtering Numbers")
     input_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     even_numbers = [x for x in input_list if x % 2 == 0]
-    print(f"Even Numbers: {even_numbers}")
+    logger.info(f"  Even Numbers: {even_numbers}")
     pass
 
 
@@ -45,11 +49,11 @@ def exercise_22_concatenate_lists():
     Expected Output:
         Merged: ['Python', 'is ', 'awesome']
     """
-    print("Exercise 22. Concatenate Two Lists Index-wise")
+    logger.info("Exercise 22. Concatenate Two Lists Index-wise")
     list_1 = ["Py", "is", "awes"]
     list_2 = ["thon", " ", "ome"]
     results = [a+b for a,b in zip(list_1, list_2)]
-    print(f"Merged: {results}")
+    logger.info(f"  Merged: {results}")
     pass
 
 
@@ -72,11 +76,11 @@ def exercise_23_iterate_lists_simultaneously():
         20 200
         30 300
     """
-    print("Exercise 23. Iterate Both Lists Simultaneously")
+    logger.info("Exercise 23. Iterate Both Lists Simultaneously")
     list_1 = [10, 20, 30]
     list_2 = [100, 200, 300]
     for x ,y in zip(list_1, list_2):
-        print(x, y)
+        logger.info(f"  {x}, {y}")
     pass
 
 
@@ -98,13 +102,13 @@ def exercise_24_add_items_to_list():
     Expected Output:
         Updated List: [10, 20, 30, 35, 40, 50]
     """
-    print("Exercise 24. Add New Item After a Specified Item")
+    logger.info("Exercise 24. Add New Item After a Specified Item")
     input_list = [10, 20, 30, 40, 50]
     target = 30
     new_item = 35
     insertion_point = input_list.index(target) + 1
     input_list.insert(insertion_point, new_item)
-    print(f"Updated List: {input_list}")
+    logger.info(f"  Updated List: {input_list}")
     pass
 
 
@@ -125,13 +129,13 @@ def exercise_25_replace_item_in_list():
     Expected Output:
         Modified List: [5, 10, 15, 200, 25]
     """
-    print("Exercise 25. Replace With New Value")
+    logger.info("Exercise 25. Replace With New Value")
     input_list = [5, 10, 15, 20, 25]
     item_to_replace = 20
     new_value = 200
     index = input_list.index(item_to_replace)
     input_list[index] = new_value
-    print(f"Modified List: {input_list}")
+    logger.info(f"  Modified List: {input_list}")
     pass
 
 
@@ -153,7 +157,7 @@ def exercise_26_find_item_in_list():
     Expected Output:
         Second Largest: 34
     """
-    print("Exercise 26. Find Second Largest Number in a List")
+    logger.info("Exercise 26. Find Second Largest Number in a List")
     input_list = [12, 35, 1, 10, 34, 1, 35]
     # convert to set to remove duplicates
     unique_list = set(input_list)
@@ -162,7 +166,7 @@ def exercise_26_find_item_in_list():
     revised_input_list.sort(reverse=True)
     # second largest value resides at index 1
     second_largest = revised_input_list[1]
-    print(f"Second Largest: {second_largest}")
+    logger.info(f"  Second Largest: {second_largest}")
     pass
 
 
@@ -182,13 +186,13 @@ def exercise_27_find_most_frequent_element():
     Expected Output:
         Mode: 3
     """
-    print("Exercise 27. Find Most Frequent Element")
+    logger.info("Exercise 27. Find Most Frequent Element")
     input_list = [1, 3, 3, 2, 1, 1, 4, 3, 3]
     results_dictionary = hf.build_dictionary(input_list)
     most_frequently_occurring_value = max(results_dictionary.values())
     # now find the key associated with the most frequently occurring value (from PyNative)
     mode = max(results_dictionary, key=results_dictionary.get)
-    print(f"Mode: {mode}")
+    logger.info(f"  Mode: {mode}")
     pass
 
 
@@ -209,11 +213,11 @@ def exercise_28_extract_elements_from_list():
     Expected Output:
         Result: ['a', 'd', 'g']
     """
-    print("Exercise 28. Extract Every Nth Element from a List")
+    logger.info("Exercise 28. Extract Every Nth Element from a List")
     input_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     offset = 3
     results = input_list[::offset]
-    print(f"Result: {results}")
+    logger.info(f"  Result: {results}")
     pass
 
 
@@ -232,9 +236,9 @@ def exercise_29_is_list_palindrome():
     Expected Output:
         Is Palindrome: True
     """
-    print("Exercise 29. Check if List is Palindrome")
+    logger.info("Exercise 29. Check if List is Palindrome")
     input_list = [1, 2, 3, 2, 1]
-    print(f"Is Palindrome: {input_list == input_list[::-1]}")
+    logger.info(f"  Is Palindrome: {input_list == input_list[::-1]}")
     pass
 
 
@@ -256,12 +260,12 @@ def exercise_30_find_common_elements():
     Expected Output:
         Common Elements: [20]
     """
-    print("Exercise 30. Find All Common Elements Between Three Lists")
+    logger.info("Exercise 30. Find All Common Elements Between Three Lists")
     list_a = [1, 5, 10, 20]
     list_b = [6, 7, 20, 80, 100]
     list_c = [3, 4, 15, 20, 30, 70, 80]
     common_elements = set(list_a).intersection(set(list_b)).intersection(set(list_c))
-    print(f"Common Elements: {list(common_elements)}")
+    logger.info(f"  Common Elements: {list(common_elements)}")
     pass
 
 

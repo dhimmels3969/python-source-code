@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -27,14 +31,14 @@ def exercise_01_basic_list_operations():
     def empty_list(list_in):
         return len(list_in) == 0
 
-    print(f"Exercise 1. Perform Basic List Operations")
+    logger.info(f"Exercise 1. Perform Basic List Operations")
     numbers = [10, 20, 30, 40, 50]
     blank_list = []
-    print(f"Third element: {numbers[2]}")
-    print(f"Length of list: {len(numbers)}")
-    print(f"Is the list empty? {empty_list(numbers)}")
+    logger.info(f"  Third element: {numbers[2]}")
+    logger.info(f"  Length of list: {len(numbers)}")
+    logger.info(f"  Is the list empty? {empty_list(numbers)}")
 
-    print(f"List Name: blank_list Is it empty? {empty_list(blank_list)}")
+    logger.info(f"  List Name: blank_list Is it empty? {empty_list(blank_list)}")
     pass
 
 
@@ -60,19 +64,19 @@ def exercise_02_perform_list_manipulation():
         Updated (Remove 600): [100, 200, 300, 400, 500]
         Updated (Remove Index 0): [200, 300, 400, 500]
     """
-    print(f"Exercise 2. Perform List Manipulation")
+    logger.info(f"Exercise 2. Perform List Manipulation")
     input_list = [100, 50, 400, 500]
-    print(f"Initial List: {input_list}")
+    logger.info(f"  Initial List: {input_list}")
     input_list[1] = 200
-    print(f"Updated (Change)): {input_list}")
+    logger.info(f"  Updated (Change)): {input_list}")
     input_list.append(600)
-    print(f"Updated (Append)): {input_list}")
+    logger.info(f"  Updated (Append)): {input_list}")
     input_list.insert(2, 300)
-    print(f"Updated (Insert): {input_list}")
+    logger.info(f"  Updated (Insert): {input_list}")
     input_list.remove(600)
-    print(f"Updated (Remove 600): {input_list}")
+    logger.info(f"  Updated (Remove 600): {input_list}")
     input_list.pop(0)
-    print(f"Updated (Remove Index 0): {input_list}")
+    logger.info(f"  Updated (Remove Index 0): {input_list}")
     pass
 
 
@@ -91,12 +95,12 @@ def exercise_03_calculate_stats():
         Sum: 150
         Average: 30.0
     """
-    print(f"Exercise 3. Sum and Average of All Numbers in a List")
+    logger.info(f"Exercise 3. Sum and Average of All Numbers in a List")
     numbers = [10, 20, 30, 40, 50]
     numbers_sum = sum(numbers)
     numbers_avg = sum(numbers) / len(numbers)
-    print(f"Sum: {numbers_sum}")
-    print(f"Average: {numbers_avg}")
+    logger.info(f"  Sum: {numbers_sum}")
+    logger.info(f"  Average: {numbers_avg}")
     pass
 
 
@@ -113,12 +117,12 @@ def exercise_04_find_min_and_max():
         Maximum: 89
         Minimum: 2
     """
-    print(f"Exercise 4. Find Maximum and Minimum from List")
+    logger.info(f"Exercise 4. Find Maximum and Minimum from List")
     input_list = [45, 12, 89, 2, 67]
     max1 = max(input_list)
     min2 = min(input_list)
-    print(f"Maximum: {max1}")
-    print(f"Minimum: {min2}")
+    logger.info(f"  Maximum: {max1}")
+    logger.info(f"  Minimum: {min2}")
     max_value = input_list[0]
     min_value = input_list[0]
     for i in range(1, len(input_list)):
@@ -126,7 +130,7 @@ def exercise_04_find_min_and_max():
             max_value = input_list[i]
         if input_list[i] < min_value:
             min_value = input_list[i]
-    print(f"Maximum: {max_value}, Minimum: {min_value}")
+    logger.info(f"  Maximum: {max_value}, Minimum: {min_value}")
     pass
 
 
@@ -143,12 +147,12 @@ def exercise_05_calculate_product():
     Expected Output:
         Product: 210
     """
-    print(f"Exercise 5. Calculate the Product of All Elements")
+    logger.info(f"Exercise 5. Calculate the Product of All Elements")
     input_list = [2, 3, 5, 7]
     results = 1
     for i in range(0, len(input_list)):
         results *= input_list[i]
-    print(f"Product: {results}")
+    logger.info(f"  Product: {results}")
     pass
 
 
@@ -169,7 +173,7 @@ def exercise_06_count_evens_and_odds():
         Even numbers: 3
         Odd numbers: 4
     """
-    print(f"Exercise 6. Count Even and Odd Numbers")
+    logger.info(f"Exercise 6. Count Even and Odd Numbers")
     input_list = [10, 21, 4, 45, 66, 93, 11]
     odds_count = 0
     even_count = 0
@@ -178,8 +182,8 @@ def exercise_06_count_evens_and_odds():
             even_count += 1
         else:
             odds_count += 1
-    print(f"Even numbers: {even_count}")
-    print(f"Odd numbers: {odds_count}")
+    logger.info(f"  Even numbers: {even_count}")
+    logger.info(f"   Odd numbers: {odds_count}")
     pass
 
 
@@ -198,10 +202,10 @@ def exercise_07_reverse_a_list():
     Expected Output:
         Reversed List: [500, 400, 300, 200, 100]
     """
-    print(f"Exercise 7. Reverse a List")
+    logger.info(f"Exercise 7. Reverse a List")
     input_list = [100, 200, 300, 400, 500]
     reversed_list = input_list[::-1]
-    print(f"Reversed List: {reversed_list}")
+    logger.info(f"  Reversed List: {reversed_list}")
     pass
 
 
@@ -219,10 +223,10 @@ def exercise_08_sort_list_of_numbers():
     Expected Output:
         Sorted List: [3, 12, 22, 56, 89]
     """
-    print(f"Exercise 8. Sort a List")
+    logger.info(f"Exercise 8. Sort a List")
     input_list = [56, 12, 89, 3, 22]
     sorted_list = sorted(input_list)
-    print(f"Sorted List: {sorted_list}")
+    logger.info(f"  Sorted List: {sorted_list}")
     pass
 
 
@@ -243,16 +247,16 @@ def exercise_09_create_copy_of_list():
         Copy: ['Apple', 'Banana', 'Cherry']
         (Verification: Modifying copy doesn't hurt original!)
     """
-    print(f"Exercise 9. Create a Copy of a List")
+    logger.info(f"Exercise 9. Create a Copy of a List")
     input_list = ["Apple", "Banana", "Cherry"]
     copy_of_input_list = input_list.copy()
-    print(f"Original: {input_list}")
-    print(f"Copy: {copy_of_input_list}")
+    logger.info(f"  Original: {input_list}")
+    logger.info(f"      Copy: {copy_of_input_list}")
     # modify the copy and show the results
-    print("------------------------------------- After updating copy_of_input_list")
+    logger.info("  ---------- After updating copy_of_input_list")
     copy_of_input_list[1] = "Tangelo"
-    print(f"Original: {input_list}")
-    print(f"Copy (After update): {copy_of_input_list}")
+    logger.info(f"             Original: {input_list}")
+    logger.info(f"  Copy (After update): {copy_of_input_list}")
     pass
 
 
@@ -270,12 +274,12 @@ def exercise_10_combine_two_lists():
     Expected Output:
         Combined List: ['Physics', 'Chemistry', 'Maths', 'Biology']
     """
-    print(f"Exercise 10. Combine Two Lists")
+    logger.info(f"Exercise 10. Combine Two Lists")
     list_a = ["Physics", "Chemistry"]
     list_b = ["Maths", "Biology"]
     # append list_b to the end of list_a using the "extend" method.
     list_a.extend(list_b)
-    print(f"Combined List: {list_a}")
+    logger.info(f"  Combined List: {list_a}")
     pass
 
 

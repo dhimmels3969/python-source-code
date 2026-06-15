@@ -1,4 +1,9 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 
 #
 # Exercises found at web page https://pynative.com/python-data-structure-exercise-for-beginners/
@@ -26,15 +31,15 @@ def exercise_01_build_output_list_from_two_input_lists():
         Printing Final third list
         [6, 12, 18, 4, 12, 20, 28]
     """
-    print("Exercise 1: List Creation using two lists")
+    logger.info("Exercise 1: List Creation using two lists")
     l1 = [3, 6, 9, 12, 15, 18, 21]
     l2 = [4, 8, 12, 16, 20, 24, 28]
     l1_odds = l1[1::2]
     l2_evens = l2[0::2]
     output_list = l1_odds + l2_evens
-    print(f"Element at odd-index positions from list one\n{l1_odds}")
-    print(f"Element at even-index positions from list two\n{l2_evens}")
-    print(f"Printing Final third list\n{output_list}")
+    logger.info(f"  Element at odd-index positions from list one  {l1_odds}")
+    logger.info(f"  Element at even-index positions from list two  {l2_evens}")
+    logger.info(f"  Printing Final third list  {output_list}")
     pass
 
 
@@ -52,16 +57,16 @@ def exercise_02_add_to_remove_from_list():
         List after Adding element at index 2  [34, 54, 11, 67, 89, 43, 94]
         List after Adding element at last  [34, 54, 11, 67, 89, 43, 94, 11]
     """
-    print("Exercise 2: Remove and add item in a list")
+    logger.info("Exercise 2: Remove and add item in a list")
     # list1 = [54, 44, 27, 79, 91, 41]
     list1 = [34, 54, 67, 89, 11, 43, 94]
     item_to_remove = list1[4]
     list1.remove(item_to_remove)
-    print(f"List After removing element at index 4  {list1}")
+    logger.info(f"  List After removing element at index 4  {list1}")
     list1.insert(2, item_to_remove)
-    print(f"List After adding element at index 2  {list1}")
+    logger.info(f"  List After adding element at index 2  {list1}")
     list1.append(item_to_remove)
-    print(f"List After adding element at last  {list1}")
+    logger.info(f"  List After adding element at last  {list1}")
     pass
 
 
@@ -80,7 +85,7 @@ def exercise_03_slice_list():
         Chunk  3 [78, 45, 89]
         After reversing it  [89, 45, 78]
     """
-    print("Exercise 3: Slice list into 3 equal chunks and reverse each chunk")
+    logger.info("Exercise 3: Slice list into 3 equal chunks and reverse each chunk")
     sample_list = [11, 45, 8, 23, 14, 12, 78, 45, 89]
     sample_size = len(sample_list) // 3
     offset = 0
@@ -91,8 +96,8 @@ def exercise_03_slice_list():
     # display the results...
     for i in range(len(chunk_list)):
         item = chunk_list[i]
-        print(f"Chunk {i + 1} : {item}")
-        print(f"After reversing it  {item[::-1]}")
+        logger.info(f"  Chunk {i + 1} : {item}")
+        logger.info(f"  After reversing it  {item[::-1]}")
     pass
 
 
@@ -108,11 +113,11 @@ def exercise_04_count_occurrences():
     Expected Output:
         Printing count of each item   {11: 2, 45: 3, 8: 1, 23: 2, 89: 1}
     """
-    print("Exercise 4: Count the occurrence of each element from a list")
+    logger.info("Exercise 4: Count the occurrence of each element from a list")
     sample_list = [11, 45, 8, 11, 23, 45, 23, 45, 89]
     results_dictionary = hf.build_dictionary(sample_list)
-    message = f" Printing count of each item  {results_dictionary}"
-    print(message)
+    message = f"Printing count of each item  {results_dictionary}"
+    logger.info(f"  {message}")
     pass
 
 
@@ -129,12 +134,12 @@ def exercise_05_build_swt_from_paired_elements():
     Expected Output:
         Result is  {(6, 36), (8, 64), (4, 16), (5, 25), (3, 9), (7, 49), (2, 4)}
     """
-    print("Exercise 5: Paired Elements from Two Lists as a Set")
+    logger.info("Exercise 5: Paired Elements from Two Lists as a Set")
     first_list = [2, 3, 4, 5, 6, 7, 8]
     second_list = [4, 9, 16, 25, 36, 49, 64]
     resultset = set(zip(first_list, second_list))
     message = f"Result is  {sorted(resultset)}"
-    print(message)
+    logger.info(f"  {message}")
     pass
 
 
@@ -152,15 +157,15 @@ def exercise_06_set_intersection_and_removal():
         Intersection is  {57, 83, 29}
         First Set after removing common element  {65, 42, 78, 23}
     """
-    print("Exercise 6: Set Intersection and Removal")
+    logger.info("Exercise 6: Set Intersection and Removal")
     first_set = {23, 42, 65, 57, 78, 83, 29}
     second_set = {57, 83, 29, 67, 73, 43, 48}
     third_set = first_set & second_set
-    print(f"Intersection is  {third_set}")
+    logger.info(f"  Intersection is  {third_set}")
     # remove the common elements (stored in third set) from the first set.
     for item in third_set:
         first_set.remove(item)
-    print(f"First set after removing common element  {first_set}")
+    logger.info(f"  First set after removing common element  {first_set}")
     pass
 
 
@@ -184,7 +189,7 @@ def exercise_07_subset_superset_test():
         First Set  set()
         Second Set  {67, 73, 43, 48, 83, 57, 29}
     """
-    print("Exercise 7: Subset or Superset of another set")
+    logger.info("Exercise 7: Subset or Superset of another set")
     first_set = {27, 43, 34}
     second_set = {34, 93, 22, 27, 43, 53, 48}
     # perform tests...
@@ -193,17 +198,15 @@ def exercise_07_subset_superset_test():
     s2_subset_of_s1 = second_set.issubset(first_set)
     s2_superset_of_s1 = second_set.issuperset(first_set)
     # print results...
-    print(f"First set is subset of second set - {s1_subset_of_s2}")
-    print(f"Second set is subset of First set - {s2_subset_of_s1}")
-    print()
-    print(f"First set is Super set of second set - {s1_superset_of_s2}")
-    print(f"Second set is Super set of First set - {s2_superset_of_s1}")
-    print()
+    logger.info(f"  First set is subset of second set - {s1_subset_of_s2}")
+    logger.info(f"  Second set is subset of First set - {s2_subset_of_s1}")
+    logger.info(f"  First set is Super set of second set - {s1_superset_of_s2}")
+    logger.info(f"  Second set is Super set of First set - {s2_superset_of_s1}")
 
     if s1_subset_of_s2 or s2_superset_of_s1:
         first_set.clear()
-    print(f"First set  {first_set}")
-    print(f"Second set  {second_set}")
+    logger.info(f"  First set  {first_set}")
+    logger.info(f"  Second set  {second_set}")
     pass
 
 
@@ -221,7 +224,7 @@ def exercise_08_filter_list_against_dictionary():
     Expected Outcome:
         After removing unwanted elements from list [47, 69, 76, 97]
     """
-    print("Exercise 8: Filter List Against Dictionary")
+    logger.info("Exercise 8: Filter List Against Dictionary")
     roll_number = [47, 64, 69, 37, 76, 83, 95, 97]
     sample_dict = {'Jhon': 47, 'Emma': 69, 'Kelly': 76, 'Jason': 97}
 
@@ -233,7 +236,7 @@ def exercise_08_filter_list_against_dictionary():
     for i in range(len(roll_number) - 1, 0, -1):
         if roll_number[i] not in sample_dict.values():
             roll_number.remove(roll_number[i])
-    print(f"After removing unwanted elements from list {roll_number}")
+    logger.info(f"  After removing unwanted elements from list {roll_number}")
     pass
 
 
@@ -249,14 +252,14 @@ def exercise_09_unique_dictionary_values():
     Expected Outcome:
         [47, 52, 44, 53, 54]
     """
-    print("Exercise 9: Unique Dictionary Values to List")
+    logger.info("Exercise 9: Unique Dictionary Values to List")
     speed = {'jan': 47, 'feb': 52, 'march': 47, 'April': 44, 'May': 52, 'June': 53, 'july': 54, 'Aug': 44, 'Sept': 54}
     final_results = []
 
     for value in speed.values():
         if value not in final_results:
             final_results.append(value)
-    print(f"Unique List: {final_results}")
+    logger.info(f"  Unique List: {final_results}")
     pass
 
 
@@ -275,7 +278,7 @@ def exercise_10_remove_duplicates_from_list():
         min: 41
         max: 99
     """
-    print("Exercise 10: Remove Duplicates from a list")
+    logger.info("Exercise 10: Remove Duplicates from a list")
     sample_list = [87, 45, 41, 65, 94, 41, 99, 94]
     unique_list = []
     for item in sample_list:
@@ -284,10 +287,10 @@ def exercise_10_remove_duplicates_from_list():
     unique_set = tuple(unique_list)
     unique_set_min = min(unique_set)
     unique_set_max = max(unique_set)
-    print(f"Unique Items: {unique_list}")
-    print(f"tuple: {unique_set}")
-    print(f"min: {unique_set_min}")
-    print(f"max: {unique_set_max}")
+    logger.info(f"  Unique Items: {unique_list}")
+    logger.info(f"  tuple: {unique_set}")
+    logger.info(f"  min: {unique_set_min}")
+    logger.info(f"  max: {unique_set_max}")
     pass
 
 

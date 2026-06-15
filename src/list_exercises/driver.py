@@ -5,7 +5,11 @@ from src.list_exercises import exercises_02 as list2
 from src.list_exercises import exercises_03 as list3
 from src.list_exercises import exercises_04 as list4
 from src.list_exercises import exercises_05 as list5
+import constants
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class Driver():
 
@@ -21,9 +25,10 @@ class Driver():
         pass
 
     def run(self):
-        print("#####################################################")
-        print("List Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("List Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = list1.exercise_01_basic_list_operations()
         results = list1.exercise_02_perform_list_manipulation()
         results = list1.exercise_03_calculate_stats()
@@ -36,10 +41,10 @@ class Driver():
         results = list1.exercise_10_combine_two_lists()
 
 
-        print("")
-        print("#####################################################")
-        print("List Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("List Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = list2.exercise_11_list_slicing()
         results = list2.exercise_12_swap_elements_in_list()
         results = list2.exercise_13_access_nested_lists()
@@ -51,10 +56,10 @@ class Driver():
         results = list2.exercise_19_remove_empty_strings()
         results = list2.exercise_20_remove_duplicates_from_list()
 
-        print("")
-        print("#####################################################")
-        print("List Exercises - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("List Exercises - 21 through 30")
+        logger.info("#####################################################")
         results = list3.exercise_21_filter_using_list_comprehension()
         results = list3.exercise_22_concatenate_lists()
         results = list3.exercise_23_iterate_lists_simultaneously()
@@ -66,10 +71,10 @@ class Driver():
         results = list3.exercise_29_is_list_palindrome()
         results = list3.exercise_30_find_common_elements()
 
-        print("")
-        print("#####################################################")
-        print("List Exercises - 31 through 40")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("List Exercises - 31 through 40")
+        logger.info("#####################################################")
         results = list4.exercise_31_filter_by_value_length()
         results = list4.exercise_32_sorted_list_check()
         results = list4.exercise_33_list_to_dictionary_conversion()
@@ -81,16 +86,16 @@ class Driver():
         results = list4.exercise_39_flatten_deeply_nested_lists()
         results = list4.exercise_40_calculate_cumulative_sum()
 
-        print("")
-        print("#####################################################")
-        print("List Exercises - 41 through 45")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("List Exercises - 41 through 45")
+        logger.info("#####################################################")
         results = list5.exercise_41_rotate_list_to_the_right()
         results = list5.exercise_42_split_list_into_chunks()
         results = list5.exercise_43_move_zeros_to_end_of_list()
         results = list5.exercise_44_generate_prime_numbers()
         results = list5.exercise_45_find_all_subsets()
-        print("#####################################################")
-        print("List Exercises - end")
-        print("#####################################################\n")
+        logger.info("#####################################################")
+        logger.info("List Exercises - end")
+        logger.info("#####################################################\n")
         pass

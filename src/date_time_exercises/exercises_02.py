@@ -1,6 +1,10 @@
 from src.common_library import helper_functions as hf
 from datetime import datetime, date, time, timedelta
 import calendar
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-date-and-time-exercise/
@@ -24,10 +28,10 @@ def exercise_11_subtract_week_from_date():
     Expected Output:
         Date after subtracting one week: 2025-03-08 00:00:00
     """
-    print("Exercise 11: Subtract Week From a Given Date")
+    logger.info("Exercise 11: Subtract Week From a Given Date")
     date = datetime(2025, 3, 15)
     revised_date = date + timedelta(days = -7)
-    print(f"Date after subtracting one week: {revised_date}")
+    logger.info(f"  Date after subtracting one week: {revised_date}")
     pass
 
 
@@ -47,10 +51,10 @@ def exercise_12_add_week_to_date():
     Expected Output:
         Date after adding one week: 2025-03-22 00:00:00
     """
-    print("Exercise 12: Add Week to Given Date")
+    logger.info("Exercise 12: Add Week to Given Date")
     date = datetime(2025, 3, 15)
     revised_date = date + timedelta(days = 7)
-    print(f"Date after adding one week: {revised_date}")
+    logger.info(f"  Date after adding one week: {revised_date}")
     pass
 
 
@@ -71,11 +75,11 @@ def exercise_13_calculate_days_between_dates():
     Expected Output:
         Days between dates: 73
     """
-    print("Exercise 13: Calculate Days Between Two Dates")
+    logger.info("Exercise 13: Calculate Days Between Two Dates")
     date1 = datetime(2025, 1, 1)
     date2 = datetime(2025, 3, 15)
     elapsed_time = date2 - date1
-    print(f"Days between dates: {elapsed_time.days}")
+    logger.info(f"  Days between dates: {elapsed_time.days}")
     pass
 
 
@@ -102,10 +106,10 @@ def exercise_14_convert_unix_timestamp():
         >>> print(datetime.fromtimestamp(1672552800))
         2023-01-01 00:00:00
     """
-    print("Exercise 14: Convert Unix Timestamp to Datetime")
+    logger.info("Exercise 14: Convert Unix Timestamp to Datetime")
     timestamp = 1672531200
     resolved_timestamp = datetime.fromtimestamp(timestamp)
-    print(f"Datetime from timestamp: {resolved_timestamp}")
+    logger.info(f"  Datetime from timestamp: {resolved_timestamp}")
     pass
 
 
@@ -126,10 +130,10 @@ def exercise_15_get_iso_week_number():
     Expected Output:
         ISO week number: 1
     """
-    print("Exercise 15: Get ISO Week Number")
+    logger.info("Exercise 15: Get ISO Week Number")
     date = datetime(2026, 1, 1)
     week_number = date.strftime("%V")
-    print(f"ISO week number: {int(week_number)}")
+    logger.info(f"  ISO week number: {int(week_number)}")
     pass
 
 
@@ -150,10 +154,10 @@ def exercise_16_subtract_hours_minutes_from_current_time():
         5 hours and 30 minutes before now: 2025-07-15 08:45:00.123456
         (actual value will vary)
     """
-    print("Exercise 16: Subtract 5 Hours and 30 Minutes")
+    logger.info("Exercise 16: Subtract 5 Hours and 30 Minutes")
     current_time = datetime.now()
     previous_time = current_time + timedelta(hours=-5, minutes=-30)
-    print(f"5 hours and 30 minutes before now: {previous_time}")
+    logger.info(f"  5 hours and 30 minutes before now: {previous_time}")
     pass
 
 
@@ -181,8 +185,8 @@ def exercise_17_leap_year_check():
         #     year % 400 == 0
 
     def leap_year_check(year):
-        print(f"{year} is a leap year: {check_for_leap_year(year)}")
-    print("Exercise 17: Check for Leap Year")
+        logger.info(f"  {year} is a leap year: {check_for_leap_year(year)}")
+    logger.info("Exercise 17: Check for Leap Year")
 
     leap_year_check(1900)
     leap_year_check(2000)
@@ -207,10 +211,10 @@ def exercise_18_calculate_age_in_days():
     Expected Output:
         Age in days: 10992 (actual value will vary based on today’s date)
     """
-    print("Exercise 18: Calculate Age in Days")
+    logger.info("Exercise 18: Calculate Age in Days")
     birthdate = datetime(1995, 6, 15)
     elapsed_time = datetime.now() - birthdate
-    print(f"Age in days: {elapsed_time.days}")
+    logger.info(f"  Age in days: {elapsed_time.days}")
     pass
 
 
@@ -230,11 +234,11 @@ def exercise_19_difference_in_seconds():
     Expected Output:
         Difference in seconds: 9930.0
     """
-    print("Exercise 19: Difference in Seconds")
+    logger.info("Exercise 19: Difference in Seconds")
     dt1 = datetime(2025, 1, 1, 9, 0, 0)
     dt2 = datetime(2025, 1, 1, 11, 45, 30)
     elapsed_time = dt2 - dt1
-    print(f"Difference in seconds: {elapsed_time.seconds}")
+    logger.info(f"  Difference in seconds: {elapsed_time.seconds}")
     pass
 
 
@@ -259,8 +263,8 @@ def exercise_20_print_monthly_calendar():
             21 22 23 24 25 26 27
             28 29 30 31
     """
-    print("Exercise 20: Print a Monthly Calendar")
-    print(calendar.month(2025, 7))
+    logger.info("Exercise 20: Print a Monthly Calendar")
+    logger.info(calendar.month(2025, 7))
     pass
 
 

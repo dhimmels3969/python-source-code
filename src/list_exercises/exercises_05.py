@@ -1,5 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-list-exercise-with-solutions/
@@ -23,13 +26,13 @@ def exercise_41_rotate_list_to_the_right():
     Expected Output:
         Rotated List: [3, 4, 5, 1, 2]
     """
-    print("Exercise 41. Rotate a List to the right by k positions")
+    logger.info("Exercise 41. Rotate a List to the right by k positions")
     input_list = [1, 2, 3, 4, 5]
     k = 2
     head = input_list[:k:]
     tail = input_list[k::]
     results = tail + head
-    print(f"Rotated List: {results}")
+    logger.info(f"  Rotated List: {results}")
     pass
 
 
@@ -54,11 +57,11 @@ def exercise_42_split_list_into_chunks():
     Solution from PyNative website
     [ myList[i: i + N]  for i in range(0, len(myList) , N)]
     """
-    print("Exercise 42. Split List into Chunks")
+    logger.info("Exercise 42. Split List into Chunks")
     input_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     N = 3
     results = [input_list[i * N: i * N + N] for i in range(0, len(input_list) // N + 1)]
-    print(f"Chunks: {results}")
+    logger.info(f"  Chunks: {results}")
     pass
 
 
@@ -79,10 +82,10 @@ def exercise_43_move_zeros_to_end_of_list():
     Expected Output:
         Result: [1, 3, 12, 0, 0]
     """
-    print("Exercise 43. Move All Zeros to the End (Maintaining Order)")
+    logger.info("Exercise 43. Move All Zeros to the End (Maintaining Order)")
     input_list = [0, 1, 0, 3, 12]
     result = [x for x in input_list if x != 0] + [x for x in input_list if x == 0]
-    print(f"Result: {result}")
+    logger.info(f"  Result: {result}")
     pass
 
 
@@ -111,10 +114,10 @@ def exercise_44_generate_prime_numbers():
             primes = [x for x in range(2, n + 1) if x not in composites]
             return primes
     """
-    print("Exercise 44. Generate Prime Numbers using List Comprehension")
+    logger.info("Exercise 44. Generate Prime Numbers using List Comprehension")
     n = 20
     prime_list = [x for x in range(n) if hf.is_prime_number(x) > 0]
-    print(f"Primes: {prime_list}")
+    logger.info(f"  Primes: {prime_list}")
     pass
 
 
@@ -149,7 +152,7 @@ def exercise_45_find_all_subsets():
     base_list = [1, 2, 3]
     subsets = get_power_set(base_list)
 
-    print("Exercise 45. Find All Subsets of a List (Power Set)")
+    logger.info("Exercise 45. Find All Subsets of a List (Power Set)")
     # input_list = [1, 2, 3]
     # final_results = []
     # final_results.append([])
@@ -158,7 +161,7 @@ def exercise_45_find_all_subsets():
     # l3 = sorted(l1 + l2)
     # final_results.append(l3)
     # final_results.append(input_list)
-    print(f"Subsets: {subsets}")
+    logger.info(f"  Subsets: {subsets}")
     pass
 
 

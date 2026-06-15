@@ -1,5 +1,9 @@
 from src.common_library import helper_functions as hf
 from datetime import datetime, date, time
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -25,9 +29,9 @@ def exercise_01_print_current_date_and_time():
         Current date and time: 2025-01-15 14:23:45.123456
         (output will vary based on when the program runs)
     """
-    print("Exercise 1: Print Current Date and Time")
+    logger.info("Exercise 1: Print Current Date and Time")
     current_date = datetime.now()
-    print("Current date and time: ", current_date)
+    logger.info(f"  Current date and time: {current_date}")
     pass
 
 
@@ -47,9 +51,9 @@ def exercise_02_format_datetime():
     Expected Output:
         Formatted: 15-Jan-2025 02:23:45 PM (output will vary based on when the program runs)
     """
-    print("Exercise 2: Format DateTime")
+    logger.info("Exercise 2: Format DateTime")
     timestamp = datetime.now().strftime('%d-%b-%Y %I.%M.%S %p')
-    print(f"Formatted: {timestamp}")
+    logger.info(f"  Formatted: {timestamp}")
     pass
 
 
@@ -68,9 +72,9 @@ def exercise_03_find_day_of_week():
     Expected Output:
         Day of the week: Wednesday
     """
-    print("Exercise 3: Find Day of Week")
+    logger.info("Exercise 3: Find Day of Week")
     date = datetime(2025, 1, 15)
-    print(f"Day of the week: {date.strftime('%A')}")
+    logger.info(f"  Day of the week: {date.strftime('%A')}")
     pass
 
 
@@ -89,9 +93,9 @@ def exercise_04_convert_datetime_to_string():
     Expected Output:
         DateTime as string: 2025-06-15 10:30:45
     """
-    print("Exercise 4: Convert Datetime into String")
+    logger.info("Exercise 4: Convert Datetime into String")
     dt = datetime(2025, 6, 15, 10, 30, 45)
-    print(f"DateTime as string: {dt.strftime('%Y-%m-%d %I:%M:%S')}")
+    logger.info(f"  DateTime as string: {dt.strftime('%Y-%m-%d %I:%M:%S')}")
     pass
 
 
@@ -117,14 +121,14 @@ def exercise_05_extract_components():
         Minute: 35
         Second: 50
     """
-    print("Exercise 5: Extract Components")
+    logger.info("Exercise 5: Extract Components")
     dt = datetime(2025, 8, 20, 14, 35, 50)
-    print(f"Year: {dt.year}")
-    print(f"Month: {dt.month}")
-    print(f"Day: {dt.day}")
-    print(f"Hour: {dt.hour}")
-    print(f"Minute: {dt.minute}")
-    print(f"Second: {dt.second}")
+    logger.info(f"  Year: {dt.year}")
+    logger.info(f"  Month: {dt.month}")
+    logger.info(f"  Day: {dt.day}")
+    logger.info(f"  Hour: {dt.hour}")
+    logger.info(f"  Minute: {dt.minute}")
+    logger.info(f"  Second: {dt.second}")
     pass
 
 
@@ -143,9 +147,9 @@ def exercise_06_print_time_with_am_pm():
     Expected Output:
         Current time: 02:30 PM (output will vary based on when the program runs)
     """
-    print("Exercise 6: Print Time with AM/PM")
+    logger.info("Exercise 6: Print Time with AM/PM")
     current_time = datetime.now()
-    print(f"Current time: {current_time.strftime('%I.%M %p')}")
+    logger.info(f"  Current time: {current_time.strftime('%I.%M %p')}")
     pass
 
 
@@ -166,9 +170,9 @@ def exercise_07_print_time_in_milliseconds():
         Current time with milliseconds: 14:23:45.123 (output will vary based
         on when the program runs)
     """
-    print("Exercise 7: Print Current Time with milliseconds")
+    logger.info("Exercise 7: Print Current Time with milliseconds")
     current_time = datetime.now()
-    print(f"Current time with milliseconds: {current_time.strftime('%I:%M:%S.%f')}")
+    logger.info(f"  Current time with milliseconds: {current_time.strftime('%I:%M:%S.%f')}")
     pass
 
 
@@ -188,9 +192,9 @@ def exercise_08_get_day_of_year():
     Expected Output:
         Day of the year: 74
     """
-    print("Exercise 8: Get Day of the Year")
+    logger.info("Exercise 8: Get Day of the Year")
     date = datetime(2025, 3, 15)
-    print(f"Day of the year: {date.timetuple().tm_yday}")
+    logger.info(f"  Day of the year: {date.timetuple().tm_yday}")
     pass
 
 
@@ -211,11 +215,11 @@ def exercise_09_combine_date_and_time():
     Expected Output:
         Combined datetime: 2025-05-20 09:45:00
     """
-    print("Exercise 9: Combine Date and Time Objects")
+    logger.info("Exercise 9: Combine Date and Time Objects")
     d = date(2025, 5, 20)
     t = time(9, 45, 0)
     new_date = datetime.combine(d, t)
-    print(f"Combined date: {new_date}")
+    logger.info(f"  Combined date: {new_date}")
     pass
 
 
@@ -236,13 +240,13 @@ def exercise_10_convert_string_to_datetime():
     Expected Output:
         DateTime object: 2025-01-20 00:00:00
     """
-    print("Exercise 10: Convert String Into Datetime Object")
+    logger.info("Exercise 10: Convert String Into Datetime Object")
     date_string = "20 January, 2025"
     try:
         results = datetime.strptime(date_string, "%d %B, %Y")
-        print(f"DateTime object: {results.strftime("%Y-%m-%d %H:%M:%S")}")
+        logger.info(f"  DateTime object: {results.strftime("%Y-%m-%d %H:%M:%S")}")
     except ValueError as e:
-        print(f"Date String is not in correct format... {e}")
+        logger.error(f"  Date String is not in correct format... {e}")
     pass
 
 

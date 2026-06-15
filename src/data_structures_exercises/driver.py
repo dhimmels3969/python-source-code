@@ -1,5 +1,10 @@
 from src.common_library import helper_functions as hf
 from src.data_structures_exercises import exercises as ds1
+import constants
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 class Driver():
@@ -17,10 +22,10 @@ class Driver():
         pass
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Data Structure Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("Data Structure Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = ds1.exercise_01_build_output_list_from_two_input_lists()
         results = ds1.exercise_02_add_to_remove_from_list()
         results = ds1.exercise_03_slice_list()
@@ -31,7 +36,7 @@ class Driver():
         results = ds1.exercise_08_filter_list_against_dictionary()
         results = ds1.exercise_09_unique_dictionary_values()
         results = ds1.exercise_10_remove_duplicates_from_list()
-        print()
+        logger.info(constants.THREE_BLANK_LINES)
 
 
 
