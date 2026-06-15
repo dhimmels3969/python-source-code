@@ -2,6 +2,11 @@ from src.common_library import helper_functions as hf
 from src.set_exercises import exercises as set1
 from src.set_exercises import exercises_02 as set2
 from src.set_exercises import exercises_03 as set3
+import constants
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-set-exercise-with-solutions/>
@@ -21,10 +26,10 @@ class Driver():
         pass
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Set Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("Set Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = set1.exercise_01_basic_set_operations()
         results = set1.exercise_02_clear_all_elements()
         results = set1.exercise_03_find_set_length()
@@ -37,10 +42,10 @@ class Driver():
         results = set1.exercise_10_sum_elements()
 
 
-        print("")
-        print("#####################################################")
-        print("Set Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Set Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = set2.exercise_11_add_elements()
         results = set2.exercise_12_update_with_multiple_iterables()
         results = set2.exercise_13_subset_superset_check()
@@ -52,10 +57,10 @@ class Driver():
         results = set2.exercise_19_pop_elements()
         results = set2.exercise_20_filter_set()
 
-        print("")
-        print("#####################################################")
-        print("Set Exercises - 21 through 31")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Set Exercises - 21 through 31")
+        logger.info("#####################################################")
         results = set3.exercise_21_common_elements_check()
         results = set3.exercise_22_count_unique_words()
         results = set3.exercise_23_convert_to_joined_string()
@@ -67,8 +72,8 @@ class Driver():
         results = set3.exercise_29_tuples_test()
         results = set3.exercise_30_shallow_copy_test()
         results = set3.exercise_31_test_performance()
-        print("#####################################################")
-        print("Set Exercises - end")
-        print("#####################################################\n")
+        logger.info("#####################################################")
+        logger.info("Set Exercises - end")
+        logger.info("#####################################################\n")
 
         pass

@@ -2,6 +2,10 @@ import json
 import copy
 from unittest import result
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -30,12 +34,12 @@ def exercise_31_check_for_subset():
         # return results
         return ( set(dict_main.items()).intersection(set(dict_subset.items())) == set(dict_subset.items()))
 
-    print("Exercise 31: Check for Subset")
+    logger.info("Exercise 31: Check for Subset")
     main = {"a": 1, "b": 2, "c": 3, "d": 4}
     subset = {"a": 1, "c": 3}
     subset2 = {"a": 1, "b": 2, "y": 25}
-    print(is_subset(main, subset2))
-    print(is_subset(main, subset))
+    logger.info(f"  {is_subset(main, subset2)}")
+    logger.info(f"  {is_subset(main, subset)}")
     pass
 
 
@@ -55,10 +59,10 @@ def exercise_32_sort_by_value_length():
     Expected Output:
         {"d": "fig", "b": "kiwi", "a": "banana", "c": "strawberry"}
     """
-    print("Exercise 32: Sort Dictionary by Value Length")
+    logger.info("Exercise 32: Sort Dictionary by Value Length")
     words = {"a": "banana", "b": "kiwi", "c": "strawberry", "d": "fig"}
     revised_words = dict(sorted(words.items(), key=lambda item: len(item[1])))
-    print(revised_words)
+    logger.info(f"  {revised_words}")
     pass
 
 
@@ -80,12 +84,12 @@ def exercise_33_key_with_longest_list():
     from PyNative website
         longest_key = max(data.items(), key=lambda item: len(item[1]))[0]
     """
-    print("Exercise 33: Find Key")
+    logger.info("Exercise 33: Find Key")
     data = {"fruits": ["apple", "banana", "cherry"], "vegs": ["carrot"], "grains": ["rice", "wheat"]}
     # revised_data = dict(sorted(data.items(), key=lambda item: len(item[1]), reverse = True))
     largest_sublist = max(data.items(), key=lambda item: len(item[1]))
     # display the key of the largest sublist...
-    print(largest_sublist[0])
+    logger.info(f"  {largest_sublist[0]}")
     pass
 
 
@@ -111,10 +115,10 @@ def exercise_34_convert_dictionary_to_json():
             }
         }
     """
-    print("Exercise 34: Convert Dictionary to JSON")
+    logger.info("Exercise 34: Convert Dictionary to JSON")
     person = {"name": "Alice", "age": 30, "address": {"city": "Mumbai", "pin": "400001"}}
     results = json.dumps(person, sort_keys=False, indent=4)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -135,12 +139,12 @@ def exercise_35_invert_dictionary():
     Expected Output:
         {1: "a", 2: "b", 3: "c"}
     """
-    print("Exercise 35: Invert Dictionary")
+    logger.info("Exercise 35: Invert Dictionary")
     original = {"a": 1, "b": 2, "c": 3}
     # revised = {k[1]: k[0] for k in original.items()}
     # from Pynative website
     inverted = {v: k for k, v in original.items()}
-    print(inverted)
+    logger.info(f"  {inverted}")
     pass
 
 
@@ -166,12 +170,12 @@ def exercise_36_invert_with_duplicate_values():
         for k, v in original.items():
             inverted.setdefault(v, []).append(k)
     """
-    print("Exercise 36: Invert with Duplicate Values")
+    logger.info("Exercise 36: Invert with Duplicate Values")
     original = {"a": 1, "b": 2, "c": 1, "d": 3, "e": 2}
     results = {}
     for pairs in original.items():
         results[pairs[1]] = results.setdefault(pairs[1], []) + [pairs[0]]
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -235,26 +239,26 @@ def exercise_37_flatten_nested_dictionary():
     def nested_dictionary_report_driver(payload_, results_, parent_, message_):
         initialize(results_, parent_)
         line2 = "=" * 80
-        # Uncomment the section below if you wantr to see what the dictionary
+        # Uncomment the section below if you want to see what the dictionary
         # looks like before we flatten it...
         # dictionary_before = json.dumps(payload_, sort_keys=True, indent=4)
-        # print(f"{line2}")
-        # print(f"Dictionary Before")
-        # print(f"{dictionary_before}")
-        # print(f"{line2}")
-        # print()
+        # logger.info(f"{line2}")
+        # logger.info(f"Dictionary Before")
+        # logger.info(f"{dictionary_before}")
+        # logger.info(f"{line2}")
+        # logger.info("")
 
-        results = flatten(payload_, results_, parent_)
+        myResults = flatten(payload_, results_, parent_)
         # convert dictionary to json for reporting...
-        final_results = json.dumps(results, sort_keys=False, indent=4)
-        print(f"{line2}")
-        print(f"{message_}")
-        print(f"{final_results}")
-        print(f"{line2}")
-        print()
+        final_results = json.dumps(myResults, sort_keys=False, indent=4)
+        logger.info(f"  {line2}")
+        logger.info(f"  {message_}")
+        logger.info(f"  {final_results}")
+        logger.info(f"  {line2}")
+        logger.info("")
         pass
 
-    print("Exercise 37: Flatten Nested Dictionary")
+    logger.info("Exercise 37: Flatten Nested Dictionary")
     # objects needed for the recursion routines (a dictionary and a list)
     results = {}
     parent = []
@@ -290,13 +294,13 @@ def exercise_38_group_by_first_character():
     Expected Output:
         {"a": ["apple", "avocado", "apricot"], "b": ["banana", "blueberry"], "c": ["cherry"]}
     """
-    print("Exercise 38: Group by First Letter")
+    logger.info("Exercise 38: Group by First Letter")
     words = ["apple", "avocado", "banana", "blueberry", "cherry", "apricot"]
     results = {}
     for item in words:
         key = item[0].lower()
         results.setdefault(key, []).append(item)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -318,14 +322,14 @@ def exercise_39_merge_and_sum_overlapping():
     Expected Output:
         {"a": 10, "b": 25, "c": 45, "d": 25}
     """
-    print("Exercise 39: Merge and Sum Overlapping")
+    logger.info("Exercise 39: Merge and Sum Overlapping")
     dict1 = {"a": 10, "b": 20, "c": 30}
     dict2 = {"b": 5, "c": 15, "d": 25}
     results = {}
     results = dict1.copy()
     for k, v in dict2.items():
         results[k] = results.get(k, 0) + v
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -350,12 +354,12 @@ def exercise_40_deep_shallow_copy():
         Original scores after deep mutation: [90, 85, 92, 100]
     """
     def display_results(message_, orig_msg_, copy_msg_, orig_, copy_):
-        print(message_)
-        print(f"{orig_msg_} {orig_}")
-        print(f"{copy_msg_} {copy_}")
-        print()
+        logger.info(message_)
+        logger.info(f"  {orig_msg_} {orig_}")
+        logger.info(f"  {copy_msg_} {copy_}")
+        logger.info("")
 
-    print("\nExercise 40: Deep vs. Shallow Copy")
+    logger.info("Exercise 40: Deep vs. Shallow Copy")
     original = {"name": "Alice", "scores": [90, 85, 92]}
     shallowcopy = original.copy()
     # update the shallow copy... change should be mirrored in the original

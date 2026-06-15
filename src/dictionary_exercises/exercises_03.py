@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -21,10 +25,10 @@ def exercise_21_find_max_value():
     Expected Output:
         Top scorer: Bob
     """
-    print("Exercise 21: Key of Maximum Value")
+    logger.info("Exercise 21: Key of Maximum Value")
     scores = {"Alice": 88, "Bob": 95, "Carol": 72, "Dave": 95, "Eve": 84}
     highest_score = max(scores.items(), key=lambda item: item[1])
-    print(f"Top scorer: {highest_score[0]}")
+    logger.info(f"  Top scorer: {highest_score[0]}")
     pass
 
 
@@ -43,10 +47,10 @@ def exercise_22_create_dictionary_from_tuples():
     Expected Output:
         {'name': 'Alice', 'age': 25, 'city': 'Paris'}
     """
-    print("Exercise 22: List of Tuples to Dictionary")
+    logger.info("Exercise 22: List of Tuples to Dictionary")
     pairs = [("name", "Alice"), ("age", 25), ("city", "Paris")]
     results = dict(pairs)
-    print(f"{results}")
+    logger.info(f"  {results}")
     pass
 
 
@@ -65,11 +69,11 @@ def exercise_23_find_common_keys():
     Expected Output:
         Common keys: {'b', 'c'}
     """
-    print("Exercise 23: Find Common Keys")
+    logger.info("Exercise 23: Find Common Keys")
     d1 = {"a": 1, "b": 2, "c": 3}
     d2 = {"b": 20, "c": 30, "d": 40}
     common_keys = set(d1) & set(d2)
-    print(f"Common keys: {common_keys}")
+    logger.info(f"  Common keys: {common_keys}")
     pass
 
 
@@ -88,11 +92,11 @@ def exercise_24_dictionary_difference():
     Expected Output:
         Keys only in d1: {'a', 'c'}
     """
-    print("Exercise 24: Dictionary Difference")
+    logger.info("Exercise 24: Dictionary Difference")
     d1 = {"a": 1, "b": 2, "c": 3}
     d2 = {"b": 20, "d": 40}
     exclusive_keys = sorted(set(d1).difference(set(d2)))
-    print(f"Keys only in d1: {exclusive_keys}")
+    logger.info(f"  Keys only in d1: {exclusive_keys}")
     pass
 
 
@@ -113,11 +117,11 @@ def exercise_25_dictionary_intersection():
     From PyNative website:
         intersection = {k: d1[k] for k in d1.keys() & d2.keys() if d1[k] == d2[k]}
     """
-    print("Exercise 25: Dictionary Intersection")
+    logger.info("Exercise 25: Dictionary Intersection")
     d1 = {"a": 1, "b": 2, "c": 3}
     d2 = {"a": 1, "b": 99, "c": 3}
     results = {item[0]: item[1] for item in d1.items() for other_item in d2.items() if item[1] == other_item[1]}
-    print(f"Intersection: {results}")
+    logger.info(f"  Intersection: {results}")
     pass
 
 
@@ -137,13 +141,13 @@ def exercise_26_word_count():
     Expected Output:
         {'the': 3, 'cat': 2, 'sat': 1, 'on': 1, 'mat': 1}
     """
-    print("Exercise 26: Word Count")
+    logger.info("Exercise 26: Word Count")
     text = "the cat sat on the mat the cat"
     words = text.split()
     word_counts = {}
     for word in words:
         word_counts[word] = word_counts.get(word, 0) + 1
-    print(f"Word Counts: {word_counts}")
+    logger.info(f"  Word Counts: {word_counts}")
     pass
 
 
@@ -163,10 +167,10 @@ def exercise_27_remove_dictionary_items():
     Expected Output:
         {'name': 'Alice', 'city': 'Paris'}
     """
-    print("Exercise 27: Remove None Values")
+    logger.info("Exercise 27: Remove None Values")
     data = {"name": "Alice", "age": None, "city": "Paris", "score": None}
     results = {k: data[k] for k in data.keys() if data[k] is not None}
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -185,11 +189,11 @@ def exercise_28_sort_dictionary_by_keys():
     Expected Output:
         {'apple': 5, 'banana': 3, 'cherry': 1, 'date': 4}
     """
-    print("Exercise 28: Sort Dictionary by Keys")
+    logger.info("Exercise 28: Sort Dictionary by Keys")
     data = {"banana": 3, "apple": 5, "cherry": 1, "date": 4}
     sorted_keys = sorted(data.keys())
     new_data = dict(sorted(data.items()))
-    print(new_data)
+    logger.info(f"  {new_data}")
     pass
 
 
@@ -208,10 +212,10 @@ def exercise_29_sort_dictionary_by_values():
     Expected Output:
         {"Diana": 60, "Bob": 72, "Alice": 88, "Charlie": 95}
     """
-    print("Exercise 29: Sort Dictionary by Values")
+    logger.info("Exercise 29: Sort Dictionary by Values")
     scores = {"Alice": 88, "Bob": 72, "Charlie": 95, "Diana": 60}
     new_scores = dict(sorted(scores.items(), key=lambda item: item[1]))
-    print(new_scores)
+    logger.info(f"  {new_scores}")
     pass
 
 
@@ -233,11 +237,11 @@ def exercise_30_unique_values_check():
     def all_unique_values(values):
         data_as_set = set(values)
         return len(data_as_set) == len(values)
-    print("Exercise 30: Unique Values Check")
+    logger.info("Exercise 30: Unique Values Check")
     data = {"a": 1, "b": 2, "c": 3, "d": 2}
-    print(all_unique_values(data.values()))
+    logger.info(f"  {all_unique_values(data.values())}")
     data = {"a": 1, "b": 2, "c": 3, "d": 23}
-    print(all_unique_values(data.values()))
+    logger.info(f"  {all_unique_values(data.values())}")
     pass
 
 

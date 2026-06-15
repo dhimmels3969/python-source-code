@@ -3,6 +3,11 @@ from src.dictionary_exercises import exercises as dict1
 from src.dictionary_exercises import exercises_02 as dict2
 from src.dictionary_exercises import exercises_03 as dict3
 from src.dictionary_exercises import exercises_04 as dict4
+import constants
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-dictionary-exercise-with-solutions/
@@ -22,10 +27,10 @@ class Driver():
         pass
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Dictionary Exercises - 1 through 10")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("Dictionary Exercises - 1 through 10")
+        logger.info("#####################################################")
         results = dict1.exercise_01_basic_dictionary_operations()
         results = dict1.exercise_02_dictionary_operations()
         results = dict1.exercise_03_create_dictionary_from_lists()
@@ -38,10 +43,10 @@ class Driver():
         results = dict1.exercise_10_delete_list_of_keys()
 
 
-        print("")
-        print("#####################################################")
-        print("Dictionary Exercises - 11 through 20")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Dictionary Exercises - 11 through 20")
+        logger.info("#####################################################")
         results = dict2.exercise_11_check_for_specific_value()
         results = dict2.exercise_12_sum_all_values()
         results = dict2.exercise_13_extract_subset_of_keys()
@@ -53,10 +58,10 @@ class Driver():
         results = dict2.exercise_19_filter_dictionary()
         results = dict2.exercise_20_find_key()
 
-        print("")
-        print("#####################################################")
-        print("Dictionary Exercises - 21 through 30")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Dictionary Exercises - 21 through 30")
+        logger.info("#####################################################")
         results = dict3.exercise_21_find_max_value()
         results = dict3.exercise_22_create_dictionary_from_tuples()
         results = dict3.exercise_23_find_common_keys()
@@ -68,10 +73,10 @@ class Driver():
         results = dict3.exercise_29_sort_dictionary_by_values()
         results = dict3.exercise_30_unique_values_check()
 
-        print("")
-        print("#####################################################")
-        print("Dictionary Exercises - 31 through 40")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Dictionary Exercises - 31 through 40")
+        logger.info("#####################################################")
         results = dict4.exercise_31_check_for_subset()
         results = dict4.exercise_32_sort_by_value_length()
         results = dict4.exercise_33_key_with_longest_list()
@@ -82,8 +87,8 @@ class Driver():
         results = dict4.exercise_38_group_by_first_character()
         results = dict4.exercise_39_merge_and_sum_overlapping()
         results = dict4.exercise_40_deep_shallow_copy()
-        print("#####################################################")
-        print("Dictionary Exercises - end")
-        print("#####################################################\n")
+        logger.info("#####################################################")
+        logger.info("Dictionary Exercises - end")
+        logger.info("#####################################################\n")
 
         pass

@@ -2,6 +2,10 @@ from src.common_library import helper_functions as hf
 from collections.abc import Iterable
 from typing import NamedTuple
 import sys
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -28,10 +32,10 @@ def exercise_13_nested_tuple_access():
     Expected Output:
         6
     """
-    print("Exercise 13: Nested Tuple Access")
+    logger.info("Exercise 13: Nested Tuple Access")
     matrix = ((1, 2, 3), (4, 5, 6), (7, 8, 9))
     results = matrix[1][2]
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -53,12 +57,12 @@ def exercise_14_tuple_stats_check():
     Expected Output:
         Sum: 573, Max: 99, and Min: 62
     """
-    print("Exercise 14: Tuple Statistics")
+    logger.info("Exercise 14: Tuple Statistics")
     scores = (88, 95, 70, 62, 99, 74, 85)
     sum_ = sum(scores)
     max_ = max(scores)
     min_ = min(scores)
-    print(f"Sum:{sum_}, Max: {max_}, and Min: {min_}")
+    logger.info(f"  Sum:{sum_}, Max: {max_}, and Min: {min_}")
     pass
 
 
@@ -78,10 +82,10 @@ def exercise_22_tuple_sort_check():
     Expected Output:
         Sorted: (('Diana', 61), ('Bob', 73), ('Alice', 88), ('Charlie', 95))
     """
-    print("Exercise 22: Sort Tuple of Tuples")
+    logger.info("Exercise 22: Sort Tuple of Tuples")
     students = (("Alice", 88), ("Bob", 73), ("Charlie", 95), ("Diana", 61))
     results = tuple(sorted(students, key=lambda item: item[1]))
-    print(f"Sorted: {results}")
+    logger.info(f"  Sorted: {results}")
     pass
 
 
@@ -105,10 +109,10 @@ def exercise_23_tuple_filtering():
         tuple(filter(lambda x: x > 10, numbers)) and tuple(n for n in numbers if n > 10)
         produce the same results.
     """
-    print("Exercise 23: Tuple Filtering")
+    logger.info("Exercise 23: Tuple Filtering")
     numbers = (3, 14, 7, 22, 9, 41, 18, 5)
     filtered = tuple(x for x in numbers if x > 10)
-    print(f"Filtered: {filtered}")
+    logger.info(f"  Filtered: {filtered}")
     pass
 
 
@@ -133,10 +137,10 @@ def exercise_24_tuple_mapping():
         tuple(map(lambda x: x**2, numbers)) and tuple(x**2 for x in numbers)
         produce the same results.
     """
-    print("Exercise 24: Tuple Mapping")
+    logger.info("Exercise 24: Tuple Mapping")
     numbers = (1, 2, 3, 4, 5, 6)
     squared = tuple(x**2 for x in numbers)
-    print(f"Squared: {squared}")
+    logger.info(f"  Squared: {squared}")
     pass
 
 
@@ -158,11 +162,11 @@ def exercise_25_tuple_dictionary_mapping():
     Expected Output:
         {'name': 'Alice', 'age': 30, 'city': 'Pune'}
     """
-    print("Exercise 25: Tuple Dictionary Mapping")
+    logger.info("Exercise 25: Tuple Dictionary Mapping")
     keys = ("name", "age", "city")
     values = ("Alice", 30, "Pune")
     results = dict(zip(keys, values))
-    print(f"{results}")
+    logger.info(f"  {results}")
     pass
 
 
@@ -186,11 +190,11 @@ def exercise_26_tuple_intersection():
         tuple(set(t1).intersection(t2)) and tuple(set(t1) & set(t2))
         produce the same results.
     """
-    print("Exercise 26: Tuple Intersection")
+    logger.info("Exercise 26: Tuple Intersection")
     t1 = (1, 2, 3, 4, 5, 6)
     t2 = (4, 5, 6, 7, 8, 9)
     results = tuple(set(t1).intersection(t2))
-    print(f"Common elements: {results}")
+    logger.info(f"  Common elements: {results}")
     pass
 
 
@@ -213,13 +217,13 @@ def exercise_27_modification_hack_test():
         Original: ('red', 'green', 'blue')
         Modified: ('red', 'yellow', 'blue')
     """
-    print("Exercise 27: Tuple Modification")
+    logger.info("Exercise 27: Tuple Modification")
     colours = ("red", "green", "blue")
     colours_list = list(colours)
     colours_list[1] = "yellow"
     results = tuple(colours_list)
-    print(f"Original: {colours}")
-    print(f"Modified: {results}")
+    logger.info(f"  Original: {colours}")
+    logger.info(f"  Modified: {results}")
     pass
 
 
@@ -244,14 +248,14 @@ def exercise_28_tuple_mutability_check():
         After:  (1, 2, [3, 4, 5, 99])
         Same object? True
     """
-    print("Exercise 28: Tuple Mutability")
+    logger.info("Exercise 28: Tuple Mutability")
     t = (1, 2, [3, 4, 5])
-    print(f"Before: {t}")
+    logger.info(f"  Before: {t}")
     id_before = id(t)
     t[2].append(99)
     id_after  = id(t)
-    print(f"After: {t}")
-    print(f"Same object? {id_before == id_after}")
+    logger.info(f"  After: {t}")
+    logger.info(f"  Same object? {id_before == id_after}")
     pass
 
 
@@ -283,7 +287,7 @@ def exercise_29_flatten_nested_tuples():
         ####
         nested = (1, (2, 3), (4, (5, (6, 7))))
         result = tuple(flatten(nested))
-        print("Flattened:", result)
+        logger.info("Flattened:", result)
     """
     def flatten(payload_, results_):
         """
@@ -304,7 +308,7 @@ def exercise_29_flatten_nested_tuples():
             results_.append(payload_)
         return results_
 
-    print("Exercise 29: Nested Tuple Flattening")
+    logger.info("Exercise 29: Nested Tuple Flattening")
     nested_data = (1, (2, 3), (4, (5, (6, 7, (8,9,(10, 11, (12, 13, 14, 15, 16))))))
               , [99, 98, 97, 96, 95, [89, 88, 87, [77, 76, 75]]]
               , sorted({"a", "b", "c", "d", "e", "f"}, reverse=True)
@@ -313,8 +317,8 @@ def exercise_29_flatten_nested_tuples():
               )
 
     results = flatten(nested_data, [])
-    print(f"Tuple Before: {nested_data}")
-    print(f"Flattened: {tuple(results)}")
+    logger.info(f"  Tuple Before: {nested_data}")
+    logger.info(f"  Flattened: {tuple(results)}")
     pass
 
 
@@ -341,17 +345,17 @@ def exercise_30_memory_efficiency_check():
     References:
         https://stackabuse.com/bytes/determining-the-size-of-an-object-in-python/
     """
-    print("Exercise 30: Memory Efficiency")
+    logger.info("Exercise 30: Memory Efficiency")
     big_list = [x for x in range(1_000_000)]
     big_tuple = tuple(big_list)
     # get the size for both objects...
     list_size_in_bytes = sys.getsizeof(big_list)
     tuple_size_in_bytes = sys.getsizeof(big_tuple)
     difference_in_bytes = list_size_in_bytes - tuple_size_in_bytes
-    print(f"Size of List: {list_size_in_bytes:,}")
-    print(f"Size of Tuple: {tuple_size_in_bytes:,}")
-    # print(f"Difference in Bytes: {difference_in_bytes:,}")
-    print(f"Difference: {difference_in_bytes:,} bytes ({difference_in_bytes / 1024:.2f} KB)")
+    logger.info(f"  Size of List: {list_size_in_bytes:,}")
+    logger.info(f"  Size of Tuple: {tuple_size_in_bytes:,}")
+    # logger.info(f"Difference in Bytes: {difference_in_bytes:,}")
+    logger.info(f"  Difference: {difference_in_bytes:,} bytes ({difference_in_bytes / 1024:.2f} KB)")
     pass
 
 
@@ -383,14 +387,14 @@ def exercise_31_named_tuples_test():
         department: str
         salary: int
 
-    print("Exercise 31: NamedTuples")
+    logger.info("Exercise 31: NamedTuples")
     employee_list = [Employee("Alice", "Engineering", 95000), Employee("Bob", "Marketing", 72000),
                      Employee("Charlie", "Engineering", 88000)]
     employee_list_tuple = tuple(employee_list)
     for employee in employee_list_tuple:
-        print(f"{employee.name} works in {employee.department} and earns ${employee.salary:,}")
+        logger.info(f"  {employee.name} works in {employee.department} and earns ${employee.salary:,}")
     highest_paid = sorted(employee_list_tuple, key=lambda x: x.salary, reverse=True)[0]
-    print(f"Highest Paid: {highest_paid.name} (${highest_paid.salary:,})")
+    logger.info(f"  Highest Paid: {highest_paid.name} (${highest_paid.salary:,})")
     pass
 
 
@@ -415,20 +419,20 @@ def exercise_32_tuple_hashability():
         (1, 2) as key: success, value = "immutable tuple"
         (1, [2]) as key: TypeError - unhashable type: 'list'
     """
-    print("Exercise 32: The Hashability Paradox")
+    logger.info("Exercise 32: The Hashability Paradox")
     my_dictionary = {}
     valid_key = (1, 2)
     invalid_key = (1, [2])
     try:
         my_dictionary[valid_key] = "immutable tuple"
-        print(f"{valid_key} as key: success, value = '{my_dictionary[valid_key]}'")
+        logger.info(f"  {valid_key} as key: success, value = '{my_dictionary[valid_key]}'")
     except TypeError as e:
-        print(f"TypeError: {e}")
+        logger.error(f"  TypeError: {e}")
 
     try:
         my_dictionary[invalid_key] = "ABCDEFGHIJKL" * 10
     except TypeError as e:
-        print(f"{invalid_key} as key: TypeError: {e}")
+        logger.error(f"  {invalid_key} as key: TypeError: {e}")
     pass
 
 

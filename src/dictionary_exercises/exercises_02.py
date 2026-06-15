@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -25,10 +29,10 @@ def exercise_11_check_for_specific_value():
     def role_found(dict, value):
         return value in dict.values()
 
-    print("Exercise 11: Check Value Existence")
+    logger.info("Exercise 11: Check Value Existence")
     roles = {"alice": "admin", "bob": "editor", "carol": "viewer"}
-    print(f"'editor' exists as a value: {role_found(roles, "editor")}")
-    print(f"'manager' exists as a value: {role_found(roles, "manager")}")
+    logger.info(f"  'editor' exists as a value: {role_found(roles, "editor")}")
+    logger.info(f"  'manager' exists as a value: {role_found(roles, "manager")}")
     pass
 
 
@@ -48,10 +52,10 @@ def exercise_12_sum_all_values():
     Expected Output:
         Total expenses: 1850
     """
-    print("Exercise 12: Sum All Values")
+    logger.info("Exercise 12: Sum All Values")
     expenses = {"rent": 1200, "food": 300, "transport": 150, "utilities": 200}
     total_expenses = sum(expenses.values())
-    print(f"Total expenses: {total_expenses}")
+    logger.info(f"  Total expenses: {total_expenses}")
     pass
 
 
@@ -71,14 +75,14 @@ def exercise_13_extract_subset_of_keys():
     Expected Output:
         {'id': 42, 'username': 'jdoe', 'email': 'jdoe@example.com'}
     """
-    print("Exercise 13: Extract Subset of Keys")
+    logger.info("Exercise 13: Extract Subset of Keys")
     user = {"id": 42, "username": "jdoe", "email": "jdoe@example.com", \
             "password": "s3cr3t", "joined": "2021-03-15"}
     keys_to_keep = ["walrus", "id", "username", "email"]
     # if a key is not found in the dictionary a key will be generated with a value of None.
     # Fliter out the missing key with an if statement in the dictionary comprehension.
     revised_user = {k: user.get(k) for k in keys_to_keep if user.get(k) != None}
-    print(revised_user)
+    logger.info(f"  {revised_user}")
     pass
 
 
@@ -99,11 +103,11 @@ def exercise_14_map_two_lists():
     Expected Output:
         {'brand': 'Honda', 'model': 'Civic', 'year': 2023, 'color': 'silver'}
     """
-    print("Exercise 14: Map Two Lists")
+    logger.info("Exercise 14: Map Two Lists")
     attributes = ["brand", "model", "year", "color"]
     details = ["Honda", "Civic", 2023, "silver"]
     car_dictionary = dict(zip(attributes, details))
-    print(car_dictionary)
+    logger.info(f"  {car_dictionary}")
     pass
 
 
@@ -122,13 +126,13 @@ def exercise_15_count_character_frequencies():
     Expected Output:
         {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
     """
-    print("Exercise 15: Count Character Frequencies")
+    logger.info("Exercise 15: Count Character Frequencies")
     text = "hello world"
     # character_counts = Counter(text)
     character_counts = {}
     for character in text:
         character_counts[character] = character_counts.get(character, 0) + 1
-    print(character_counts)
+    logger.info(f"  {character_counts}")
     pass
 
 
@@ -148,11 +152,11 @@ def exercise_16_modify_nested_dictionary():
     Expected Output:
         {'name': 'TechCorp', 'location': {'city': 'Munich', 'country': 'Germany'}}
     """
-    print("Exercise 16: Modify Nested Dictionary")
+    logger.info("Exercise 16: Modify Nested Dictionary")
     company = {"name": "TechCorp", "location": {"city": "Berlin", "country": "Germany"}}
     updated_city = "Munich"
     company["location"]["city"] = updated_city
-    print(company)
+    logger.info(f"  {company}")
     pass
 
 
@@ -173,10 +177,10 @@ def exercise_17_update_deeply_nested_key():
     Expected Output:
         {'school': {'department': {'class': {'teacher': 'Mr. Smith', 'students': 35}}}}
     """
-    print("Exercise 17: Update Deeply Nested Key")
+    logger.info("Exercise 17: Update Deeply Nested Key")
     data = {"school": {"department": {"class": {"teacher": "Mr. Smith", "students": 30}}}}
     data["school"]["department"]["class"]["students"] = 35
-    print(data)
+    logger.info(f"  {data}")
     pass
 
 
@@ -196,9 +200,9 @@ def exercise_18_dictionary_comprehension():
     Expected Output:
         {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
     """
-    print("Exercise 18: Dictionary Comprehension")
+    logger.info("Exercise 18: Dictionary Comprehension")
     results = {i: i ** 2 for i in range(1,11)}
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -220,11 +224,11 @@ def exercise_19_filter_dictionary():
     Expected Output:
         {'Alice': 82, 'Carol': 91, 'Eve': 73}
     """
-    print("Exercise 19: Filter Dictionary")
+    logger.info("Exercise 19: Filter Dictionary")
     scores = {"Alice": 82, "Bob": 45, "Carol": 91, "Dave": 58, "Eve": 73}
     passing_score = 60
     filtered_dictionary = {item[0]: item[1] for item in scores.items() if item[1] > passing_score}
-    print(filtered_dictionary)
+    logger.info(f"  {filtered_dictionary}")
     pass
 
 
@@ -243,11 +247,11 @@ def exercise_20_find_key():
     Expected Output:
         Lowest stock item: grapes
     """
-    print("Exercise 20: Find Key")
+    logger.info("Exercise 20: Find Key")
     stock = {"apples": 34, "bananas": 12, "oranges": 57, "grapes": 8, "mangoes": 23}
     # lowest_stock_item = min(stock.values())
     lowest_item = min(stock.items(), key=lambda item: item[1])
-    print(f"Lowest stock item: {lowest_item[0]}")
+    logger.info(f"  Lowest stock item: {lowest_item[0]}")
     pass
 
 

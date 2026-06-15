@@ -1,6 +1,11 @@
 from src.common_library import helper_functions as hf
 from src.tuple_exercises import exercises as tuple_01
 from src.tuple_exercises import exercises_02 as tuple_02
+import constants
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-tuple-exercise-with-solutions/
@@ -20,10 +25,10 @@ class Driver():
         pass
 
     def run(self):
-        print()
-        print("#####################################################")
-        print("Tuple Exercises - 1 through 12")
-        print("#####################################################")
+        logger.info(constants.THREE_BLANK_LINES)
+        logger.info("#####################################################")
+        logger.info("Tuple Exercises - 1 through 12")
+        logger.info("#####################################################")
         results = tuple_01.exercise_01_tuple_basics_check()
         results = tuple_01.exercise_02_trailing_comma_check()
         results = tuple_01.exercise_03_tuple_repetition()
@@ -38,10 +43,10 @@ class Driver():
         results = tuple_01.exercise_12_swap_values()
 
 
-        print("")
-        print("#####################################################")
-        print("Tuple Exercises - 13, 14, 22 through 32")
-        print("#####################################################")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Tuple Exercises - 13, 14, 22 through 32")
+        logger.info("#####################################################")
         results = tuple_02.exercise_13_nested_tuple_access()
         results = tuple_02.exercise_14_tuple_stats_check()
         results = tuple_02.exercise_22_tuple_sort_check()
@@ -56,9 +61,9 @@ class Driver():
         results = tuple_02.exercise_31_named_tuples_test()
         results = tuple_02.exercise_32_tuple_hashability()
 
-        print("")
-        print("#####################################################")
-        print("Tuple Exercises - end")
-        print("#####################################################\n")
+        logger.info("")
+        logger.info("#####################################################")
+        logger.info("Tuple Exercises - end")
+        logger.info("#####################################################\n")
 
         pass

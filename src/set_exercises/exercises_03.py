@@ -1,5 +1,9 @@
 from src.common_library import helper_functions as hf
 import time
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 #
 # Exercises found at web page https://pynative.com/python-set-exercise-with-solutions/
@@ -24,11 +28,11 @@ def exercise_21_common_elements_check():
     Expected Output:
         common = {3, 4, 5}
     """
-    print("Exercise 21: Find Common Elements in Lists")
+    logger.info("Exercise 21: Find Common Elements in Lists")
     list1 = [1, 2, 3, 4, 5, 3, 2]
     list2 = [3, 4, 5, 6, 7, 4, 5]
     results = set(list1).intersection(set(list2))
-    print(f"common = {results}")
+    logger.info(f"  common = {results}")
     pass
 
 
@@ -50,10 +54,10 @@ def exercise_22_count_unique_words():
     Expected Output:
         Unique word count: 5
     """
-    print("Exercise 22: Count Unique Words")
+    logger.info("Exercise 22: Count Unique Words")
     text = "the cat sat on the mat the cat"
     words = set(text.split())
-    print(f"Unique word count: {len(words)}")
+    logger.info(f"  Unique word count: {len(words)}")
     pass
 
 
@@ -74,10 +78,10 @@ def exercise_23_convert_to_joined_string():
     Expected Output:
         A single string with all tags joined by " | " (order may vary)
     """
-    print("Exercise 23: Convert Set to Joined String")
+    logger.info("Exercise 23: Convert Set to Joined String")
     tags = {"python", "set", "programming", "tutorial"}
     results = " | ".join(tags)
-    print(f"Joined string: {results}")
+    logger.info(f"  Joined string: {results}")
     pass
 
 
@@ -101,12 +105,12 @@ def exercise_24_proper_subset_superset():
         b is a proper superset of a: True
         a is a proper subset of a: False
     """
-    print("Exercise 24: Proper Subset and Superset")
+    logger.info("Exercise 24: Proper Subset and Superset")
     a = {1, 2, 3}
     b = {1, 2, 3, 4, 5}
-    print(f"a is a proper subset of b: {a < b}")
-    print(f"b is a proper superset of a: {b > a}")
-    print(f"a is a proper subset of a: {a < a}")
+    logger.info(f"  a is a proper subset of b: {a < b}")
+    logger.info(f"  b is a proper superset of a: {b > a}")
+    logger.info(f"  a is a proper subset of a: {a < a}")
     pass
 
 
@@ -132,16 +136,16 @@ def exercise_25_frozenset_check():
     Additional information:
         "fs.intersection(set_02)" and "fs & set_02" produce the same results.
     """
-    print("Exercise 25: Frozen Set")
+    logger.info("Exercise 25: Frozen Set")
     fs = frozenset([1, 2, 3, 4, 5])
     set_02 = {3, 4, 5, 6}
-    print(f"frozenset: {fs}")
-    print(f"Intersection with {3, 4, 5, 6}: {fs.intersection(set_02)}")
+    logger.info(f"  frozenset: {fs}")
+    logger.info(f"  Intersection with {3, 4, 5, 6}: {fs.intersection(set_02)}")
     # try to add an item to frozenset fs... will result in an error (AttributeError)
     try:
         fs.add(100)
     except AttributeError as e:
-        print(f"Error: {e}")
+        logger.error(f"  Error: {e}")
     pass
 
 
@@ -162,9 +166,9 @@ def exercise_26_set_comprehension():
     Expected Output:
         {4, 16, 36, 64, 100, 144, 196, 256, 324, 400}
     """
-    print("Exercise 26: Set Comprehension")
+    logger.info("Exercise 26: Set Comprehension")
     set_of_squares = sorted({x**2 for x in range(1,21,1) if x %2 == 0})
-    print(set_of_squares)
+    logger.info(f"  {set_of_squares}")
     pass
 
 
@@ -187,7 +191,7 @@ def exercise_27_remove_duplicates_preserve_order():
     Expected Output:
         [3, 1, 4, 5, 9, 2, 6]
     """
-    print("Exercise 27: Remove Duplicates (Preserving Order)")
+    logger.info("Exercise 27: Remove Duplicates (Preserving Order)")
     items = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
     seen = set()
     results = []
@@ -195,7 +199,7 @@ def exercise_27_remove_duplicates_preserve_order():
         if item not in seen:
             seen.add(item)
             results.append(item)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -220,11 +224,11 @@ def exercise_28_multiset_difference():
     Additional information:
         "A - B - C" and "A.difference(B).difference(C)" produce the same results
     """
-    print("Exercise 28: Multi-Set Difference")
+    logger.info("Exercise 28: Multi-Set Difference")
     A = {1, 2, 3, 4, 5, 6, 7, 8}
     B = {2, 4, 6}
     C = {5, 7, 9}
-    print(f"Result: {A.difference(B).difference(C)}")
+    logger.info(f"  Result: {A.difference(B).difference(C)}")
     pass
 
 
@@ -247,7 +251,7 @@ def exercise_29_tuples_test():
         Set of tuples: {(1, 2), (3, 4), (5, 6)}
         Error: unhashable type: 'list'
     """
-    print("Exercise 29: Set Comparison")
+    logger.info("Exercise 29: Set Comparison")
     results = set()
     a = (1,2)
     b = (3,4)
@@ -260,7 +264,7 @@ def exercise_29_tuples_test():
     try:
         results.add(myList)
     except TypeError as e:
-        print(f"Error: {e}")
+        logger.info(f"  Error: {e}")
 
     pass
 
@@ -288,22 +292,22 @@ def exercise_30_shallow_copy_test():
         original: {1, 2, 3, 4, 5}
         copied: {1, 2, 3, 4, 5, 42}
     """
-    print("Exercise 30: Shallow Copy vs. Assignment")
+    logger.info("Exercise 30: Shallow Copy vs. Assignment")
     original = {1, 2, 3, 4, 5}
     ref_copy = original
     original.add(99)
-    print(f"--- Assignment (=) ---")
-    print(f"original: {original}")
-    print(f"ref: {ref_copy}")
+    logger.info(f"  --- Assignment (=) ---")
+    logger.info(f"  original: {original}")
+    logger.info(f"  ref: {ref_copy}")
 
     # restore original
     original.remove(99)
     shallow_copy = original.copy()
     # original.add(43)
     shallow_copy.add(42)
-    print(f"--- Shallow copy (.copy()) ---")
-    print(f"original: {original}")
-    print(f"copied: {shallow_copy}")
+    logger.info(f"  --- Shallow copy (.copy()) ---")
+    logger.info(f"  original: {original}")
+    logger.info(f"  copied: {shallow_copy}")
     pass
 
 
@@ -332,15 +336,15 @@ def exercise_31_test_performance():
         elapsed_time = end - start
         return elapsed_time
 
-    print("Exercise 31: Membership Testing Performance")
+    logger.info("Exercise 31: Membership Testing Performance")
     myList = list(range(1_000_000))
     mySet = set(myList)
     search_arg = 999_999
 
     list_lookup_time = elapsed_time(myList, search_arg)
     set_lookup_time = elapsed_time(mySet, search_arg)
-    print(f"List lookup time: {list_lookup_time:.6f} seconds")
-    print(f"Set lookup time: {set_lookup_time:.6f} seconds")
+    logger.info(f"  List lookup time: {list_lookup_time:.6f} seconds")
+    logger.info(f"  Set lookup time: {set_lookup_time:.6f} seconds")
 
 
     pass

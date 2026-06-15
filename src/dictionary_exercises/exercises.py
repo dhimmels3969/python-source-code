@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -21,14 +25,14 @@ def exercise_01_basic_dictionary_operations():
         {"name": "Alice", "age": 21, "grade": "B", "city": "New York"}
         and Name: Alice
     """
-    print("Exercise 1: Basic Dictionary Operations")
+    logger.info("Exercise 1: Basic Dictionary Operations")
     student = {"name": "Alice", "age": 20, "grade": "B"}
     # add key for city
     student["city"] = "New York"
     # update age
     student["age"] = 21
-    print(student)
-    print(f"Name: {student["name"]}")
+    logger.info(f"  {student}")
+    logger.info(f"  Name: {student["name"]}")
     pass
 
 
@@ -51,13 +55,13 @@ def exercise_02_dictionary_operations():
         'brand' exists: True
         'color' exists: False
     """
-    print("Exercise 2: Dictionary Operations")
+    logger.info("Exercise 2: Dictionary Operations")
     car = {"brand": "Toyota", "model": "Camry", "year": 2022, "color": "blue"}
     car.pop("color")
-    print(car)
-    print(car.items())
-    print(f"brand exists: {"brand" in car.keys()}")
-    print(f"color exists: {"color" in car.keys()}")
+    logger.info(f"  {car}")
+    logger.info(f"  {car.items()}")
+    logger.info(f"  brand exists: {"brand" in car.keys()}")
+    logger.info(f"  color exists: {"color" in car.keys()}")
     pass
 
 
@@ -76,11 +80,11 @@ def exercise_03_create_dictionary_from_lists():
     Expected Output:
         {'name': 'Bob', 'age': 25, 'city': 'London'}
     """
-    print("Exercise 3: Dictionary from Two Lists")
+    logger.info("Exercise 3: Dictionary from Two Lists")
     keys = ["name", "age", "city"]
     values = ["Bob", 25, "London"]
     new_dictionary = dict(zip(keys, values))
-    print(new_dictionary)
+    logger.info(f"  {new_dictionary}")
     pass
 
 
@@ -99,10 +103,10 @@ def exercise_04_clear_dictionary():
     Expected Output:
         {}
     """
-    print("Exercise 4: Clear Dictionary")
+    logger.info("Exercise 4: Clear Dictionary")
     inventory = {"apples": 10, "bananas": 5, "oranges": 8}
     inventory.clear()
-    print(f"Dictionary after clearing is {inventory}")
+    logger.info(f"  Dictionary after clearing is {inventory}")
     pass
 
 
@@ -122,11 +126,11 @@ def exercise_05_merge_dictionaries():
     Expected Output:
         {'a': 1, 'b': 3, 'c': 4}
     """
-    print("Exercise 5: Merge Dictionaries")
+    logger.info("Exercise 5: Merge Dictionaries")
     dict1 = {"a": 1, "b": 2}
     dict2 = {"b": 3, "c": 4}
     merged_dictionary = dict1 | dict2
-    print(f"Results of merge: {merged_dictionary}")
+    logger.info(f"  Results of merge: {merged_dictionary}")
     pass
 
 
@@ -146,10 +150,10 @@ def exercise_06_access_nested_dictionary():
     Expected Output:
         City: Paris
     """
-    print("Exercise 6: Access Nested Dictionary")
+    logger.info("Exercise 6: Access Nested Dictionary")
     person = {"name": "Carol", "address": {"city": "Paris", "zip": "75001"}}
     city = person["address"]["city"]
-    print(f"City: {city}")
+    logger.info(f"  City: {city}")
     pass
 
 
@@ -168,10 +172,10 @@ def exercise_07_access_key_in_nested_dictionary():
     Expected Output:
         History grade: 75
     """
-    print("Exercise 7: Access Nested Dictionary")
+    logger.info("Exercise 7: Access Nested Dictionary")
     student = {"name": "Dave", "grades": {"math": 88, "science": 92, "history": 75}}
     history_grade = student["grades"]["history"]
-    print(f"History grade: {history_grade}")
+    logger.info(f"  History grade: {history_grade}")
     pass
 
 
@@ -190,11 +194,11 @@ def exercise_08_initialize_dictionary_with_default_values():
     Expected Output:
         {'math': 0, 'science': 0, 'english': 0, 'history': 0}
     """
-    print("Exercise 8: Initialize Dictionary with Default Values")
+    logger.info("Exercise 8: Initialize Dictionary with Default Values")
     keys = ["math", "science", "english", "history"]
     default = 0
     new_dictionary = dict.fromkeys(keys, default)
-    print(new_dictionary)
+    logger.info(f"  {new_dictionary}")
     pass
 
 
@@ -215,13 +219,13 @@ def exercise_09_rename_key_in_dictionary():
     Expected Output:
         {'first_name': 'John', 'age': 30, 'dept': 'Engineering'}
     """
-    print("Exercise 9: Rename Key In Dictionary")
+    logger.info("Exercise 9: Rename Key In Dictionary")
     employee = {"fname": "John", "age": 30, "dept": "Engineering"}
 
     # remove key
     employee["first_name"] = employee.pop("fname")
 
-    print(f"Dictionary item after rename: {employee}")
+    logger.info(f"  Dictionary item after rename: {employee}")
     pass
 
 
@@ -241,12 +245,12 @@ def exercise_10_delete_list_of_keys():
     Expected Output:
         {'id': 101, 'name': 'Laptop', 'price': 999}
     """
-    print("Exercise 10: Delete List of Keys")
+    logger.info("Exercise 10: Delete List of Keys")
     product = {"id": 101, "name": "Laptop", "price": 999, "stock": 50, "warehouse": "A3"}
     items_to_delete = ["stock", "warehouse"]
     for item in items_to_delete:
         product.pop(item, None)
-    print(f"Dictionary item after delete: {product}")
+    logger.info(f"  Dictionary item after delete: {product}")
     pass
 
 

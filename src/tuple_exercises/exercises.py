@@ -1,4 +1,8 @@
 from src.common_library import helper_functions as hf
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 #
@@ -23,12 +27,12 @@ def exercise_01_tuple_basics_check():
     Expected Output:
         First element: apple, Last element: date, and Length: 4
     """
-    print("Exercise 1: Basic Tuple Operations")
+    logger.info("Exercise 1: Basic Tuple Operations")
     fruits = ("apple", "banana", "cherry", "date")
     first_element = fruits[0]
     last_element = fruits[-1]
     size_of_fruits = len(fruits)
-    print(f"First element: {first_element}, Last element: {last_element}, and Length: {size_of_fruits}")
+    logger.info(f"  First element: {first_element}, Last element: {last_element}, and Length: {size_of_fruits}")
     pass
 
 
@@ -48,9 +52,9 @@ def exercise_02_trailing_comma_check():
     Expected Output:
         (50,) and <class 'tuple'>
     """
-    print("Exercise 2: Trailing Comma")
+    logger.info("Exercise 2: Trailing Comma")
     my_tuple = (50,)
-    print(f"my tuple: {my_tuple}, type: {type(my_tuple)}")
+    logger.info(f"  my tuple: {my_tuple}, type: {type(my_tuple)}")
     pass
 
 
@@ -71,10 +75,10 @@ def exercise_03_tuple_repetition():
         ('red', 'green', 'red', 'green', 'red', 'green')
 
     """
-    print("Exercise 3: Tuple Repetition")
+    logger.info("Exercise 3: Tuple Repetition")
     colors = ("red", "green")
     colors_times_three = colors * 3
-    print(f"{colors_times_three}")
+    logger.info(f"  {colors_times_three}")
     pass
 
 
@@ -96,14 +100,14 @@ def exercise_04_tuple_concatenation():
     Additional Information:
         a + b + c will produce different results than (a,b,c)
     """
-    print("Exercise 4: Tuple Concatenation")
+    logger.info("Exercise 4: Tuple Concatenation")
     a = (1, 2)
     b = (3, 4)
     c = (5, 6)
     combined_tuple = a + b + c
-    print(f"a+b+c: {combined_tuple}")
+    logger.info(f"  a+b+c: {combined_tuple}")
     different_combined_tuple = (a,b,c)
-    print(f"(a,b,c): {different_combined_tuple}")
+    logger.info(f"  (a,b,c): {different_combined_tuple}")
     pass
 
 
@@ -124,10 +128,10 @@ def exercise_05_tuple_slicing():
     Expected Output:
         (30, 40, 50)
     """
-    print("Exercise 5: Tuple Slicing")
+    logger.info("Exercise 5: Tuple Slicing")
     numbers = (10, 20, 30, 40, 50, 60, 70)
     subset = numbers[2:5]
-    print(f"{subset}")
+    logger.info(f"  {subset}")
     pass
 
 
@@ -147,10 +151,10 @@ def exercise_06_tuple_reversal():
     Expected Output:
         (5, 4, 3, 2, 1)
     """
-    print("Exercise 6: Tuple Reversal")
+    logger.info("Exercise 6: Tuple Reversal")
     items = (1, 2, 3, 4, 5)
     items_in_reverse = items[::-1]
-    print(f"items: {items} ... items_in_reverse: {items_in_reverse}")
+    logger.info(f"  items: {items} ... items_in_reverse: {items_in_reverse}")
     pass
 
 
@@ -171,11 +175,11 @@ def exercise_07_type_casting():
     Expected Output:
         (10, 20, 30, 40, 50) and <class 'tuple'>
     """
-    print("Exercise 7: Type Casting")
+    logger.info("Exercise 7: Type Casting")
     my_list = [10, 20, 30, 40, 50]
     my_tuple = tuple(my_list)
-    print(f"my_tuple: {my_tuple}")
-    print(f"{type(my_tuple)}")
+    logger.info(f"  my_tuple: {my_tuple}")
+    logger.info(f"  {type(my_tuple)}")
     pass
 
 
@@ -196,10 +200,10 @@ def exercise_08_tuple_to_string():
     Expected Output:
         abc
     """
-    print("Exercise 8: Tuple to String")
+    logger.info("Exercise 8: Tuple to String")
     chars = ('a', 'b', 'c')
     results = "".join(chars)
-    print(results)
+    logger.info(f"  {results}")
     pass
 
 
@@ -219,13 +223,13 @@ def exercise_09_tuple_membership_test():
     Expected Output:
         True and False
     """
-    print("Exercise 9: Tuple Membership Testing")
+    logger.info("Exercise 9: Tuple Membership Testing")
     fruits = ("apple", "banana", "cherry", "date")
     apple_ = "apple" in fruits
     tomato_ = "tomato" in fruits
-    print(f"fruits: {fruits}")
-    print(f"'apple' in fruits: {apple_}")
-    print(f"'tomato' in fruits: {tomato_}")
+    logger.info(f"  fruits: {fruits}")
+    logger.info(f"  'apple' in fruits: {apple_}")
+    logger.info(f"  'tomato' in fruits: {tomato_}")
     pass
 
 
@@ -245,11 +249,11 @@ def exercise_10_counting_test():
     Expected Output:
         yes appears 4 times and no appears 2 times
     """
-    print("Exercise 10: Counting")
+    logger.info("Exercise 10: Counting")
     votes = ("yes", "no", "yes", "yes", "no", "yes")
     yes_ = votes.count("yes")
     no_ = votes.count("no")
-    print(f"yes appears {yes_} times and no appears {no_} times")
+    logger.info(f"  yes appears {yes_} times and no appears {no_} times")
     pass
 
 
@@ -269,10 +273,10 @@ def exercise_11_tuple_unpacking():
     Expected Output:
         Name: Alice, Age: 30, Job: Engineer, and City: Pune
     """
-    print("Exercise 11: Tuple Unpacking")
+    logger.info("Exercise 11: Tuple Unpacking")
     person = ("Alice", 30, "Engineer", "Pune")
     (Name, Age, Job, City) = person
-    print(f"Name: {Name}, Age: {Age}, Job: {Job}, and City: {City}")
+    logger.info(f"  Name: {Name}, Age: {Age}, Job: {Job}, and City: {City}")
     pass
 
 
@@ -293,12 +297,12 @@ def exercise_12_swap_values():
     Expected Output:
         After swap: a = 200, b = 100
     """
-    print("Exercise 12: Swap Trick")
+    logger.info("Exercise 12: Swap Trick")
     a = 100
     b = 200
-    print(f"----BEFORE---- a: {a}, b: {b}")
+    logger.info(f"  ----BEFORE---- a: {a}, b: {b}")
     b, a = a, b
-    print(f"----AFTER----  a: {a}, b: {b}")
+    logger.info(f"  ----AFTER----  a: {a}, b: {b}")
     pass
 
 
