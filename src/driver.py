@@ -14,6 +14,7 @@ from src.date_time_exercises import driver as date_time_exercise_driver
 from src.object_oriented_exercises import driver as object_oriented_exercise_driver
 from src.file_handling_exercises import driver as file_handling_exercise_driver
 from src.wordle import driver as wordle_driver
+import constants
 import logging
 
 # https://pynative.com/python-input-and-output-exercise/#h-exercise-2-format-output-string
@@ -22,7 +23,7 @@ import logging
 #   https://fstring.help/cheat/
 #   https://www.pythonmorsels.com/string-formatting/
 
-def driver(src_dir):
+def driver(src_dir, user_input):
     logger = logging.getLogger(__name__)
     logger.info("Start main driver.")
     EXIT_OUT_OF_LOOP = "3"
@@ -145,6 +146,16 @@ def driver(src_dir):
 
 
     #####################################################################
+    def main_driver_non_interactive_mode():
+        # Bypass user interaction
+        # Execute the run_code_exercises code directly.
+
+        process_valid_request("2")
+
+        return None
+    #####################################################################
+
+    #####################################################################
     def start_here():
 
         display_message_box("**********     Main Driver - start      **********")
@@ -155,6 +166,10 @@ def driver(src_dir):
         return None
     #####################################################################
 
-
-    start_here()
+    # process user-specified args. As of 2026-06-16, only valid arg is mode.
+    results = hf.parse_kwargs(user_input)
+    if results["mode"] == constants.NON_INTERACTIVE_MODE:
+        main_driver_non_interactive_mode()
+    else:
+        start_here()
     logger.info("End main driver.")
