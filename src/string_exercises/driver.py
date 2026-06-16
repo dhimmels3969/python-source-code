@@ -1,3 +1,4 @@
+import constants
 from src.common_library import helper_functions as hf
 from src.string_exercises import exercises as s1
 from src.string_exercises import exercises_02 as s2
@@ -23,7 +24,7 @@ class Driver():
 
     def run(self):
 
-        logger.info("")
+        logger.info(constants.THREE_BLANK_LINES)
         logger.info("#####################################################")
         logger.info("String Exercises - 1 through 10")
         logger.info("#####################################################")
