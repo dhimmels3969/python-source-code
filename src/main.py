@@ -1,5 +1,6 @@
 from src import driver
 import os
+import sys
 from pathlib import Path
 from logging_config import setup_logging
 import logging
@@ -23,7 +24,7 @@ if __name__ == '__main__':
     logger.info("Application started")
     src_dir = Path(os.path.dirname(__file__))
     print()
-    driver = driver.driver(src_dir.parent)
+    driver = driver.driver(src_dir.parent, sys.argv[1:])
 
     logger.info("Application ended.")
 

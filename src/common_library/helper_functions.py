@@ -139,6 +139,25 @@ def build_dictionary(input_object):
 
 
 #########################################################################
+def parse_kwargs(args):
+    """
+    This function will parse through a list of inputs provided by the calling function.
+    Function checks to see if they are in name = value format. If so function will split
+    the item and generate a DictionaryEntry that will be added to a dictionary that will
+    be returned to the user.
+    :param args:  list of name value pairs provided by user
+    :type args:   list
+    :return:      dictionary of key value pairs
+    :rtype:       dictionary
+    """
+    kwargs = {}
+    for arg in args:
+        if '=' in arg:
+            key, value = arg.split('=', 1)
+            kwargs[key.lower().strip()] = value.strip()
+    return kwargs
+
+#########################################################################
 def is_prime(n):
     """
     Use the Sieve of Eratosthenes Algorithm to determine if a number is prime.
