@@ -23,6 +23,7 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
     logger.info("Application started")
     src_dir = Path(os.path.dirname(__file__))
+    print()
     driver = driver.driver(src_dir.parent, sys.argv[1:])
 
     logger.info("Application ended.")

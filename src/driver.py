@@ -6,6 +6,7 @@ from src.common_library import helper_functions as hf
 from src.functions_exercises import driver as function_exercise_driver
 from src.string_exercises import driver as string_exercise_driver
 from src.data_structures_exercises import driver as data_structures_exercise_driver
+from src.comprehension_exercises import driver as comprehension_exercise_driver
 from src.list_exercises import driver as list_exercises_driver
 from src.dictionary_exercises import driver as dictionary_exercises_driver
 from src.set_exercises import driver as set_exercise_driver
@@ -52,6 +53,9 @@ def driver(src_dir, user_input):
 
         data_structures_driver = data_structures_exercise_driver.Driver()
         data_structures_driver.run()
+
+        comprehension_exercises_driver = comprehension_exercise_driver.Driver()
+        comprehension_exercises_driver.run()
 
         list_exercise_driver  = list_exercises_driver.Driver()
         list_exercise_driver.run()
