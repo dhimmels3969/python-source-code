@@ -1,4 +1,6 @@
 from src.common_library import helper_functions as hf
+import itertools
+import sys
 import logging
 
 logger = logging.getLogger(__name__)
@@ -35,6 +37,10 @@ def exercise_11_fizzbuzz_comprehension():
          ...]
     """
     logger.info("Exercise 11: FizzBuzz with Comprehension")
+    results = ['FizzBuzz' if i % 15 == 0 else 'Buzz'
+                    if i % 5 == 0 else 'Fizz'
+                    if i % 3 == 0 else i for i in range(1, 51)]
+    logger.info(f"  {results}")
     pass
 
 
@@ -66,6 +72,10 @@ def exercise_12_matrix_transposition():
             [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
     """
     logger.info("Exercise 12: Matrix Transposition")
+    matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    results = [[matrix[i][j] for i in range(0,3)] for j in range(0,3)]
+    logger.info(f"  Original:  {matrix}")
+    logger.info(f"  Transposed:  {results}")
     pass
 
 
@@ -95,6 +105,10 @@ def exercise_13_cartesian_product():
          (3, 'a'), (3, 'b'), (3, 'c')]
     """
     logger.info("Exercise 13: Cartesian Product")
+    xs = [1, 2, 3]
+    ys = ["a", "b", "c"]
+    results = [(x,y) for x in xs for y in ys]
+    logger.info(f"  {results}")
     pass
 
 
@@ -120,6 +134,9 @@ def exercise_14_extract_digits():
         ['1', '2', '3', '4', '2', '4', '2', '0', '2', '4']
     """
     logger.info("Exercise 14: Extract Digits")
+    strings = ["abc123", "hello", "42px", "year2024", "no-digits"]
+    results = [character  for word in strings for character in word if character.isdigit()]
+    logger.info(f"  {results}")
     pass
 
 
@@ -145,6 +162,9 @@ def exercise_15_nested_filtering():
         [[1, 2, 3], [6, 7, 8], [4, 5, 6]]
     """
     logger.info("Exercise 15: Nested Filtering")
+    groups = [[1, 2, 3], [-1, 4, 5], [6, 7, 8], [0, 9, 10], [-3, -1, 2], [4, 5, 6]]
+    results = [sublist for sublist in groups if all(n > 0 for n in sublist)]
+    logger.info(f"  {results}")
     pass
 
 
@@ -154,7 +174,7 @@ def exercise_16_conditional_dictionary_comprehension():
     Exercise 16: Conditional Dict Comprehension
     Problem Statement: Given a dictionary mapping student
         names to their exam scores, use a dict comprehension
-        with an if clause to produce a new dictionary
+        with an if-clause to produce a new dictionary
         containing only the students who passed — defined
         as a score of 50 or above.
     Purpose: Filtering a dictionary down to a relevant
@@ -172,6 +192,10 @@ def exercise_16_conditional_dictionary_comprehension():
         {'Alice': 82, 'Charlie': 91, 'Eve': 55}
     """
     logger.info("Exercise 16: Conditional Dict Comprehension")
+    scores = {"Alice": 82, "Bob": 45, "Charlie": 91,
+              "Diana": 37, "Eve": 55, "Frank": 49}
+    results = {k: v for k, v in scores.items() if v > 50}
+    logger.info(f"  {results}")
     pass
 
 
@@ -200,6 +224,10 @@ def exercise_17_grouped_dictionary():
         {'name': 'Alice', 'age': 30, 'city': 'N/A', 'email': 'N/A'}
     """
     logger.info("Exercise 17: Grouped Dict from Two Lists")
+    keys = ["name", "age", "city", "email"]
+    values = ["Alice", 30, None, None]
+    results = {k:(v if v is not None else 'N/A') for k,v in zip(keys, values)}
+    logger.info(f"  {results}")
     pass
 
 
@@ -228,6 +256,11 @@ def exercise_18_common_elements():
         {3, 4, 5} (order may vary)
     """
     logger.info("Exercise 18: Set of Common Elements")
+    list_a = [1, 2, 3, 4, 5, 3, 2]
+    list_b = [3, 4, 5, 6, 7, 4, 5]
+    # results = set(i for i in list_a if i in list_b)
+    results = {i for i in list_a if i in list_b}
+    logger.info(f"  {results}")
     pass
 
 
@@ -256,6 +289,11 @@ def exercise_19_character_frequency_set():
         'p', and 'h' (order may vary).
     """
     logger.info("Exercise 19: Character Frequency Set")
+    sentence = "comprehension makes python powerful"
+    results = dict(sorted({c: sentence.count(c)
+        for c in sentence if c != " " and sentence.count(c) > 1}.items(),
+        key=lambda item: item[0]))
+    logger.info(f"  {results}")
     pass
 
 
@@ -285,4 +323,9 @@ def exercise_20_lazy_squares():
         List size:        8,000,056 bytes
     """
     logger.info("Exercise 20: Lazy Squares")
+    squares_generator = (i ** 2 for i in range(1, 1_000_001))
+    squares_comprehension = [i ** 2 for i in range(1, 1_000_001)]
+    logger.info(f"  First 10 squares: {list(itertools.islice(squares_generator, 10))}")
+    logger.info(f"  Generator size: {sys.getsizeof(squares_generator):,}")
+    logger.info(f"  List size: {sys.getsizeof(squares_comprehension):,}")
     pass

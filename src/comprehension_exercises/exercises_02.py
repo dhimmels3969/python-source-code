@@ -1,4 +1,5 @@
 from src.common_library import helper_functions as hf
+import itertools
 import logging
 
 logger = logging.getLogger(__name__)
@@ -30,7 +31,16 @@ def exercise_21_fibonacci_generator():
     Expected Output:
         [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
     """
+    def fibonacci():
+        a, b = 0, 1
+        while True:
+            a, b = b, a+b
+            yield b
+
     logger.info("Exercise 21: Infinite Fibonacci Generator")
+    threshhold = 200
+    results = itertools.takewhile(lambda n: n < threshhold, fibonacci())
+    logger.info(f"  {list(results)}")
     pass
 
 
