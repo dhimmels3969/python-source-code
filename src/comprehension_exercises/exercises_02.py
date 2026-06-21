@@ -1,4 +1,8 @@
+from common_library.helper_functions import is_prime_number
 from src.common_library import helper_functions as hf
+import timeit
+from collections import defaultdict, deque
+import sys
 import itertools
 import logging
 
@@ -70,6 +74,11 @@ def exercise_22_chained_generator_pipeline():
          'Prime: 13', 'Prime: 17', 'Prime: 19', 'Prime: 23', 'Prime: 29']
     """
     logger.info("Exercise 22: Chained Generator Pipeline")
+    numbers = (n for n in range(2, 101))
+    primes = (n for n in numbers if hf.is_prime(n))
+    formatted = list(f"Prime: {prime}" for prime in primes)
+    results = itertools.islice(formatted, 10)
+    logger.info(f"  {list(results)}")
     pass
 
 
@@ -102,7 +111,15 @@ def exercise_23_row_parser():
         ['Diana', '28', 'Paris']
     """
     logger.info("Exercise 23: CSV Row Parser")
+    # user_info = "'Name','Age','City'\n'Alice',30,'New York'\n'Bob',25,'London'\n'Charlie',35,'Tokyo'\n'Diana',28,'Paris'"
+    user_info = "Name,Age,City\nAlice,30,New York\nBob,25,London\nCharlie,35,Tokyo\nDiana,28,Paris"
+
+    lines = user_info.strip().splitlines()[1:]
+    results = list([field.strip() for field in line.split(",")]  for line in lines)
+    for user in results:
+        logger.info(f"  {user}")
     pass
+
 
 
 ##############################################################################
@@ -124,10 +141,46 @@ def exercise_24_grouped_anagrams():
          ('a', 'b', 't'): ['bat', 'tab']}
     """
     logger.info("Exercise 24: Grouped Anagrams")
+    results = {}
+    words = ["eat", "tea", "tan", "ate", "nat", "bat", "tab"]
+    keys = [tuple(sorted(char for char in word)) for word in words]
+    words_with_index = list(zip(keys, words))
+
+    # initialize the dictionary
+    results = defaultdict(list)
+    # defaultdict(list) is equivalent to the loop below
+    # for key, word in words_with_index:
+    #     results[key] = []
+
+    # loop through list of words and load the dictionary
+    for key, word in words_with_index:
+        results[key].append(word)
+
+    # logger.info(f"  {results}")
+    for k,v in results.items():
+        logger.info(f"  {k}: {v}")
+
+    # Show the comprehension approach -- demonstrates the key idea
+    # (last-write-wins, so groups are lost without defaultdict)
+    key_demo = {k:v for k,v in words_with_index}
+    logger.info(f"  Comprehension only (last word per group):")
+    logger.info(f"  {key_demo}")
     pass
 
 
 ##############################################################################
+# Define a function with a list
+list_builder = '''\
+def build_list(upper_limit): 
+    return [i**2 for i in range(1,upper_limit) if i %2 ==0] 
+'''
+
+# Define a function with a generator
+gen_builder = ''' 
+def build_gen(upper_limit): 
+    return (i**2 for i in range(1,upper_limit) if i %2 ==0)
+'''
+
 def exercise_25_comprehension_generator_testing():
     """
     Exercise 25: Comprehension vs Generator Benchmark
@@ -162,5 +215,62 @@ def exercise_25_comprehension_generator_testing():
         List  iter:  0.1843s
         Gen   iter:  0.5102s
     """
+
+    def build_list(upper_limit):
+        return [i**2 for i in range(1,upper_limit) if i %2 ==0]
+
+    def build_gen(upper_limit):
+        return (i**2 for i in range(1,upper_limit) if i %2 ==0)
+
     logger.info("Exercise 25: Comprehension vs Generator Benchmark")
+    list_message, gen_message = "", ""
+    upper_limit = 100_000
+    RUNS = 1000
+    squares_list = build_list(upper_limit + 1)
+    squares_gen  = build_gen(upper_limit + 1)
+    ###############  MEMORY USAGE ###################
+    logger.info(f"  ------ Memory ------")
+    logger.info(f"  List size: {sys.getsizeof(squares_list):,}")
+    logger.info(f"  Gen  size: {sys.getsizeof(squares_gen):,}")
+
+    ###############  CONSTRUCTION TIME ###################
+    logger.info(f"  ------ Construction time (1000 runs) ------")
+    list_build_time = timeit.timeit(
+        lambda: [x ** 2 for x in range(1, upper_limit + 1) if x % 2 == 0],
+        number=RUNS
+    )
+    list_message = f"List build - 1000 runs took: {list_build_time:.6f} seconds"
+
+    gen_build_time = timeit.timeit(
+        lambda: (x ** 2 for x in range(1, upper_limit + 1) if x % 2 == 0),
+        number=RUNS
+    )
+    gen_message = f"Gen build - 1000 runs took: {gen_build_time:.6f} seconds"
+
+    logger.info(f"  {list_message}")
+    logger.info(f"  {gen_message}")
+
+    ###############  ITERATION TIME ###################
+    # List: iterate a pre-built list
+    list_iter_time = timeit.timeit(
+        lambda: deque([x ** 2 for x in range(1, upper_limit + 1) if x % 2 == 0], maxlen=0),
+        number=RUNS
+    )
+    # Generator: build and fully consume in the same call
+    gen_iter_time = timeit.timeit(
+        lambda: deque((x ** 2 for x in range(1, upper_limit + 1) if x % 2 == 0), maxlen=0),
+        number=RUNS
+    )
+
+    logger.info(f"  --- Full iteration time ({RUNS:,} runs) ---")
+    logger.info(f"  List  iter:  {list_iter_time:.4f}seconds")
+    logger.info(f"  Gen   iter:  {gen_iter_time:.4f}seconds")
+
+    # try:
+    #     t = timeit.timeit(stmt=list_builder, number=1_000_000)
+    #     # timer = timeit.Timer("build_list(100001)", "build a list")
+    #     # t = timer.timeit(number=1000)
+    #     list_message = f"List build - 1000 runs took: {t:.6f} seconds"
+    # except Exception as e:
+    #     print(f"Timer error: {e}")
     pass
