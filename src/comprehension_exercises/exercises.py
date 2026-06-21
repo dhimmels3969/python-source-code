@@ -32,6 +32,8 @@ def exercise_01_squares_list():
         169, 196, 225, 256, 289, 324, 361, 400]
     """
     logger.info("Exercise 1: Squares List")
+    results = [i**2 for i in range(1, 21)]
+    logger.info(f"  {results}")
     pass
 
 
@@ -54,6 +56,9 @@ def exercise_02_even_numbers_list():
         [2, 14, 8, 6, 10]
     """
     logger.info("Exercise 2: Even Numbers")
+    numbers = [3, 7, 2, 14, 9, 8, 11, 6, 5, 10]
+    results = [n for n in numbers if n % 2 == 0]
+    logger.info(f"  {results}")
     pass
 
 
@@ -78,6 +83,9 @@ def exercise_03_string_lengths():
         [6, 4, 13, 2, 8]
     """
     logger.info("Exercise 3: String Lengths")
+    words = ["python", "list", "comprehension", "is", "powerful"]
+    results = [len(word) for word in words]
+    logger.info(f"  {results}")
     pass
 
 
@@ -102,6 +110,9 @@ def exercise_04_uppercase_conversion():
         ['APPLE', 'BANANA', 'CHERRY', 'DATE', 'ELDERBERRY']
     """
     logger.info("Exercise 4: Uppercase Converter")
+    fruits = ["apple", "banana", "cherry", "date", "elderberry"]
+    results = [fruit.upper() for fruit in fruits]
+    logger.info(f"  {results}")
     pass
 
 
@@ -125,6 +136,9 @@ def exercise_05_flatten_list():
         [1, 2, 3, 4, 5, 6, 7, 8, 9]
     """
     logger.info("Exercise 5: Flatten List")
+    matrix = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+    results = [column for item in matrix for column in item]
+    logger.info(f"  {results}")
     pass
 
 
@@ -150,6 +164,9 @@ def exercise_06_filter_and_transform():
         [1, 9, 25, 49, 81]
     """
     logger.info("Exercise 6: Filter & Transform Together")
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    results = [i ** 2 for i in numbers if i % 2 == 1]
+    logger.info(f"  {results}")
     pass
 
 
@@ -176,6 +193,10 @@ def exercise_07_word_frequency_list():
         {'apple': 3, 'banana': 2, 'cherry': 1, 'date': 1}
     """
     logger.info("Exercise 7: Word Frequency Dict")
+    words = ["apple", "banana", "apple", "cherry", "banana", "apple", "date"]
+    results = dict(sorted({word: words.count(word)
+                           for word in set(words)}.items(), key=lambda item: item[0]))
+    logger.info(f"  {results}")
     pass
 
 
@@ -186,8 +207,8 @@ def exercise_08_invert_dictionary():
     Problem Statement: Given a dictionary, use a dict
         comprehension to produce a new dictionary where
         the original keys become values and the
-        original values become keys. The original d
-        ictionary must remain unchanged.
+        original values become keys. The original
+        dictionary must remain unchanged.
     Purpose: Dictionary inversion is a common operation
         when you need to look up data in the reverse
         direction — for example, finding a country from
@@ -204,6 +225,10 @@ def exercise_08_invert_dictionary():
          'British Pound': 'GBP', 'Japanese Yen': 'JPY'}
     """
     logger.info("Exercise 8: Invert Dictionary")
+    codes = {"USD": "US Dollar", "EUR": "Euro",
+             "GBP": "British Pound", "JPY": "Japanese Yen"}
+    results = {v: k for k, v in codes.items()}
+    logger.info(f"  {results}")
     pass
 
 
@@ -230,6 +255,12 @@ def exercise_09_unique_vowels_list():
         {'a', 'e', 'i', 'o', 'u'} (order may vary)
     """
     logger.info("Exercise 9: Unique Vowels")
+    vowels = ["a", "e", "i", "o", "u"]
+    sentence = "the quick brown fox jumps over the lazy dog"
+    results = \
+        sorted(list(set([letter for letter in sentence if
+                            letter.lower() in vowels])))
+    logger.info(f"  {results}")
     pass
 
 
@@ -252,6 +283,8 @@ def exercise_10_square_mapping_check():
         {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
     """
     logger.info("Exercise 10: Square Mapping")
+    results = { i: i**2 for i in range(1,11)}
+    logger.info(f"  {results}")
     pass
 
 
