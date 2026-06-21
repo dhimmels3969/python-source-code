@@ -169,18 +169,6 @@ def exercise_24_grouped_anagrams():
 
 
 ##############################################################################
-# Define a function with a list
-list_builder = '''\
-def build_list(upper_limit): 
-    return [i**2 for i in range(1,upper_limit) if i %2 ==0] 
-'''
-
-# Define a function with a generator
-gen_builder = ''' 
-def build_gen(upper_limit): 
-    return (i**2 for i in range(1,upper_limit) if i %2 ==0)
-'''
-
 def exercise_25_comprehension_generator_testing():
     """
     Exercise 25: Comprehension vs Generator Benchmark
