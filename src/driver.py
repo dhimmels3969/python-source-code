@@ -14,6 +14,7 @@ from src.tuple_exercises import driver as tuple_exercise_driver
 from src.date_time_exercises import driver as date_time_exercise_driver
 from src.object_oriented_exercises import driver as object_oriented_exercise_driver
 from src.file_handling_exercises import driver as file_handling_exercise_driver
+from src.timers_and_timing_tests import driver as timer_driver
 from src.wordle import driver as wordle_driver
 import constants
 import logging
@@ -36,47 +37,30 @@ def driver(src_dir, user_input):
         word_driver.run()
     #####################################################################
 
-
     #####################################################################
     def run_code_exercises(root):
-        # io_driver = input_output_exercise_driver.Driver(src_dir)
-        # io_driver.run()
-        #
-        # loop_driver = loop_exercise_driver.Driver()
-        # loop_driver.run()
 
-        func_driver = function_exercise_driver.Driver()
-        func_driver.run()
+        # build the list of Drivers
+        drivers = [
+            input_output_exercise_driver.Driver(src_dir, ["run=False"]),
+            loop_exercise_driver.Driver(["run=False"]),
+            function_exercise_driver.Driver(),
+            string_exercise_driver.Driver(),
+            data_structures_exercise_driver.Driver(),
+            comprehension_exercise_driver.Driver(),
+            list_exercises_driver.Driver(),
+            dictionary_exercises_driver.Driver(),
+            set_exercise_driver.Driver(),
+            tuple_exercise_driver.Driver(),
+            date_time_exercise_driver.Driver(),
+            object_oriented_exercise_driver.Driver(src_dir),
+            file_handling_exercise_driver.Driver(src_dir),
+            timer_driver.Driver()
+        ]
 
-        string_driver = string_exercise_driver.Driver()
-        string_driver.run()
-
-        data_structures_driver = data_structures_exercise_driver.Driver()
-        data_structures_driver.run()
-
-        comprehension_exercises_driver = comprehension_exercise_driver.Driver()
-        comprehension_exercises_driver.run()
-
-        list_exercise_driver  = list_exercises_driver.Driver()
-        list_exercise_driver.run()
-
-        dict_exercises_driver = dictionary_exercises_driver.Driver()
-        dict_exercises_driver.run()
-
-        set_exercises_driver = set_exercise_driver.Driver()
-        set_exercises_driver.run()
-
-        tuple_exercises_driver = tuple_exercise_driver.Driver()
-        tuple_exercises_driver.run()
-
-        date_time_exercises_driver = date_time_exercise_driver.Driver()
-        date_time_exercises_driver.run()
-
-        object_oriented_driver = object_oriented_exercise_driver.Driver(src_dir)
-        object_oriented_driver.run()
-
-        file_handling_driver = file_handling_exercise_driver.Driver(src_dir)
-        file_handling_driver.run()
+        # iterate through the list and run each item...
+        for driver in drivers:
+            driver.run()
 
         return None
     #####################################################################

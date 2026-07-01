@@ -262,3 +262,20 @@ def exercise_25_comprehension_generator_testing():
     # except Exception as e:
     #     print(f"Timer error: {e}")
     pass
+
+
+
+###########################################################################
+#### Following code verified: 2026-06-21
+###########################################################################
+#
+# my_code = """
+# total = 0
+# for i in range(500):
+#    total += 1
+# """
+# def timer_test():
+#     time_taken = timeit.timeit(my_code)
+#     logger.info(f"==========>>>>  Total time taken: {time_taken:,.6f} seconds.")
+#     pass
+###########################################################################
