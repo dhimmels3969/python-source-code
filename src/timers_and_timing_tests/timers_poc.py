@@ -1,5 +1,8 @@
 from common_library.helper_functions import is_prime_number
+from common_library.real_python_timer import Timer, ContextManagerTimer
 from src.common_library import helper_functions as hf
+from src.common_library import real_python_timer as rptimer
+import time
 import timeit
 from collections import defaultdict, deque
 import sys
@@ -142,5 +145,105 @@ def timer_test_number_04(sum_, tests_, repeat_):
     pass
 
 
+##############################################################################
+def perf_counter_test_number_01(sum_, tests_, repeat_):
+    tic = time.perf_counter()
+    calculate_sum_via_loop(sum_)
+    toc = time.perf_counter()
+    logger.info(f"  --------------------------------------------------------------------------")
+    logger.info(f"  perf_counter testing - basic functionality")
+    logger.info(f"  Sum first {sum_:,} numbers... completed in {toc - tic:0.6f} seconds")
+    logger.info(f"  --------------------------------------------------------------------------")
+    logger.info("")
+    pass
 
+
+##############################################################################
+def perf_counter_test_number_02(sum_, tests_, repeat_):
+    myTimer = rptimer.Timer_orig(text="[02] From the Timer_orig class... Elapsed time: {:0.6f} seconds"
+                                 , logger=logging.warning)
+    myTimer.start()
+    calculate_sum_via_loop(sum_)
+    elapsedTime = myTimer.stop()
+    logger.info(f"  --------------------------------------------------------------------------")
+    logger.info(f"  perf_counter_test_number_02 - move timer to a class")
+    logger.info(f"  Sum first {sum_:,} numbers... completed in {elapsedTime:0.6f} seconds")
+    logger.info(f"  --------------------------------------------------------------------------")
+    logger.info("")
+    pass
+
+
+
+##############################################################################
+def perf_counter_test_number_03(sum_, tests_, repeat_):
+    myTimer = rptimer.Timer(name = "test_number_03"
+                                 , text="[03] From the timer class... Elapsed time: {:0.6f} seconds"
+                                 , logger=logging.warning)
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info(f"perf_counter_test_number_03 - enhanced timer class")
+    for i in range(tests_ + 1):
+        myTimer.start()
+        calculate_sum_via_loop(sum_)
+        elapsedTime = myTimer.stop()
+        # logger.info(f"  --------------------------------------------------------------------------")
+        # logger.info(f"  perf_counter testing - move timer to a class")
+        # logger.info(f"  Sum first {sum_:,} numbers... completed in {elapsedTime:0.6f} seconds")
+        # logger.info(f"  --------------------------------------------------------------------------")
+        # logger.info("")
+    # after completion of all tests accumulated elapsed time will reside in a dictionary within
+    # the timer object.
+
+    logger.info(f"  Elapsed time for all tests: {myTimer.timers['test_number_03']:0.6f} seconds")
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info("")
+    pass
+
+
+
+##############################################################################
+def perf_counter_test_number_04(sum_, tests_, repeat_):
+    myTimer = rptimer.ContextManagerTimer(name = "test_number_04"
+                                 , text="[04] Timer as Context Manager... Elapsed time: {:0.6f} seconds"
+                                 , logger=logging.warning)
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info(f"perf_counter_test_number_04 - timer as context manager")
+    for i in range(tests_ + 1):
+        with myTimer:
+            calculate_sum_via_loop(sum_)
+
+    # after completion of all tests accumulated elapsed time will reside in a dictionary within
+    # the timer object.
+
+    logger.info(f"  Elapsed time for all tests: {myTimer.timers['test_number_04']:0.6f} seconds")
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info("")
+    pass
+
+
+
+##############################################################################
+
+@rptimer.ContextManagerTimer(name = "test_number_05"
+                                 , text="[05] Timer as Decorator... Elapsed time: {:0.6f} seconds"
+                                 , logger=logging.warning)
+def time_loops_test_number_05(sum_):
+    calculate_sum_via_loop(sum_)
+    return None
+
+def perf_counter_test_number_05(sum_, tests_, repeat_):
+    myTimer = rptimer.ContextManagerTimer(name = "test_number_05"
+                                 , text="[05] Timer as Decorator... Elapsed time: {:0.6f} seconds"
+                                 , logger=logging.warning)
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info(f"perf_counter_test_number_05 - timer as decorator")
+
+    for i in range(tests_ + 1):
+        time_loops_test_number_05(sum_)
+    # after completion of all tests accumulated elapsed time will reside in a dictionary within
+    # the timer object.
+
+    # logger.info(f"  Elapsed time for all tests: {myTimer.timers['test_number_05']:0.6f} seconds")
+    logger.info(f"--------------------------------------------------------------------------")
+    logger.info("")
+    pass
 

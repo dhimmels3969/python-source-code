@@ -1,12 +1,15 @@
 import constants
-from src.common_library import helper_functions as hf
+# from src.common_library import helper_functions as hf
 from src.timers_and_timing_tests import timers_poc as poc
 import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 #
-# Exercises found at web page https://pynative.com/python-file-handling-exercises/
+# Code samples pertaining to timing and performance measurement.
+#   timeit - https://www.learnbyexample.org/timeit-module-to-measure-execution-time-in-python/
+#   perf_counter - https://realpython.com/python-timer/
+#
 # Driver program to call all methods
 #
 
@@ -37,7 +40,13 @@ class Driver:
         results = poc.timer_test_number_03()
         results = poc.timer_test_number_04(10_000, 250_000, 5)
 
-
+        results = poc.perf_counter_test_number_01(1_000, 0, 0)
+        results = poc.perf_counter_test_number_01(1_000_000, 0, 0)
+        results = poc.perf_counter_test_number_01(10_000_000, 0, 0)
+        results = poc.perf_counter_test_number_02(100_000, 0, 0)
+        results = poc.perf_counter_test_number_03(100_000, 8, 0)
+        results = poc.perf_counter_test_number_04(100_000, 10, 0)
+        results = poc.perf_counter_test_number_05(100_000, 3, 0)
 
         logger.info("")
         logger.info("#####################################################")
