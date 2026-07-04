@@ -20,5 +20,9 @@
 ## Project Organization
 
 ***
-## Dependencies
-+ pwinput
+## Dependencies 
++ et_xmlfile==2.0.0
++ openpyxl==3.1.5
++ pwinput==1.0.3
++ tzdata==2026.2
++ _**current as of June 2026**_

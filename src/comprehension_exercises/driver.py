@@ -69,6 +69,7 @@ class Driver:
         results = cmp_03.exercise_23_row_parser()
         results = cmp_03.exercise_24_grouped_anagrams()
         results = cmp_03.exercise_25_comprehension_generator_testing()
+        # results = cmp_03.timer_test()
 
 
 
