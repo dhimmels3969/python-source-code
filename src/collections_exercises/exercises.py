@@ -1,4 +1,7 @@
 import logging
+import re
+from collections import Counter, defaultdict
+
 #
 # https://pynative.com/python-collections-module-exercises/
 # Exercises 1 through 10
@@ -31,6 +34,10 @@ def exercise_01_word_frequency_counter():
         , e.g. the: 3, cat: 2, sat: 2, on: 1, mat: 1
     """
     logger.info(f"Exercise 1: Word Frequency Counter")
+    sentence = "the cat sat on the mat the cat sat"
+    words_in_sentence_counter = Counter(sentence.split(" "))
+    for word in words_in_sentence_counter:
+        logger.info(f"  {word}: {words_in_sentence_counter[word]}")
     pass
 
 
@@ -55,6 +62,11 @@ def exercise_02_most_common_elements():
         apple: 4, banana: 3, cherry: 2
     """
     logger.info(f"Exercise 2: Most Common Elements")
+    items = ["apple", "banana", "apple", "cherry", "banana"
+        , "apple", "date", "cherry", "banana", "apple"]
+    items_counter = Counter(items)
+    most_frequent_items_counter = items_counter.most_common(n=3)
+    logger.info(f"  Most Frequent Items: {most_frequent_items_counter}")
     pass
 
 
@@ -82,6 +94,15 @@ def exercise_03_counter_subtraction():
         apple: 1, banana: 1 (items with positive remaining count only)
     """
     logger.info(f"Exercise 3: Subtract Two Counters")
+    stock = ["apple", "apple", "apple", "banana", "banana", "cherry"]
+    sold = ["apple", "apple", "banana", "cherry", "cherry"]
+    stock_counter = Counter(stock)
+    sold_Counter = Counter(sold)
+    message = "Remaining Items: "
+    results = stock_counter - sold_Counter
+    for item in results.items():
+        message = message + f" {item[0]}: {item[1]},"
+    logger.info(f"  {message[:-1]}")
     pass
 
 
@@ -107,6 +128,10 @@ def exercise_04_character_frequency_string():
         w: 1, r: 1, d: 1
     """
     logger.info(f"Exercise 4: Character Frequency in a String")
+    text = "hello world"
+    resolved_text = re.sub(r'\s+', '', text)
+    character_counter = Counter(resolved_text)
+    logger.info(f"  {character_counter}")
     pass
 
 
@@ -133,7 +158,12 @@ def exercise_05_counter_addition():
         apple: 50, banana: 70, cherry: 30, date: 60
     """
     logger.info(f"Exercise 5: Combine Counters with Addition")
+    warehouse_a = Counter({"apple": 50, "banana": 30, "cherry": 20})
+    warehouse_b = Counter({"banana": 40, "cherry": 10, "date": 60})
+    combined_warehouse_counts = warehouse_a + warehouse_b
+    logger.info(f"  {combined_warehouse_counts}")
     pass
+
 
 
 #########################################################################################
@@ -158,6 +188,13 @@ def exercise_06_group_words_by_first_letter():
         starting with that letter, e.g. a: ['apple', 'avocado', 'apricot']
     """
     logger.info(f"Exercise 6: Group Words by First Letter")
+    words = ["apple", "avocado", "banana", "blueberry", "cherry"
+        , "apricot", "cranberry", "bluebell"]
+    results = defaultdict(list)
+    for word in words:
+        results[word[0].lower()].append(word)
+    for letter, items in sorted(results.items()):
+        logger.info(f"  {letter}: {items} ")
     pass
 
 
@@ -169,7 +206,7 @@ def exercise_07_count_occurrences():
     Problem Statement:
         Write a Python program that counts the occurrences of each item
         in a list using defaultdict(int), without any manual
-        initialisation of keys, and prints each item with its count.
+        initialization of keys, and prints each item with its count.
     Purpose:
         Before Counter and defaultdict existed, counting with a plain
         dictionary required checking for key existence on every update.
@@ -183,6 +220,13 @@ def exercise_07_count_occurrences():
         red: 3, blue: 3, green: 1, yellow: 1
     """
     logger.info(f"Exercise 7: Count Occurrences Without KeyError")
+    colours = ["red", "blue", "red", "green", "blue"
+        , "blue", "red", "yellow"]
+    results = defaultdict(int)
+    for colour in colours:
+        results[colour] += 1
+    for color, count in results.items():
+        logger.info(f"  {color}: {count} ")
     pass
 
 
@@ -208,6 +252,13 @@ def exercise_08_build_adjacency_list():
         e.g. A: ['B', 'C'], B: ['D'], C: ['D'], D: ['E']
     """
     logger.info(f"Exercise 8: Build an Adjacency List")
+    edges = [("A", "B"), ("A", "C"), ("B", "D")
+        , ("C", "D"), ("D", "E")]
+    results = defaultdict(list)
+    for src, tgt in edges:
+        results[src].append(tgt)
+    for k, v in results.items():
+        logger.info(f"  {k}: {v} ")
     pass
 
 
@@ -236,6 +287,21 @@ def exercise_09_nested_defaultdict():
         and their placeholder data, e.g. Engineering: {'Alice': [], 'Charlie': []}
     """
     logger.info(f"Exercise 9: Nested defaultdict")
+    results = defaultdict(lambda: defaultdict(list))
+    department_info = [("Engineering", "Alice")
+        , ("Marketing", "Bob"), ("Engineering", "Charlie"), ("Marketing", "Diana")
+        , ("HR", "Eve")]
+    # department_info_items = [(k, v) for k, v in department_info]
+    # for k,v in department_info_items:
+    # build the nested dictionary
+    for k, v in department_info:
+        results[k][v] = []
+    # print the newly-created dictionary
+    for k in sorted(results.keys()):
+        logger.info(f"  {k}")
+        for k, v in sorted(results[k].items()):
+            logger.info(f"    {k}: {v}")
+
     pass
 
 
@@ -261,4 +327,11 @@ def exercise_10_use_set_with_default_dict():
         , Bob: {'Science', 'Maths'}, Charlie: {'Science'}
     """
     logger.info(f"Exercise 10: defaultdict with set")
+    results = defaultdict(set)
+    enrollments = [("Thomas", "Physics"), ("Alice", "Maths"), ("Bob", "Science"), ("Alice", "Science")
+        , ("Alice", "Maths"), ("Bob", "Maths"), ("Charlie", "Science")]
+    for k, v in enrollments:
+        results[k].add(v)
+    for student, courses in sorted(results.items()):
+        logger.info(f"  {student}: {sorted(courses)}")
     pass
