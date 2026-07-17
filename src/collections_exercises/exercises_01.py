@@ -1,4 +1,7 @@
 import logging
+from collections import defaultdict, deque
+from collections import OrderedDict
+from datetime import datetime
 #
 # https://pynative.com/python-collections-module-exercises/
 # Exercises 11 through 20
@@ -8,6 +11,14 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
+#########################################################################################
+def show_tasks(object_, message_):
+    logger.info(f"{message_}")
+    for k, v in object_.items():
+        logger.info(f"  {k}: {v}")
+    logger.info("")
+    pass
 
 
 #########################################################################################
@@ -35,6 +46,16 @@ def exercise_11_preserve_insertion_order():
             banana: 3, apple: 5, cherry: 1, date: 8, elderberry: 2
     """
     logger.info(f"Exercise 11: Preserve Insertion Order")
+    pairs = [("banana", 3), ("apple", 5), ("cherry", 1)
+        , ("date", 8), ("kiwi", 4), ("elderberry", 2), ("apricot", 12)]
+    results = OrderedDict()
+    for k, v in pairs:
+        results[k] = v
+    for k, v in results.items():
+        logger.info(f"  {k}: {v}")
+    logger.info(f"---- In sorted order ----")
+    for k, v in sorted(results.items()):
+        logger.info(f"  {k}: {v}")
     pass
 
 
@@ -63,11 +84,85 @@ def exercise_12_move_to_end():
         moving task_1 to the back.
     """
     logger.info(f"Exercise 12: Move to End")
+    tasks = [("task_1", "Write tests"), ("task_2", "Fix bug")
+        , ("task_3", "Deploy"), ("task_4", "Code review")
+        , ("task_5", "Update docs")]
+    results = OrderedDict()
+    for k, v in tasks:
+        results[k] = v
+
+    show_tasks(results, f"  ---- Original task list ----")
+    # make a copy of the original dictionary
+    original_results = results
+
+    # move  task_3 to the front
+    results.move_to_end("task_3", last=False)
+    show_tasks(results, f"  ---- After moving task_3 to the FRONT of the list")
+
+    # move task_1 to the end
+    results.move_to_end("task_1")
+    show_tasks(results, f"  ---- After moving task_1 to the END of the list")
+
     pass
 
 
 
 #########################################################################################
+def exercise_13_build_queue():
+    """
+    Build the initial queue with 3 entries
+    :return:
+    :rtype:
+    """
+    dt = datetime.now()
+    start_time_format = '%Y-%m-%d %I:%M:%S.%f'
+    results = OrderedDict()
+    key = "task_1"
+    value = {"start": datetime(dt.year, dt.month, dt.day, 0, 0, 0).strftime(start_time_format)}
+    results[key] = value
+    key = "task_2"
+    value = {"start": datetime(dt.year, dt.month, dt.day, 0, 1, 0).strftime(start_time_format)}
+    results[key] = value
+    key = "task_3"
+    value = {"start": datetime(dt.year, dt.month, dt.day, 0, 2, 0).strftime(start_time_format)}
+    results[key] = value
+    return results
+
+def exercise_13_process_request(input_queue, capacity, request):
+    """
+    :param input_queue:  queue of tasks...
+    :type input_queue:   dictionary
+    :param capacity:     maximum size of queue
+    :type capacity:      integer
+    :param request:      task user wishes to add to queue or update if task already exists
+    :type request:       string
+    :return:             updated queue
+    :rtype:              dictionary
+    :logic:
+        analyze the task. if it already exists, update the "start" property and move to the end of the queue
+        if task does NOT exist... create the entry "task_name": {"start": timestamp}
+        and move to the end of the queue. if the queue is at max capacity remove the item
+        at the head of the queue.  In high-volume systems you probably need to remove the oldest entry
+        prior to adding the new entry.
+    """
+    # try to get the request from the existing queue
+    # if found update the start time and move the item to the end of the queue
+    dt = datetime.now()
+    start_time_format = '%Y-%m-%d %I:%M:%S.%f'
+    value = {"start": datetime(dt.year, dt.month, dt.day
+                               , dt.hour, dt.minute, dt.second, dt.microsecond).strftime(start_time_format)}
+    if input_queue.get(request) is not None:
+        pass
+    else:
+        # if NOT found... check the size of the queue and delete the oldest item if full
+        # then add the new request to the end of the queue
+        if input_queue.__len__() >= capacity:
+            input_queue.popitem(last = False)
+    input_queue[request] = value
+    input_queue.move_to_end(request)
+    pass
+
+
 def exercise_13_implement_single_cache():
     """
     Exercise 13: Implement a Simple LRU Cache
@@ -91,6 +186,13 @@ def exercise_13_implement_single_cache():
         which items are present and which was evicted.
     """
     logger.info(f"Exercise 13: Implement a Simple LRU Cache")
+    queue = exercise_13_build_queue()
+    capacity = queue.__len__()
+    show_tasks(queue, f"  ---- Queue immediately after creation. ----")
+    exercise_13_process_request(queue, capacity, "task_1")
+    show_tasks(queue, f"  ---- After updating existing item. ----")
+    exercise_13_process_request(queue, capacity, "task_4.5")
+    show_tasks(queue, f"  ---- After adding new item. ----")
     pass
 
 
@@ -117,6 +219,14 @@ def exercise_14_compare_ordered_dicts():
         dict equality: True and OrderedDict equality: False
     """
     logger.info(f"Exercise 14: Compare Two OrderedDicts")
+    src_dictionary = {"a": 1, "b": 2, "c": 3}
+    tgt_dictionary = {"a": 1, "c": 3, "b": 2}
+    dict_objects_equal = src_dictionary == tgt_dictionary
+    logger.info(f"  Dictionary equality: {dict_objects_equal}")
+    src_ordered_dictionary = OrderedDict(src_dictionary)
+    tgt_ordered_dictionary = OrderedDict(tgt_dictionary)
+    OrderedDictObjectsEqual = src_ordered_dictionary == tgt_ordered_dictionary
+    logger.info(f"  OrderedDict equality: {OrderedDictObjectsEqual}")
     pass
 
 
@@ -144,10 +254,26 @@ def exercise_15_reverse_ordered_dict():
         step_5 down to step_1.
     """
     logger.info(f"Exercise 15: Reverse an OrderedDict")
+    steps = [("step_1", "Load data"), ("step_2", "Clean data")
+        , ("step_3", "Analyze"), ("step_4", "Visualise")
+        , ("step_5", "Export")]
+
+    myDictionary = OrderedDict(steps)
+    myDictionaryReversed = reversed(myDictionary.items())
+    for key, value in myDictionaryReversed:
+        logger.info(f"  {key}: {value}")
+
+
     pass
 
 
 #########################################################################################
+
+def display_deque(deque_, message_):
+    logger.info(f"  {message_}")
+    logger.info(f"  {list(deque_)}")
+    return None
+
 def exercise_16_basic_deque_operations():
     """
     Exercise 16: Basic deque Operations
@@ -167,12 +293,39 @@ def exercise_16_basic_deque_operations():
         The deque state printed after each of the six operations showing
         how items enter and leave from both ends.
     """
+
+
     logger.info(f"Exercise 16: Basic deque Operations")
+    initial = [2, 3, 4]
+    dq = deque(initial)
+    display_deque(dq, f"---- Initial Deque ---- ")
+    dq.append(99)
+    display_deque(dq, f"---- Add to End of Deque ---- ")
+    dq.appendleft(1.01)
+    display_deque(dq, f"---- Add to Head of Deque ---- ")
+    dq.pop()
+    display_deque(dq, f"---- Remove from End of Deque ---- ")
+    dq.popleft()
+    display_deque(dq, f"---- Remove from Head of Deque ---- ")
+    dq.extend([55, 65, 75])
+    display_deque(dq, f"---- Extend End of Deque ---- ")
+    dq.extendleft([1.25, 1.5, 1.75])
+    display_deque(dq, f"---- Extend End of Deque ---- ")
     pass
 
 
 
 #########################################################################################
+def complete_request(queue_: deque, pop_type: str = "FIFO"):
+    if queue_ is not None and len(queue_) > 0:
+        if pop_type == "FIFO":
+            queue_.popleft()
+        else:
+            queue_.pop()
+    else:
+        logger.info(f"  **** No more queued items in {queue_}.  Request not processed")
+    return None
+
 def exercise_17_implement_fifo_queue():
     """
     Exercise 17: Implement a Queue (FIFO)
@@ -195,6 +348,25 @@ def exercise_17_implement_fifo_queue():
         , showing customers entering at the back and leaving from the front.
     """
     logger.info(f"Exercise 17: Implement a Queue (FIFO)")
+    dq = deque([])
+    dq.extend(["Customer 1", "Customer 2", "Customer 3"])
+    display_deque(dq, f"---- Initial Deque ---- ")
+    dq.extend(["Customer 4"])
+    display_deque(dq, f"---- Add Customer 4 to Deque ---- ")
+    complete_request(dq)
+    display_deque(dq, f"---- Customer 1 removed from  Deque ---- ")
+    complete_request(dq)
+    display_deque(dq, f"---- Customer 2 removed from  Deque ---- ")
+    complete_request(dq)
+    display_deque(dq, f"---- Customer 3 removed from  Deque ---- ")
+    dq.append("Customer 5")
+    display_deque(dq, f"---- Customer 5 added to Deque ---- ")
+    complete_request(dq)
+    display_deque(dq, f"---- Customer 4 removed from Deque ---- ")
+    complete_request(dq)
+    display_deque(dq, f"---- Customer 5 removed from Deque ---- ")
+    # Deque should be empty at this point. Next popleft will result in IndexError.
+    complete_request(dq)
     pass
 
 
@@ -221,6 +393,17 @@ def exercise_18_implement_stack():
         showing pages added and removed from the same end.
     """
     logger.info(f"Exercise 18: Implement a Stack (LIFO)")
+    dq = deque([])
+    dq.extend(["microsoft", "google", "facebook", "x"])
+    display_deque(dq, f"---- Initial Deque ---- ")
+    complete_request(dq, pop_type="LIFO")
+    display_deque(dq, f"---- Remove Last Item ---- ")
+    complete_request(dq, pop_type="LIFO")
+    display_deque(dq, f"---- Remove Last Item ---- ")
+    complete_request(dq, pop_type="LIFO")
+    display_deque(dq, f"---- Remove Last Item ---- ")
+    complete_request(dq, pop_type="LIFO")
+    display_deque(dq, f"---- Remove Last Item ---- ")
     pass
 
 
@@ -246,7 +429,15 @@ def exercise_19_rotate_deque():
         rotating right by 2, and after rotating left by 2.
     """
     logger.info(f"Exercise 19: Rotating a deque")
-    pass
+    tasks = deque(["Design", "Develop", "Test", "Review", "Deploy"])
+    display_deque(tasks, f"---- Initial display ----")
+    # rotate to the right by 2 should display Review .... Test
+    tasks.rotate(2)
+    display_deque(tasks, f"---- Rotate 2 positions to the right:  should display Review .... Test ----")
+
+    # rotate to the left by 4 should display Test .... Develop
+    tasks.rotate(-4)
+    display_deque(tasks, f"---- Rotate 4 positions to the left:  should display Test .... Develop ----")
     pass
 
 
@@ -272,5 +463,23 @@ def exercise_20_bounded_deque():
         History buffer state after each addition, showing the
         oldest URL being dropped when the sixth is added.
     """
+    def deque_is_full(queue: deque):
+        return len(queue) == queue.maxlen
+
     logger.info(f"Exercise 20: Bounded deque for Recent History")
+    dq = deque(maxlen=5)
+    pages = ["https://google.com"
+        ,"https://facebook.com"
+        , "https://apple.com"
+        , "https://www.python.org/"
+        , "https://microsoft.com"
+        , "https://postgres.com"]
+
+    for page in pages:
+        message = f"---- Add website to history ----"
+        if deque_is_full(dq):
+            message = f"---- Deque full. Add website to history. Oldest item will be removed. ----"
+        dq.append(page)
+        display_deque(dq, message)
+
     pass
