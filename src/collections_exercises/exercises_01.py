@@ -473,7 +473,7 @@ def exercise_20_bounded_deque():
         , "https://apple.com"
         , "https://www.python.org/"
         , "https://microsoft.com"
-        , "https://postgres.com"]
+        , "https://www.postgresql.org/"]
 
     for page in pages:
         message = f"---- Add website to history ----"
@@ -481,5 +481,4 @@ def exercise_20_bounded_deque():
             message = f"---- Deque full. Add website to history. Oldest item will be removed. ----"
         dq.append(page)
         display_deque(dq, message)
-
     pass
