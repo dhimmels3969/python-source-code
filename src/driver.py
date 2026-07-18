@@ -7,6 +7,7 @@ from src.functions_exercises import driver as function_exercise_driver
 from src.string_exercises import driver as string_exercise_driver
 from src.data_structures_exercises import driver as data_structures_exercise_driver
 from src.comprehension_exercises import driver as comprehension_exercise_driver
+from src.collections_exercises import driver as collection_exercise_driver
 from src.list_exercises import driver as list_exercises_driver
 from src.dictionary_exercises import driver as dictionary_exercises_driver
 from src.set_exercises import driver as set_exercise_driver
@@ -44,18 +45,19 @@ def driver(src_dir, user_input):
         drivers = [
             input_output_exercise_driver.Driver(src_dir, ["run=False"]),
             loop_exercise_driver.Driver(["run=False"]),
-            function_exercise_driver.Driver(),
-            string_exercise_driver.Driver(),
-            data_structures_exercise_driver.Driver(),
-            comprehension_exercise_driver.Driver(),
-            list_exercises_driver.Driver(),
-            dictionary_exercises_driver.Driver(),
-            set_exercise_driver.Driver(),
-            tuple_exercise_driver.Driver(),
-            date_time_exercise_driver.Driver(),
-            object_oriented_exercise_driver.Driver(src_dir),
-            file_handling_exercise_driver.Driver(src_dir),
-            timer_driver.Driver()
+            function_exercise_driver.Driver(["run=False"]),
+            string_exercise_driver.Driver(["run=False"]),
+            data_structures_exercise_driver.Driver(["run=False"]),
+            comprehension_exercise_driver.Driver(["run=False"]),
+            collection_exercise_driver.Driver(["run=True"]),
+            list_exercises_driver.Driver(["run=False"]),
+            dictionary_exercises_driver.Driver(["run=False"]),
+            set_exercise_driver.Driver(["run=False"]),
+            tuple_exercise_driver.Driver(["run=False"]),
+            date_time_exercise_driver.Driver(["run=False"]),
+            object_oriented_exercise_driver.Driver(src_dir, ["run=False"]),
+            file_handling_exercise_driver.Driver(src_dir, ["run=False"]),
+            timer_driver.Driver(["run=False"])
         ]
 
         # iterate through the list and run each item...

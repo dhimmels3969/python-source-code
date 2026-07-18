@@ -26,15 +26,16 @@ class Driver():
     """
     def __init__(self, userInput):
         self.parms = hf.parse_kwargs(userInput)
+        self._name = "Loop Exercises"
         pass
 
     def run(self, **kwargs):
         if self.parms["run"] == "False":
-            logger.info("Skipping the Loop Exercises module...")
+            logger.info(f"Skipping the {self._name} module...\n")
         else:
             logger.info(constants.THREE_BLANK_LINES)
             logger.info("#####################################################")
-            logger.info("Loop Exercises - 1 through 10")
+            logger.info(f"{self._name} - 1 through 10")
             logger.info("#####################################################")
             results = l1.exercise_01_print_numbers_using_while(10)
             results = l1.exercise_02_display_negative_numbers()
@@ -49,7 +50,7 @@ class Driver():
 
             logger.info("")
             logger.info("#####################################################")
-            logger.info("Loop Exercises - 11 through 20")
+            logger.info(f"{self._name} - 11 through 20")
             logger.info("#####################################################")
             results = l2.exercise_11_reverse_string()
             results = l2.exercise_12_count_vowels_consonants()
@@ -73,7 +74,7 @@ class Driver():
 
             logger.info("")
             logger.info("#####################################################")
-            logger.info("Loop Exercises - 21 through 30")
+            logger.info(f"{self._name} - 21 through 30")
             logger.info("#####################################################")
             results = l3.exercise_21_reverse_number_pattern()
             results = l3.exercise_22_alternate_numbers_pattern()
@@ -89,7 +90,7 @@ class Driver():
 
             logger.info("")
             logger.info("#####################################################")
-            logger.info("Loop Exercises - 31 through 40")
+            logger.info(f"{self._name} - 31 through 40")
             logger.info("#####################################################")
 
             results = l4.exercise_31_segregate_items_in_list()
@@ -109,7 +110,7 @@ class Driver():
             results = l4.exercise_40_nested_list_search()
 
             logger.info("#####################################################")
-            logger.info("Loop Exercises - END")
+            logger.info(f"{self._name} - END")
             logger.info("#####################################################")
             logger.info("")
         pass

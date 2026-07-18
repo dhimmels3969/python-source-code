@@ -23,17 +23,18 @@ class Driver():
         # pass the root directory to the class for file operations
         self.root = root
         self.parms = hf.parse_kwargs(userInput)
+        self._name = "Input Output Exercises"
         pass
 
 
     def run(self):
 
         if self.parms["run"] == "False":
-            logger.info("Skipping the Input Output Exercises module...")
+            logger.info(f"Skipping the {self._name} module...\n")
         else:
             logger.info(constants.THREE_BLANK_LINES)
             logger.info("#####################################################")
-            logger.info("Input Output Exercises - 1 through 10")
+            logger.info(f"{self._name} - 1 through 10")
             logger.info("#####################################################")
             results = io_ex_03.exercise_22_check_empty_zilch_file(self.root)
 
@@ -55,7 +56,7 @@ class Driver():
             results = io_ex.ex_09_display_right_aligned_output()
 
             logger.info("#####################################################")
-            logger.info("Input Output Exercises - 11 through 20")
+            logger.info(f"{self._name} - 11 through 20")
             logger.info("#####################################################")
 
             results = io_ex.exercise_10_center_aligned_text()
@@ -73,7 +74,7 @@ class Driver():
 
 
             logger.info("#####################################################")
-            logger.info("Input Output Exercises - 21 through end")
+            logger.info(f"{self._name} - 21 through end")
             logger.info("#####################################################")
             items_to_keep = [3]
             results = io_ex_03.exercise_21_read_specific_lines_from_file(self.root, items_to_keep)
@@ -85,7 +86,7 @@ class Driver():
 
             logger.info()
             logger.info("#####################################################")
-            logger.info("Input Output Exercises - End of Section")
+            logger.info(f"{self._name} - End of Section")
             logger.info("#####################################################")
             logger.info()
 

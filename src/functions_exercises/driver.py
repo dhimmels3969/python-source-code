@@ -1,4 +1,5 @@
 import logging
+from src.common_library import helper_functions as hf
 from src.functions_exercises import exercises as f1
 from src.functions_exercises import exercises_02 as f2
 #
@@ -22,44 +23,48 @@ class Driver():
     TODO:
         Set up a dictionary to control which function gets executed and which functions get bypassed.
     """
-    def __init__(self):
+    def __init__(self, userInput):
+        self.parms = hf.parse_kwargs(userInput)
+        self._name = "Functions Exercises"
         pass
 
 
     def run(self):
+        if self.parms["run"] == "False":
+            logger.info(f"Skipping the {self._name} module...\n")
+        else:
+            logger.info("")
+            logger.info("#####################################################")
+            logger.info(f"{self._name} - 1 through 10")
+            logger.info("#####################################################")
 
-        logger.info("")
-        logger.info("#####################################################")
-        logger.info("Functions Exercises - 1 through 10")
-        logger.info("#####################################################")
+            results = f1.exercise_01_create_function_with_parameters()
+            results = f1.exercise_02_variable_length_arguments()
+            result = f1.exercise_03_return_multiple_values()
+            result = f1.exercise_04_functions_default_argument()
+            result = f1.exercise_05_inner_function_example()
+            result = f1.exercise_06_recursion_addition()
+            result = f1.exercise_07_assign_function_different_name()
+            results = f1.exercise_08_generate_list(4, 30)
+            results = f1.exercise_09_find_max_in_list()
+            results = f1.exercise_10_keyword_positional_arguments()
 
-        results = f1.exercise_01_create_function_with_parameters()
-        results = f1.exercise_02_variable_length_arguments()
-        result = f1.exercise_03_return_multiple_values()
-        result = f1.exercise_04_functions_default_argument()
-        result = f1.exercise_05_inner_function_example()
-        result = f1.exercise_06_recursion_addition()
-        result = f1.exercise_07_assign_function_different_name()
-        results = f1.exercise_08_generate_list(4, 30)
-        results = f1.exercise_09_find_max_in_list()
-        results = f1.exercise_10_keyword_positional_arguments()
-
-        logger.info("")
-        logger.info("#####################################################")
-        logger.info("Functions Exercises - 11 through 18")
-        logger.info("#####################################################")
-        results = f2.exercise_11_function_with_keyword_args()
-        results = f2.exercise_12_modify_global_variables()
-        results = f2.exercise_13_recursion_factorial()
-        results = f2.exercise_14_square_number_using_lambda()
-        results = f2.exercise_15_filter_list_using_lambda()
-        results = f2.exercise_16_transform_list_using_lambda()
-        results = f2.exercise_17_sort_complex_data_using_lambda()
-        results = f2.exercise_18_pass_a_function_to_a_higher_order_function()
-        logger.info("#####################################################")
-        logger.info("Functions Exercises - END")
-        logger.info("#####################################################")
-        logger.info("")
+            logger.info("")
+            logger.info("#####################################################")
+            logger.info(f"{self._name} - 11 through 18")
+            logger.info("#####################################################")
+            results = f2.exercise_11_function_with_keyword_args()
+            results = f2.exercise_12_modify_global_variables()
+            results = f2.exercise_13_recursion_factorial()
+            results = f2.exercise_14_square_number_using_lambda()
+            results = f2.exercise_15_filter_list_using_lambda()
+            results = f2.exercise_16_transform_list_using_lambda()
+            results = f2.exercise_17_sort_complex_data_using_lambda()
+            results = f2.exercise_18_pass_a_function_to_a_higher_order_function()
+            logger.info("#####################################################")
+            logger.info(f"{self._name} - END")
+            logger.info("#####################################################")
+            logger.info("")
 
         pass
 
