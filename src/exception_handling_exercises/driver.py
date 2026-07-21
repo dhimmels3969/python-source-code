@@ -23,7 +23,8 @@ class Driver:
     TODO:
         Set up a dictionary to control which function gets executed and which functions get bypassed.
     """
-    def __init__(self, userInput):
+    def __init__(self, root, userInput):
+        self.root = root
         self.parms = hf.parse_kwargs(userInput)
         self._name = "Exception Handling Exercises"
         pass
@@ -39,14 +40,14 @@ class Driver:
             logger.info("#####################################################")
             results = excp_01.exercise_01_try_except_test()
             results = excp_01.exercise_02_division_error_prevention()
-            results = excp_01.exercise_03_file_not_found()
+            results = excp_01.exercise_03_file_not_found(self.root)
             results = excp_01.exercise_04_index_out_of_range()
             results = excp_01.exercise_05_key_error_test()
             results = excp_01.exercise_06_type_error_prevention()
             results = excp_01.exercise_07_multiple_exceptions()
-            results = excp_01.exercise_08_finally_block_testing()
+            results = excp_01.exercise_08_finally_block_testing(self.root)
             results = excp_01.exercise_09_else_clause_testing()
-            results = excp_01.exercise_10_nested_try_except()
+            results = excp_01.exercise_10_nested_try_except(self.root)
 
             logger.info("")
             logger.info("#####################################################")

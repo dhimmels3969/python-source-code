@@ -57,7 +57,7 @@ def driver(src_dir, user_input):
             collection_exercise_driver.Driver(["run=False"]),
             date_time_exercise_driver.Driver(["run=False"]),
             object_oriented_exercise_driver.Driver(src_dir, ["run=False"]),
-            exception_handling_exercise_driver.Driver(["run=True"]),
+            exception_handling_exercise_driver.Driver(src_dir, ["run=True"]),
             file_handling_exercise_driver.Driver(src_dir, ["run=False"]),
             timer_driver.Driver(["run=False"])
         ]

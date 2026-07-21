@@ -1,4 +1,8 @@
+import json
 import logging
+from pathlib import Path
+import math
+from src.common_library import helper_functions as hf
 
 #
 # https://pynative.com/python-exception-handling-exercises/
@@ -31,6 +35,14 @@ def exercise_01_try_except_test():
         Error: That was not a valid integer. Please enter a number.
     """
     logger.info(f"Exercise 1: Basic Try-Except")
+    logger.info(f"  Please enter a number between 1 and 10:")
+    rspns_01 = "hello"
+    logger.info(f"  {rspns_01}")
+    try:
+        rspns_02 = int(rspns_01)
+    except ValueError as e:
+        logger.info(f"  ***Error: That was not a valid integer. Please enter a number.")
+        logger.info(f"  ***{e}")
     pass
 
 
@@ -54,13 +66,27 @@ def exercise_02_division_error_prevention():
     Expected Output:
         None for the first call and 5.0 for the second.
     """
+    def safe_divide(a, b):
+        results = 0
+        try:
+            results = a / b
+        except ZeroDivisionError:
+            results = None
+        return results
+
     logger.info(f"Exercise 2: Division Safety")
+    a, b = 10, 0
+    results = safe_divide(a, b)
+    logger.info(f"  {a} / {b} = {results}")
+    a, b = 10, 2
+    results = safe_divide(a, b)
+    logger.info(f"  {a} / {b} = {results}")
     pass
 
 
 
 #########################################################################################
-def exercise_03_file_not_found():
+def exercise_03_file_not_found(root_dir):
     """
     Exercise 3: File Not Found
     Problem Statement:
@@ -78,8 +104,20 @@ def exercise_03_file_not_found():
     Expected Output:
         Error: The file 'missing_file.txt' was not found.
         Please check the filename and path.
+
+        Error Message from system: "[Errno 2] No such file or directory: "
     """
     logger.info(f"Exercise 3: File Not Found")
+    missing_file = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "missing_file.txt")
+    try:
+        with open(missing_file, "r") as f:
+            logger.info(f"  {missing_file} opened!")
+    except FileNotFoundError as e:
+        logger.info(f"  Error: The file 'missing_file.txt' was not found.")
+        logger.info(f"  Please check the filename and path.")
+        # logger.info(f"  {e}")
     pass
 
 
@@ -105,6 +143,13 @@ def exercise_04_index_out_of_range():
         (valid indices: 0 to 2).
     """
     logger.info(f"Exercise 4: Index Out of Range")
+    items = ["apple", "banana", "cherry"]
+    requested_index = len(items) + 2
+    try:
+        item = items[requested_index]
+    except IndexError as e:
+        logger.info(f"  Error: Index {requested_index} is out of range. The list has {len(items)} items.")
+        logger.info(f"  (Valid Indices: 0 to {len(items) - 1}).")
     pass
 
 
@@ -130,6 +175,12 @@ def exercise_05_key_error_test():
         Error: 'Germany' was not found in the dictionary.
     """
     logger.info(f"Exercise 5: Key Error Handling")
+    capitals = {"France": "Paris", "Japan": "Tokyo", "Brazil": "Brasilia"}
+    requested_key = "Germany"
+    try:
+        capital = capitals[requested_key]
+    except KeyError as e:
+        logger.info(f"  Error: '{requested_key}' was not found in the dictionary.")
     pass
 
 
@@ -155,7 +206,20 @@ def exercise_06_type_error_prevention():
     Expected Output:
         Error: incompatible types for addition. for the first call and 30 for the second.
     """
+
+    def add_values(a, b):
+        results = ""
+        try:
+            results = a + b
+        except TypeError as e:
+            results = "Error: incompatible types for addition."
+        return results
+
     logger.info(f"Exercise 6: Type Error Guard")
+    message = add_values(10, "20")
+    logger.info(f"  {message}")
+    message = add_values(10, 20)
+    logger.info(f"  {message}")
     pass
 
 
@@ -184,13 +248,32 @@ def exercise_07_multiple_exceptions():
         Error: Cannot divide by zero.
         5.0
     """
+    def parse_and_divide(value, divisor):
+        results = ""
+        try:
+            converted_value = float(value)
+            results = converted_value / divisor
+        except ValueError as e:
+            results = f"Error: '{value}' cannot be converted to a number."
+        except ZeroDivisionError as e:
+            results = f"Error: Cannot divide by zero."
+        return results
+        pass
+
+    def test_parse_and_divide(value, divisor):
+        results = parse_and_divide(value, divisor)
+        logger.info(f"  {results}")
+
     logger.info(f"Exercise 7: Multiple Exceptions")
+    test_parse_and_divide("abc", 2)
+    test_parse_and_divide("10", 0)
+    test_parse_and_divide("10", 2)
     pass
 
 
 
 #########################################################################################
-def exercise_08_finally_block_testing():
+def exercise_08_finally_block_testing(root_dir):
     """
     Exercise 8: Finally Block
     Problem Statement:
@@ -214,7 +297,28 @@ def exercise_08_finally_block_testing():
         File closed.
         Error: 'missing.txt' not found.
     """
+    def read_file(filename):
+        results = ""
+        try:
+            with open(filename, "r") as f:
+                results = "Hello from the file!"
+        except FileNotFoundError as e:
+            results = f"  Error: {Path(filename).name} not found."
+        finally:
+            logger.info(f"  File closed.")
+            logger.info(f"  {results}")
+        pass
+
     logger.info(f"Exercise 8: Finally Block")
+    hello_file = hf.build_file_name(root_dir
+                        , "data/file_handling_exercises"
+                        , "hello_world.txt")
+    read_file(hello_file)
+    logger.info(f"  ------------------------------")
+    missing_file = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "missing_file.txt")
+    read_file(missing_file)
     pass
 
 
@@ -241,13 +345,28 @@ def exercise_09_else_clause_testing():
         Success: the square root of 25.0 is 5.0
         Error: 'abc' is not a valid number.
     """
+    def safe_sqrt(value):
+        message = ""
+        results = 0
+        try:
+            number_to_parse = float(value)
+        except ValueError as e:
+            message =  f"  Error: \"{value}\" is not a valid number."
+        else:
+            results = math.sqrt(number_to_parse)
+            message = f"  the square root of {number_to_parse} is {results}."
+        logger.info(f"  {message}")
+        pass
+
     logger.info(f"Exercise 9: Else Clause")
+    safe_sqrt("25")
+    safe_sqrt("abc")
     pass
 
 
 
 #########################################################################################
-def exercise_10_nested_try_except():
+def exercise_10_nested_try_except(root_dir):
     """
     Exercise 10: Nested Try-Except
     Problem Statement:
@@ -271,7 +390,39 @@ def exercise_10_nested_try_except():
         Error: key 'email' not found in the data.
         Error: file 'missing.json' does not exist.
     """
+    def load_and_parse(filename, key):
+        # open a JSON file (outer try)
+        message = ""
+        try:
+            with open(filename) as data_file:
+                data = json.load(data_file)
+                # retrieve data using a key (inner try)
+                try:
+                    item = data[key]
+                    message = item
+                except KeyError as e:
+                        message = f"Error: key \"{key}\" not found in the data."
+        except FileNotFoundError as e:
+            message = f"Error: \"{Path(filename).name}\" does not exist."
+        return message
     logger.info(f"Exercise 10: Nested Try-Except")
+
+    json_data = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "data.json")
+
+    missing_json_data = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "missing.json")
+
+    results = load_and_parse(json_data, "name")
+    logger.info(f"  {results}")
+
+    results = load_and_parse(json_data, "email")
+    logger.info(f"  {results}")
+
+    results = load_and_parse(missing_json_data, "name")
+    logger.info(f"  {results}")
     pass
 
 
