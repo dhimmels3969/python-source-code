@@ -1,4 +1,13 @@
 import logging
+from cmath import inf
+from pathlib import Path
+from typing import List, Tuple, Union
+import random
+import threading
+
+from src.exception_handling_exercises.retry_decorator import auto_retry
+from src.common_library import helper_functions as hf
+
 
 #
 # https://pynative.com/python-exception-handling-exercises/
@@ -31,7 +40,21 @@ def exercise_11_reraising_exceptions_test():
         [log] process_data failed: invalid literal for int() with base 10: 'abc'
         [main] Caught re-raised exception: invalid literal for int() with base 10: 'abc'
     """
+    def process_data(value):
+        try:
+            results = int(value)
+        except ValueError as e:
+            logger.error(f"  process_data failed: {e}")
+            raise
+        return results
+
+
     logger.info("Exercise 11: Re-raising Exceptions")
+    try:
+        value = "abc"
+        process_data(value)
+    except ValueError as e:
+        logger.info(f"  Caught re-raised exception: {e}")
     pass
 
 
@@ -58,13 +81,47 @@ def exercise_12_custom_exception_class():
     Expected Output:
         Error: Cannot withdraw 150. Available balance: 100.
     """
+
+    class InsufficientFundsError(Exception):
+        # from PyNative
+        def __init__(self, amount, balance):
+            self.amount = amount
+            self.balance = balance
+            super().__init__(
+                f"Cannot withdraw {amount}. Available balance: {balance}."
+            )
+
+    class BankAccount():
+        def __init__(self, opening_balance):
+            self._balance = opening_balance
+
+        @property
+        def balance(self):
+            return self._balance
+
+        def withdraw(self, amount):
+            if amount > self.balance:
+                raise InsufficientFundsError(amount, self.balance)
+            self._balance -= amount
+            logger.info(f"  Withdrew {amount}. New balance: {self.balance}.")
+
+    def withdraw_funds(account, requested_amount):
+        try:
+            account.withdraw(requested_amount)
+        except InsufficientFundsError as e:
+            logger.error(f"  Error: {e}")
+
+
     logger.info("Exercise 12: Custom Exception Class")
+    my_account = BankAccount(1000)
+    withdraw_funds(my_account, 1500)
+    withdraw_funds(my_account, 275)
     pass
 
 
 
 #########################################################################################
-def exercise_13_exception_chaining():
+def exercise_13_exception_chaining(root_dir):
     """
     Exercise 13: Exception Chaining
     Problem Statement:
@@ -86,7 +143,27 @@ def exercise_13_exception_chaining():
         ConfigurationError: Could not load config file 'config.json'.
         Caused by: [Errno 2] No such file or directory: 'config.json'
     """
+
+    class ConfigurationError(Exception):
+        pass
+
+    def load_config(filename):
+        try:
+            with open(filename, "r") as f:
+                logger.info(f"  {Path(filename).name} opened!")
+        except FileNotFoundError as e:
+            raise ConfigurationError(f"Could not load config file '{Path(filename).name}'.") from e
+
     logger.info("Exercise 13: Exception Chaining")
+    filename = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "config.json")
+
+    try:
+        load_config(filename)
+    except ConfigurationError as e:
+        logger.error(f"  Configuration Error: {e}")
+        logger.error(f"  Caused by: {e.__cause__}")
     pass
 
 
@@ -118,6 +195,29 @@ def exercise_14_validate_user_input():
         You entered: 7
     """
     logger.info("Exercise 14: Validate User Input Loop")
+    prompt = "  Enter a positive integer: "
+    responses = ["abc", -5, 7]
+    exit_loop = False
+    while True:
+        for response in responses:
+            logger.info(f" {prompt} {response}")
+            try:
+                results = int(response)
+            except ValueError as e:
+                # e will equal... Error: invalid literal for int() with base 10: 'abc'
+                logger.error(f"  Error: '{response}' is not a valid integer. Try again.")
+                continue
+            else:
+                if results < 0:
+                    logger.error(f"  Error: {response} is not positive. Try again.")
+                    continue
+                else:
+                    logger.info(f"  You entered: {response}")
+                    exit_loop = True
+        if exit_loop:
+            break
+
+    logger.info("End of loop")
     pass
 
 
@@ -152,7 +252,46 @@ def exercise_15_context_manager_exception_test():
         Entering context...
         TypeError: unsupported operand type(s) for +: 'int' and 'str'
     """
+
+    class SuppressError:
+        def __init__(self, exceptions: Tuple):
+            self.exception_type = exceptions
+            pass
+
+        def __enter__(self):
+            logger.info("  Entering Context...")
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return_Code = False
+            if exc_type is not None:
+                if issubclass(exc_type, tuple(self.exception_type)):
+                    logger.info(f"    {exc_type.__name__} suppressed.")
+                    return_Code = True
+                else:
+                    logger.error(f"  ####{exc_type.__name__}: {exc_value}")
+                    return_Code = False
+            else:
+                logger.info("  Successfully Exited From Context")
+                return_Code = True
+            return return_Code
+
     logger.info("Exercise 15: Context Manager with Exceptions")
+    with SuppressError((ValueError, ZeroDivisionError)) as supp:
+        v = "1.0"
+        w = int(v)
+
+    with SuppressError((ValueError, ZeroDivisionError)) as supp:
+        try:
+            v2 = "150"
+            x = 300 + v2
+        except Exception as e:
+            logger.error(f"  ****Error: {e}")
+            logger.info(f"  Handling Exception and allowing the program to continue.")
+
+
+    with SuppressError((ValueError, ZeroDivisionError)) as supp:
+        raise ZeroDivisionError("10 / 0")
     pass
 
 
@@ -183,7 +322,35 @@ def exercise_16_exception_hierarchy():
         Caught as DatabaseError: host unreachable
         Caught as AppError: host unreachable
     """
+    class App_Error(Exception):
+        pass
+
+    class Database_Error(App_Error):
+        pass
+
+    class Connection_Error(Database_Error):
+        pass
+
+    def error_test(message_: str, error_message_: str, exception_) -> None:
+        logger.error(message_)
+        try:
+            raise Connection_Error(error_message_)
+        except exception_ as e:
+            logger.error(f"  Caught in class {exception_}")
+        pass
+
     logger.info("Exercise 16: Exception Hierarchy")
+    error_test(f"  Catch a connection error in the Connection_Error class.",
+               "host unreachable",
+               Connection_Error)
+
+    error_test(f"  Catch a connection error in the Database_Error class.",
+               "host unreachable",
+               Database_Error)
+
+    error_test(f"  Catch a connection error in the App_Error class.",
+               "host unreachable",
+               App_Error)
     pass
 
 
@@ -210,7 +377,23 @@ def exercise_17_logging_exceptions_test():
         Console: divide(10, 0) returned None
         app.log: ERROR:root:Division failed - ZeroDivisionError with full traceback
     """
+    def divide(a, b):
+        try:
+            results = a / b
+        except ZeroDivisionError:
+            logging.exception(f"  Division failed: attempted to divide {a} by zero.")
+            results = None
+        return results
+
+    def test_divide_function(a, b):
+        answer = divide(a, b)
+        logger.info(f" results of dividing {a} by {b}: {answer}")
+        logger.info("")
+        return None
+
     logger.info("Exercise 17: Logging Exceptions")
+    test_divide_function(10, 0)
+    test_divide_function(10, 2)
     pass
 
 
@@ -241,7 +424,49 @@ def exercise_18_retry_decorator():
         Attempt 3 succeeded.
         Result: success
     """
+    def coin_toss_simulation() -> int:
+        number_heads = 0
+        for i in range(1, 101):
+            coin_flip = random.randrange(1, 101)
+            if coin_flip % 2 == 0:
+                number_heads += 1
+        return number_heads
+
+    @auto_retry(retries=5, delay=2)
+    def unpredictable_api_call(threshold, user_id):
+        # Simulates a network call that often fails.
+        """ Flip a coin 100 times check for the number of heads.
+            If the number of heads exceeds the threshold classify the test as a success.
+        """
+        # if random.random() < 0.75:
+        #     # 75% chance to fail
+        #     raise IOError(f"Network error: Could not fetch data for user {user_id}")
+        number_heads = coin_toss_simulation()
+        if number_heads < threshold:
+            raise RuntimeError(f"Runtime error: Score {number_heads} did not exceed threshold {threshold} for user {user_id}")
+
+        # 25% chance to succeed
+        # logger.info(f"Success! Fetched data for user {user_id}.")
+        logger.info(f"Success! Score {number_heads} matched or exceed threshold {threshold} for user {user_id}.")
+        return {"id": user_id, "data": number_heads}
+
+    def test_unpredictable_api_call(message: str, threshold: int, user_id: int):
+        try:
+            logger.info(message)
+            data = unpredictable_api_call(threshold, user_id)
+            logger.info(f"Final result: {data}")
+
+        except Exception as e:
+            logger.error(f"Test permanently failed: {e}")
+        pass
+
     logger.info("Exercise 18: Retry Decorator")
+
+    test_unpredictable_api_call(f"  --- First Call (will likely retry) ---", 68, 101)
+    test_unpredictable_api_call(f"  --- Second Call (will likely retry) ---", 41, 1001)
+    logger.info("")
+
+
     pass
 
 
@@ -274,12 +499,43 @@ def exercise_19_thread_safe_exception_handling():
         Thread-4: division by zero
     """
     logger.info("Exercise 19: Thread-Safe Exception Handling")
+    def divide_thread(request_id: str, numerator: int, denominator: int):
+        try:
+            results = numerator / denominator
+            message = f"  {request_id}:  {numerator} / {denominator} =  {results}"
+            logger.info(message)
+        except ZeroDivisionError as e:
+            with lock:
+                message = f"{request_id}: {e}"
+                # logger.error(message)
+                errors.append(message)
+        return None
+
+    errors = []
+    request_list = []
+    lock = threading.Lock()
+
+    requests = [("Thread-1", 10, 2),
+                ("Thread-2", 10, 0),
+                ("Thread-3", 10, 5),
+                ("Thread-4", 10, 0),
+                ("Thread-5", 10, 1)]
+    for item in requests:
+        request_list.append(threading.Thread(target=divide_thread, args=(item[0], item[1], item[2]), daemon=True))
+    for request in request_list:
+        request.start()
+        request.join()
+
+    if errors:
+        logger.info(f"  --------Errors collected --------")
+        for item in errors:
+            logger.error(f"  {item}")
     pass
 
 
 
 #########################################################################################
-def exercise_20_generator_exception_test():
+def exercise_20_generator_exception_test(root_dir):
     """
     Exercise 20: Exception in Generator
     Problem Statement:
@@ -303,8 +559,38 @@ def exercise_20_generator_exception_test():
         Generator cancelled: operation aborted
         Done.
     """
+    def file_lines(filename: str):
+        try:
+            f = open(filename, "r")
+        except IOError as e:
+            print(f"Could not open file: {e}")
+            return
+
+        with f:
+            for line in f:
+                try:
+                    yield line.rstrip("\n")
+                except RuntimeError as e:
+                    logger.error(f"  Generator cancelled: {e}")
+                    return
+
+
+
     logger.info("Exercise 20: Exception in Generator")
-    pass
+    sample_file = hf.build_file_name(root_dir
+                        , "data/exception_handling_exercises"
+                        , "sample.txt")
+
+    # contents is a generator object
+    contents = file_lines(sample_file)
+    try:
+        line_ = next(contents)
+        logger.info(f"  {line_}")
+        contents.throw(RuntimeError, "Throwing RuntimeError")
+    except StopIteration as e:
+        pass
+    logger.info("  Done.")
+    return
 
 
 
