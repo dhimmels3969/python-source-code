@@ -288,3 +288,17 @@ def shuffle(list_size):
                 break
         results[spin] = i
     return results
+
+
+
+#########################################################################
+def fibonacci():
+    """
+    generate a fibonacci sequence
+    :return:
+    :rtype:
+    """
+    a, b = 0, 1
+    while True:
+        a, b = b, a+b
+        yield b
