@@ -3,6 +3,7 @@ from src.common_library import helper_functions as hf
 from src.math_statistics_exercises import exercises as math_01
 from src.math_statistics_exercises import exercises_02 as math_02
 from src.math_statistics_exercises import exercises_03 as math_03
+from src.math_statistics_exercises import miscellaneous_math_problems as mmp
 
 import logging
 
@@ -77,6 +78,11 @@ class Driver:
             results = math_03.exercise_28_grading_curve_with_normal_distribution()
             results = math_03.exercise_29_linear_regression_testing()
             results = math_03.exercise_30_z_score_outlier_detection()
+            logger.info("")
+            logger.info("#####################################################")
+            logger.info(f"{self._name} - miscellaneous math problems")
+            logger.info("#####################################################")
+            results = mmp.exercise_31_calculate_series_test()
 
             logger.info("")
             logger.info("#####################################################")
