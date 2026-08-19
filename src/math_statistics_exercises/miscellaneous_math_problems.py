@@ -1,7 +1,11 @@
 import logging
+import math
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
+
+
 
 #########################################################################################
 def exercise_31_calculate_series_test():
@@ -40,4 +44,42 @@ def exercise_31_calculate_series_test():
     logger.info(f"Results of series calculation(130,16): {calculate_series(130, 16):,}")
     logger.info(f"Results of series calculation(2,31): {calculate_series(2, 31):,}")
 
+    pass
+
+
+#########################################################################################
+def exercise_32_square_root_four_consecutive_numbers_plus_one():
+    """
+    """
+
+    def calculate_answer(x):
+        """
+        This function performs the following calculation:
+            multiply four consecutive numbers together (example 4*5*6*7)
+            add one
+            the square root of the above results will always be a perfect square
+            and is equivalent to x**2 + 3x + 1
+
+        :param x: first number in the series
+        :type x:  int
+        :return:
+        :rtype:
+        """
+
+        # calculate the answer manually
+        message = f"Square root of ({x}*{x+1}*{x+2}*{x+3})+1"
+        number_calculate_manually = math.sqrt(((x * (x+1) * (x+2) * (x+3)) + 1))
+        expected_answer = math.pow(x, 2) + x*3 + 1
+        return number_calculate_manually, expected_answer, message
+
+    def display_results(x):
+        results_of_calculation = calculate_answer(x)
+        message = f"{results_of_calculation[2]} = {results_of_calculation[0]:,.0f}"
+        return message
+
+    logger.info("")
+    logger.info("-----------------------------------------------------------")
+    logger.info(f"  {display_results(50)}")
+    logger.info(f"  {display_results(1000)}")
+    logger.info(f"  {display_results(2500)}")
     pass

@@ -83,6 +83,7 @@ class Driver:
             logger.info(f"{self._name} - miscellaneous math problems")
             logger.info("#####################################################")
             results = mmp.exercise_31_calculate_series_test()
+            results = mmp.exercise_32_square_root_four_consecutive_numbers_plus_one()
 
             logger.info("")
             logger.info("#####################################################")
