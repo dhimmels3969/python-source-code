@@ -50,12 +50,14 @@
 | input_output_exercises       | Python Input and Output Exercise: 20+ Coding Problems with Solutions                                            | https://pynative.com/python-input-and-output-exercise/                    |
 | list_exercises               | Python list Exercises: 45 Coding Problems with Solutions                                                        | https://pynative.com/python-list-exercise-with-solutions/                 |
 | loop_exercises               | Python Loops Exercises: 40+ Coding Problems with Solutions                                                      | https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/ |
+| math_statistics_exercises    | Python Math and Statistics Exercises: 30 Coding Problems with Solutions                                         | https://pynative.com/python-math-statistics-exercises/                    |
 | object_oriented_exercises    | 30+ Python Object-Oriented Programming (OOP) Exercise: Classes and Objects Exercises                            | https://pynative.com/python-object-oriented-programming-oop-exercise/     |
 | set_exercises                | Python Set Exercises: 30 Coding Problems with Solutions                                                         | https://pynative.com/python-set-exercise-with-solutions/                  |
 | string_exercises             | Python Set Exercises: 30 Coding Problems with Solutions                                                         | https://pynative.com/python-string-exercise/                              |
 | timers_and_timing_tests      | Code snippets for testing timer functions                                                                       | N/A                                                                       |
 | tuple_exercises              | Python Tuple Exercises: 30 Coding Problems with Solutions                                                       | https://pynative.com/python-tuple-exercise-with-solutions/                |
 | wordle                       | wordle implementation from 2020–2022 timeframe                                                                  | N/A                                                                       |
+
 
 
 
