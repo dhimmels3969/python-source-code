@@ -18,6 +18,7 @@ from src.exception_handling_exercises import driver as exception_handling_exerci
 from src.math_statistics_exercises import driver as math_statistics_exercise_driver
 from src.file_handling_exercises import driver as file_handling_exercise_driver
 from src.timers_and_timing_tests import driver as timer_driver
+from src.os_and_sys_module_exercises import driver as os_and_sys_module_exercise_driver
 from src.wordle import driver as wordle_driver
 import constants
 import logging
@@ -59,8 +60,9 @@ def driver(src_dir, user_input):
             date_time_exercise_driver.Driver(["run=False"]),
             object_oriented_exercise_driver.Driver(src_dir, ["run=False"]),
             exception_handling_exercise_driver.Driver(src_dir, ["run=False"]),
-            math_statistics_exercise_driver.Driver(["run=True"]),
+            math_statistics_exercise_driver.Driver(["run=False"]),
             file_handling_exercise_driver.Driver(src_dir, ["run=False"]),
+            os_and_sys_module_exercise_driver.Driver(["run=True"]),
             timer_driver.Driver(["run=False"])
         ]
 
